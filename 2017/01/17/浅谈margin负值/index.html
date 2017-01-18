@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>浅谈margin负值 | LuckyAbby|To Do My Best</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="margin负值在平常代码中似乎很少用到过，最近接触了之后才觉得效果比较让我惊讶，想着自己健忘还是写下来，还克服懒癌从印象笔记挪到blog，说不定以后还能给别人看见呢(捂脸逃)。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浅谈margin负值">
+<meta property="og:url" content="http://yoursite.com/2017/01/17/浅谈margin负值/index.html">
+<meta property="og:site_name" content="LuckyAbby|To Do My Best">
+<meta property="og:description" content="margin负值在平常代码中似乎很少用到过，最近接触了之后才觉得效果比较让我惊讶，想着自己健忘还是写下来，还克服懒癌从印象笔记挪到blog，说不定以后还能给别人看见呢(捂脸逃)。">
+<meta property="og:image" content="http://ojzeprg7w.bkt.clouddn.com/%E6%B5%8B%E8%AF%95.png">
+<meta property="og:image" content="http://ojzeprg7w.bkt.clouddn.com/top.png">
+<meta property="og:image" content="http://ojzeprg7w.bkt.clouddn.com/left.png">
+<meta property="og:image" content="http://ojzeprg7w.bkt.clouddn.com/left.png">
+<meta property="og:image" content="http://ojzeprg7w.bkt.clouddn.com/top.png">
+<meta property="og:image" content="http://ojzeprg7w.bkt.clouddn.com/buju.png">
+<meta property="og:updated_time" content="2017-01-18T17:10:32.986Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="浅谈margin负值">
+<meta name="twitter:description" content="margin负值在平常代码中似乎很少用到过，最近接触了之后才觉得效果比较让我惊讶，想着自己健忘还是写下来，还克服懒癌从印象笔记挪到blog，说不定以后还能给别人看见呢(捂脸逃)。">
+<meta name="twitter:image" content="http://ojzeprg7w.bkt.clouddn.com/%E6%B5%8B%E8%AF%95.png">
+  
+    <link rel="alternative" href="/atom.xml" title="LuckyAbby|To Do My Best" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <script src="/style.js"></script>
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="/img/avatar.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Abby</a></h1>
+		</hgroup>
+
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/">随记</a></li>
+	        
+				<li><a href="/">读书</a></li>
+	        
+				<li><a href="/">生活</a></li>
+	        
+				<li><a href="/">DEMO</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="http://github.com/LuckyAbby" title="github">github</a>
+		        
+					<a class="weibo" target="_blank" href="http://weibo.com/u/3291714961/home" title="weibo">weibo</a>
+		        
+					<a class="rss" target="_blank" href="#" title="rss">rss</a>
+		        
+					<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/xia-yan-luo-47" title="zhihu">zhihu</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">Abby</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="/img/avatar.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Abby</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/">随记</a></li>
+		        
+					<li><a href="/">读书</a></li>
+		        
+					<li><a href="/">生活</a></li>
+		        
+					<li><a href="/">DEMO</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="http://github.com/LuckyAbby" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/u/3291714961/home" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="#" title="rss">rss</a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/xia-yan-luo-47" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-浅谈margin负值" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      浅谈margin负值
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>margin负值在平常代码中似乎很少用到过，最近接触了之后才觉得效果比较让我惊讶，想着自己健忘还是写下来，还克服懒癌从印象笔记挪到blog，说不定以后还能给别人看见呢(捂脸逃)。<br><a id="more"></a></p>
+<h3 id="margin负值的原理"><a href="#margin负值的原理" class="headerlink" title="margin负值的原理"></a>margin负值的原理</h3><p>为了方便理解负值margin，我们引入参考线的定义，参考线就是就是margin移动的基准点，而margin的值就是移动的数值。<br>margin的参考线有两类，一类是top、left，它们以外元素作为参考线，另一类是right、bottom，它们以自身作为参考线。<br>简单点说就是：</p>
+<ul>
+<li>top负值就是以包含块(Containing block) 内容区域的上边或者上方相连元素 margin 的下边为参考线;</li>
+<li>left负值就是以包含块(Containing block) 内容区域的左边或者左方相连元素 margin 的右边为参考线;</li>
+<li>right负值就是以元素本身border的右边为参考线；</li>
+<li>bottom负值就是以元素本身border的下边为参考线；<br>另外关于包含块的定义具体请参考<a href="http://w3help.org/zh-cn/kb/008/" target="_blank" rel="external">KB008包含块(Containing block)</a>。</li>
+</ul>
+<p>下面这张图很直观地解释了margin的移动，其中红色箭头表示正值时候的移动方向，当margin为负值的时候就反方向移动。<br><img src="http://ojzeprg7w.bkt.clouddn.com/%E6%B5%8B%E8%AF%95.png" alt="margin原理图"></p>
+<p>总地来说，就是当margin-top、left为负值的时候与参考线的距离减少，当margin-right、bottom为负值的时候参考线就向左、上面移动。</p>
+<h3 id="实际小DEMO"><a href="#实际小DEMO" class="headerlink" title="实际小DEMO"></a>实际小DEMO</h3><h5 id="当设置margin-top为负值的时候"><a href="#当设置margin-top为负值的时候" class="headerlink" title="当设置margin-top为负值的时候"></a>当设置margin-top为负值的时候</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">&lt;div class=&quot;box&quot;&gt;</div><div class="line">     &lt;div class=&quot;one&quot;&gt;one&lt;/div&gt;</div><div class="line">    &lt;div class=&quot;two&quot;&gt;two&lt;/div&gt;</div><div class="line">&lt;/div&gt;</div><div class="line"></div><div class="line">&lt;style&gt;</div><div class="line">.box &#123;</div><div class="line">    width:200px;</div><div class="line">    height: 200px;</div><div class="line">    border: 1px black solid;</div><div class="line">&#125;</div><div class="line">.box div &#123;</div><div class="line">    width:100px;</div><div class="line">    height: 100px;</div><div class="line">&#125;</div><div class="line">.one &#123;</div><div class="line">	background:gray;</div><div class="line">&#125;</div><div class="line">.two &#123;</div><div class="line">	background:orange;</div><div class="line">	margin-top:-50px;</div><div class="line">&#125;</div><div class="line">&lt;/style&gt;</div></pre></td></tr></table></figure>
+<p>结果如下图<br><img src="http://ojzeprg7w.bkt.clouddn.com/top.png" alt="top为负值测试图"></p>
+<p>当设置class为two的div的margin-top为-50的时候，它的参考线是div.one的下边，整个div.two向上移动使得与参考线的距离减少50px。</p>
+<h5 id="当设置margin-left为负值的时候"><a href="#当设置margin-left为负值的时候" class="headerlink" title="当设置margin-left为负值的时候"></a>当设置margin-left为负值的时候</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">&lt;div class=&quot;box&quot;&gt;</div><div class="line">     &lt;div class=&quot;one&quot;&gt;one&lt;/div&gt;</div><div class="line">    &lt;div class=&quot;two&quot;&gt;two&lt;/div&gt;</div><div class="line">&lt;/div&gt;</div><div class="line">&lt;style&gt;</div><div class="line">.box &#123;</div><div class="line">    width:200px;</div><div class="line">    height: 200px;</div><div class="line">    border: 1px black solid;</div><div class="line">&#125;</div><div class="line">.box div &#123;</div><div class="line">    width:100px;</div><div class="line">    height: 100px;</div><div class="line">&#125;</div><div class="line">.one &#123;</div><div class="line">	background:gray;</div><div class="line">	float: left;</div><div class="line">&#125;</div><div class="line">.two &#123;</div><div class="line">	background:orange;</div><div class="line">    margin-left: -50px;</div><div class="line">    float: left;</div><div class="line">&#125;</div><div class="line">&lt;/style&gt;</div></pre></td></tr></table></figure>
+<p>结果如下图<br><img src="http://ojzeprg7w.bkt.clouddn.com/left.png" alt="left为负值侧视图"></p>
+<p>设置float:left使得两个div浮动起来，然后设置div.two的margin-left为-50px,div.two的参考线就是div.one的右边，于是div.two左移与参考线距离减少50px。</p>
+<h5 id="当设置margin-right为负值的时候"><a href="#当设置margin-right为负值的时候" class="headerlink" title="当设置margin-right为负值的时候"></a>当设置margin-right为负值的时候</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">&lt;div class=&quot;box&quot;&gt;</div><div class="line">     &lt;div class=&quot;one&quot;&gt;one&lt;/div&gt;</div><div class="line">    &lt;div class=&quot;two&quot;&gt;two&lt;/div&gt;</div><div class="line">&lt;/div&gt;</div><div class="line">&lt;style&gt;</div><div class="line">.box &#123;</div><div class="line">    width:200px;</div><div class="line">    height: 200px;</div><div class="line">    border: 1px black solid;</div><div class="line">&#125;</div><div class="line">.box div &#123;</div><div class="line">    width:100px;</div><div class="line">    height: 100px;</div><div class="line">&#125;</div><div class="line">.one &#123;</div><div class="line">    background:gray;</div><div class="line">    float:left;</div><div class="line">    margin-right:-50px;</div><div class="line">&#125;</div><div class="line">.two &#123;</div><div class="line">    background:orange;</div><div class="line">    float:left;</div><div class="line">&#125;</div><div class="line">&lt;/style&gt;</div></pre></td></tr></table></figure>
+<p>结果如下图<br><img src="http://ojzeprg7w.bkt.clouddn.com/left.png" alt="right为负值侧视图"></p>
+<p>仍然让两个div左浮动，设置div.one的margin-right为-50px,这时候的参考线是本身的右边界，margin-right为负值于是参考线向反方向即左方向移动。</p>
+<h5 id="当设置margin-bottom为负值的时候"><a href="#当设置margin-bottom为负值的时候" class="headerlink" title="当设置margin-bottom为负值的时候"></a>当设置margin-bottom为负值的时候</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">&lt;div class=&quot;box&quot;&gt;</div><div class="line">     &lt;div class=&quot;one&quot;&gt;one&lt;/div&gt;</div><div class="line">    &lt;div class=&quot;two&quot;&gt;two&lt;/div&gt;</div><div class="line">&lt;/div&gt;</div><div class="line">&lt;style&gt;</div><div class="line">.box &#123;</div><div class="line">    width:200px;</div><div class="line">    height: 200px;</div><div class="line">    border: 1px black solid;</div><div class="line">&#125;</div><div class="line">.box div &#123;</div><div class="line">    width:100px;</div><div class="line">    height: 100px;</div><div class="line">&#125;</div><div class="line">.one &#123;</div><div class="line">    background:gray;</div><div class="line">    margin-bottom:-50px;</div><div class="line">&#125;</div><div class="line">.two &#123;</div><div class="line">    background:orange;</div><div class="line">&#125;</div><div class="line">&lt;/style&gt;</div></pre></td></tr></table></figure>
+<p>结果如下图<br><img src="http://ojzeprg7w.bkt.clouddn.com/top.png" alt="bottom为负值测试图"></p>
+<p>当设置div.one的margin-bottom为负值的时候，此时的参考线是自身的下边界，bottom为负值于是参考线向反方向即向上方移动。</p>
+<h3 id="margin负值的实际应用"><a href="#margin负值的实际应用" class="headerlink" title="margin负值的实际应用"></a>margin负值的实际应用</h3><ol>
+<li>边框去重<br>有的时候我们做Tab选项卡的时候不希望tab元素和父元素都加上边框，因此就可以给tab元素添加一像素的margin。详见<a href="http://www.hicss.net/i-know-you-do-not-know-the-negative-margin/" target="_blank" rel="external">我知道你不知道的负Margin</a>。</li>
+<li>左右布局<br>当用margin负值之后就可以通过改变margin-top等的值成为负值之后不需要使用float就可以实现左右布局</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">&lt;div class=&quot;container&quot;&gt;</div><div class="line">    &lt;div class=&quot;left&quot;&gt;&lt;/div&gt;</div><div class="line">    &lt;div class=&quot;right&quot;&gt;&lt;/div&gt;</div><div class="line">&lt;/div&gt;</div><div class="line">&lt;style&gt;</div><div class="line">.container &#123;</div><div class="line">	width:400px;</div><div class="line">	order: 1px solid black;</div><div class="line">	padding:10px</div><div class="line">&#125;</div><div class="line">.left &#123;</div><div class="line">	width: 100px;</div><div class="line">	height:400px;</div><div class="line">	background-color:gray;</div><div class="line">&#125;</div><div class="line">.right &#123;</div><div class="line">	width: 300px;</div><div class="line">	height:400px;</div><div class="line">	margin:-400px 0 0 100px;</div><div class="line">	background-color:orange;</div><div class="line">&#125;</div><div class="line">&lt;/style&gt;</div></pre></td></tr></table></figure>
+<p>结果如图<br><img src="http://ojzeprg7w.bkt.clouddn.com/buju.png" alt="利用margin左右排版测试图"></p>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>因为自己做的项目还不多，很多问题其实自己还并没有遇到过，先总结出来仅供参考，也是第一次写技术博客，有不对的地方烦请指出改正。<br>参考资料</p>
+<ol>
+<li><a href="http://www.hicss.net/i-know-you-do-not-know-the-negative-margin/" target="_blank" rel="external">我知道你不知道的负Margin</a></li>
+<li><a href="http://blog.acwong.org/2014/12/06/negative-margins/" target="_blank" rel="external">实用的margin负值</a></li>
+</ol>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2017/01/17/浅谈margin负值/" class="archive-article-date">
+  	<time datetime="2017-01-17T15:36:58.000Z" itemprop="datePublished"><i class="icon-clock"></i>2017-01-17</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/随记/">随记</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2016/10/19/Blog/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Hi MyBlog</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2017 Abby
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+<script src="/./main.js"></script>
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="/tags/随记/" style="font-size: 10px;">随记</a>
+    			</div>
+    	</section>
+    
+
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">大三&lt;br&gt;&lt;br&gt;一只还在自我修炼的程序媛&lt;br&gt;萌妹子&lt;br&gt;爱读书&lt;br&gt;摄影健身</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>

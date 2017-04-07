@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>深入浅出Javascript事件循环机制(上) | LuckyAbby|To Do My Best</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="最近琢磨了好久的Javascript的事件循环机制，看了很多国内的博客总觉得写的还是不够深，很多都只说了Javascript的事件分为同步任务和异步任务，遇到同步任务就放在执行栈中执行，而碰到异步任务就放到任务队列之中，等到执行栈执行完毕之后再去执行任务队列之中的事件。自己对大概的基础有所了解之后也没接着深入去查资料，这就导致我在面试的时候被面试官一点一点深挖的时候就懵了(囧">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深入浅出Javascript事件循环机制(上)">
+<meta property="og:url" content="http://yoursite.com/2017/04/07/深入浅出Javascript事件循环机制-上/index.html">
+<meta property="og:site_name" content="LuckyAbby|To Do My Best">
+<meta property="og:description" content="最近琢磨了好久的Javascript的事件循环机制，看了很多国内的博客总觉得写的还是不够深，很多都只说了Javascript的事件分为同步任务和异步任务，遇到同步任务就放在执行栈中执行，而碰到异步任务就放到任务队列之中，等到执行栈执行完毕之后再去执行任务队列之中的事件。自己对大概的基础有所了解之后也没接着深入去查资料，这就导致我在面试的时候被面试官一点一点深挖的时候就懵了(囧">
+<meta property="og:image" content="http://ojzeprg7w.bkt.clouddn.com/%E5%8D%9A%E5%AE%A241.JPG">
+<meta property="og:image" content="http://ojzeprg7w.bkt.clouddn.com/%E5%8D%9A%E5%AE%A242.JPG">
+<meta property="og:image" content="http://ojzeprg7w.bkt.clouddn.com/%E5%8D%9A%E5%AE%A243.png">
+<meta property="og:image" content="http://ojzeprg7w.bkt.clouddn.com/%E5%8D%9A%E5%AE%A244.png">
+<meta property="og:image" content="http://ojzeprg7w.bkt.clouddn.com/%E5%8D%9A%E5%AE%A245.JPG">
+<meta property="og:image" content="http://ojzeprg7w.bkt.clouddn.com/%E5%8D%9A%E5%AE%A246.png">
+<meta property="og:image" content="http://ojzeprg7w.bkt.clouddn.com/%E5%8D%9A%E5%AE%A247.png">
+<meta property="og:image" content="http://ojzeprg7w.bkt.clouddn.com/%E5%8D%9A%E5%AE%A248.png">
+<meta property="og:image" content="http://ojzeprg7w.bkt.clouddn.com/%E5%8D%9A%E5%AE%A249.png">
+<meta property="og:updated_time" content="2017-04-07T07:13:44.834Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="深入浅出Javascript事件循环机制(上)">
+<meta name="twitter:description" content="最近琢磨了好久的Javascript的事件循环机制，看了很多国内的博客总觉得写的还是不够深，很多都只说了Javascript的事件分为同步任务和异步任务，遇到同步任务就放在执行栈中执行，而碰到异步任务就放到任务队列之中，等到执行栈执行完毕之后再去执行任务队列之中的事件。自己对大概的基础有所了解之后也没接着深入去查资料，这就导致我在面试的时候被面试官一点一点深挖的时候就懵了(囧">
+<meta name="twitter:image" content="http://ojzeprg7w.bkt.clouddn.com/%E5%8D%9A%E5%AE%A241.JPG">
+  
+    <link rel="alternative" href="/atom.xml" title="LuckyAbby|To Do My Best" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <script src="/style.js"></script>
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="/img/avatar.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Abby</a></h1>
+		</hgroup>
+
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/">随记</a></li>
+	        
+				<li><a href="/">读书</a></li>
+	        
+				<li><a href="/">生活</a></li>
+	        
+				<li><a href="/">DEMO</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="http://github.com/LuckyAbby" title="github">github</a>
+		        
+					<a class="weibo" target="_blank" href="http://weibo.com/u/3291714961/home" title="weibo">weibo</a>
+		        
+					<a class="rss" target="_blank" href="#" title="rss">rss</a>
+		        
+					<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/xia-yan-luo-47" title="zhihu">zhihu</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">Abby</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="/img/avatar.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Abby</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/">随记</a></li>
+		        
+					<li><a href="/">读书</a></li>
+		        
+					<li><a href="/">生活</a></li>
+		        
+					<li><a href="/">DEMO</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="http://github.com/LuckyAbby" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/u/3291714961/home" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="#" title="rss">rss</a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/xia-yan-luo-47" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-深入浅出Javascript事件循环机制-上" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      深入浅出Javascript事件循环机制(上)
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近琢磨了好久的Javascript的事件循环机制，看了很多国内的博客总觉得写的还是不够深，很多都只说了Javascript的事件分为同步任务和异步任务，遇到同步任务就放在执行栈中执行，而碰到异步任务就放到任务队列之中，等到执行栈执行完毕之后再去执行任务队列之中的事件。自己对大概的基础有所了解之后也没接着深入去查资料，这就导致我在面试的时候被面试官一点一点深挖的时候就懵了(囧<br><a id="more"></a></p>
+<h2 id="函数调用栈与任务队列"><a href="#函数调用栈与任务队列" class="headerlink" title="函数调用栈与任务队列"></a>函数调用栈与任务队列</h2><p>Javascript有一个main thread 主进程和call-stack（一个调用堆栈），在对一个调用堆栈中的task处理的时候，其他的都要等着。当在执行过程中遇到一些类似于setTimeout等异步操作的时候，会交给浏览器的其他模块(以webkit为例，是webcore模块)进行处理，当到达setTimeout指定的延时执行的时间之后，<strong>task(回调函数)会放入到任务队列之中</strong>。一般不同的异步任务的回调函数会放入不同的任务队列之中。等到调用栈中所有task执行完毕之后，接着去执行任务队列之中的task(回调函数)。</p>
+<p>用Philip Roberts的演讲<a href="https://vimeo.com/96425312" target="_blank" rel="external">《Help, I’m stuck in an event-loop》</a>之中的一张图表示就是</p>
+<p><img src="http://ojzeprg7w.bkt.clouddn.com/%E5%8D%9A%E5%AE%A241.JPG" alt=""></p>
+<p>在上图中，调用栈中遇到DOM操作、ajax请求以及setTimeout等WebAPIs的时候就会交给浏览器内核的其他模块进行处理，webkit内核在Javasctipt执行引擎之外，有一个重要的模块是webcore模块。对于图中WebAPIs提到的三种API，webcore分别提供了DOM Binding、network、timer模块来处理底层实现。等到这些模块处理完这些操作的时候将回调函数放入任务队列中，之后等栈中的task执行完之后再去执行任务队列之中的回调函数。</p>
+<h2 id="从setTimeout看事件循环机制"><a href="#从setTimeout看事件循环机制" class="headerlink" title="从setTimeout看事件循环机制"></a>从setTimeout看事件循环机制</h2><p>下面用Philip Roberts的演讲中的一个栗子来说明事件循环机制究竟是怎么执行setTimeout的。</p>
+<p><img src="http://ojzeprg7w.bkt.clouddn.com/%E5%8D%9A%E5%AE%A242.JPG" alt=""></p>
+<p>首先main()函数的执行上下文入栈(对执行上下文还不了解的可以看我的上一篇博客)。</p>
+<p><img src="http://ojzeprg7w.bkt.clouddn.com/%E5%8D%9A%E5%AE%A243.png" alt=""></p>
+<p>代码接着执行，遇到console.log(‘Hi’),此时log(‘Hi’)入栈，console.log方法只是一个webkit内核支持的普通的方法，所以log(‘Hi’)方法立即被执行。此时输出’Hi’。</p>
+<p><img src="http://ojzeprg7w.bkt.clouddn.com/%E5%8D%9A%E5%AE%A244.png" alt=""></p>
+<p>当遇到setTimeout的时候，执行引擎将其添加到栈中。</p>
+<p><img src="http://ojzeprg7w.bkt.clouddn.com/%E5%8D%9A%E5%AE%A245.JPG" alt=""></p>
+<p>调用栈发现setTimeout是之前提到的WebAPIs中的API，因此将其出栈之后将延时执行的函数交给浏览器的timer模块进行处理。</p>
+<p><img src="http://ojzeprg7w.bkt.clouddn.com/%E5%8D%9A%E5%AE%A246.png" alt=""></p>
+<p>timer模块去处理延时执行的函数，此时执行引擎接着执行将log(‘SJS’)添加到栈中，此时输出’SJS’。</p>
+<p><img src="http://ojzeprg7w.bkt.clouddn.com/%E5%8D%9A%E5%AE%A247.png" alt=""></p>
+<p>当timer模块中延时方法规定的时间到了之后就将其放入到任务队列之中，此时调用栈中的task已经全部执行完毕。</p>
+<p><img src="http://ojzeprg7w.bkt.clouddn.com/%E5%8D%9A%E5%AE%A248.png" alt=""></p>
+<p><img src="http://ojzeprg7w.bkt.clouddn.com/%E5%8D%9A%E5%AE%A249.png" alt=""></p>
+<p>调用栈中的task执行完毕之后，执行引擎会接着看执行任务队列中是否有需要执行的回调函数。这里的cb函数被执行引擎添加到调用栈中，接着执行里面的代码，输出’there’。等到执行结束之后再出栈。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>上面的这一个流程解释了当浏览器遇到setTimeout之后究竟是怎么执行的，相类似的还有前面图中提到的另外的API以及另外一些异步的操作。<br>总结上文说的，主要就是以下几点：</p>
+<ul>
+<li>所有的代码都要通过函数调用栈中调用执行。</li>
+<li>当遇到前文中提到的APIs的时候，会交给浏览器内核的其他模块进行处理。</li>
+<li>任务队列中存放的是回调函数。</li>
+<li>等到调用栈中的task执行完之后再回去执行任务队列之中的task。</li>
+</ul>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">for (var i = 0; i &lt; 5; i++) &#123;</div><div class="line">    setTimeout(function() &#123;</div><div class="line">      console.log(new Date, i);</div><div class="line">    &#125;, 1000);</div><div class="line">&#125;</div><div class="line"></div><div class="line">console.log(new Date, i);</div></pre></td></tr></table></figure>
+<p>这段代码是我从网上前不久的一篇文章<a href="https://juejin.im/post/58cf180b0ce4630057d6727c" target="_blank" rel="external">80%应聘者都不及格的 JS 面试题</a>中找到的，现在我们就分析一下这段代码究竟是怎么输出最后文章中所说的最后的执行状态：</p>
+<blockquote>
+<p>40% 的人会描述为：5 -&gt; 5,5,5,5,5，即第 1 个 5 直接输出，1 秒之后，输出 5 个 5；</p>
+</blockquote>
+<ol>
+<li><p>首先i=0时，满足条件，执行栈执行循环体里面的代码，发现是setTimeout，将其出栈之后把延时执行的函数交给Timer模块进行处理。</p>
+</li>
+<li><p>当i=1,2,3,4时，均满足条件，情况和i=0时相同，因此timer模块里面有5个相同的延时执行的函数。</p>
+</li>
+<li><p>当i=5的时候，不满足条件，因此for循环结束,console.log(new Date, i)入栈，此时的i已经变成了5。因此输出5。</p>
+</li>
+<li><p>此时1s已经过去，timer模块将5个回调函数按照注册的顺序返回给任务队列。</p>
+</li>
+<li><p>执行引擎去执行任务队列中的函数，5个function依次入栈执行之后再出栈，此时的i已经变成了5。因此几乎同时输出5个5。</p>
+</li>
+<li><p>因此等待的1s的时间其实只有输出第一个5之后需要等待1s，<strong>这1s的时间是timer模块需要等到的规定的1s时间之后才将回调函数交给任务队列</strong>。等执行栈执行完毕之后再去执行任务对列中的5个回调函数。这期间是不需要等待1s的。因此输出的状态就是：5 -&gt; 5,5,5,5,5，即第1个 5 直接输出，1s之后，输出 5个5；</p>
+</li>
+</ol>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>看到这里，对事件循环机制有了一个大概的了解了，可是细想，其中还有一些另外值得深入的问题。<br>下面通过一个栗子来说明：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">(function test() &#123;</div><div class="line">    setTimeout(function() &#123;console.log(4)&#125;, 0);</div><div class="line">    new Promise(function executor(resolve) &#123;</div><div class="line">        console.log(1);</div><div class="line">        for( var i=0 ; i&lt;10000 ; i++ ) &#123;</div><div class="line">            i == 9999 &amp;&amp; resolve();</div><div class="line">        &#125;</div><div class="line">        console.log(2);</div><div class="line">    &#125;).then(function() &#123;</div><div class="line">        console.log(5);</div><div class="line">    &#125;);</div><div class="line">    console.log(3);</div><div class="line">&#125;)()</div></pre></td></tr></table></figure></p>
+<p>在这段代码里面，多了一个promise，那么我们可以思考下面这个问题：</p>
+<ol>
+<li><p>promise的task会放在不同的任务队列里面，那么setTimeout的任务队列和promise的任务队列的执行顺序又是怎么的呢？</p>
+</li>
+<li><p>到这里大家看了我说了这么多的task,那么上文中一直提到的task究竟包括了什么？具体是怎么分的？</p>
+</li>
+</ol>
+<p>如果到这里大家还是没太懂的话，那么接下来我会接着深入再细说不同task的事件循环机制。</p>
+<p>当然，以上都是我自己鄙陋的见解，欢迎大家批评指正。</p>
+<p>参考资料：<br><a href="http://ejohn.org/blog/how-javascript-timers-work/" target="_blank" rel="external">JavaScript定时器的工作原理</a><br><a href="https://vimeo.com/96425312" target="_blank" rel="external">《Help, I’m stuck in an event-loop》</a><br><a href="http://www.alloyteam.com/2015/10/turning-to-javascript-series-from-settimeout-said-the-event-loop-model/" target="_blank" rel="external">【转向Javascript系列】从setTimeout说事件循环模型</a><br><a href="http://www.ruanyifeng.com/blog/2014/10/event-loop.html" target="_blank" rel="external">JavaScript 运行机制详解：再谈Event Loop</a></p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2017/04/07/深入浅出Javascript事件循环机制-上/" class="archive-article-date">
+  	<time datetime="2017-04-07T06:59:53.000Z" itemprop="datePublished"><i class="icon-clock"></i>2017-04-07</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/随记/">随记</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2017/03/27/你不知道的执行上下文/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">你不知道的执行上下文</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a>
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a>
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+<div class="share_addthis share_jia">
+  <div class="sharing addthis_toolbox share">
+  	<span class="jiathis_txt">Share to: &nbsp; </span>
+    <a class="addthis_button_facebook_like"></a>
+    <a class="addthis_button_tweet"></a>
+    <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-560c64c35486b3d4" async="async"></script>
+</div>
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="深入浅出Javascript事件循环机制-上" data-title="深入浅出Javascript事件循环机制(上)" data-url="http://yoursite.com/2017/04/07/深入浅出Javascript事件循环机制-上/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"luckyabby"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2017 Abby
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+<script src="/./main.js"></script>
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="/tags/随记/" style="font-size: 10px;">随记</a>
+    			</div>
+    	</section>
+    
+
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">大三&lt;br&gt;&lt;br&gt;一只还在自我修炼的程序媛&lt;br&gt;萌妹子&lt;br&gt;爱读书&lt;br&gt;摄影健身</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>

@@ -21,7 +21,7 @@
 <meta property="og:image" content="http://ojzeprg7w.bkt.clouddn.com/%E5%8D%9A%E5%AE%A247.png">
 <meta property="og:image" content="http://ojzeprg7w.bkt.clouddn.com/%E5%8D%9A%E5%AE%A248.png">
 <meta property="og:image" content="http://ojzeprg7w.bkt.clouddn.com/%E5%8D%9A%E5%AE%A249.png">
-<meta property="og:updated_time" content="2017-04-07T07:13:44.834Z">
+<meta property="og:updated_time" content="2017-04-07T07:33:42.764Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深入浅出Javascript事件循环机制(上)">
 <meta name="twitter:description" content="最近琢磨了好久的Javascript的事件循环机制，看了很多国内的博客总觉得写的还是不够深，很多都只说了Javascript的事件分为同步任务和异步任务，遇到同步任务就放在执行栈中执行，而碰到异步任务就放到任务队列之中，等到执行栈执行完毕之后再去执行任务队列之中的事件。自己对大概的基础有所了解之后也没接着深入去查资料，这就导致我在面试的时候被面试官一点一点深挖的时候就懵了(囧">
@@ -182,21 +182,13 @@
 <p><img src="http://ojzeprg7w.bkt.clouddn.com/%E5%8D%9A%E5%AE%A241.JPG" alt=""></p>
 <p>在上图中，调用栈中遇到DOM操作、ajax请求以及setTimeout等WebAPIs的时候就会交给浏览器内核的其他模块进行处理，webkit内核在Javasctipt执行引擎之外，有一个重要的模块是webcore模块。对于图中WebAPIs提到的三种API，webcore分别提供了DOM Binding、network、timer模块来处理底层实现。等到这些模块处理完这些操作的时候将回调函数放入任务队列中，之后等栈中的task执行完之后再去执行任务队列之中的回调函数。</p>
 <h2 id="从setTimeout看事件循环机制"><a href="#从setTimeout看事件循环机制" class="headerlink" title="从setTimeout看事件循环机制"></a>从setTimeout看事件循环机制</h2><p>下面用Philip Roberts的演讲中的一个栗子来说明事件循环机制究竟是怎么执行setTimeout的。</p>
-<p><img src="http://ojzeprg7w.bkt.clouddn.com/%E5%8D%9A%E5%AE%A242.JPG" alt=""></p>
-<p>首先main()函数的执行上下文入栈(对执行上下文还不了解的可以看我的上一篇博客)。</p>
-<p><img src="http://ojzeprg7w.bkt.clouddn.com/%E5%8D%9A%E5%AE%A243.png" alt=""></p>
-<p>代码接着执行，遇到console.log(‘Hi’),此时log(‘Hi’)入栈，console.log方法只是一个webkit内核支持的普通的方法，所以log(‘Hi’)方法立即被执行。此时输出’Hi’。</p>
-<p><img src="http://ojzeprg7w.bkt.clouddn.com/%E5%8D%9A%E5%AE%A244.png" alt=""></p>
-<p>当遇到setTimeout的时候，执行引擎将其添加到栈中。</p>
-<p><img src="http://ojzeprg7w.bkt.clouddn.com/%E5%8D%9A%E5%AE%A245.JPG" alt=""></p>
-<p>调用栈发现setTimeout是之前提到的WebAPIs中的API，因此将其出栈之后将延时执行的函数交给浏览器的timer模块进行处理。</p>
-<p><img src="http://ojzeprg7w.bkt.clouddn.com/%E5%8D%9A%E5%AE%A246.png" alt=""></p>
-<p>timer模块去处理延时执行的函数，此时执行引擎接着执行将log(‘SJS’)添加到栈中，此时输出’SJS’。</p>
-<p><img src="http://ojzeprg7w.bkt.clouddn.com/%E5%8D%9A%E5%AE%A247.png" alt=""></p>
-<p>当timer模块中延时方法规定的时间到了之后就将其放入到任务队列之中，此时调用栈中的task已经全部执行完毕。</p>
-<p><img src="http://ojzeprg7w.bkt.clouddn.com/%E5%8D%9A%E5%AE%A248.png" alt=""></p>
-<p><img src="http://ojzeprg7w.bkt.clouddn.com/%E5%8D%9A%E5%AE%A249.png" alt=""></p>
-<p>调用栈中的task执行完毕之后，执行引擎会接着看执行任务队列中是否有需要执行的回调函数。这里的cb函数被执行引擎添加到调用栈中，接着执行里面的代码，输出’there’。等到执行结束之后再出栈。</p>
+<p><img src="http://ojzeprg7w.bkt.clouddn.com/%E5%8D%9A%E5%AE%A242.JPG" alt=""><br>首先main()函数的执行上下文入栈(对执行上下文还不了解的可以看我的上一篇博客)。</p>
+<p><img src="http://ojzeprg7w.bkt.clouddn.com/%E5%8D%9A%E5%AE%A243.png" alt=""><br>代码接着执行，遇到console.log(‘Hi’),此时log(‘Hi’)入栈，console.log方法只是一个webkit内核支持的普通的方法，所以log(‘Hi’)方法立即被执行。此时输出’Hi’。</p>
+<p><img src="http://ojzeprg7w.bkt.clouddn.com/%E5%8D%9A%E5%AE%A244.png" alt=""><br>当遇到setTimeout的时候，执行引擎将其添加到栈中。</p>
+<p><img src="http://ojzeprg7w.bkt.clouddn.com/%E5%8D%9A%E5%AE%A245.JPG" alt=""><br>调用栈发现setTimeout是之前提到的WebAPIs中的API，因此将其出栈之后将延时执行的函数交给浏览器的timer模块进行处理。</p>
+<p><img src="http://ojzeprg7w.bkt.clouddn.com/%E5%8D%9A%E5%AE%A246.png" alt=""><br>timer模块去处理延时执行的函数，此时执行引擎接着执行将log(‘SJS’)添加到栈中，此时输出’SJS’。</p>
+<p><img src="http://ojzeprg7w.bkt.clouddn.com/%E5%8D%9A%E5%AE%A247.png" alt=""><br>当timer模块中延时方法规定的时间到了之后就将其放入到任务队列之中，此时调用栈中的task已经全部执行完毕。</p>
+<p><img src="http://ojzeprg7w.bkt.clouddn.com/%E5%8D%9A%E5%AE%A248.png" alt=""><br><img src="http://ojzeprg7w.bkt.clouddn.com/%E5%8D%9A%E5%AE%A249.png" alt=""><br>调用栈中的task执行完毕之后，执行引擎会接着看执行任务队列中是否有需要执行的回调函数。这里的cb函数被执行引擎添加到调用栈中，接着执行里面的代码，输出’there’。等到执行结束之后再出栈。</p>
 <h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>上面的这一个流程解释了当浏览器遇到setTimeout之后究竟是怎么执行的，相类似的还有前面图中提到的另外的API以及另外一些异步的操作。<br>总结上文说的，主要就是以下几点：</p>
 <ul>
 <li>所有的代码都要通过函数调用栈中调用执行。</li>
@@ -257,6 +249,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2017/04/07/深入浅出JavaScript事件循环机制-下/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          深入浅出JavaScript事件循环机制(下)
+        
+      </div>
+    </a>
   
   
     <a href="/2017/03/27/你不知道的执行上下文/" id="article-nav-older" class="article-nav-link-wrap">

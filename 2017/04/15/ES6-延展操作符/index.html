@@ -4,18 +4,18 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>ES6--延展操作符 | LuckyAbby|To Do My Best</title>
+  <title>ES6--扩展运算符与剩余操作符 | LuckyAbby|To Do My Best</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="延展操作符又称之为三点操作符，已经被 ES6 数组支持，它能解决很多之前 arguments 解决起来很麻烦的问题。">
+  <meta name="description" content="扩展运算符与剩余操作符都是以三点开头的操作符，二者长的很像，只是在用法上有些差别。它们已经被 ES6 数组支持，能解决很多之前 arguments 解决起来很麻烦的问题。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ES6--延展操作符">
+<meta property="og:title" content="ES6--扩展运算符与剩余操作符">
 <meta property="og:url" content="http://yoursite.com/2017/04/15/ES6-延展操作符/index.html">
 <meta property="og:site_name" content="LuckyAbby|To Do My Best">
-<meta property="og:description" content="延展操作符又称之为三点操作符，已经被 ES6 数组支持，它能解决很多之前 arguments 解决起来很麻烦的问题。">
-<meta property="og:updated_time" content="2017-04-16T04:42:41.018Z">
+<meta property="og:description" content="扩展运算符与剩余操作符都是以三点开头的操作符，二者长的很像，只是在用法上有些差别。它们已经被 ES6 数组支持，能解决很多之前 arguments 解决起来很麻烦的问题。">
+<meta property="og:updated_time" content="2017-04-17T01:35:15.901Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ES6--延展操作符">
-<meta name="twitter:description" content="延展操作符又称之为三点操作符，已经被 ES6 数组支持，它能解决很多之前 arguments 解决起来很麻烦的问题。">
+<meta name="twitter:title" content="ES6--扩展运算符与剩余操作符">
+<meta name="twitter:description" content="扩展运算符与剩余操作符都是以三点开头的操作符，二者长的很像，只是在用法上有些差别。它们已经被 ES6 数组支持，能解决很多之前 arguments 解决起来很麻烦的问题。">
   
     <link rel="alternative" href="/atom.xml" title="LuckyAbby|To Do My Best" type="application/atom+xml">
   
@@ -142,7 +142,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      ES6--延展操作符
+      ES6--扩展运算符与剩余操作符
     </h1>
   
 
@@ -150,23 +150,30 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>延展操作符又称之为三点操作符，已经被 ES6 数组支持，它能解决很多之前 arguments 解决起来很麻烦的问题。</p>
+        <p>扩展运算符与剩余操作符都是以三点开头的操作符，二者长的很像，只是在用法上有些差别。它们已经被 ES6 数组支持，能解决很多之前 arguments 解决起来很麻烦的问题。</p>
 <a id="more"></a>
-<p>因为在React里面经常碰到，自己就做了很简单的几个归纳。主要几种在以下几个方面。</p>
+<h1 id="扩展运算符"><a href="#扩展运算符" class="headerlink" title="扩展运算符"></a>扩展运算符</h1><p>因为扩展运算符在React里面经常碰到，自己就做了很简单的几个归纳。主要几种在以下几个方面。</p>
 <h2 id="1-改变函数的调用"><a href="#1-改变函数的调用" class="headerlink" title="1. 改变函数的调用"></a>1. 改变函数的调用</h2><p>将数组作为函数的参数传递进去的时候，通常使用的方法是Function.prototype.apply，例如下面的例子<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var students = [&apos;Abby&apos;,&apos;Andy&apos;];</div><div class="line">var otherStudents = [&apos;Jane&apos;,&apos;Tom&apos;];</div><div class="line">Array.prototype.push.apply(students,otherStudents);</div><div class="line">console.log(students); //Abby Andy Jane Tom</div></pre></td></tr></table></figure></p>
-<p>这样写起来就不太方便，现在有了延展操作符，它可以将数组，更确切的说是（可遍历对象）进行展开然后作为函数入参进行调用。现在只需要像下面简单地直接push进去就行了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var students = [&apos;Abby&apos;,&apos;Andy&apos;];</div><div class="line">var otherStudents = [&apos;Jane&apos;,&apos;Tom&apos;];</div><div class="line">students.push(...otherStudents);</div><div class="line">console.log(students);</div></pre></td></tr></table></figure></p>
-<h2 id="2-数组构造"><a href="#2-数组构造" class="headerlink" title="2. 数组构造"></a>2. 数组构造</h2><p>在延展操作符之前，我们如果想让一个数组成为另一个数组的一部分，不可避免地就要用到push, splice, concat等等。现在，延展操作符允许我们简单地操作就能实现，如下面代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var parts = [&apos;shoulders&apos;, &apos;knees&apos;];</div><div class="line">var lyrics = [&apos;head&apos;, ...parts, &apos;and&apos;, &apos;toes&apos;];</div><div class="line">console.log(lyrics)// [&apos;head&apos;, &apos;shoulders, &apos;knees&apos;, &apos;and&apos;, &apos;toes&apos;]</div></pre></td></tr></table></figure></p>
+<p>这样写起来就不太方便，现在有了扩展运算符，它可以将数组，更确切的说是（可遍历对象）进行展开然后作为函数入参进行调用。现在只需要像下面简单地直接push进去就行了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var students = [&apos;Abby&apos;,&apos;Andy&apos;];</div><div class="line">var otherStudents = [&apos;Jane&apos;,&apos;Tom&apos;];</div><div class="line">students.push(...otherStudents);</div><div class="line">console.log(students);</div></pre></td></tr></table></figure></p>
+<h2 id="2-数组构造"><a href="#2-数组构造" class="headerlink" title="2. 数组构造"></a>2. 数组构造</h2><p>在扩展运算符之前，我们如果想让一个数组成为另一个数组的一部分，不可避免地就要用到push, splice, concat等等。现在，扩展运算符允许我们简单地操作就能实现，如下面代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var parts = [&apos;shoulders&apos;, &apos;knees&apos;];</div><div class="line">var lyrics = [&apos;head&apos;, ...parts, &apos;and&apos;, &apos;toes&apos;];</div><div class="line">console.log(lyrics)// [&apos;head&apos;, &apos;shoulders, &apos;knees&apos;, &apos;and&apos;, &apos;toes&apos;]</div></pre></td></tr></table></figure></p>
 <p>除此之外，我们还可以使用它来快速复制一个数组。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var arr = [1, 2, 3];</div><div class="line">var arr2 = [...arr]; // like arr.slice()</div><div class="line">arr2.push(4);</div><div class="line"></div><div class="line">// arr2 becomes [1, 2, 3, 4]</div><div class="line">// arr remains unaffected</div></pre></td></tr></table></figure></p>
-<h2 id="3-数组解构"><a href="#3-数组解构" class="headerlink" title="3. 数组解构"></a>3. 数组解构</h2><p>除了可以快速构造数组之外，还可以用来实现数组的解构。可以用来提取数组中的部分值，并且提取的结果是一个数组对象。注意延展操作符总是应该位于解构赋值的最后一个位置。举个栗子。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var students = [&apos;Abby&apos;, &apos;Andy&apos;, &apos;Jane&apos;, &apos;Tom&apos;];</div><div class="line">var somestudents, otherStudents;</div><div class="line">[somestudents, ...otherStudents] = students ;</div><div class="line">console.log(somestudents); // Abby</div><div class="line">console.log(otherStudents); // Andy Jane Tom</div></pre></td></tr></table></figure></p>
-<h2 id="4-获取参数"><a href="#4-获取参数" class="headerlink" title="4. 获取参数"></a>4. 获取参数</h2><p>延展操作符可以用来方便地获取传进来的参数。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">function fn(...args) &#123;  </div><div class="line">   return args.length;</div><div class="line">&#125;</div><div class="line">fn(1, 2); // 传进来的参数的个数 3</div></pre></td></tr></table></figure></p>
-<p>同时如果不想把所有的参数写成…args传进去的话,可以将部分单独写出来,用逗号分隔。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">function myFunction() &#123;</div><div class="line">  for(var i in arguments) &#123;</div><div class="line">    console.log(arguments[i]);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">var args = [0, 1];</div><div class="line">myFunction(-1, ...args, 2, ...[3]); // -1 0 1 2 3</div></pre></td></tr></table></figure></p>
-<h2 id="5-React里面的延展属性（Spread-Attributes）"><a href="#5-React里面的延展属性（Spread-Attributes）" class="headerlink" title="5. React里面的延展属性（Spread Attributes）"></a>5. React里面的延展属性（Spread Attributes）</h2><p>React里面，延展操作符可以在JSX中，将一个对象的键值对与ReactElement的props属性合并。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var props = &#123;&#125;;</div><div class="line">props.foo = x;</div><div class="line">props.bar = y;</div><div class="line">var component = &lt;Component &#123;...props&#125; /&gt;;</div></pre></td></tr></table></figure></p>
+<h2 id="3-将类数组对象转换成数组"><a href="#3-将类数组对象转换成数组" class="headerlink" title="3. 将类数组对象转换成数组"></a>3. 将类数组对象转换成数组</h2><p>扩展运算符可以将一个类数组对象中索引范围在[0,length)之间的所有属性的值添加到一个数组中，这样可以得到一个真正的数组：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var nodeList = document.querySelectorAll(&apos;div&apos;);</div><div class="line">var array = [...nodeList];</div></pre></td></tr></table></figure>
+<h2 id="4-数组解构"><a href="#4-数组解构" class="headerlink" title="4. 数组解构"></a>4. 数组解构</h2><p>除了可以快速构造数组之外，还可以用来实现数组的解构。可以用来提取数组中的部分值，并且提取的结果是一个数组对象。注意扩展运算符总是应该位于解构赋值的最后一个位置。举个栗子。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var students = [&apos;Abby&apos;, &apos;Andy&apos;, &apos;Jane&apos;, &apos;Tom&apos;];</div><div class="line">var somestudents, otherStudents;</div><div class="line">[somestudents, ...otherStudents] = students ;</div><div class="line">console.log(somestudents); // Abby</div><div class="line">console.log(otherStudents); // Andy Jane Tom</div></pre></td></tr></table></figure></p>
+<h2 id="5-React里面的延展属性（Spread-Attributes）"><a href="#5-React里面的延展属性（Spread-Attributes）" class="headerlink" title="5. React里面的延展属性（Spread Attributes）"></a>5. React里面的延展属性（Spread Attributes）</h2><p>React里面，扩展运算符可以在JSX中，{…props}可以将ReactElement的props属性展开。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var props = &#123;&#125;;</div><div class="line">props.foo = x;</div><div class="line">props.bar = y;</div><div class="line">var component = &lt;Component &#123;...props&#125; /&gt;;</div></pre></td></tr></table></figure></p>
 <p>传入对象的属性会被复制到组件内。</p>
 <p>它能被多次使用，也可以和其它属性一起用。注意顺序很重要，后面的会覆盖掉前面的。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var props = &#123; foo: &apos;default&apos; &#125;;</div><div class="line">var component = &lt;Component &#123;...props&#125; foo=&#123;&apos;override&apos;&#125; /&gt;;</div><div class="line">console.log(component.props.foo); // &apos;override&apos;</div></pre></td></tr></table></figure></p>
-<p>以上就是自己总结的延展操作符较为简单常用的用法，如有不恰当之处欢迎指正。</p>
+<h1 id="剩余操作符"><a href="#剩余操作符" class="headerlink" title="剩余操作符"></a>剩余操作符</h1><p>剩余参数（rest parameter）允许长度不确定的实参表示为一个数组。如果一个函数的最后一个形参是以 … 为前缀的，则在函数被调用时,该形参会成为一个<strong>数组</strong>,数组中的元素都是传递给该函数的多出来的实参的值。</p>
+<h2 id="1-获取参数"><a href="#1-获取参数" class="headerlink" title="1. 获取参数"></a>1. 获取参数</h2><p>剩余操作符可以用来方便地获取传进来的参数。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">function fn(a, b, ...args) &#123;  </div><div class="line">   return args.length;</div><div class="line">&#125;</div><div class="line">fn(1, 2, 3, 4, 5 ); // 传进来的参数的个数 3</div></pre></td></tr></table></figure></p>
+<p>其中第一个形参a对应的是1,第二个形参b对应的2,…args表示的就是[3, 4, 5]。</p>
+<h2 id="2-与arguments的不同"><a href="#2-与arguments的不同" class="headerlink" title="2. 与arguments的不同"></a>2. 与arguments的不同</h2><p>上面args可以有length属性，也说明了args是一个数组而不是像arguments一样是一个伪数组，因此能在在它上面直接使用所有的数组方法，比如 sort，map，forEach，pop。</p>
+<p>arguments想要变成数组，可以通过Array.prototype.slice.call方法，使用剩余操作符可以避免将arguments转为数组的麻烦。这种用法和上面扩展运算符地的用法还有点异曲同工之妙。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">//// 下面的代码模拟了剩余数组</div><div class="line">function fn1(a, b)&#123;</div><div class="line">  var args = Array.prototype.slice.call(arguments, fn1.length);</div><div class="line">  console.log(args.length);</div><div class="line">&#125;</div><div class="line"> </div><div class="line">// 现在代码可以简化为这样了</div><div class="line">function fn2(a, b, ...args) &#123;</div><div class="line">   console.log(args.length);</div><div class="line">&#125;</div><div class="line"></div><div class="line">fn1(1,2,3); // 1</div><div class="line">fn2(1,2,3); // 1</div></pre></td></tr></table></figure></p>
+<h1 id="扩展运算符与剩余操作符的区别"><a href="#扩展运算符与剩余操作符的区别" class="headerlink" title="扩展运算符与剩余操作符的区别"></a>扩展运算符与剩余操作符的区别</h1><p>关于扩展运算符与剩余操作符之间的区别，简单地说，在某种程度上，剩余操作符和扩展运算符相反，扩展运算符会“展开”数组变成多个元素，剩余操作符会收集多个元素和“压缩”成一个单一的元素。</p>
+<p>以上就是自己总结的扩展运算符与剩余操作符较为简单常用的用法，如有不恰当之处欢迎指正。</p>
 <p>参考资料</p>
 <p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator" target="_blank" rel="external">Spreadsyntax</a></p>
-<p><a href="https://github.com/rowone/blog/issues/1" target="_blank" rel="external">[译]三点操作符是如何改变Javascript的 #1</a></p>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Spread_operator" target="_blank" rel="external">扩展语句</a></p>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Functions/Rest_parameters" target="_blank" rel="external">剩余参数</a></p>
 <p><a href="http://www.114390.com/api/react/jsx-spread.html" target="_blank" rel="external">http://www.114390.com/api/react/jsx-spread.html</a></p>
 
       
@@ -240,7 +247,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="ES6-延展操作符" data-title="ES6--延展操作符" data-url="http://yoursite.com/2017/04/15/ES6-延展操作符/"></div>
+	<div class="ds-thread" data-thread-key="ES6-延展操作符" data-title="ES6--扩展运算符与剩余操作符" data-url="http://yoursite.com/2017/04/15/ES6-延展操作符/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">

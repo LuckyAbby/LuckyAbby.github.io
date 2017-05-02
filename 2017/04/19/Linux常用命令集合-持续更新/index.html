@@ -12,7 +12,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/04/19/Linux常用命令集合-持续更新/index.html">
 <meta property="og:site_name" content="LuckyAbby|To Do My Best">
 <meta property="og:description" content="自从开始接触命令行之后，就开始感叹命令行效率的强大，自己接触命令行也没多久，这篇博客就当自己的日记本，把自己常用的命令行写进来，有些自己总是记不住，记下来也免得自己又得去查。">
-<meta property="og:updated_time" content="2017-05-01T15:23:37.208Z">
+<meta property="og:updated_time" content="2017-05-02T14:35:32.823Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux常用命令集合(持续更新)">
 <meta name="twitter:description" content="自从开始接触命令行之后，就开始感叹命令行效率的强大，自己接触命令行也没多久，这篇博客就当自己的日记本，把自己常用的命令行写进来，有些自己总是记不住，记下来也免得自己又得去查。">
@@ -192,6 +192,7 @@
 <p>diff有三种格式： 1. 正常格式（normal diff）2. 上下文格式（context diff） 3. 合并格式（unified diff）</p>
 <h4 id="正常格式diff"><a href="#正常格式diff" class="headerlink" title="正常格式diff"></a>正常格式diff</h4><p>正常格式不用加任何参数，diff f1 f2即可，显示结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">3c9</div><div class="line">&lt; a b d</div><div class="line">---</div><div class="line">&gt; a b c</div><div class="line">2d2</div><div class="line">&lt; c</div><div class="line">6a5</div><div class="line">&gt; f</div></pre></td></tr></table></figure></p>
 <p>3c9、2d2、6a5是说明变动的位置，前边数字代表f1中变化的行，后边的则代表f2中变化的行，中间的字母分别代表“改变”（c）、“删除”（d）和“增加”（a）。<br>&lt;表示f1指定行的内容，—分割两个文件的，然后&gt;表示f2指定行的内容。删除或增加时，则分别f2、f1中指定行无内容。</p>
+<h3 id="17-file命令"><a href="#17-file命令" class="headerlink" title="17. file命令"></a>17. file命令</h3><p>该命令用于判断接在file命令后的文件的基本数据，因为在Linux下文件的类型并不是以后缀为分的，所以这个命令对我们来说就很有用了，它的用法非常简单，基本语法如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[plain] view plain copy print?</div><div class="line">file filename  </div><div class="line">#例如：  </div><div class="line">file ./test</div></pre></td></tr></table></figure></p>
 
       
     </div>

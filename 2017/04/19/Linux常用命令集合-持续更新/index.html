@@ -12,7 +12,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/04/19/Linux常用命令集合-持续更新/index.html">
 <meta property="og:site_name" content="LuckyAbby|To Do My Best">
 <meta property="og:description" content="自从开始接触命令行之后，就开始感叹命令行效率的强大，自己接触命令行也没多久，这篇博客就当自己的日记本，把自己常用的命令行写进来，有些自己总是记不住，记下来也免得自己又得去查。">
-<meta property="og:updated_time" content="2017-05-03T14:22:25.271Z">
+<meta property="og:updated_time" content="2017-05-05T14:36:15.716Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux常用命令集合(持续更新)">
 <meta name="twitter:description" content="自从开始接触命令行之后，就开始感叹命令行效率的强大，自己接触命令行也没多久，这篇博客就当自己的日记本，把自己常用的命令行写进来，有些自己总是记不住，记下来也免得自己又得去查。">
@@ -195,7 +195,12 @@
 <h3 id="17-file命令"><a href="#17-file命令" class="headerlink" title="17. file命令"></a>17. file命令</h3><p>该命令用于判断接在file命令后的文件的基本数据，因为在Linux下文件的类型并不是以后缀为分的，所以这个命令对我们来说就很有用了，它的用法非常简单，基本语法如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[plain] view plain copy print?</div><div class="line">file filename  </div><div class="line">#例如：  </div><div class="line">file ./test</div></pre></td></tr></table></figure></p>
 <h3 id="18-kill命令"><a href="#18-kill命令" class="headerlink" title="18. kill命令"></a>18. kill命令</h3><p>该命令用于向某个工作（%jobnumber）或者是某个PID（数字）传送一个信号，它通常与ps和jobs命令一起使用，它的基本语法如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">[plain] view plain copy print?</div><div class="line">kill -signal PID  </div><div class="line">signal的常用参数如下：</div><div class="line">注：最前面的数字为信号的代号，使用时可以用代号代替相应的信号。</div><div class="line">[plain] view plain copy print?</div><div class="line">1：SIGHUP，启动被终止的进程  </div><div class="line">2：SIGINT，相当于输入ctrl+c，中断一个程序的进行  </div><div class="line">9：SIGKILL，强制中断一个进程的进行  </div><div class="line">15：SIGTERM，以正常的结束进程方式来终止进程  </div><div class="line">17：SIGSTOP，相当于输入ctrl+z，暂停一个进程的进行</div></pre></td></tr></table></figure></p>
 <p>例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[plain] view plain copy print?</div><div class="line"># 以正常的结束进程方式来终于第一个后台工作，可用jobs命令查看后台中的第一个工作进程  </div><div class="line">kill -SIGTERM %1   </div><div class="line"># 重新改动进程ID为PID的进程，PID可用ps命令通过管道命令加上grep命令进行筛选获得  </div><div class="line">kill -SIGHUP PID</div></pre></td></tr></table></figure></p>
-
+<h3 id="19-file命令"><a href="#19-file命令" class="headerlink" title="19.file命令"></a>19.file命令</h3><p>该命令用于判断接在file命令后的文件的基本数据，因为在Linux下文件的类型并不是以后缀为分的，所以这个命令对我们来说就很有用了，它的用法非常简单，基本语法如下：</p>
+<pre><code>[plain] view plain copy print?
+file filename  
+#例如：  
+file ./test
+</code></pre>
       
     </div>
     <div class="article-info article-info-index">

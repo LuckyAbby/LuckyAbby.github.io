@@ -12,7 +12,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/03/27/你不知道的执行上下文/index.html">
 <meta property="og:site_name" content="LuckyAbby|To Do My Best">
 <meta property="og:description" content="执行上下文看似很好理解，可是当深入之后其实里面还有很多值得学习的地方，并且与很多我们耳熟能详的概念，譬如提升(hoisting)联系紧密。我的理解可能有所欠缺，只能把自己浅薄的理解说出来，大家仅供参考哇。也欢迎大家来找我讨论哇。">
-<meta property="og:updated_time" content="2017-04-25T14:49:45.467Z">
+<meta property="og:updated_time" content="2017-05-07T09:58:06.841Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="你不知道的执行上下文">
 <meta name="twitter:description" content="执行上下文看似很好理解，可是当深入之后其实里面还有很多值得学习的地方，并且与很多我们耳熟能详的概念，譬如提升(hoisting)联系紧密。我的理解可能有所欠缺，只能把自己浅薄的理解说出来，大家仅供参考哇。也欢迎大家来找我讨论哇。">
@@ -184,7 +184,7 @@
 <p>在当前上下文上运行/解释函数代码，并随着代码一行行执行指派变量的值和函数的引用。</p>
 <h4 id="创建阶段"><a href="#创建阶段" class="headerlink" title="创建阶段"></a>创建阶段</h4><p>1.根据函数的参数，创建并初始化arguments object。</p>
 <p>2.扫描上下文的函数声明：对于找到的函数声明，将函数名和函数引用存入VO中，如果VO中已经有同名函数，那么就进行覆盖。</p>
-<p>3.扫面上下文的变量声明：对于找到的每个变量声明，将变量名存入VO中，并且将变量的值初始化为undefined。如果变量的名字已经在变量对象里存在，不会进行任何操作并继续扫描。</p>
+<p>3.扫描上下文的变量声明：对于找到的每个变量声明，将变量名存入VO中，并且将变量的值初始化为undefined。如果变量的名字已经在变量对象里存在，不会进行任何操作并继续扫描。</p>
 <p><strong>要记住：函数扫描是在变量之前。</strong></p>
 <p>让我们举一个栗子来说明：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">function person(age) &#123;</div><div class="line">    var name = &apos;abby&apos;;</div><div class="line">    var getName = function getName() &#123;</div><div class="line">    &#125;;</div><div class="line">    function getAge() &#123;</div><div class="line">    	return age</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">person(20);</div></pre></td></tr></table></figure></p>
 <p>首先，当我调用person(20)的时候，创建的状态是这样:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">fooExecutionContext = &#123;</div><div class="line">    scopeChain: &#123; ... &#125;,</div><div class="line">    variableObject: &#123;</div><div class="line">        arguments: &#123;</div><div class="line">            0: 20,</div><div class="line">            length: 1</div><div class="line">        &#125;,</div><div class="line">        age: 20,</div><div class="line">        getAge: pointer to function getAge(),</div><div class="line">        name: undefined,</div><div class="line">        getName: undefined,</div><div class="line">    &#125;,</div><div class="line">    this: &#123; ... &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
@@ -198,7 +198,7 @@
 <p>1.console.log(typeof name); 此时name在VO中是函数。</p>
 <p>2.console.log(typeof another); 此时another在VO中的值是undefined。</p>
 <p>3.指出函数name的引用。</p>
-<p>4.将name赋值为’hello’。</p>
+<p>4.将name赋值为’Abby’。</p>
 <p>5.将another赋值为函数表达式的值。</p>
 <p>6.console.log(typeof name); 此时的name由于被函数被字符串赋值覆盖因此是string类型。</p>
 <p>7.console.log(typeof another); 此时的another被赋值成函数表达式因此是function类型。</p>

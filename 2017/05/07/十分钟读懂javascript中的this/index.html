@@ -6,8 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <title>十分钟读懂javascript中的this | LuckyAbby|To Do My Best</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="最近刚熬过了一大波考试和大作业，半个月没更文还有点心生愧疚Orz。今天就总结一下 JS 里面的 this,之前面试的时候也被面试官问到过，当时答的不够好，下来自己就整理了一下。
-在我之前的一篇文章你不知道的执行上下文中有提到过 this,对那篇文章进行概括就是：
+  <meta name="description" content="最近刚熬过了一大波考试和大作业，半个月没更文还有点心生愧疚Orz。今天就总结一下 JS 里面的 this，之前面试的时候也被面试官问到过，当时答的不够好，下来自己就整理了一下。
+在我之前的一篇文章你不知道的执行上下文中有提到过 this，对那篇文章进行概括就是：
 
 上下文是在函数调用的时候被创建的。
 this 是组成上下文的一部分。
@@ -17,18 +17,18 @@ this 是组成上下文的一部分。
 <meta property="og:title" content="十分钟读懂javascript中的this">
 <meta property="og:url" content="http://yoursite.com/2017/05/07/十分钟读懂javascript中的this/index.html">
 <meta property="og:site_name" content="LuckyAbby|To Do My Best">
-<meta property="og:description" content="最近刚熬过了一大波考试和大作业，半个月没更文还有点心生愧疚Orz。今天就总结一下 JS 里面的 this,之前面试的时候也被面试官问到过，当时答的不够好，下来自己就整理了一下。
-在我之前的一篇文章你不知道的执行上下文中有提到过 this,对那篇文章进行概括就是：
+<meta property="og:description" content="最近刚熬过了一大波考试和大作业，半个月没更文还有点心生愧疚Orz。今天就总结一下 JS 里面的 this，之前面试的时候也被面试官问到过，当时答的不够好，下来自己就整理了一下。
+在我之前的一篇文章你不知道的执行上下文中有提到过 this，对那篇文章进行概括就是：
 
 上下文是在函数调用的时候被创建的。
 this 是组成上下文的一部分。
 
 因此每次函数被调用的时候就会产生一个新的 this。具体的分为">
-<meta property="og:updated_time" content="2017-05-07T12:38:47.731Z">
+<meta property="og:updated_time" content="2017-05-07T12:44:31.576Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="十分钟读懂javascript中的this">
-<meta name="twitter:description" content="最近刚熬过了一大波考试和大作业，半个月没更文还有点心生愧疚Orz。今天就总结一下 JS 里面的 this,之前面试的时候也被面试官问到过，当时答的不够好，下来自己就整理了一下。
-在我之前的一篇文章你不知道的执行上下文中有提到过 this,对那篇文章进行概括就是：
+<meta name="twitter:description" content="最近刚熬过了一大波考试和大作业，半个月没更文还有点心生愧疚Orz。今天就总结一下 JS 里面的 this，之前面试的时候也被面试官问到过，当时答的不够好，下来自己就整理了一下。
+在我之前的一篇文章你不知道的执行上下文中有提到过 this，对那篇文章进行概括就是：
 
 上下文是在函数调用的时候被创建的。
 this 是组成上下文的一部分。
@@ -168,15 +168,15 @@ this 是组成上下文的一部分。
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>最近刚熬过了一大波考试和大作业，半个月没更文还有点心生愧疚Orz。今天就总结一下 JS 里面的 this,之前面试的时候也被面试官问到过，当时答的不够好，下来自己就整理了一下。</p>
-<p>在我之前的一篇文章<a href="http://luckyabby.com/2017/03/27/%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87/" target="_blank" rel="external">你不知道的执行上下文</a>中有提到过 this,对那篇文章进行概括就是：</p>
+        <p>最近刚熬过了一大波考试和大作业，半个月没更文还有点心生愧疚Orz。今天就总结一下 JS 里面的 this，之前面试的时候也被面试官问到过，当时答的不够好，下来自己就整理了一下。</p>
+<p>在我之前的一篇文章<a href="http://luckyabby.com/2017/03/27/%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87/" target="_blank" rel="external">你不知道的执行上下文</a>中有提到过 this，对那篇文章进行概括就是：</p>
 <ol>
 <li>上下文是在函数调用的时候被创建的。</li>
 <li>this 是组成上下文的一部分。</li>
 </ol>
 <p>因此每次函数被调用的时候就会产生一个新的 this。具体的分为下面几种。</p>
-<h2 id="1-作为普通函数被调用"><a href="#1-作为普通函数被调用" class="headerlink" title="1. 作为普通函数被调用"></a>1. 作为普通函数被调用</h2><p>在全局环境里面，this 永远指向 window,因此作为普通函数被调用的时候，this 也是指向 window。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">var name = &apos;Abby&apos;;</div><div class="line">function fn() &#123;</div><div class="line">    console.log(this); //window</div><div class="line">    console.log(this.name); //Abby</div><div class="line">&#125;</div><div class="line"></div><div class="line">fn();</div></pre></td></tr></table></figure></p>
-<p>这里，fn 其实是作为 window 的一个方法被调用的，而 name 也是 window 的一个属性，因此fn()实际上就是 window.fn()。</p>
+<h2 id="1-作为普通函数被调用"><a href="#1-作为普通函数被调用" class="headerlink" title="1. 作为普通函数被调用"></a>1. 作为普通函数被调用</h2><p>在全局环境里面，this 永远指向 window，因此作为普通函数被调用的时候，this 也是指向 window。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">var name = &apos;Abby&apos;;</div><div class="line">function fn() &#123;</div><div class="line">    console.log(this); //window</div><div class="line">    console.log(this.name); //Abby</div><div class="line">&#125;</div><div class="line"></div><div class="line">fn();</div></pre></td></tr></table></figure></p>
+<p>这里，fn 其实是作为 window 的一个方法被调用的，而 name 也是 window 的一个属性，因此 fn() 实际上就是 window.fn()。</p>
 <h2 id="2-作为对象的属性被调用"><a href="#2-作为对象的属性被调用" class="headerlink" title="2.作为对象的属性被调用"></a>2.作为对象的属性被调用</h2><p>如果函数作为一个对象的属性方法，并且被调用的时候，this 就指向这个对象。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">var name = &apos;Jane&apos;;</div><div class="line">var person = &#123;</div><div class="line">	name: &apos;Abby&apos;,</div><div class="line">	sayName: function() &#123;</div><div class="line">		console.log(this.name);</div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line">var sayNameWin = person.sayName;</div><div class="line"></div><div class="line">person.sayName(); //Abby</div><div class="line">sayNameWin(); //Jane   作为 window 的方法被调用的</div></pre></td></tr></table></figure>
 <p>在这里，sayName 方法是作为 person 的一个属性方法被调用的，因此指向 person，但是 sayNameWin 方法却是作为 window 的一个属性方法被调用的，因此 console.log 的值是 Jane。我们再看一个变形。</p>
@@ -187,10 +187,10 @@ this 是组成上下文的一部分。
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">var name = &apos;Jane&apos;;</div><div class="line">var person = &#123;</div><div class="line">    name: &apos;Abby&apos;,</div><div class="line">    sayName: function () &#123;</div><div class="line">    	var that = this;</div><div class="line">        function fn()&#123;</div><div class="line">            console.log(that);      //Object &#123;name: &quot;Abby&quot;&#125;</div><div class="line">            console.log(that.name);    //Abby</div><div class="line">        &#125;</div><div class="line">        fn();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">person.sayName();</div></pre></td></tr></table></figure>
 <h2 id="3-作为构造函数被调用"><a href="#3-作为构造函数被调用" class="headerlink" title="3. 作为构造函数被调用"></a>3. 作为构造函数被调用</h2><p>作为构造函数被调用的时候，this 代表它即将 new 出来的对象。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">function Person(name) &#123;</div><div class="line">	this.name = name;</div><div class="line">	console.log(this);  //Person &#123;name: &quot;Abby&quot;&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var person = new Person(&apos;Abby&apos;);</div><div class="line">console.log(person.name);  //Abby</div></pre></td></tr></table></figure>
-<p>如果不加 ew,表示即作为普通函数调用，指向 window</p>
+<p>如果不加 new,表示即作为普通函数调用，指向 window</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">function Person(name) &#123;</div><div class="line">	this.name = name;</div><div class="line">	console.log(this);  //window</div><div class="line">&#125;</div><div class="line"></div><div class="line">Person(&apos;Jane&apos;); </div><div class="line">console.log(window.name); //Jane</div></pre></td></tr></table></figure>
 <h2 id="4-作为-call-apply-bind-方法的调用"><a href="#4-作为-call-apply-bind-方法的调用" class="headerlink" title="4. 作为 call/apply/bind 方法的调用"></a>4. 作为 call/apply/bind 方法的调用</h2><p>作为 call/apply/bind 方法被调用的时候指向传入的值<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">var person = &#123;</div><div class="line">	name: &apos;Abby&apos;</div><div class="line">&#125;;</div><div class="line">function fn() &#123;</div><div class="line">	console.log(this); //Object &#123;name: &quot;Abby&quot;&#125;</div><div class="line">	console.log(this.name); //Abby</div><div class="line">&#125;</div><div class="line"></div><div class="line">fn.apply(person);</div></pre></td></tr></table></figure></p>
-<h2 id="5-setTimeout、setInterval中的this"><a href="#5-setTimeout、setInterval中的this" class="headerlink" title="5. setTimeout、setInterval中的this"></a>5. setTimeout、setInterval中的this</h2><p>setTimeout/setInterval 执行的时候，this 默认指向 window 对象，除非手动改变 this 的指向。《javascript高级程序设计》中写到：“超时调用的代码(setTimeout)都是在全局作用域中执行的，因此函数中的 this 的值，在非严格模式下是指向 window 对象，在严格模式下是指向 undefined”。本文只是在非严格模式下。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">var name = &apos;Jane&apos;;</div><div class="line">function Person()&#123;</div><div class="line">    this.name = &apos;Abby&apos;;</div><div class="line">    this.sayName=function()&#123;</div><div class="line">    	console.log(this); //window</div><div class="line">        console.log(this.name); //Jane</div><div class="line">        &#125;;</div><div class="line">    setTimeout(this.sayName, 10);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">var person=new Person();</div></pre></td></tr></table></figure></p>
+<h2 id="5-setTimeout、setInterval中的this"><a href="#5-setTimeout、setInterval中的this" class="headerlink" title="5. setTimeout、setInterval中的this"></a>5. setTimeout、setInterval中的this</h2><p>setTimeout/setInterval 执行的时候，this 默认指向 window 对象，除非手动改变 this 的指向。《javascript 高级程序设计》中写到：“超时调用的代码(setTimeout)都是在全局作用域中执行的，因此函数中的 this 的值，在非严格模式下是指向 window 对象，在严格模式下是指向 undefined”。本文只是在非严格模式下。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">var name = &apos;Jane&apos;;</div><div class="line">function Person()&#123;</div><div class="line">    this.name = &apos;Abby&apos;;</div><div class="line">    this.sayName=function()&#123;</div><div class="line">    	console.log(this); //window</div><div class="line">        console.log(this.name); //Jane</div><div class="line">        &#125;;</div><div class="line">    setTimeout(this.sayName, 10);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">var person=new Person();</div></pre></td></tr></table></figure></p>
 <p>在这里如果想改变 this，可是使用 apply/call/bind 等，也可以使用 that 保存 this。</p>
 <h2 id="6-构造函数-prototype-属性"><a href="#6-构造函数-prototype-属性" class="headerlink" title="6. 构造函数 prototype 属性"></a>6. 构造函数 prototype 属性</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">var name = &apos;Jane&apos;;</div><div class="line">function Person()&#123;</div><div class="line">    this.name = &apos;Abby&apos;;</div><div class="line">&#125;</div><div class="line">Person.prototype.sayName = function () &#123;</div><div class="line">    console.log(this);        // Person &#123;name: &quot;Abby&quot;&#125;</div><div class="line">    console.log(this.name);      // Abby</div><div class="line">&#125;</div><div class="line">var person = new Person();</div><div class="line">person.sayName();</div></pre></td></tr></table></figure>
 <p>在 Person.prototype.sayName 函数中，this 指向的 person 对象。即便是在整个原型链中,this 也代表当前对象的值。</p>
@@ -199,6 +199,8 @@ this 是组成上下文的一部分。
 <p>在这里，和不使用 Eval ，作为对象的方法调用的时候得出的结果是一样的。</p>
 <h2 id="8-箭头函数"><a href="#8-箭头函数" class="headerlink" title="8. 箭头函数"></a>8. 箭头函数</h2><p>箭头函数里面 this 始终指向外部对象，因为箭头函数没有 this，因此它自身不能进行new实例化，同时也不能使用 call, apply, bind 等方法来改变 this 的指向。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">var person = &#123;</div><div class="line">    name: &apos;Abby&apos;,</div><div class="line">    sayName: function() &#123;</div><div class="line">        var fn = () =&gt; &#123;</div><div class="line">            return () =&gt; &#123;</div><div class="line">                console.log(this);   //Object &#123;name: &quot;Abby&quot;&#125;</div><div class="line">                console.log(this.name); //Abby</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        fn()();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">person.sayName();</div></pre></td></tr></table></figure>
+<p>如果有不恰当之处，欢迎指出。</p>
+<p>参考资料：<br><a href="http://www.cnblogs.com/wangfupeng1988/p/3988422.html" target="_blank" rel="external">深入理解javascript原型和闭包（10）——this</a><br><a href="https://www.ibm.com/developerworks/cn/web/1207_wangqf_jsthis/index.html" target="_blank" rel="external">深入浅出 JavaScript 中的 this</a><br><a href="http://www.cnblogs.com/justany/archive/2012/11/01/the_keyword_this_in_javascript.html" target="_blank" rel="external">http://www.cnblogs.com/justany/archive/2012/11/01/the_keyword_this_in_javascript.html</a></p>
 
       
     </div>

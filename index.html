@@ -130,67 +130,6 @@
       <div class="body-wrap">
         
   
-    <article id="post-C语言实现数据结构-线性表" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/12/C语言实现数据结构-线性表/">C语言实现数据结构--线性表</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>线性表是一种最简单的线性结构。<br>线性结构的基本特征是：<br>线性结构是一个数据元素的有序（次序）集。<br>1．集合中必存在唯一的一个“第一元素”；<br>2．集合中必存在唯一的一个 “最后元素” ；<br>3．除最后元素在外，均有 唯一的后继；<br>4．除第一元素之外，均有 唯一的前驱。<br>比较典型的线性结构：线性表、栈、队列、串等。</p>
-<p>线性表是n个数据元素的有限序列，可以表示为:（a1, a2, …，ai-1，ai，ai+1， …，an），其中数据元素可以是各种类型的元素。<br>线性表常用的两种表现形式是顺序表示与链式表示。</p>
-<h2 id="线性表的顺序表示–顺序表"><a href="#线性表的顺序表示–顺序表" class="headerlink" title="线性表的顺序表示–顺序表"></a>线性表的顺序表示–顺序表</h2><p>线性表的顺序存储是指用一组地址连续的存储单元依次存储线性表中的各个元素，使得线性表中在逻辑结构上相邻的数据元素存储在相邻的物理存储单元中，即通过数据元素物理存储的相邻关系来反映数据元素之间逻辑上的相邻关系。</p>
-<p>以“存储位置相邻”表示有序对<ai-1，ai>  即：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">LOC(ai) = LOC(ai-1) + l （一个数据元素所占存储量）</div></pre></td></tr></table></figure></ai-1，ai></p>
-<p>所有数据元素的存储位置均取决于第一个数据元素的存储位置。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">LOC(ai) = LOC(a1) + (i-1)×l</div></pre></td></tr></table></figure></p>
-<p>用C语言来描述顺序映像就是：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">define</span>  LIST_INIT_SIZE  80   <span class="comment">// 线性表存储空间的初始分配量</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span>  LISTINCREMENT  10   <span class="comment">// 线性表存储空间的分配增量</span></span></div><div class="line"></div><div class="line"><span class="keyword">typedef</span>  <span class="keyword">struct</span> &#123;</div><div class="line">	ElemType *elem;</div><div class="line">	<span class="keyword">int</span> length;</div><div class="line">	<span class="keyword">int</span> listSize</div><div class="line">&#125;SqList;</div></pre></td></tr></table></figure></p>
-<p>顺序表简单实现数据的插入：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function">Status <span class="title">ListInsert</span><span class="params">(SqList &amp;L, <span class="keyword">int</span> i, ElemType e)</span> </span>&#123;</div><div class="line">	q = &amp;(L.elem[i<span class="number">-1</span>]) ; <span class="comment">//q指向插入的位置</span></div><div class="line">	<span class="keyword">for</span>(p = &amp;(L.elem[L.length<span class="number">-1</span>]); p &gt;= q; --p) &#123;</div><div class="line">	*(p+<span class="number">1</span>) = *p; <span class="comment">//插入位置及之后的元素右移</span></div><div class="line">	&#125;</div><div class="line">	*q = e;</div><div class="line">	++L.length;</div><div class="line">	<span class="keyword">return</span> OK;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>假如此顺序表的长度是 n,此时算法的时间复杂度是 O(n)。<br>由此可以看出顺序表的一些缺点比如：插入与删除的效率很低，需要预先分配存储的空间等等。<br>由此便得到线性表的另一种存储形式–链式存储。</p>
-<h2 id="线性表的链式表示–链表"><a href="#线性表的链式表示–链表" class="headerlink" title="线性表的链式表示–链表"></a>线性表的链式表示–链表</h2><p>数据元素除了具有代表其本身信息的数据域外，还有一个用来指示逻辑关系的指针域，这样的存储结构称为结点。链式存储通过每个结点的指针域将线性表的n个结点按其逻辑顺序链接在一起，称为线性表的链式存储表示。<br>用图片表示就是<br>![<a href="http://ojzeprg7w.bkt.clouddn.com/%E5%9B%BE%E7%89%871.png" target="_blank" rel="external">http://ojzeprg7w.bkt.clouddn.com/%E5%9B%BE%E7%89%871.png</a>]</p>
-<p>用C语言来描述链式映像就是：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typedef</span>  <span class="keyword">struct</span>  LNode&#123;</div><div class="line">     ElemType  data；       <span class="comment">//结点的数据域</span></div><div class="line">     <span class="keyword">struct</span>  LNode  *next； <span class="comment">//结点的指针域</span></div><div class="line">&#125;LNode, *LinkList;</div></pre></td></tr></table></figure></p>
-<p>用C实现链表的常用操作：</p>
-<h4 id="1-链表初始化"><a href="#1-链表初始化" class="headerlink" title="1. 链表初始化"></a>1. 链表初始化</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">InitList</span><span class="params">(LinkList &amp;H)</span> </span>&#123;</div><div class="line">    H = (LNode *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(LNode));   <span class="comment">//申请一个头结点        </span></div><div class="line">    <span class="keyword">if</span> (!H)  <span class="keyword">return</span> ERROR;        </div><div class="line">    H-&gt;next = <span class="literal">NULL</span>;                   <span class="comment">//头结点的指针域置空</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h4 id="2-重置链表"><a href="#2-重置链表" class="headerlink" title="2. 重置链表"></a>2. 重置链表</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">ClearList</span><span class="params">(&amp;L)</span> </span>&#123;</div><div class="line">	<span class="keyword">while</span> (L-&gt;next) &#123;</div><div class="line">        p = L-&gt;next;  </div><div class="line">		L-&gt;next = p-&gt;next;        </div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h4 id="3-单链表的查找"><a href="#3-单链表的查找" class="headerlink" title="3. 单链表的查找"></a>3. 单链表的查找</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">int Search(LinkList H, int e) &#123;</div><div class="line">	LinkList p;</div><div class="line">	p = H-&gt;next;</div><div class="line">	while(p) &#123;</div><div class="line">		if(p-&gt;data == e) return OK;</div><div class="line">		else   p = p-&gt;next;</div><div class="line">	&#125;		</div><div class="line">	return ERROR;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h4 id="4-单链表的插入"><a href="#4-单链表的插入" class="headerlink" title="4. 单链表的插入"></a>4. 单链表的插入</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="function">Status <span class="title">ListInsert</span><span class="params">(LinkList &amp;L, <span class="keyword">int</span> i, ElemType e)</span>  <span class="comment">// 在单链表L的第i个位置上插入值为e的元素 </span></span></div><div class="line">&#123;</div><div class="line">	LinkList p = L; </div><div class="line">	<span class="keyword">int</span> j = <span class="number">0</span>;</div><div class="line">	<span class="keyword">while</span>(p &amp;&amp; j&lt;i<span class="number">-1</span>) &#123;</div><div class="line">		p = p-&gt;next; </div><div class="line">		++j;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">if</span>(!p || j&gt;i<span class="number">-1</span>) &#123;</div><div class="line">		<span class="keyword">return</span> ERROR;</div><div class="line">	&#125;</div><div class="line">	s = (LinkList)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(Lnode)); <span class="comment">//创建一个新的存储空间</span></div><div class="line">	s-&gt;data = e;</div><div class="line">	<span class="comment">//注意下面两步顺序千万不能写乱，不然会找不到插入前 p 前面的节点</span></div><div class="line">	s-&gt;next = p-&gt;next;</div><div class="line">	p-&gt;next = s;</div><div class="line">	<span class="keyword">return</span> OK;</div><div class="line">&#125;</div><div class="line">``` </div><div class="line">#### <span class="number">5.</span> 单链表的删除</div></pre></td></tr></table></figure>
-<p>Status ListDelete(LinkList &amp;L, int i, ElemType &amp;e)<br>{<br>    LinkList p = L;<br>    int j = 0;<br>    while(p &amp;&amp; j<i-1) {="" p="p-">next;<br>        ++j;<br>    }<br>    if(!p || j&gt;i-1) return ERROR;<br>    q = p-&gt;next;<br>    p-&gt;next = q-&gt;next;<br>    e = q-&gt;data;<br>    free(q);<br>    return OK;<br>}</i-1)></p>
-<p>```</p>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2017/05/12/C语言实现数据结构-线性表/" class="archive-article-date">
-  	<time datetime="2017-05-12T14:56:04.000Z" itemprop="datePublished"><i class="icon-clock"></i>2017-05-12</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
     <article id="post-十分钟读懂javascript中的this" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -428,6 +367,58 @@
       
       <a href="/2017/04/07/深入浅出Javascript事件循环机制-上/" class="archive-article-date">
   	<time datetime="2017-04-07T06:59:53.000Z" itemprop="datePublished"><i class="icon-clock"></i>2017-04-07</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术/">技术</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-你不知道的执行上下文" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/27/你不知道的执行上下文/">你不知道的执行上下文</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>执行上下文看似很好理解，可是当深入之后其实里面还有很多值得学习的地方，并且与很多我们耳熟能详的概念，譬如提升(hoisting)联系紧密。我的理解可能有所欠缺，只能把自己浅薄的理解说出来，大家仅供参考哇。也欢迎大家来找我讨论哇。<br>
+        <p class="article-more-link">
+          <a class="article-more-a"  href="/2017/03/27/你不知道的执行上下文/#more">more >></a>
+        </p>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2017/03/27/你不知道的执行上下文/" class="archive-article-date">
+  	<time datetime="2017-03-26T23:57:22.000Z" itemprop="datePublished"><i class="icon-clock"></i>2017-03-27</time>
 </a>
       
 	<div class="article-tag tagcloud">

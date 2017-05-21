@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>C语言实现数据结构-串 | LuckyAbby|To Do My Best</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="串即字符串，是由零个或多个字符组成的有限序列，是数据元素为单个字符的特殊线性表。串长：串中字符的个数（n≥0）. n=0 时称为空串。空白串：由一个或多个空格符组成的串。空串和空白串有无区别？答：有区别。空串(Null String)是指长度为零的串；而空白串(Blank String),是指包含一个或多个空白字符’ ‘(空格键)的字符串。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C语言实现数据结构-串">
+<meta property="og:url" content="http://yoursite.com/2017/05/21/C语言实现数据结构-串/index.html">
+<meta property="og:site_name" content="LuckyAbby|To Do My Best">
+<meta property="og:description" content="串即字符串，是由零个或多个字符组成的有限序列，是数据元素为单个字符的特殊线性表。串长：串中字符的个数（n≥0）. n=0 时称为空串。空白串：由一个或多个空格符组成的串。空串和空白串有无区别？答：有区别。空串(Null String)是指长度为零的串；而空白串(Blank String),是指包含一个或多个空白字符’ ‘(空格键)的字符串。">
+<meta property="og:image" content="http://ojzeprg7w.bkt.clouddn.com/%E4%B8%B21.JPG">
+<meta property="og:updated_time" content="2017-05-21T15:25:15.622Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C语言实现数据结构-串">
+<meta name="twitter:description" content="串即字符串，是由零个或多个字符组成的有限序列，是数据元素为单个字符的特殊线性表。串长：串中字符的个数（n≥0）. n=0 时称为空串。空白串：由一个或多个空格符组成的串。空串和空白串有无区别？答：有区别。空串(Null String)是指长度为零的串；而空白串(Blank String),是指包含一个或多个空白字符’ ‘(空格键)的字符串。">
+<meta name="twitter:image" content="http://ojzeprg7w.bkt.clouddn.com/%E4%B8%B21.JPG">
+  
+    <link rel="alternative" href="/atom.xml" title="LuckyAbby|To Do My Best" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <script src="/style.js"></script>
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="/img/avatar.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Abby</a></h1>
+		</hgroup>
+
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/tags/技术/">技术</a></li>
+	        
+				<li><a href="/tags/随记/">随记</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="http://github.com/LuckyAbby" title="github">github</a>
+		        
+					<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/xia-yan-luo-47" title="zhihu">zhihu</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">Abby</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="/img/avatar.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Abby</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/tags/技术/">技术</a></li>
+		        
+					<li><a href="/tags/随记/">随记</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="http://github.com/LuckyAbby" title="github">github</a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/xia-yan-luo-47" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-C语言实现数据结构-串" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      C语言实现数据结构-串
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>串即字符串，是由零个或多个字符组成的有限序列，是数据元素为单个字符的特殊线性表。<br>串长：串中字符的个数（n≥0）. n=0 时称为空串。空白串：由一个或多个空格符组成的串。<br>空串和空白串有无区别？<br>答：有区别。空串(Null String)是指长度为零的串；而空白串(Blank String),是指包含一个或多个空白字符’ ‘(空格键)的字符串。<br><a id="more"></a><br>先弄清楚几个基本概念<br>子串：串S中任意个连续的字符序列叫S的子串。<br>子串位置：子串的第一个字符在主串中的序号。<br>字符位置：字符在串中的序号。<br>串相等：串长度相等，且对应位置上字符相等。<br>空串是任意串的子串；任意串S都是S本身的子串，除S本身外，S的其他子串称为S的真子串。</p>
+<h2 id="串的实现与表示"><a href="#串的实现与表示" class="headerlink" title="串的实现与表示"></a>串的实现与表示</h2><p>首先强调：串与线性表的运算有所不同，是以“串的整体”作为操作对象，例如查找某子串，在主串某位置上插入一个子串等。<br>串有三种机内表示方法：1. 定长顺序存储表示：用一组地址连续的存储单元存储串值的字符序列，属静态存储方式 2. 堆分配存储表示：用一组地址连续的存储单元存储串值的字符序列,但存储空间是在程序执行过程中动态分配而得。</p>
+<ol>
+<li>串的块链存储表示：链式方式存储。其实其中1、2都属于顺序存储，3属于链式存储。</li>
+</ol>
+<h2 id="定长顺序存储"><a href="#定长顺序存储" class="headerlink" title="定长顺序存储"></a>定长顺序存储</h2><p>用一组连续的存储单元来存放串，直接使用定长的字符数组来定义，数组的上界预先给出，故称为静态存储分配。</p>
+<p>例如：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">define</span> Maxstrlen 255    <span class="comment">//用户可用的最大串长</span></span></div><div class="line"><span class="keyword">typedef</span> <span class="keyword">unsigned</span> <span class="keyword">char</span> SString[ Maxstrlen＋<span class="number">1</span> ] ;   </div><div class="line">SString s;   <span class="comment">//s 是一个可容纳255个字符的顺序串。</span></div></pre></td></tr></table></figure></p>
+<p>一般用SString[0]来存放串长信息;C语言约定在串尾加结束符’\0’，但不计入串长;若字符串超过Maxstrlen 则自动截断。</p>
+<h2 id="堆分配存储"><a href="#堆分配存储" class="headerlink" title="堆分配存储"></a>堆分配存储</h2><p>堆分配存储特点：仍用一组连续的存储单元来存放串，但存储空间是在程序执行过程中动态分配而得。思路是利用malloc函数合理预设串长空间。若在操作中串值改变，还可以利用realloc函数按新串长度增加空间（即动态数组概念）。<br>堆T的存储结构描述：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Typedef <span class="keyword">struct</span> &#123;</div><div class="line">    <span class="keyword">char</span> *ch;    <span class="comment">//若非空串,按串长分配空间; 否则ch=NULL</span></div><div class="line">    <span class="keyword">int</span> length;  <span class="comment">//串长度</span></div><div class="line">&#125;HString</div></pre></td></tr></table></figure></p>
+<h2 id="链式存储"><a href="#链式存储" class="headerlink" title="链式存储"></a>链式存储</h2><p>链式存储特点 ：用链表存储串值，易插入和删除。<br>其中主要有两种方法：法1：链表结点的数据分量长度取1个字符； 法2：链表结点（数据域）大小取n。很直观地就能看出法1存储密度为 &lt; 法2存储密度。显然，若数据元素很多，用法2存储更优—称为块链结构。</p>
+<h2 id="块链的定义"><a href="#块链的定义" class="headerlink" title="块链的定义"></a>块链的定义</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">#define  CHUNKSIZE  80   //每块大小，可由用户定义</div><div class="line">//首先定义结点类型</div><div class="line">typedef struct  Chunk &#123;</div><div class="line">    char ch [ CHUNKSIZE ]; //每个结点中的数据域</div><div class="line">    struct Chunk * next ;  //每个结点中的指针域</div><div class="line">&#125;Chunk;</div><div class="line">//其次定义用链式存储的串类型</div><div class="line">typedef struct &#123;</div><div class="line">    Chunk  *head;  //头指针</div><div class="line">    Chunk  *tail;  //尾指针</div><div class="line">    int  curLen;   //串的当前长度</div><div class="line">   &#125; Lstring;</div></pre></td></tr></table></figure>
+<h2 id="串的模式匹配算法"><a href="#串的模式匹配算法" class="headerlink" title="串的模式匹配算法"></a>串的模式匹配算法</h2><p>算法目的：确定主串中所含子串第一次出现的位置（定位），定位问题称为串的模式匹配(Pattern Matching)，即子串定位运算，它是串处理系统中最重要的操作之一。典型函数为Index(S,T,pos)。<br>典型的算法有：1.BF算法–带回溯，速度慢 2.KMP算法–避免回溯，匹配速度快。</p>
+<h3 id="BF算法"><a href="#BF算法" class="headerlink" title="BF算法"></a>BF算法</h3><p>假设S=’ababcabcacbab’，T=’abcac’，pos=1，求：串T在串S中第pos个字符之后的位置。</p>
+<blockquote>
+<p>BF算法设计思想：<br>将主串S的第pos个字符和模式T的第1个字符比较，<br>若相等，继续逐个比较后续字符；<br>若不等，从主串S的下一字符（pos+1）起，重新与T第一个字符比较。<br>直到主串S的一个连续子串字符序列与模式T相等,返回值为S中与T匹配的子序列第一个字符的序号，即匹配成功。否则，匹配失败，返回值0.</p>
+</blockquote>
+<h4 id="算法的实现"><a href="#算法的实现" class="headerlink" title="算法的实现"></a>算法的实现</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">int Index(SString S, SString T, int pos)</div><div class="line">&#123;    </div><div class="line">    int i = pos;</div><div class="line">    int j = 1;</div><div class="line">    while (i &lt;= S[0] &amp;&amp; j&lt;=T[0])</div><div class="line">    &#123;</div><div class="line">        if (S[i] == T[j])</div><div class="line">        &#123;</div><div class="line">            ++i;</div><div class="line">            ++j; //继续比较后续字符</div><div class="line">        &#125;</div><div class="line">        else</div><div class="line">        &#123;</div><div class="line">            i = i-j+2; //指针回溯到下一首位，重新开始匹配</div><div class="line">            j = 1; </div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    if (j &gt; T[0]) return i-T[0];  //子串结束，说明匹配成功</div><div class="line">    else return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="讨论BF算法的时间复杂度"><a href="#讨论BF算法的时间复杂度" class="headerlink" title="讨论BF算法的时间复杂度"></a>讨论BF算法的时间复杂度</h4><p>若n为主串长度，m为子串长度，则：<br>(1)最好的情况—每趟不成功的匹配都发生在第一对字符比较时<br>如：s=’aaaaaaaaaabc’；t=’bc’<br>设匹配成功发生在si处，则字符比较次数在前面i-1趟中共比较了i-1次，第i趟成功匹配共比较了m次，因此总共比较了i-1+m次。所有成功匹配的可能共有n-m+1种。<br>设从si开始与t匹配成功的概率为pi，在等概率情况下pi=1/(n-m+1),因此，最好情况下平均比较次数（期望值）为：<br><img src="http://ojzeprg7w.bkt.clouddn.com/%E4%B8%B21.JPG" alt=""><br>(2)最坏的情况：不成功的匹配都发生在T的最后一个字符.<br>每趟比较都要进行 m 次，这样比较的趟数要 n-m+1 趟，所需要比较字符的总次数为(n-m+1)m。由于m&lt;&lt;n，(n-m+1)m≈(n×m)。<br>因此，最坏的情况下的时间复杂度为 O(n×m)。</p>
+<h3 id="KPM算法"><a href="#KPM算法" class="headerlink" title="KPM算法"></a>KPM算法</h3><p>改进的KPM算法，相比于BF算法来说，其改进在于：每当一趟匹配过程中出现字符比较不等时，不回溯i指针，而是利用已经得到的“部分匹配”的结果，将模式向右“滑动”尽可能远的一段距离后，继续进行比较。</p>
+<h4 id="KPM算法的实现"><a href="#KPM算法的实现" class="headerlink" title="KPM算法的实现"></a>KPM算法的实现</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">getNext</span><span class="params">(<span class="keyword">char</span>* t,<span class="keyword">int</span> next[])</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> i=<span class="number">0</span>,j=<span class="number">-1</span>;</div><div class="line">    next[<span class="number">0</span>]=<span class="number">-1</span>;</div><div class="line">    <span class="keyword">while</span>(t[i])</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span>(j == <span class="number">-1</span> || t[i] == t[j])</div><div class="line">        &#123;</div><div class="line">            j++;i++;</div><div class="line">            next[i]=j;</div><div class="line">        &#125; </div><div class="line">        <span class="keyword">else</span></div><div class="line">        &#123;</div><div class="line">            j=next[j];</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">indexKMP</span><span class="params">(<span class="keyword">char</span>* s,<span class="keyword">char</span>* t, <span class="keyword">int</span> pos)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> len = <span class="built_in">strlen</span>(t);</div><div class="line">    <span class="keyword">int</span>* next = (<span class="keyword">int</span> *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">int</span>)*len);</div><div class="line">    <span class="keyword">int</span> i = pos, j = <span class="number">0</span>;</div><div class="line">    getNext(t, next);</div><div class="line">    <span class="keyword">while</span>(s[i] &amp;&amp; t[j])</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span>(j == <span class="number">-1</span> || s[i] == t[j])</div><div class="line">        &#123;</div><div class="line">            i++;j++;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">else</span></div><div class="line">        &#123;</div><div class="line">            j=next[j];</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span>(j &gt;= len)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">return</span> i-j;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>欢迎指正orz…</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2017/05/21/C语言实现数据结构-串/" class="archive-article-date">
+  	<time datetime="2017-05-21T14:19:22.000Z" itemprop="datePublished"><i class="icon-clock"></i>2017-05-21</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术/">技术</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2017/05/18/C语言实现数据结构-队列/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">C语言实现数据结构-队列</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a>
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a>
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+<div class="share_addthis share_jia">
+  <div class="sharing addthis_toolbox share">
+  	<span class="jiathis_txt">Share to: &nbsp; </span>
+    <a class="addthis_button_facebook_like"></a>
+    <a class="addthis_button_tweet"></a>
+    <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-560c64c35486b3d4" async="async"></script>
+</div>
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="C语言实现数据结构-串" data-title="C语言实现数据结构-串" data-url="http://yoursite.com/2017/05/21/C语言实现数据结构-串/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"luckyabby"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2017 Abby
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: true,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+<script src="/./main.js"></script>
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="/tags/C/" style="font-size: 15px;">C</a> <a href="/tags/CSS/" style="font-size: 12.5px;">CSS</a> <a href="/tags/ES6/" style="font-size: 10px;">ES6</a> <a href="/tags/JavaScript/" style="font-size: 17.5px;">JavaScript</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/技术/" style="font-size: 20px;">技术</a> <a href="/tags/数据结构/" style="font-size: 15px;">数据结构</a> <a href="/tags/生活/" style="font-size: 10px;">生活</a> <a href="/tags/随记/" style="font-size: 10px;">随记</a>
+    			</div>
+    	</section>
+    
+
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">大三&lt;br&gt;&lt;br&gt;一只还在自我修炼的程序媛&lt;br&gt;萌妹子&lt;br&gt;爱读书&lt;br&gt;摄影健身</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>

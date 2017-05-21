@@ -6,17 +6,17 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <title>C语言实现数据结构-串 | LuckyAbby|To Do My Best</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="串即字符串，是由零个或多个字符组成的有限序列，是数据元素为单个字符的特殊线性表。串长：串中字符的个数（n≥0）. n=0 时称为空串。空白串：由一个或多个空格符组成的串。空串和空白串的区别是：空串(Null String)是指长度为零的串；而空白串(Blank String),是指包含一个或多个空白字符’ ‘(空格键)的字符串。">
+  <meta name="description" content="串即字符串，是由零个或多个字符组成的有限序列，是数据元素为单个字符的特殊线性表。串长：串中字符的个数（n≥0）. n=0 时称为空串。空白串：由一个或多个空格符组成的串。空串和空白串的区别是：空串(Null String)是指长度为零的串；而空白串(Blank String),是指包含一个或多个空白字符的字符串。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C语言实现数据结构-串">
 <meta property="og:url" content="http://yoursite.com/2017/05/21/C语言实现数据结构-串/index.html">
 <meta property="og:site_name" content="LuckyAbby|To Do My Best">
-<meta property="og:description" content="串即字符串，是由零个或多个字符组成的有限序列，是数据元素为单个字符的特殊线性表。串长：串中字符的个数（n≥0）. n=0 时称为空串。空白串：由一个或多个空格符组成的串。空串和空白串的区别是：空串(Null String)是指长度为零的串；而空白串(Blank String),是指包含一个或多个空白字符’ ‘(空格键)的字符串。">
+<meta property="og:description" content="串即字符串，是由零个或多个字符组成的有限序列，是数据元素为单个字符的特殊线性表。串长：串中字符的个数（n≥0）. n=0 时称为空串。空白串：由一个或多个空格符组成的串。空串和空白串的区别是：空串(Null String)是指长度为零的串；而空白串(Blank String),是指包含一个或多个空白字符的字符串。">
 <meta property="og:image" content="http://ojzeprg7w.bkt.clouddn.com/%E4%B8%B21.JPG">
-<meta property="og:updated_time" content="2017-05-21T16:19:05.278Z">
+<meta property="og:updated_time" content="2017-05-21T16:21:02.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C语言实现数据结构-串">
-<meta name="twitter:description" content="串即字符串，是由零个或多个字符组成的有限序列，是数据元素为单个字符的特殊线性表。串长：串中字符的个数（n≥0）. n=0 时称为空串。空白串：由一个或多个空格符组成的串。空串和空白串的区别是：空串(Null String)是指长度为零的串；而空白串(Blank String),是指包含一个或多个空白字符’ ‘(空格键)的字符串。">
+<meta name="twitter:description" content="串即字符串，是由零个或多个字符组成的有限序列，是数据元素为单个字符的特殊线性表。串长：串中字符的个数（n≥0）. n=0 时称为空串。空白串：由一个或多个空格符组成的串。空串和空白串的区别是：空串(Null String)是指长度为零的串；而空白串(Blank String),是指包含一个或多个空白字符的字符串。">
 <meta name="twitter:image" content="http://ojzeprg7w.bkt.clouddn.com/%E4%B8%B21.JPG">
   
     <link rel="alternative" href="/atom.xml" title="LuckyAbby|To Do My Best" type="application/atom+xml">
@@ -152,7 +152,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>串即字符串，是由零个或多个字符组成的有限序列，是数据元素为单个字符的特殊线性表。<br>串长：串中字符的个数（n≥0）. n=0 时称为空串。空白串：由一个或多个空格符组成的串。<br>空串和空白串的区别是：空串(Null String)是指长度为零的串；而空白串(Blank String),是指包含一个或多个空白字符’ ‘(空格键)的字符串。<br><a id="more"></a><br>先弄清楚几个基本概念<br>子串：串S中任意个连续的字符序列叫S的子串。<br>子串位置：子串的第一个字符在主串中的序号。<br>字符位置：字符在串中的序号。<br>串相等：串长度相等，且对应位置上字符相等。<br>空串是任意串的子串；任意串S都是S本身的子串，除S本身外，S的其他子串称为S的真子串。</p>
+        <p>串即字符串，是由零个或多个字符组成的有限序列，是数据元素为单个字符的特殊线性表。<br>串长：串中字符的个数（n≥0）. n=0 时称为空串。空白串：由一个或多个空格符组成的串。<br>空串和空白串的区别是：空串(Null String)是指长度为零的串；而空白串(Blank String),是指包含一个或多个空白字符的字符串。<br><a id="more"></a><br>先弄清楚几个基本概念<br>子串：串S中任意个连续的字符序列叫S的子串。<br>子串位置：子串的第一个字符在主串中的序号。<br>字符位置：字符在串中的序号。<br>串相等：串长度相等，且对应位置上字符相等。<br>空串是任意串的子串；任意串S都是S本身的子串，除S本身外，S的其他子串称为S的真子串。</p>
 <h2 id="串的实现与表示"><a href="#串的实现与表示" class="headerlink" title="串的实现与表示"></a>串的实现与表示</h2><p>首先强调：串与线性表的运算有所不同，是以“串的整体”作为操作对象，例如查找某子串，在主串某位置上插入一个子串等。<br>串有三种机内表示方法：1. 定长顺序存储表示：用一组地址连续的存储单元存储串值的字符序列，属静态存储方式 2. 堆分配存储表示：用一组地址连续的存储单元存储串值的字符序列,但存储空间是在程序执行过程中动态分配而得。</p>
 <ol>
 <li>串的块链存储表示：链式方式存储。其实其中1、2都属于顺序存储，3属于链式存储。</li>

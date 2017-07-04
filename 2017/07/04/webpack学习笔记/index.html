@@ -6,17 +6,17 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <title>webpack学习笔记 | LuckyAbby|To Do My Best</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="webpack学习笔记最近研究了一阵子webpack，刚开始还是觉得很难啃，后来慢慢觉得好梳理一些了，就做了一些很简单的笔记，好记性不如烂笔头嘛哈哈哈。 入口（entry）入口就是告诉webpack从哪个文件开始生成依赖关系图表，并从依赖关系图表知道要打包哪些文件。可以有多个入口文件，入口文件的可以是一个String、Array、Object。 单个入口123module.exports = &amp;#">
+  <meta name="description" content="webpack学习笔记最近研究了一阵子webpack，刚开始还是觉得很难啃，后来慢慢觉得好梳理一些了，就做了一些很简单的笔记，好记性不如烂笔头嘛哈哈哈。">
 <meta name="keywords" content="技术,JavaScript,webpack">
 <meta property="og:type" content="article">
 <meta property="og:title" content="webpack学习笔记">
 <meta property="og:url" content="http://yoursite.com/2017/07/04/webpack学习笔记/index.html">
 <meta property="og:site_name" content="LuckyAbby|To Do My Best">
-<meta property="og:description" content="webpack学习笔记最近研究了一阵子webpack，刚开始还是觉得很难啃，后来慢慢觉得好梳理一些了，就做了一些很简单的笔记，好记性不如烂笔头嘛哈哈哈。 入口（entry）入口就是告诉webpack从哪个文件开始生成依赖关系图表，并从依赖关系图表知道要打包哪些文件。可以有多个入口文件，入口文件的可以是一个String、Array、Object。 单个入口123module.exports = &amp;#">
-<meta property="og:updated_time" content="2017-07-04T02:21:46.000Z">
+<meta property="og:description" content="webpack学习笔记最近研究了一阵子webpack，刚开始还是觉得很难啃，后来慢慢觉得好梳理一些了，就做了一些很简单的笔记，好记性不如烂笔头嘛哈哈哈。">
+<meta property="og:updated_time" content="2017-07-04T02:30:50.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="webpack学习笔记">
-<meta name="twitter:description" content="webpack学习笔记最近研究了一阵子webpack，刚开始还是觉得很难啃，后来慢慢觉得好梳理一些了，就做了一些很简单的笔记，好记性不如烂笔头嘛哈哈哈。 入口（entry）入口就是告诉webpack从哪个文件开始生成依赖关系图表，并从依赖关系图表知道要打包哪些文件。可以有多个入口文件，入口文件的可以是一个String、Array、Object。 单个入口123module.exports = &amp;#">
+<meta name="twitter:description" content="webpack学习笔记最近研究了一阵子webpack，刚开始还是觉得很难啃，后来慢慢觉得好梳理一些了，就做了一些很简单的笔记，好记性不如烂笔头嘛哈哈哈。">
   
     <link rel="alternative" href="/atom.xml" title="LuckyAbby|To Do My Best" type="application/atom+xml">
   
@@ -152,6 +152,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="webpack学习笔记"><a href="#webpack学习笔记" class="headerlink" title="webpack学习笔记"></a>webpack学习笔记</h1><p>最近研究了一阵子webpack，刚开始还是觉得很难啃，后来慢慢觉得好梳理一些了，就做了一些很简单的笔记，好记性不如烂笔头嘛哈哈哈。</p>
+<a id="more"></a>
 <h3 id="入口（entry）"><a href="#入口（entry）" class="headerlink" title="入口（entry）"></a>入口（entry）</h3><p>入口就是告诉webpack从哪个文件开始生成依赖关系图表，并从依赖关系图表知道要打包哪些文件。可以有多个入口文件，入口文件的可以是一个String、Array、Object。</p>
 <h5 id="单个入口"><a href="#单个入口" class="headerlink" title="单个入口"></a>单个入口</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">module.exports = &#123;</div><div class="line">  entry: &apos;./path/src/app.js&apos;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>这种写法是省略了main的省略写法，实际上写法是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">module.exports = &#123;</div><div class="line">  entry: &#123;</div><div class="line">    main: &apos;./path/src/app.js&apos;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>

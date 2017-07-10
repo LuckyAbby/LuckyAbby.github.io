@@ -6,17 +6,17 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <title>我所理解的RESTful api | LuckyAbby|To Do My Best</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="在解释我所理解的 RESTful api 的时候，先说说为什么会有 RESTful 结构， 因为之前的网页都是没有做到前后端分离的，使用一些类似于 JSP 进行嵌套，一人搞定页面虽然很爽，但是这样子就不易于前后端协作开发。所以就需要规范一些 api ，使得前后端通过 api 就能明晰地进行协作开发，只要按照 api 约定好的格式去传数据就好了。而这个 RESTful api就是 REST 风格的接">
+  <meta name="description" content="在解释我所理解的 RESTful api 的时候，先说说为什么会有 RESTful 结构， 因为之前的网页都是没有做到前后端分离的，使用一些类似于 JSP 进行嵌套，这样子就不易于前后端协作开发。所以就需要规范一些 api ，使得前后端通过 api 就能明晰地进行协作开发，只要按照 api 约定好的格式去传数据就好了。而这个 RESTful api就是 REST 风格的接口。至于 REST 风格是">
 <meta name="keywords" content="技术,RESTful">
 <meta property="og:type" content="article">
 <meta property="og:title" content="我所理解的RESTful api">
 <meta property="og:url" content="http://yoursite.com/2017/07/10/我所理解的RESTful-api/index.html">
 <meta property="og:site_name" content="LuckyAbby|To Do My Best">
-<meta property="og:description" content="在解释我所理解的 RESTful api 的时候，先说说为什么会有 RESTful 结构， 因为之前的网页都是没有做到前后端分离的，使用一些类似于 JSP 进行嵌套，一人搞定页面虽然很爽，但是这样子就不易于前后端协作开发。所以就需要规范一些 api ，使得前后端通过 api 就能明晰地进行协作开发，只要按照 api 约定好的格式去传数据就好了。而这个 RESTful api就是 REST 风格的接">
-<meta property="og:updated_time" content="2017-07-10T09:33:11.000Z">
+<meta property="og:description" content="在解释我所理解的 RESTful api 的时候，先说说为什么会有 RESTful 结构， 因为之前的网页都是没有做到前后端分离的，使用一些类似于 JSP 进行嵌套，这样子就不易于前后端协作开发。所以就需要规范一些 api ，使得前后端通过 api 就能明晰地进行协作开发，只要按照 api 约定好的格式去传数据就好了。而这个 RESTful api就是 REST 风格的接口。至于 REST 风格是">
+<meta property="og:updated_time" content="2017-07-10T09:36:17.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="我所理解的RESTful api">
-<meta name="twitter:description" content="在解释我所理解的 RESTful api 的时候，先说说为什么会有 RESTful 结构， 因为之前的网页都是没有做到前后端分离的，使用一些类似于 JSP 进行嵌套，一人搞定页面虽然很爽，但是这样子就不易于前后端协作开发。所以就需要规范一些 api ，使得前后端通过 api 就能明晰地进行协作开发，只要按照 api 约定好的格式去传数据就好了。而这个 RESTful api就是 REST 风格的接">
+<meta name="twitter:description" content="在解释我所理解的 RESTful api 的时候，先说说为什么会有 RESTful 结构， 因为之前的网页都是没有做到前后端分离的，使用一些类似于 JSP 进行嵌套，这样子就不易于前后端协作开发。所以就需要规范一些 api ，使得前后端通过 api 就能明晰地进行协作开发，只要按照 api 约定好的格式去传数据就好了。而这个 RESTful api就是 REST 风格的接口。至于 REST 风格是">
   
     <link rel="alternative" href="/atom.xml" title="LuckyAbby|To Do My Best" type="application/atom+xml">
   
@@ -151,7 +151,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>在解释我所理解的 RESTful api 的时候，先说说为什么会有 RESTful 结构， 因为之前的网页都是没有做到前后端分离的，使用一些类似于 JSP 进行嵌套，一人搞定页面虽然很爽，但是这样子就不易于前后端协作开发。所以就需要规范一些 api ，使得前后端通过 api 就能明晰地进行协作开发，只要按照 api 约定好的格式去传数据就好了。而这个 RESTful api就是 REST 风格的接口。至于 REST 风格是什么，英文全称是 REpresentational State Transfer，中文翻译为表现层状态转移，其实我看了很多资料还是没太看明白这个东西。。</p>
+        <p>在解释我所理解的 RESTful api 的时候，先说说为什么会有 RESTful 结构， 因为之前的网页都是没有做到前后端分离的，使用一些类似于 JSP 进行嵌套，这样子就不易于前后端协作开发。所以就需要规范一些 api ，使得前后端通过 api 就能明晰地进行协作开发，只要按照 api 约定好的格式去传数据就好了。而这个 RESTful api就是 REST 风格的接口。至于 REST 风格是什么，英文全称是 REpresentational State Transfer，中文翻译为表现层状态转移，具体是什么我也看的很懵。。。</p>
 <a id="more"></a>
 <p>现在就说说 RESTful api 好了。我理解的用一句话总结就是 URL 只表示资源的位置，使用 HTTP 的动作词表示操作。</p>
 <h5 id="URL-只表示资源的位置"><a href="#URL-只表示资源的位置" class="headerlink" title="URL 只表示资源的位置"></a>URL 只表示资源的位置</h5><p>URL里面只表示资源的位置，不能出现对资源的操作，因此只允许有名词，并且推荐使用复数，不允许出现动词，比如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">example.com／api/v1/books 获取所有的书本信息</div><div class="line">example.com/api/v1/markets 获取所有的商场信息</div></pre></td></tr></table></figure></p>

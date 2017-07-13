@@ -4,19 +4,19 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>我所理解的RESTful api | LuckyAbby|To Do My Best</title>
+  <title>js里面的深拷贝与浅拷贝 | LuckyAbby|To Do My Best</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="在解释我所理解的 RESTful api 的时候，先说说为什么会有 RESTful 结构， 因为之前的网页都是没有做到前后端分离的，使用一些类似于 JSP 进行嵌套，这样子就不易于前后端协作开发。所以就需要规范一些 api ，使得前后端通过 api 就能明晰地进行协作开发，只要按照 api 约定好的格式去传数据就好了。而这个 RESTful api就是 REST 风格的接口。至于 REST 风格是">
-<meta name="keywords" content="技术,RESTful">
+  <meta name="description" content="为什么会有浅拷贝与深拷贝在说浅拷贝与深拷贝的时候先说说为什么会有浅拷贝与深拷贝。在js里面，变量分为基本类型与引用类型。对于基本类型，基本类型是简单的数据段，但是引用类型是指那样可能由多个值构成的对象等。深拷贝主要是由引用类型的复制引起的。">
+<meta name="keywords" content="技术,JavaScript">
 <meta property="og:type" content="article">
-<meta property="og:title" content="我所理解的RESTful api">
-<meta property="og:url" content="http://yoursite.com/2017/07/10/我所理解的RESTful-api/index.html">
+<meta property="og:title" content="js里面的深拷贝与浅拷贝">
+<meta property="og:url" content="http://yoursite.com/2017/07/13/js里面的深拷贝与浅拷贝/index.html">
 <meta property="og:site_name" content="LuckyAbby|To Do My Best">
-<meta property="og:description" content="在解释我所理解的 RESTful api 的时候，先说说为什么会有 RESTful 结构， 因为之前的网页都是没有做到前后端分离的，使用一些类似于 JSP 进行嵌套，这样子就不易于前后端协作开发。所以就需要规范一些 api ，使得前后端通过 api 就能明晰地进行协作开发，只要按照 api 约定好的格式去传数据就好了。而这个 RESTful api就是 REST 风格的接口。至于 REST 风格是">
-<meta property="og:updated_time" content="2017-07-10T09:36:17.000Z">
+<meta property="og:description" content="为什么会有浅拷贝与深拷贝在说浅拷贝与深拷贝的时候先说说为什么会有浅拷贝与深拷贝。在js里面，变量分为基本类型与引用类型。对于基本类型，基本类型是简单的数据段，但是引用类型是指那样可能由多个值构成的对象等。深拷贝主要是由引用类型的复制引起的。">
+<meta property="og:updated_time" content="2017-07-13T15:53:58.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="我所理解的RESTful api">
-<meta name="twitter:description" content="在解释我所理解的 RESTful api 的时候，先说说为什么会有 RESTful 结构， 因为之前的网页都是没有做到前后端分离的，使用一些类似于 JSP 进行嵌套，这样子就不易于前后端协作开发。所以就需要规范一些 api ，使得前后端通过 api 就能明晰地进行协作开发，只要按照 api 约定好的格式去传数据就好了。而这个 RESTful api就是 REST 风格的接口。至于 REST 风格是">
+<meta name="twitter:title" content="js里面的深拷贝与浅拷贝">
+<meta name="twitter:description" content="为什么会有浅拷贝与深拷贝在说浅拷贝与深拷贝的时候先说说为什么会有浅拷贝与深拷贝。在js里面，变量分为基本类型与引用类型。对于基本类型，基本类型是简单的数据段，但是引用类型是指那样可能由多个值构成的对象等。深拷贝主要是由引用类型的复制引起的。">
   
     <link rel="alternative" href="/atom.xml" title="LuckyAbby|To Do My Best" type="application/atom+xml">
   
@@ -133,7 +133,7 @@
 </nav>
 
       <div class="body-wrap">
-        <article id="post-我所理解的RESTful-api" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-js里面的深拷贝与浅拷贝" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -143,7 +143,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      我所理解的RESTful api
+      js里面的深拷贝与浅拷贝
     </h1>
   
 
@@ -151,28 +151,32 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>在解释我所理解的 RESTful api 的时候，先说说为什么会有 RESTful 结构， 因为之前的网页都是没有做到前后端分离的，使用一些类似于 JSP 进行嵌套，这样子就不易于前后端协作开发。所以就需要规范一些 api ，使得前后端通过 api 就能明晰地进行协作开发，只要按照 api 约定好的格式去传数据就好了。而这个 RESTful api就是 REST 风格的接口。至于 REST 风格是什么，英文全称是 REpresentational State Transfer，中文翻译为表现层状态转移，具体是什么我也看的很懵。。。</p>
+        <h3 id="为什么会有浅拷贝与深拷贝"><a href="#为什么会有浅拷贝与深拷贝" class="headerlink" title="为什么会有浅拷贝与深拷贝"></a>为什么会有浅拷贝与深拷贝</h3><p>在说浅拷贝与深拷贝的时候先说说为什么会有浅拷贝与深拷贝。在js里面，变量分为基本类型与引用类型。对于基本类型，基本类型是简单的数据段，但是引用类型是指那样可能由多个值构成的对象等。深拷贝主要是由引用类型的复制引起的。</p>
 <a id="more"></a>
-<p>现在就说说 RESTful api 好了。我理解的用一句话总结就是 URL 只表示资源的位置，使用 HTTP 的动作词表示操作。</p>
-<h5 id="URL-只表示资源的位置"><a href="#URL-只表示资源的位置" class="headerlink" title="URL 只表示资源的位置"></a>URL 只表示资源的位置</h5><p>URL里面只表示资源的位置，不能出现对资源的操作，因此只允许有名词，并且推荐使用复数，不允许出现动词，比如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">example.com／api/v1/books 获取所有的书本信息</div><div class="line">example.com/api/v1/markets 获取所有的商场信息</div></pre></td></tr></table></figure></p>
-<p>这里的<code>v1</code>表示版本信息，可以省略的。Github 就是这种做法：<a href="https://developer.github.com/v3/media/#request-specific-version" target="_blank" rel="external">Github 的api</a>。</p>
-<p>有一些不好的例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">example.com／api/v1/getBooks 获取所有的书本信息</div><div class="line">example.com／api/v1/deleteBooks 删除所有的书本信息</div></pre></td></tr></table></figure></p>
-<h5 id="使用-HTTP-动作次表示操作"><a href="#使用-HTTP-动作次表示操作" class="headerlink" title="使用 HTTP 动作次表示操作"></a>使用 HTTP 动作次表示操作</h5><p>在 RESTful api 里面使用的动作次一般包括 GET POST PUT DELETE PATCH<br>例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">GET example.com／api/v1/books／id 获取某个指定id的书的信息</div><div class="line">## 典型的例子就是: https://www.zhihu.com/question/20284816 获取id是20284816编号的问题</div><div class="line">POST example.com/api/v1/books 新建一个书的信息</div><div class="line">PUT example.com/api/v1/books/&#123;id&#125; 修改某本书的信息</div><div class="line">PATCH example.com/api/v1/books/&#123;id&#125; 修改某本书的信息（局部更新）</div><div class="line">DELSTE example.com/api/v1/books／&#123;id&#125; 删除某本书的信息</div></pre></td></tr></table></figure></p>
-<p>这里区分一下 PATCH 与 PUT 的区别<br>如果需要修改一个联系人的电话号码 这个联系人的信息是放在 userInfo 这个对象里面的，需要修改的只是 userPhone 这个字段，这个对象里面还有比如 userName userSex 等等字段 ，如果是 PUT 需要传一整个新的对象过去，这个对象除了电话号码是修改过的之外别的都是没变的，因此这样就比较浪费。但是PATCH 是只需要提供 userPhone 过去就好了，所以是局部更新。</p>
-<h5 id="资源的传递约定格式，返回需要状态码"><a href="#资源的传递约定格式，返回需要状态码" class="headerlink" title="资源的传递约定格式，返回需要状态码"></a>资源的传递约定格式，返回需要状态码</h5><p>客户端和服务端之间传递的资源约定好格式，一般最常用的是 JSON，当然还有 XML等等，这也是这种资源的表现层。<br>使用 HTTP 状态码 传递服务器端的状态信息。例如使用 200 表示操作成功，404 表示未找到资源，500 表示服务器内部错误等。<br>对于一些状态码的后端要给出明确的文本信息，便于理解。</p>
-<p>总的来说 ，RESTful api 只是一种推荐使用的规范，不是必须使用的，使用只是因为方便前后端沟通，应该根据实际情况变动。</p>
+<h4 id="基本类型"><a href="#基本类型" class="headerlink" title="基本类型"></a>基本类型</h4><p>基本类型只有 Undefined Null Boolean Number String 这五种，基本类型的值存放在栈内存中，可以直接访问，当进行复制的时候，是重新开辟一块内存存放一个相同的值，这两个值相同但是是完全独立的，之后任何操作都是互不影响的。</p>
+<h4 id="引用类型"><a href="#引用类型" class="headerlink" title="引用类型"></a>引用类型</h4><p>引用类型在js中指的是对象和数组等等，引用类型的值是存放在堆内存中，但是不需要直接操作变量在堆内存中的位置，因此在栈内存中存放了引用类型的地址，因此对栈内存的值的操作其实是对堆内存的一个引用的操作，因此复制的时候也是复制一个地址过去，真实操作的时候还是对堆内存数据的操作。</p>
+<p>正是因为引用类型的值在栈内存中存放的只是一个地址，这个时候如果只是复制这个地址过去，操作新复制变量的时候还会对原来的变量值产生影响，这就是浅拷贝（shallow copy）的弊端，这些情况有时会让代码变得很混乱。</p>
+<h3 id="如何实现浅拷贝与深拷贝"><a href="#如何实现浅拷贝与深拷贝" class="headerlink" title="如何实现浅拷贝与深拷贝"></a>如何实现浅拷贝与深拷贝</h3><p>在说如何实现深浅拷贝的时候最重要的一句话就是 <strong> 深浅拷贝最主要的区别只针对引用类型，不针对基本类型 </strong></p>
+<h4 id="实现浅拷贝"><a href="#实现浅拷贝" class="headerlink" title="实现浅拷贝"></a>实现浅拷贝</h4><h5 id="直接赋值"><a href="#直接赋值" class="headerlink" title="直接赋值"></a>直接赋值</h5><p>最典型的浅拷贝就是直接赋值，例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">let object1 =&#123;a:1,b:2&#125;;</div><div class="line">let object2 = object1;</div><div class="line">object2.a = 3;</div><div class="line">console.log(object1.a); // 3</div></pre></td></tr></table></figure></p>
+<p>在上面对 object2 进行操作的时候也会改变原来 object1 的值。</p>
+<h5 id="Array-prototype-concat-与-Array-prototype-slice"><a href="#Array-prototype-concat-与-Array-prototype-slice" class="headerlink" title="Array.prototype.concat 与 Array.prototype.slice"></a>Array.prototype.concat 与 Array.prototype.slice</h5><p>MDN对于concat的描述：</p>
+<blockquote>
+<p>concat 方法并不修改调用它的对象(this 指向的对象) 和参数中的各个数组本身的值,而是将他们的每个元素拷贝一份放在组合成的新数组中.原数组中的元素有两种被拷贝的方式:<br>对象引用(非对象直接量):concat 方法会复制对象引用放到组合的新数组里,原数组和新数组中的对象引用都指向同一个实际的对象,所以,当实际的对象被修改时,两个数组也同时会被修改.<br>字符串和数字(是原始值,而不是包装原始值的 String 和 Number 对象): concat 方法会复制字符串和数字的值放到新数组里.</p>
+</blockquote>
+<p>对于slice的描述也如上，这两个方法都是浅复制，对于引用类型都只是复制了一份地址。<br>具体见下例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">let arr = [1, &#123;a: 2, b: 3&#125;];</div><div class="line">let arrConcat = arr.concat();</div><div class="line">var arrSlice = arr.slice(0);</div><div class="line">arrSlice[1].a = 4;</div><div class="line">console.log(arr); //[1, &#123;a: 4, b: 3&#125;]</div><div class="line">console.log(arrSlice); //[1, &#123;a: 4, b: 3&#125;]</div></pre></td></tr></table></figure></p>
+<p>由此可见，这两个方法还是操作的是堆内存中的同一块区域数值。</p>
 
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/2017/07/10/我所理解的RESTful-api/" class="archive-article-date">
-  	<time datetime="2017-07-10T07:29:39.000Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-10</time>
+      <a href="/2017/07/13/js里面的深拷贝与浅拷贝/" class="archive-article-date">
+  	<time datetime="2017-07-13T13:26:46.000Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-13</time>
 </a>
       
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RESTful/">RESTful</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术/">技术</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术/">技术</a></li></ul>
 	</div>
 
       
@@ -185,18 +189,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/07/13/js里面的深拷贝与浅拷贝/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          js里面的深拷贝与浅拷贝
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/07/04/Git常用命令/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Git常用命令</div>
+    <a href="/2017/07/10/我所理解的RESTful-api/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">我所理解的RESTful api</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -242,7 +237,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="我所理解的RESTful-api" data-title="我所理解的RESTful api" data-url="http://yoursite.com/2017/07/10/我所理解的RESTful-api/"></div>
+	<div class="ds-thread" data-thread-key="js里面的深拷贝与浅拷贝" data-title="js里面的深拷贝与浅拷贝" data-url="http://yoursite.com/2017/07/13/js里面的深拷贝与浅拷贝/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">

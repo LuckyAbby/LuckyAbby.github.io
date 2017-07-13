@@ -13,7 +13,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/07/13/js里面的深拷贝与浅拷贝/index.html">
 <meta property="og:site_name" content="LuckyAbby|To Do My Best">
 <meta property="og:description" content="为什么会有浅拷贝与深拷贝在说浅拷贝与深拷贝的时候先说说为什么会有浅拷贝与深拷贝。在js里面，变量分为基本类型与引用类型。对于基本类型，基本类型是简单的数据段，但是引用类型是指那样可能由多个值构成的对象等。深拷贝主要是由引用类型的复制引起的。">
-<meta property="og:updated_time" content="2017-07-13T15:53:58.000Z">
+<meta property="og:updated_time" content="2017-07-13T16:13:37.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="js里面的深拷贝与浅拷贝">
 <meta name="twitter:description" content="为什么会有浅拷贝与深拷贝在说浅拷贝与深拷贝的时候先说说为什么会有浅拷贝与深拷贝。在js里面，变量分为基本类型与引用类型。对于基本类型，基本类型是简单的数据段，但是引用类型是指那样可能由多个值构成的对象等。深拷贝主要是由引用类型的复制引起的。">
@@ -165,6 +165,8 @@
 </blockquote>
 <p>对于slice的描述也如上，这两个方法都是浅复制，对于引用类型都只是复制了一份地址。<br>具体见下例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">let arr = [1, &#123;a: 2, b: 3&#125;];</div><div class="line">let arrConcat = arr.concat();</div><div class="line">var arrSlice = arr.slice(0);</div><div class="line">arrSlice[1].a = 4;</div><div class="line">console.log(arr); //[1, &#123;a: 4, b: 3&#125;]</div><div class="line">console.log(arrSlice); //[1, &#123;a: 4, b: 3&#125;]</div></pre></td></tr></table></figure></p>
 <p>由此可见，这两个方法还是操作的是堆内存中的同一块区域数值。</p>
+<h5 id="Object-assign"><a href="#Object-assign" class="headerlink" title="Object.assign"></a>Object.assign</h5><p>Object.assign() 方法用于将所有可枚举的属性的值从一个或多个源对象复制到目标对象。假设源对象中有属性是引用类型，那么也只会拷贝这个引用，也就是堆内存数据的地址。具体例子见下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var obj = &#123; a: 1, b: &#123;c: 2, d: 3&#125;&#125;;</div><div class="line">var copy = Object.assign(&#123;&#125;, obj);</div><div class="line">copy.b.c = 4;</div><div class="line">console.log(obj.b); //&#123;c: 4, d: 3&#125;</div></pre></td></tr></table></figure></p>
+<p>这里copy中的b属性是一个对象，操作这个对象也会引起obj中b属性的变化。</p>
 
       
     </div>

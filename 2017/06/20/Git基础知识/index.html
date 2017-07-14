@@ -13,16 +13,16 @@
 <meta property="og:url" content="http://yoursite.com/2017/06/20/Git基础知识/index.html">
 <meta property="og:site_name" content="LuckyAbby|To Do My Best">
 <meta property="og:description" content="Git是Git一种分布式版本控制系统，相比于之前的集中式版本控制系统有很明显的区别。">
-<meta property="og:image" content="http://ojzeprg7w.bkt.clouddn.com/git1.png">
-<meta property="og:image" content="http://ojzeprg7w.bkt.clouddn.com/git2.png">
+<meta property="og:image" content="http://ojzeprg7w.bkt.clouddn.com/gitnew2.png">
+<meta property="og:image" content="http://ojzeprg7w.bkt.clouddn.com/gitnew3.png">
 <meta property="og:image" content="http://ojzeprg7w.bkt.clouddn.com/git3.png">
 <meta property="og:image" content="http://ojzeprg7w.bkt.clouddn.com/git5.png">
 <meta property="og:image" content="http://ojzeprg7w.bkt.clouddn.com/git6.png">
-<meta property="og:updated_time" content="2017-06-20T15:38:06.000Z">
+<meta property="og:updated_time" content="2017-07-14T04:07:35.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git基础知识">
 <meta name="twitter:description" content="Git是Git一种分布式版本控制系统，相比于之前的集中式版本控制系统有很明显的区别。">
-<meta name="twitter:image" content="http://ojzeprg7w.bkt.clouddn.com/git1.png">
+<meta name="twitter:image" content="http://ojzeprg7w.bkt.clouddn.com/gitnew2.png">
   
     <link rel="alternative" href="/atom.xml" title="LuckyAbby|To Do My Best" type="application/atom+xml">
   
@@ -160,8 +160,8 @@
         <p>Git是Git一种分布式版本控制系统，相比于之前的集中式版本控制系统有很明显的区别。</p>
 <a id="more"></a>
 <h2 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h2><p>集中式版本控制系统(Central VCS)中有一个中央服务器，版本库是存放在中央服务器上，而自己的电脑需要先从中央服务器获取最新的版本，等自己的代码更新完了之后再全部推送给中央服务器。<br>集中式版本控制系统有个很明显的缺点就是需要联网。<br>而分布式管理系统却不需要联网，因为每个人的电脑上面都有完整的版本库，没有中央服务器，在未联网的环境下面也可以工作，而当需要和他人合作的时候只需要把自己修改的地方推送给别人即可。</p>
-<p>集中式版本控制见下图：<br><img src="http://ojzeprg7w.bkt.clouddn.com/git1.png" alt=""></p>
-<p>分布式版本控制见下图：<br><img src="http://ojzeprg7w.bkt.clouddn.com/git2.png" alt=""></p>
+<p>集中式版本控制见下图：<br><img src="http://ojzeprg7w.bkt.clouddn.com/gitnew2.png" alt=""></p>
+<p>分布式版本控制见下图：<br><img src="http://ojzeprg7w.bkt.clouddn.com/gitnew3.png" alt=""></p>
 <h2 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h2><p>Git和其他版本控制系统的区别在于它是记录快照而不是比较差异，其他版本控制系统记录的主要是一组基本的文件和这些文件随时间不断修改之后与之前的差异，而Git是当提交数据之后制作全部文件的快照并将这个快照的索引值保存下来。</p>
 <p>Git有三种状态，已提交(committed)、已修改(modified)、以及处于暂存区(staged)，由此引申出工作区、暂存区以及版本库的概念。初始化一个Git仓库的时候使用的是 git init 命令，其中会创建一个在文件夹中看不见的目录 .git 就是版本库，可以通过 ls -ah 命令看到 。在版本库中有一个 stage 或者 index 称为暂存区，版本库中还有一个 master 分支，以及指向 master 的一个指针 HEAD ,用下面的图表示就是：<br><img src="http://ojzeprg7w.bkt.clouddn.com/git3.png" alt=""></p>
 <h4 id="工作区"><a href="#工作区" class="headerlink" title="工作区"></a>工作区</h4><p>其中工作区就是本地电脑中的文件，例如<br><img src="http://ojzeprg7w.bkt.clouddn.com/git5.png" alt=""><br>其中我在本地的 gitTest 目录就是我的工作区，我在里面新建了一个文件readme.txt,在其中写入一句话Hello,Git.</p>

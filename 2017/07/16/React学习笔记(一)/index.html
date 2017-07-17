@@ -6,18 +6,18 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <title>React学习笔记（一） | LuckyAbby|To Do My Best</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="想把学习 React 的一些零碎的知识点记下来，也是一些我自己的理解，可能比较琐碎，也可能比较肤浅。 在我看来，React 的一些特性主要体现在以下的几个方面： 组件化组件不是一个很新的概念，之前接触过的安卓开发里面也是组件，组件意味将某个独立的功能或者页面封装起来达到复用的功能。React 认为整个页面是一个大组件，可以将其拆分成很多小组件，组件之间组合而成的整个页面，并且 React 认为组件">
+  <meta name="description" content="想把学习 React 的一些零碎的知识点记下来，也是一些我自己的理解，可能比较琐碎，也可能比较肤浅。 在我看来，React 的一些特性主要体现在以下的几个方面：">
 <meta name="keywords" content="技术,React">
 <meta property="og:type" content="article">
 <meta property="og:title" content="React学习笔记（一）">
 <meta property="og:url" content="http://yoursite.com/2017/07/16/React学习笔记(一)/index.html">
 <meta property="og:site_name" content="LuckyAbby|To Do My Best">
-<meta property="og:description" content="想把学习 React 的一些零碎的知识点记下来，也是一些我自己的理解，可能比较琐碎，也可能比较肤浅。 在我看来，React 的一些特性主要体现在以下的几个方面： 组件化组件不是一个很新的概念，之前接触过的安卓开发里面也是组件，组件意味将某个独立的功能或者页面封装起来达到复用的功能。React 认为整个页面是一个大组件，可以将其拆分成很多小组件，组件之间组合而成的整个页面，并且 React 认为组件">
+<meta property="og:description" content="想把学习 React 的一些零碎的知识点记下来，也是一些我自己的理解，可能比较琐碎，也可能比较肤浅。 在我看来，React 的一些特性主要体现在以下的几个方面：">
 <meta property="og:image" content="http://ojzeprg7w.bkt.clouddn.com/react1.png">
-<meta property="og:updated_time" content="2017-07-17T10:43:08.000Z">
+<meta property="og:updated_time" content="2017-07-17T10:51:03.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="React学习笔记（一）">
-<meta name="twitter:description" content="想把学习 React 的一些零碎的知识点记下来，也是一些我自己的理解，可能比较琐碎，也可能比较肤浅。 在我看来，React 的一些特性主要体现在以下的几个方面： 组件化组件不是一个很新的概念，之前接触过的安卓开发里面也是组件，组件意味将某个独立的功能或者页面封装起来达到复用的功能。React 认为整个页面是一个大组件，可以将其拆分成很多小组件，组件之间组合而成的整个页面，并且 React 认为组件">
+<meta name="twitter:description" content="想把学习 React 的一些零碎的知识点记下来，也是一些我自己的理解，可能比较琐碎，也可能比较肤浅。 在我看来，React 的一些特性主要体现在以下的几个方面：">
 <meta name="twitter:image" content="http://ojzeprg7w.bkt.clouddn.com/react1.png">
   
     <link rel="alternative" href="/atom.xml" title="LuckyAbby|To Do My Best" type="application/atom+xml">
@@ -155,6 +155,7 @@
       
         <p>想把学习 React 的一些零碎的知识点记下来，也是一些我自己的理解，可能比较琐碎，也可能比较肤浅。</p>
 <p>在我看来，React 的一些特性主要体现在以下的几个方面：</p>
+<a id="more"></a>
 <h3 id="组件化"><a href="#组件化" class="headerlink" title="组件化"></a>组件化</h3><p>组件不是一个很新的概念，之前接触过的安卓开发里面也是组件，组件意味将某个独立的功能或者页面封装起来达到复用的功能。React 认为整个页面是一个大组件，可以将其拆分成很多小组件，组件之间组合而成的整个页面，并且 React 认为组件是一个状态机器，将用户界面看成简单的状态机器，当组件处于某个状态的时候就输出对应这个状态的页面，因此我们只需要去管理每个组件的状态就好，React 会根据不同的状态去渲染 UI。</p>
 <h3 id="state-amp-amp-props"><a href="#state-amp-amp-props" class="headerlink" title="state &amp;&amp; props"></a>state &amp;&amp; props</h3><p>既然 React 中页面是由一个一个组件组成的，那最基本的问题就是组件之间是如何进行数据的交换的。React 定义了 state 以及 props 进行数据的传输。</p>
 <p>state 主要负责的与用户的交互的那部分数据变化，例如表单中的数据经常需要随着用户的输入而改变，那就应该放在 state 里面， 而 props 主要负责父子组件之间的通信传输的数据，存放的是不会随着用户的交互而变的值。例如现在你需要查询一个影院的数据，影院的id是在父组件里面拿到的，那么就应该通过 props 传递给子组件，因为这个影院的 id 值是不会在与用户的交互中变化的。</p>

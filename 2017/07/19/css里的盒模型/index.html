@@ -4,19 +4,20 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>mouseenter/mouseover mouseleave/mouseout的区别 | LuckyAbby|To Do My Best</title>
+  <title>css里的盒模型 | LuckyAbby|To Do My Best</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="这个问题当初是由 轮播条鼠标移上去之后无法暂停导致的，后来查看原因发现是因为 mouseover 会冒泡的原因。">
-<meta name="keywords" content="技术,Javascript,事件">
+  <meta name="description" content="css 的盒模型主要有两种，分为 w3c 的标准模型以及 IE 的传统模型。 它们都是对content、padding、border以及margin的计算，但是主要的区别在于计算的方式不一样 1. w3c 标准盒模型12元素真实的内部 width = content width + padding + border元素真实的内部 height = content height + padding">
 <meta property="og:type" content="article">
-<meta property="og:title" content="mouseenter&#x2F;mouseover mouseleave&#x2F;mouseout的区别">
-<meta property="og:url" content="http://yoursite.com/2017/07/19/mouseenter-mouseover-mouseleave-mouseout的区别/index.html">
+<meta property="og:title" content="css里的盒模型">
+<meta property="og:url" content="http://yoursite.com/2017/07/19/css里的盒模型/index.html">
 <meta property="og:site_name" content="LuckyAbby|To Do My Best">
-<meta property="og:description" content="这个问题当初是由 轮播条鼠标移上去之后无法暂停导致的，后来查看原因发现是因为 mouseover 会冒泡的原因。">
-<meta property="og:updated_time" content="2017-07-18T16:17:06.000Z">
+<meta property="og:description" content="css 的盒模型主要有两种，分为 w3c 的标准模型以及 IE 的传统模型。 它们都是对content、padding、border以及margin的计算，但是主要的区别在于计算的方式不一样 1. w3c 标准盒模型12元素真实的内部 width = content width + padding + border元素真实的内部 height = content height + padding">
+<meta property="og:image" content="http://ojzeprg7w.bkt.clouddn.com/css2.jpg">
+<meta property="og:updated_time" content="2017-07-19T14:48:52.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="mouseenter&#x2F;mouseover mouseleave&#x2F;mouseout的区别">
-<meta name="twitter:description" content="这个问题当初是由 轮播条鼠标移上去之后无法暂停导致的，后来查看原因发现是因为 mouseover 会冒泡的原因。">
+<meta name="twitter:title" content="css里的盒模型">
+<meta name="twitter:description" content="css 的盒模型主要有两种，分为 w3c 的标准模型以及 IE 的传统模型。 它们都是对content、padding、border以及margin的计算，但是主要的区别在于计算的方式不一样 1. w3c 标准盒模型12元素真实的内部 width = content width + padding + border元素真实的内部 height = content height + padding">
+<meta name="twitter:image" content="http://ojzeprg7w.bkt.clouddn.com/css2.jpg">
   
     <link rel="alternative" href="/atom.xml" title="LuckyAbby|To Do My Best" type="application/atom+xml">
   
@@ -133,7 +134,7 @@
 </nav>
 
       <div class="body-wrap">
-        <article id="post-mouseenter-mouseover-mouseleave-mouseout的区别" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-css里的盒模型" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -143,7 +144,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      mouseenter/mouseover mouseleave/mouseout的区别
+      css里的盒模型
     </h1>
   
 
@@ -151,30 +152,28 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>这个问题当初是由 轮播条鼠标移上去之后无法暂停导致的，后来查看原因发现是因为 mouseover 会冒泡的原因。</p>
-<a id="more"></a>
-<h4 id="进入"><a href="#进入" class="headerlink" title="进入"></a>进入</h4><p>mouseenter：不冒泡<br>mouseover: 冒泡<br>把事件绑定在被选元素上，不论鼠标指针穿过被选元素或其子元素，都会触发 mouseover 事件<br>只有在鼠标指针穿过被选元素时，才会触发 mouseenter 事件</p>
-<h4 id="移出"><a href="#移出" class="headerlink" title="移出"></a>移出</h4><p>mouseleave: 不冒泡<br>mouseout：冒泡<br>把事件绑定在被选元素上面，不论鼠标指针离开被选元素还是任何子元素，都会触发 mouseout 事件<br>只有在鼠标指针离开被选元素时，才会触发 mouseleave 事件</p>
-<p>mouseover/mouseout在原生JS中一直都是有的，也就是onmouseover和onmouseout事件，而如今chrome以及firefox、safari也都支持onmouseenter和onmouseleave事件。详细的兼容性可以参考MDN <a href="https://developer.mozilla.org/en-US/docs/Web/Events/mouseleave" target="_blank" rel="external">mouseleave</a></p>
-<h4 id="阻止-mouseover-mouseout-反复触发"><a href="#阻止-mouseover-mouseout-反复触发" class="headerlink" title="阻止 mouseover/mouseout 反复触发"></a>阻止 mouseover/mouseout 反复触发</h4><p>这里要用到event对象的一个属性relatedTarget，这个属性就是用来判断 mouseover和mouseout事件目标节点的相关节点的属性。简单的来说就是当触发mouseover事件时，relatedTarget属性代表的就是鼠标刚刚离开的那个节点，当触发mouseout事件时它代表的是鼠标移向的那个对象。由于MSIE不支持这个属性，不过它有代替的属性，分别是 fromElement和toElement。</p>
-<p>有了这个属性，我们就能够清楚的知道我们的鼠标是从哪个对象移过来，又是要移动到哪里去了。这样我们就能够通过判断这个相关联的对象是否在我们要触发事件的对象的内部，或者是不是就是这个对象本身。通过这个判断我们就能够合理的选择是否真的要触发事件。</p>
-<p>这里我们还用到了一个用于检查一个对象是否包含在另外一个对象中的方法，contains方法。</p>
-<h4 id="执行的顺序"><a href="#执行的顺序" class="headerlink" title="执行的顺序"></a>执行的顺序</h4><h5 id="1-鼠标移入时，触发mouseover、mouseenter和mousemove事件"><a href="#1-鼠标移入时，触发mouseover、mouseenter和mousemove事件" class="headerlink" title="1. 鼠标移入时，触发mouseover、mouseenter和mousemove事件"></a>1. 鼠标移入时，触发mouseover、mouseenter和mousemove事件</h5><p>浏览器先触发mouseover和mouseenter事件，再触发多次mousemove事件（IE还未测试）</p>
-<h5 id="2-鼠标移出时，触发mousemove、mouseleave和mouseout事件"><a href="#2-鼠标移出时，触发mousemove、mouseleave和mouseout事件" class="headerlink" title="2. 鼠标移出时，触发mousemove、mouseleave和mouseout事件"></a>2. 鼠标移出时，触发mousemove、mouseleave和mouseout事件</h5><p>所有浏览器的顺序都是(1)mousemove、(2)mouseout和(3)mouseleave事件</p>
+        <p>css 的盒模型主要有两种，分为 w3c 的标准模型以及 IE 的传统模型。 它们都是对content、padding、border以及margin的计算，但是主要的区别在于计算的方式不一样</p>
+<h5 id="1-w3c-标准盒模型"><a href="#1-w3c-标准盒模型" class="headerlink" title="1. w3c 标准盒模型"></a>1. w3c 标准盒模型</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">元素真实的内部 width = content width + padding + border</div><div class="line">元素真实的内部 height = content height + padding + border</div></pre></td></tr></table></figure>
+<h5 id="2-IE-传统盒模型"><a href="#2-IE-传统盒模型" class="headerlink" title="2. IE 传统盒模型"></a>2. IE 传统盒模型</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">元素真实的 width = content width</div><div class="line">元素真实的 height = content height</div></pre></td></tr></table></figure>
+<p>用一个例子来表示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;boxContent&quot;&gt;&lt;/div&gt;</div><div class="line">&lt;div id=&quot;boxBox&quot;&gt;&lt;/div&gt;</div></pre></td></tr></table></figure>
+<p>样式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">div &#123;</div><div class="line">		width:200px;</div><div class="line">		height:200px;</div><div class="line">		padding:10px;</div><div class="line">		margin: 20px;</div><div class="line">		border:5px solid black;</div><div class="line">		background-color: #e3e3e3;</div><div class="line">	&#125;</div><div class="line">	#boxContent &#123;</div><div class="line">		box-sizing: content-box;</div><div class="line">		-moz-box-sizing: content-box; </div><div class="line">		-webkit-box-sizing: content-box; </div><div class="line">		-o-box-sizing: content-box;</div><div class="line">		-ms-box-sizing: content-box;</div><div class="line">	&#125;</div><div class="line">	#boxBox &#123;</div><div class="line">		box-sizing: border-box;</div><div class="line">		-moz-box-sizing: border-box; </div><div class="line">		-webkit-box-sizing: border-box; </div><div class="line">		-o-box-sizing: border-box; </div><div class="line">		-ms-box-sizing: border-box;</div></pre></td></tr></table></figure>
+<p>最后在浏览器中显示的结果如图：<br><img src="http://ojzeprg7w.bkt.clouddn.com/css2.jpg" alt=""></p>
+<p>上图很明显的说明了两种盒模型在处理块状元素实际的 width 时的差别。详细的计算过程就是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># 对于 content-box</div><div class="line">元素的真实内部 width = content width(200) + padding(10*2) + border(5*2)</div><div class="line"></div><div class="line"># 对于 border-box</div><div class="line">元素的真实内部 width = content width(200)</div></pre></td></tr></table></figure></p>
+<p>对于 border-box 这种特性在两栏布局的时候就不用再像之前再精打细算算好每个元素的宽度之后如果再需要修改类似于 padding 之类的值的时候一不小心就会被挤下来的情况。</p>
+<p>比如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;content&quot;&gt;</div><div class="line">    &lt;div id=&quot;left&quot;&gt;left&lt;/div&gt;;</div><div class="line">    &lt;div id=&quot;main&quot;&gt;main&lt;/div&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure></p>
+<p>css:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">#content &#123;</div><div class="line">	width: 420px;</div><div class="line">&#125;</div><div class="line">#left &#123;</div><div class="line">	width: 100px;</div><div class="line">	float: left;</div><div class="line">	margin-left: 20px;</div><div class="line">	background: #e3e3e3;</div><div class="line">&#125;</div><div class="line"></div><div class="line">#main &#123;</div><div class="line">	width: 300px;</div><div class="line">	float: left;</div><div class="line">	background: #999;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>对于上面的两栏布局，必须计算好两个 div 的宽度以及 margin 等值加起来的总和等于最外层的容器的宽度。如果这个时候需要给左边的加上 padding 值，如果不改变左边的 div 的 width，这个时候就会发现右边的 div 被挤下来了。如果页面有很多地方需要细调的话，就会一不小心就把布局弄乱，这个时候就可以将两个 div 的 box-sizing 设置为 border-box, 这个时候不论怎么改变 padding border等值都不需要再重新计算值。</p>
 
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/2017/07/19/mouseenter-mouseover-mouseleave-mouseout的区别/" class="archive-article-date">
-  	<time datetime="2017-07-18T16:14:49.000Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-19</time>
+      <a href="/2017/07/19/css里的盒模型/" class="archive-article-date">
+  	<time datetime="2017-07-19T13:58:05.000Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-19</time>
 </a>
       
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/事件/">事件</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术/">技术</a></li></ul>
-	</div>
-
       
 
       <div class="clearfix"></div>
@@ -185,18 +184,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/07/19/css里的盒模型/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          css里的盒模型
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/07/16/React学习笔记(一)/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">React学习笔记（一）</div>
+    <a href="/2017/07/19/mouseenter-mouseover-mouseleave-mouseout的区别/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">mouseenter/mouseover mouseleave/mouseout的区别</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -242,7 +232,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="mouseenter-mouseover-mouseleave-mouseout的区别" data-title="mouseenter/mouseover mouseleave/mouseout的区别" data-url="http://yoursite.com/2017/07/19/mouseenter-mouseover-mouseleave-mouseout的区别/"></div>
+	<div class="ds-thread" data-thread-key="css里的盒模型" data-title="css里的盒模型" data-url="http://yoursite.com/2017/07/19/css里的盒模型/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">

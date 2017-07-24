@@ -150,31 +150,9 @@
       
         <h2 id="CSS-浮动"><a href="#CSS-浮动" class="headerlink" title="CSS 浮动"></a>CSS 浮动</h2><p>浮动很类似于印刷排版中的文字环绕效果。浮动的盒子可以向左或者向右移动，直到它的外边缘碰到包含盒子或另一个浮动盒子的边为止。由于浮动盒子不在文档的普通流中，相当于不占用空间，所以文档的普通流中的块框表现得就像浮动框不存在一样。</p>
 <p>同时这种特性会导致包含浮动盒子的父元素塌陷，无法自动延伸高度，从而使得父元素的高度为 0 。</p>
-<h2 id="CSS-浮动情形"><a href="#CSS-浮动情形" class="headerlink" title="CSS 浮动情形"></a>CSS 浮动情形</h2><p>正常的情况下三个 div 的位置如左下，但是当第一个 div 浮动的时候，就会脱离正常流向右移动，直到碰到父容器的边框。<br><img src="http://ojzeprg7w.bkt.clouddn.com/float1.png" alt=""></p>
-<p>当我们将第一个 div 向左边浮动的时候，脱离正常流之后就会导致一个问题，使得 第二、三个 div 感知不到第一个 div 的存在，因此上移，这时候使得这个 div 盖住了第二个 div。</p>
-<p>想解决这个问题，只要让三个 div 都浮动即可，但是这样会导致父容器的高度无法自动撑起来，这种问题后面来说怎么解决。<br><img src="http://ojzeprg7w.bkt.clouddn.com/float2.png" alt=""></p>
-<p>浮动的时候如果父元素的宽度不够，第三个 div 会自动向下浮动，直到有足够的宽度，如果浮动的时候发现高度不一致就会出现下面右边被卡住的情况。</p>
-<p><img src="http://ojzeprg7w.bkt.clouddn.com/float3.png" alt=""></p>
-<h2 id="清除浮动"><a href="#清除浮动" class="headerlink" title="清除浮动"></a>清除浮动</h2><p>上面也说了，浮动会导致一些问题出现，那么怎么清理浮动呢？</p>
-<h3 id="overflow"><a href="#overflow" class="headerlink" title="overflow"></a>overflow</h3><p>给浮动的父元素添加一个 overflow 属性，设置成 auto 或者 hidden 就会使得父容器的高度撑起来。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&lt;div class=&quot;box-container&quot;&gt;</div><div class="line">    &lt;div class=&quot;box&quot;&gt;&lt;/div&gt;</div><div class="line">&lt;/div&gt;</div><div class="line"></div><div class="line">.box-container &#123;</div><div class="line">	border: 1px solid #000;</div><div class="line">&#125;</div><div class="line">.box &#123;</div><div class="line">	width: 200px;</div><div class="line">	height: 200px;</div><div class="line">	background: #e3e3e3;</div><div class="line">	float: left;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>子元素浮动，父元素只剩下 2px 的边框高度，效果见下图：<br><img src="http://ojzeprg7w.bkt.clouddn.com/float4.png" alt=""></p>
-<p>解决这个问题，只要给父元素加上 overflow:hidden 触发一个 bfc 即可。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">.box-container &#123;</div><div class="line">	border: 1px solid #000;</div><div class="line">	overflow: hidden;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>效果见下图：<br><img src="http://ojzeprg7w.bkt.clouddn.com/float5.png" alt=""></p>
-<p>这种方法的缺点就是各种浏览器对 overflow 效果不一样，同时对阴影也会有影响。</p>
-<h3 id="使用带-clear-的空标签"><a href="#使用带-clear-的空标签" class="headerlink" title="使用带 clear 的空标签"></a>使用带 clear 的空标签</h3><p>在浮动元素后面加上一个空元素，空元素的 clear 需要设置。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">.box-container &#123;</div><div class="line">	border: 1px solid #000;</div><div class="line">&#125;</div><div class="line">.box &#123;</div><div class="line">	width: 200px;</div><div class="line">	height: 200px;</div><div class="line">	background: #e3e3e3;</div><div class="line">	float: left;</div><div class="line">&#125;</div><div class="line">.clear &#123;</div><div class="line">	clear: both;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>效果图和上图一样，很会清除浮动。这种方法的缺点就是语义化不好，需要再增加一个元素。</p>
-<h3 id="使用伪类元素"><a href="#使用伪类元素" class="headerlink" title="使用伪类元素"></a>使用伪类元素</h3><p>原理是在父元素上面使用 ::after 伪类元素，使用伪类元素可以在父元素后面创造隐藏的元素，将元素的 display 设置成block 或者 table-cell。</p>
-<p>需要注意的是IE6，IE7不支持 ::after 伪元素，因此要添加 .clearfix{zoom:1} ；来触发haslayout。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">&lt;div class=&quot;box-container clearfix&quot;&gt;</div><div class="line">    &lt;div class=&quot;box&quot;&gt;&lt;/div&gt;</div><div class="line">    &lt;div class=&quot;clear&quot;&gt;</div><div class="line">&lt;/div&gt;</div><div class="line"></div><div class="line"></div><div class="line">.box-container &#123;</div><div class="line">	border: 1px solid #000;</div><div class="line">&#125;</div><div class="line">.box &#123;</div><div class="line">	width: 200px;</div><div class="line">	height: 200px;</div><div class="line">	background: #e3e3e3;</div><div class="line">	float: left;</div><div class="line">&#125;</div><div class="line">.clearfix:after &#123;</div><div class="line">	display: block;</div><div class="line">	content: &apos;&apos;;</div><div class="line">	clear: both;</div><div class="line">&#125;</div><div class="line">.clearfix &#123;</div><div class="line">	zoom: 1;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>效果和上图一样。</p>
-<h3 id="display-table"><a href="#display-table" class="headerlink" title="display: table"></a>display: table</h3><p>使用 display:table/display:table-cell 等table系列属性可以使得父元素自动包含浮动元素。因为此时创建了 bfc ,但是这种不兼容 ie6/7。。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">.box-container &#123;</div><div class="line">	border: 1px solid #000;</div><div class="line">	display: table;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>效果见下图<br><img src="http://ojzeprg7w.bkt.clouddn.com/float6.png" alt=""></p>
-<p>常见的就是上述几种了，按合适的选择即可。</p>
-
+        <p class="article-more-link">
+          <a class="article-more-a"  href="/2017/07/25/css-浮动/#more">more >></a>
+        </p>
       
     </div>
     <div class="article-info article-info-index">

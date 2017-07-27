@@ -13,13 +13,12 @@
 <meta property="og:url" content="http://yoursite.com/2017/07/26/常见的POST提交数据的方式/index.html">
 <meta property="og:site_name" content="LuckyAbby|To Do My Best">
 <meta property="og:description" content="请求分为状态行、请求头以及消息主体，我们通过 POST 发送到数据是放在消息主体中的，通过请求头的 content-type 就能控制数据的提交方式，服务器端根据这个字段就能知道请求的消息主体是何种编码方式了，这样就能正确地对主体进行解析。">
-<meta property="og:image" content="http://ojzeprg7w.bkt.clouddn.com/post1.png">
 <meta property="og:image" content="http://ojzeprg7w.bkt.clouddn.com/post2.png">
-<meta property="og:updated_time" content="2017-07-27T14:40:58.000Z">
+<meta property="og:updated_time" content="2017-07-27T14:57:56.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="常见的POST提交数据的方式">
 <meta name="twitter:description" content="请求分为状态行、请求头以及消息主体，我们通过 POST 发送到数据是放在消息主体中的，通过请求头的 content-type 就能控制数据的提交方式，服务器端根据这个字段就能知道请求的消息主体是何种编码方式了，这样就能正确地对主体进行解析。">
-<meta name="twitter:image" content="http://ojzeprg7w.bkt.clouddn.com/post1.png">
+<meta name="twitter:image" content="http://ojzeprg7w.bkt.clouddn.com/post2.png">
   
     <link rel="alternative" href="/atom.xml" title="LuckyAbby|To Do My Best" type="application/atom+xml">
   
@@ -157,8 +156,12 @@
         <p>请求分为状态行、请求头以及消息主体，我们通过 POST 发送到数据是放在消息主体中的，通过请求头的 content-type 就能控制数据的提交方式，服务器端根据这个字段就能知道请求的消息主体是何种编码方式了，这样就能正确地对主体进行解析。</p>
 <a id="more"></a>
 <p>content-type 一般常用的有下面几种：</p>
-<h3 id="application-x-www-form-urlencoded"><a href="#application-x-www-form-urlencoded" class="headerlink" title="application/x-www-form-urlencoded"></a>application/x-www-form-urlencoded</h3><p>最常见的数据提交方式，也是表单的提交方式，对于原生表单如果不设置 enctype 属性，就是以这种方式提交数据。使用 类似 AJAX 库的时候默认的编码方式也是这个。这种方式提交的数据请求的数据被编码成 key=value&amp;&amp;key=value 的格式,类似于下图<br><img src="http://ojzeprg7w.bkt.clouddn.com/post1.png" alt=""></p>
-<p>使用表单提交的数据，后端如果使用 PHP 的话，可以很方便地通过$_POST[]拿到值。</p>
+<h3 id="application-x-www-form-urlencoded"><a href="#application-x-www-form-urlencoded" class="headerlink" title="application/x-www-form-urlencoded"></a>application/x-www-form-urlencoded</h3><p>最常见的数据提交方式，也是表单的提交方式，对于原生表单如果不设置 enctype 属性，就是以这种方式提交数据。使用 类似 AJAX 库的时候默认的编码方式也是这个。这种方式提交的数据请求的数据被编码成 key=value&amp;&amp;key=value 的格式,类似于下图</p>
+<p>如下面的示例</p>
+<p>有个表单是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;form enctype=&quot;application/x-www-form-urlencoded&quot; action=&quot;http://example.php&quot; method=&quot;POST&quot;&gt;</div><div class="line">    &lt;input type=&quot;text&quot; name=&quot;name&quot; value=&quot;abby&quot;&gt;</div><div class="line">    &lt;input type=&quot;text&quot; name=&quot;age&quot; value=&quot;20&quot;&gt;</div><div class="line">    &lt;input type=&quot;submit&quot; value=&quot;submit&quot;&gt;</div><div class="line">&lt;/form&gt;</div></pre></td></tr></table></figure></p>
+<p>在 htttp 请求头里面看到的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Content-Type:application/x-www-form-urlencoded</div></pre></td></tr></table></figure>
+<p>后端看到的数据格式就是 name=abby&amp;&amp;age=20。使用表单提交的数据，后端如果使用 PHP 的话，可以很方便地通过$_POST[]拿到值。</p>
 <h3 id="application-json"><a href="#application-json" class="headerlink" title="application/json"></a>application/json</h3><p>这种提交方式主要是告诉服务器端传过来的数据是序列之后的 json 字符串的。这种方式也使用得十分平常。浏览器端传输数据的时候只要使用 JSON.stringify 就可以将一个 js 值转化成 JSON 对象。</p>
 <p>json 格式对于复杂的数据结构处理比较方便，在浏览器里面能以十分直观的树形结构展示出来，比较适合做 RESTful api。</p>
 <p>如下图：<br><img src="http://ojzeprg7w.bkt.clouddn.com/post2.png" alt=""></p>

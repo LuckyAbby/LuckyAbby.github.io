@@ -6,17 +6,17 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <title>浅谈HTTP缓存 | LuckyAbby|To Do My Best</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="http 1.0 时代主要通过 Pragma 和 Expires 这两个字段来规范。其实这样控制缓存很古老，但是有些较旧的客户端可能不支持 http 1.1，因此这两个头还在使用中。 Pragma在响应头头里面设置这个字段值是 no-cache 的时候，意味着浏览器不会缓存资源，每次都要向服务器发送一次请求。 ExpiresExpires 可以用来设置缓存的时间，它的值是一个格林尼治时间，比如Mo">
+  <meta name="description" content="什么是缓存缓存是指存储指定资源的一份拷贝，并在下次请求该资源时提供该拷贝的技术，当 web 缓存发现请求的资源已经被存储，它会拦截请求，返回该资源的拷贝，而不会去源服务器重新下载。">
 <meta name="keywords" content="技术,HTTP,缓存">
 <meta property="og:type" content="article">
 <meta property="og:title" content="浅谈HTTP缓存">
 <meta property="og:url" content="http://yoursite.com/2017/07/30/浅谈HTTP缓存/index.html">
 <meta property="og:site_name" content="LuckyAbby|To Do My Best">
-<meta property="og:description" content="http 1.0 时代主要通过 Pragma 和 Expires 这两个字段来规范。其实这样控制缓存很古老，但是有些较旧的客户端可能不支持 http 1.1，因此这两个头还在使用中。 Pragma在响应头头里面设置这个字段值是 no-cache 的时候，意味着浏览器不会缓存资源，每次都要向服务器发送一次请求。 ExpiresExpires 可以用来设置缓存的时间，它的值是一个格林尼治时间，比如Mo">
-<meta property="og:updated_time" content="2017-07-30T10:20:09.000Z">
+<meta property="og:description" content="什么是缓存缓存是指存储指定资源的一份拷贝，并在下次请求该资源时提供该拷贝的技术，当 web 缓存发现请求的资源已经被存储，它会拦截请求，返回该资源的拷贝，而不会去源服务器重新下载。">
+<meta property="og:updated_time" content="2017-07-30T10:28:41.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浅谈HTTP缓存">
-<meta name="twitter:description" content="http 1.0 时代主要通过 Pragma 和 Expires 这两个字段来规范。其实这样控制缓存很古老，但是有些较旧的客户端可能不支持 http 1.1，因此这两个头还在使用中。 Pragma在响应头头里面设置这个字段值是 no-cache 的时候，意味着浏览器不会缓存资源，每次都要向服务器发送一次请求。 ExpiresExpires 可以用来设置缓存的时间，它的值是一个格林尼治时间，比如Mo">
+<meta name="twitter:description" content="什么是缓存缓存是指存储指定资源的一份拷贝，并在下次请求该资源时提供该拷贝的技术，当 web 缓存发现请求的资源已经被存储，它会拦截请求，返回该资源的拷贝，而不会去源服务器重新下载。">
   
     <link rel="alternative" href="/atom.xml" title="LuckyAbby|To Do My Best" type="application/atom+xml">
   
@@ -151,7 +151,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="http-1-0-时代"><a href="#http-1-0-时代" class="headerlink" title="http 1.0 时代"></a>http 1.0 时代</h2><p>主要通过 Pragma 和 Expires 这两个字段来规范。其实这样控制缓存很古老，但是有些较旧的客户端可能不支持 http 1.1，因此这两个头还在使用中。</p>
+        <h2 id="什么是缓存"><a href="#什么是缓存" class="headerlink" title="什么是缓存"></a>什么是缓存</h2><p>缓存是指存储指定资源的一份拷贝，并在下次请求该资源时提供该拷贝的技术，当 web 缓存发现请求的资源已经被存储，它会拦截请求，返回该资源的拷贝，而不会去源服务器重新下载。</p>
+<a id="more"></a>
+<h2 id="为什么需要缓存"><a href="#为什么需要缓存" class="headerlink" title="为什么需要缓存"></a>为什么需要缓存</h2><h4 id="首先减少带宽"><a href="#首先减少带宽" class="headerlink" title="首先减少带宽"></a>首先减少带宽</h4><p>使用缓存就不需要再去下载资源，这样使得网络带宽大幅减少。</p>
+<h4 id="其次缓解服务器压力"><a href="#其次缓解服务器压力" class="headerlink" title="其次缓解服务器压力"></a>其次缓解服务器压力</h4><p>服务器不需要给每次请求都返回数据，这样可以降低服务器的压力。</p>
+<h4 id="最重要的是提升网站的性能"><a href="#最重要的是提升网站的性能" class="headerlink" title="最重要的是提升网站的性能"></a>最重要的是提升网站的性能</h4><p>使用缓存可以减少用户等待的时间，这样可以使得网站的性能上升，给用户更好的体验。</p>
+<h2 id="http-1-0-时代"><a href="#http-1-0-时代" class="headerlink" title="http 1.0 时代"></a>http 1.0 时代</h2><p>主要通过 Pragma 和 Expires 这两个字段来规范。其实这样控制缓存很古老，但是有些较旧的客户端可能不支持 http 1.1，因此这两个头还在使用中。</p>
 <h3 id="Pragma"><a href="#Pragma" class="headerlink" title="Pragma"></a>Pragma</h3><p>在响应头头里面设置这个字段值是 no-cache 的时候，意味着浏览器不会缓存资源，每次都要向服务器发送一次请求。</p>
 <h3 id="Expires"><a href="#Expires" class="headerlink" title="Expires"></a>Expires</h3><p>Expires 可以用来设置缓存的时间，它的值是一个格林尼治时间，比如Mon, 20 Jul 2017 10:08:35 GMT 来告诉浏览器资源缓存过期时间，如果还没过该时间点则<strong>不发请求</strong>。</p>
 <p>当 Pragma 头部和 Expires 头部同时存在的时候 ，起作用的是 Pragma，因此当设置 Pragma 为 no-cache 之后又设置 Expires 的话还是会向服务器发送请求。</p>

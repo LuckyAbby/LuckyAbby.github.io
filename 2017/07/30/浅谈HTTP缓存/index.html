@@ -4,19 +4,19 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>胡诌乱扯 | LuckyAbby|To Do My Best</title>
+  <title>浅谈HTTP缓存 | LuckyAbby|To Do My Best</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="算算到今天，已经来美团实习一个多月了，这一个多月，经历了很多事情，学到了很多，也明白了很多。 其实事情的开始并不是来到美团实习，如果要追溯的话最早应该是大二吧。。。">
-<meta name="keywords" content="随记,胡诌">
+  <meta name="description" content="http 1.0 时代主要通过 Pragma 和 Expires 这两个字段来规范。其实这样控制缓存很古老，但是有些较旧的客户端可能不支持 http 1.1，因此这两个头还在使用中。 Pragma在响应头头里面设置这个字段值是 no-cache 的时候，意味着浏览器不会缓存资源，每次都要向服务器发送一次请求。 ExpiresExpires 可以用来设置缓存的时间，它的值是一个格林尼治时间，比如Mo">
+<meta name="keywords" content="技术,HTTP,缓存">
 <meta property="og:type" content="article">
-<meta property="og:title" content="胡诌乱扯">
-<meta property="og:url" content="http://yoursite.com/2017/07/14/胡诌乱扯/index.html">
+<meta property="og:title" content="浅谈HTTP缓存">
+<meta property="og:url" content="http://yoursite.com/2017/07/30/浅谈HTTP缓存/index.html">
 <meta property="og:site_name" content="LuckyAbby|To Do My Best">
-<meta property="og:description" content="算算到今天，已经来美团实习一个多月了，这一个多月，经历了很多事情，学到了很多，也明白了很多。 其实事情的开始并不是来到美团实习，如果要追溯的话最早应该是大二吧。。。">
-<meta property="og:updated_time" content="2017-07-15T15:42:20.000Z">
+<meta property="og:description" content="http 1.0 时代主要通过 Pragma 和 Expires 这两个字段来规范。其实这样控制缓存很古老，但是有些较旧的客户端可能不支持 http 1.1，因此这两个头还在使用中。 Pragma在响应头头里面设置这个字段值是 no-cache 的时候，意味着浏览器不会缓存资源，每次都要向服务器发送一次请求。 ExpiresExpires 可以用来设置缓存的时间，它的值是一个格林尼治时间，比如Mo">
+<meta property="og:updated_time" content="2017-07-30T10:20:09.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="胡诌乱扯">
-<meta name="twitter:description" content="算算到今天，已经来美团实习一个多月了，这一个多月，经历了很多事情，学到了很多，也明白了很多。 其实事情的开始并不是来到美团实习，如果要追溯的话最早应该是大二吧。。。">
+<meta name="twitter:title" content="浅谈HTTP缓存">
+<meta name="twitter:description" content="http 1.0 时代主要通过 Pragma 和 Expires 这两个字段来规范。其实这样控制缓存很古老，但是有些较旧的客户端可能不支持 http 1.1，因此这两个头还在使用中。 Pragma在响应头头里面设置这个字段值是 no-cache 的时候，意味着浏览器不会缓存资源，每次都要向服务器发送一次请求。 ExpiresExpires 可以用来设置缓存的时间，它的值是一个格林尼治时间，比如Mo">
   
     <link rel="alternative" href="/atom.xml" title="LuckyAbby|To Do My Best" type="application/atom+xml">
   
@@ -133,7 +133,7 @@
 </nav>
 
       <div class="body-wrap">
-        <article id="post-胡诌乱扯" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-浅谈HTTP缓存" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -143,7 +143,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      胡诌乱扯
+      浅谈HTTP缓存
     </h1>
   
 
@@ -151,46 +151,53 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>算算到今天，已经来美团实习一个多月了，这一个多月，经历了很多事情，学到了很多，也明白了很多。</p>
-<p>其实事情的开始并不是来到美团实习，如果要追溯的话最早应该是大二吧。。。</p>
-<a id="more"></a>
-<p>大一的我是什么样的呢，学习很认真，最后专业第二转到了当时以为自己很满意的信管的专业。当时只知道保研，老师和我们说的也是保研好啊，不用考研，<strong>我似乎就记住能保研就行，却没有思考过为什么要保研。</strong></p>
-<p>大二转专业过来之后才发现新的专业真的有很多学霸，当时危机感很重，自己又很好强，于是自己就想证明自己，最后拿到了专业第一，这次的专业第一让我开始觉得 <strong>自己其实是能做很多事情出来的</strong>，也慢慢改变了那种自己很菜的想法。这应该是我大学生涯里面第一个思想上的转折点了。</p>
-<p>大二下的时候我开始跑步，慢慢地喜欢上了跑步，喜欢跑步的原因其实不是因为自己有多么爱运动，更多的原因是自己很享受在跑步的时候那种放空自己的状态，那个时候我会一直想一些事情开始忘记了自己在跑步，每晚5km，有时候还会一直忘记跑步最后到10km，跑步的那段时间，自己成就了两件事情：<strong>1.我不要和他们一样被动保研</strong>。2.我的体育体测2km我以9分30秒拿了满分。这应该是我第二个思想上的转折点。</p>
-<p>后来的事情就是我开始觉得 <strong>自己好像很享受那种写代码的状态</strong>，尤其是遇到了我的JAVA老师，一个彻底改变了我对于代码看法的老师，那段时间我在寝室写代码写到自己都不想出去取快递的状态。第三个转折点。</p>
-<p>在这三个转折点的碰撞下，我就开始写页面，刚开始什么都不懂，觉得html和一般的语言好不一样，怎么用浏览器就可以打开执行了呢，但是好有意思啊。后来跟着一个英文的教程自己学了 html css，还记得自己刚开始的时候连class和id的区别都没区分开来。想想那段时间，真是想笑又想哭。</p>
-<p>虽然我想清楚了不能被动保研，但是我还是没有完全放弃我的学业，到现在，我还是专业第一，但是这个专业第一，含金量似乎也没那么重了。暑假仓促准备了两个学校，其中北大计算机把我拒绝了，接着我把复旦拒绝了，想想自己毫无底气地拒绝复旦真的是很厉害了！！如果真要深究什么原因，应该就是 <strong>做自己喜欢的，做有成就感的。</strong> 和我一起转专业的有七个人，其中三个是我的室友，另外三个男孩子是室友，这个小学期，很幸运，三个男孩子都如愿去了自己最想去的学校。我们寝室三个人也都很不错，只是我，<strong>显得很特别</strong>。</p>
-<p>提到清北，还是有点羡慕，羡慕的只是能去顶尖学府，但是对于所学的，却怎么也羡慕不起来。因为我很不喜欢管理，我不想那我的生命花费在一点没让我有成就感的事情上面，这也是我只报了北大计算机的原因，也是我大三下一直在准备春招而不是在准备清北管科的原因。</p>
-<p>在一个体制里面想彻底走出来真的很难，到现在我的同学们还在议论，为什么管信专业第一不去保研，<strong>是不是脑子有病？</strong></p>
-<p>这个体制就是，<strong>你得去做别人觉得你应该要做的事情</strong>。</p>
-<p><strong>不是所有人的生命都要围绕在体制周围的，如果自己还有选择自己一定会选择离开</strong>，如果最后没有办法，那就只能再被选择体制。</p>
-<p><strong>我觉得自己，能离开的。</strong></p>
-<p>这一路走过来，看明白了很多事情，越来越觉得自己是个战士，如果有颂歌，我一定要给自己唱一曲。</p>
-<p>我以前是个没有把握很多事情就不敢做的人，但现在越来越觉得怕什么，只管去做就好了。</p>
-<p>从开始接触前端之后，很多事情就变得不一样了。我觉得我的性格和男朋友越来越像，他开始鼓励我做一些事情，让我觉得自己在一个全新的领域，也能做的很好，就像当时自己不敢相信自己能考上专业第一一样。</p>
-<p>开始自己接手一些项目，虽然不大，但是看着都是自己写出来的，自己去思考一些问题，去注意一些细小的点，也特别有成就感。<strong>自己虽然菜，但是自己也是努力的小菜鸡。</strong></p>
-<p>我是一个不想轻易放弃的人，很多事情暂时失败了，但是还是想一直坚持，不想服输。</p>
-<p>之前只觉得自己菜，然后有点怂，怕自己做不好什么，但是现在在美团实习的时候我刻意去突破自己这种心理，有时候师兄给的活，虽然有些师兄怕我做不好可以不做，但是自己还是主动去接受，虽然有些地方可能写的有点慢，但是都是自己一点一点写来的。</p>
-<p>之前对于react，是处于那种在文档写小demo阶段，但是这一段时间来，虽然没弄很熟，也至少自己也做了很多思考，一些活自己也能接手。<strong>也让我开始觉得，不怕什么不能实现，这不是盲目自信。</strong></p>
-<p>我很喜欢这种状态，这一个多月，我学到了很多在学校在学校三年都学不到的东西。</p>
-<p>在学校那段时间让我明白了一个很重要的道理，身边一些学霸都是有某种特质的。<strong>其中最重要的特质就是认真，不管是做什么，都很认真。</strong></p>
-<p>恬不知耻地说一句，我大概也是满足这个特质的。</p>
-<p>所以我才很有底气拒绝了复旦，继续投入一个自己目前并不是特别有竞争优势的领域。我觉得我的认真，可以弥补很多错过的时间。</p>
-<p>越看越像一篇吹捧自己的文章。233333。其实这么乱七八糟写下来，我也不知道写了什么。</p>
-<p>不管是什么，希望自己能一直热泪盈眶地走下去。</p>
-<p>我是工程师刘小婷，加油！</p>
+        <h2 id="http-1-0-时代"><a href="#http-1-0-时代" class="headerlink" title="http 1.0 时代"></a>http 1.0 时代</h2><p>主要通过 Pragma 和 Expires 这两个字段来规范。其实这样控制缓存很古老，但是有些较旧的客户端可能不支持 http 1.1，因此这两个头还在使用中。</p>
+<h3 id="Pragma"><a href="#Pragma" class="headerlink" title="Pragma"></a>Pragma</h3><p>在响应头头里面设置这个字段值是 no-cache 的时候，意味着浏览器不会缓存资源，每次都要向服务器发送一次请求。</p>
+<h3 id="Expires"><a href="#Expires" class="headerlink" title="Expires"></a>Expires</h3><p>Expires 可以用来设置缓存的时间，它的值是一个格林尼治时间，比如Mon, 20 Jul 2017 10:08:35 GMT 来告诉浏览器资源缓存过期时间，如果还没过该时间点则<strong>不发请求</strong>。</p>
+<p>当 Pragma 头部和 Expires 头部同时存在的时候 ，起作用的是 Pragma，因此当设置 Pragma 为 no-cache 之后又设置 Expires 的话还是会向服务器发送请求。</p>
+<p>使用这两个头部控制缓存当然会存在一些问题， Expires 定义的缓存时间是相对服务器上的时间而言的，如果客户端上的时间跟服务器上的时间不一致，那就没什么用了。因为这些问题 ，后来就有了 http 1.1 时代的缓存控制。</p>
+<h2 id="http-1-1-时代"><a href="#http-1-1-时代" class="headerlink" title="http 1.1 时代"></a>http 1.1 时代</h2><p>主要是通过 Cache-Control 来区分对缓存机制的支持，其中请求头和响应头都支持。</p>
+<h3 id="Cache-Control"><a href="#Cache-Control" class="headerlink" title="Cache-Control"></a>Cache-Control</h3><p>若报文中同时出现了 Expires 和 Cache-Control，则以 Cache-Control 为准。如果同时出现了三者，优先级从高到低分别是 Pragma -&gt; Cache-Control -&gt; Expires 。</p>
+<p>这个字段的值可以进行一些组合</p>
+<h4 id="完全不缓存"><a href="#完全不缓存" class="headerlink" title="完全不缓存"></a>完全不缓存</h4><p>缓存中不得存储任何关于客户端请求和服务端响应的内容。每次由客户端发起的请求都会下载完整的响应内容。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Cache-Control: no-cache, no-store, must-revalidate</div></pre></td></tr></table></figure>
+<h4 id="缓存过期"><a href="#缓存过期" class="headerlink" title="缓存过期"></a>缓存过期</h4><p>判断缓存是否过期的一个最常使用的标志是 max-age。相对 Expires 而言，max-age 是距离请求发起的时间的秒数。针对应用中那些不会改变的文件，通常可以手动设置一定的时长以保证缓存有效，例如图片、css、js等静态资源。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Cache-Control: max-age = 3600</div></pre></td></tr></table></figure>
+<p>这里指缓存有效时间是一个小时，一个小时内不发请求，但是一个小时之后需要从服务器拿到资源。</p>
+<p>讲到这里，决定客户端发送是否发送请求的头部控制就已经说完了。但是现在还有一个同样很重要的问题，<strong>是不是客户端发送请求之后，服务器端就必须要将全部的资源发回去。如果客户端发请求之后，服务器端资源并没有改变呢？</strong>。就这个问题，就需要一个缓存校验字段。</p>
+<h3 id="Last-Modified"><a href="#Last-Modified" class="headerlink" title="Last-Modified"></a>Last-Modified</h3><p>服务器将资源传递给客户端时，会将资源最后更改的时间以“Last-Modified: GMT”的形式加在实体首部上一起返回给客户端。例如<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Last-Modified: Fri, 23 Jul 2017 01:47:00 GMT</div></pre></td></tr></table></figure></p>
+<p>这个时候客户端在请求资源的时候需要发送一个字段来标记时间，服务器端会根据这个时间与服务器上该资源的最终修改时间对比，若一致，则说明该资源没有被修改过。</p>
+<p>客户端发送的这个字段一般有两种：</p>
+<p><code>If-Modified-Since: Last-Modified-value</code></p>
+<p>该字段告诉服务器如果客户端传来的最后修改时间和服务器上的一致，直接返回 304 状态码即可，当前各大浏览器均是使用该字段来向服务器传递保存的 Last-Modified 的值。如果时间不一致的话，服务器会返回所有的这个资源并返回 200 状态码。</p>
+<p><code>If-Unmodified-Since: Last-Modified-value</code></p>
+<p>该字段告诉服务器如果客户端传来的最后修改时间和服务器上的不一致，则直接返回 412 状态码(Precondition Failed)。</p>
+<h3 id="ETag"><a href="#ETag" class="headerlink" title="ETag"></a>ETag</h3><p>使用 Last-Modified 也存在一些问题，比如如果资源在服务器上被修改了，但是内容还是没变，这个时候服务器端会发现时间匹配不上而又返回一个一样的资源，这样又浪费了带宽也增加了用户等待响应的时间。</p>
+<p>为解决上面这个问题，又双叒叕有 ETag 字段来标注资源的唯一性。</p>
+<p>服务器端在返回的实体里面定义一个字段 ETag,这个字段的值是由某种算法计算出来的唯一标志符（比如md5）。</p>
+<p>而客户端需要在请求资源的时候发送一个字段去把服务器给它的这个 ETag 值再传给服务器，服务器会根据这个值和自己这个资源的ETag值进行对比，如果不同的话就返回这个资源并返回 200, 如果相同的话只需要返回 304 告诉浏览器直接从缓存中读取就可以了。</p>
+<p>客户端发送的这个字段一般有两种：</p>
+<p><code>If-None-Match: ETag-value</code></p>
+<p>告诉服务端如果 ETag 没匹配上需要重发资源数据，否则直接回送304 和响应报头即可。</p>
+<p>当前各浏览器均是使用的该请求首部来向服务器传递保存的 ETag 值。</p>
+<p><code>If-Match: ETag-value</code></p>
+<p>该字段告诉服务器如果客户端传来的 Etag 值跟服务器上的不一致，则直接返回 412 状态码(Precondition Failed)。</p>
+<p>Last-Modified 与 ETag 是可以一起使用的，服务器会优先验证 ETag，一致的情况下，才会继续比对 Last-Modified，最后才决定是否返回 304。</p>
+<h2 id="用户行为"><a href="#用户行为" class="headerlink" title="用户行为"></a>用户行为</h2><p>用户在使用地址栏回车、页面链接跳转、新开窗口以及前进后退的时候 Cache-Control/Expires 都还接着有效。</p>
+<p>当用户在按F5进行刷新的时候，会忽略 Cache-Control/Expires 的设置，再次发送请求去服务器请求，而 Last-Modified/Etag 还是有效的，服务器会根据情况判断返回304还是200。</p>
+<p>当用户使用Ctrl+F5进行强制刷新的时候，只是所有的缓存机制都将失效，重新从服务器拉去资源。</p>
 
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/2017/07/14/胡诌乱扯/" class="archive-article-date">
-  	<time datetime="2017-07-14T13:53:49.000Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-14</time>
+      <a href="/2017/07/30/浅谈HTTP缓存/" class="archive-article-date">
+  	<time datetime="2017-07-30T06:09:32.000Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-30</time>
 </a>
       
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/胡诌/">胡诌</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/随记/">随记</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTTP/">HTTP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术/">技术</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/缓存/">缓存</a></li></ul>
 	</div>
 
       
@@ -203,18 +210,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/07/16/React学习笔记(一)/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          React学习笔记（一）
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/07/13/js里面的深拷贝与浅拷贝/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">js里面的深拷贝与浅拷贝</div>
+    <a href="/2017/07/26/常见的POST提交数据的方式/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">常见的POST提交数据的方式</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -260,7 +258,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="胡诌乱扯" data-title="胡诌乱扯" data-url="http://yoursite.com/2017/07/14/胡诌乱扯/"></div>
+	<div class="ds-thread" data-thread-key="浅谈HTTP缓存" data-title="浅谈HTTP缓存" data-url="http://yoursite.com/2017/07/30/浅谈HTTP缓存/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">

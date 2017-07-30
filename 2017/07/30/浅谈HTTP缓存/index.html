@@ -13,7 +13,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/07/30/浅谈HTTP缓存/index.html">
 <meta property="og:site_name" content="LuckyAbby|To Do My Best">
 <meta property="og:description" content="什么是缓存缓存是指存储指定资源的一份拷贝，并在下次请求该资源时提供该拷贝的技术，当 web 缓存发现请求的资源已经被存储，它会拦截请求，返回该资源的拷贝，而不会去源服务器重新下载。">
-<meta property="og:updated_time" content="2017-07-30T11:31:29.000Z">
+<meta property="og:updated_time" content="2017-07-30T12:30:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浅谈HTTP缓存">
 <meta name="twitter:description" content="什么是缓存缓存是指存储指定资源的一份拷贝，并在下次请求该资源时提供该拷贝的技术，当 web 缓存发现请求的资源已经被存储，它会拦截请求，返回该资源的拷贝，而不会去源服务器重新下载。">
@@ -177,7 +177,10 @@
 <p>该字段告诉服务器如果客户端传来的最后修改时间和服务器上的一致，直接返回 304 状态码即可，当前各大浏览器均是使用该字段来向服务器传递保存的 Last-Modified 的值。如果时间不一致的话，服务器会返回所有的这个资源并返回 200 状态码。</p>
 <p><code>If-Unmodified-Since: Last-Modified-value</code></p>
 <p>该字段告诉服务器如果客户端传来的最后修改时间和服务器上的不一致，则直接返回 412 状态码(Precondition Failed)。</p>
-<h3 id="ETag"><a href="#ETag" class="headerlink" title="ETag"></a>ETag</h3><p>使用 Last-Modified 也存在一些问题，比如如果资源在服务器上被修改了，但是内容还是没变，这个时候服务器端会发现时间匹配不上而又返回一个一样的资源，这样又浪费了带宽也增加了用户等待响应的时间。</p>
+<h3 id="ETag"><a href="#ETag" class="headerlink" title="ETag"></a>ETag</h3><p>使用 Last-Modified 也存在一些问题，比如：</p>
+<p>1、一些文件也许会周期性的更改，但是他的内容并不改变(仅仅改变的修改时间)，这个时候我们并不希望客户端认为这个文件被修改了，而重新GET；</p>
+<p>2、某些文件修改非常频繁，比如在秒以下的时间内进行修改，(比方说1s内修改了N次)，If-Modified-Since能检查到的粒度是s级的，这种修改无法判断(或者说UNIX记录MTIME只能精确到秒)；</p>
+<p>3、某些服务器不能精确的得到文件的最后修改时间。</p>
 <p>为解决上面这个问题，又双叒叕有 ETag 字段来标注资源的唯一性。</p>
 <p>服务器端在返回的实体里面定义一个字段 ETag,这个字段的值是由某种算法计算出来的唯一标志符（比如md5）。</p>
 <p>而客户端需要在请求资源的时候发送一个字段去把服务器给它的这个 ETag 值再传给服务器，服务器会根据这个值和自己这个资源的ETag值进行对比，如果不同的话就返回这个资源并返回 200, 如果相同的话只需要返回 304 告诉浏览器直接从缓存中读取就可以了。</p>

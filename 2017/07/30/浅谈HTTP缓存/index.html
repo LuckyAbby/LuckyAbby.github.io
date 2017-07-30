@@ -13,7 +13,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/07/30/浅谈HTTP缓存/index.html">
 <meta property="og:site_name" content="LuckyAbby|To Do My Best">
 <meta property="og:description" content="什么是缓存缓存是指存储指定资源的一份拷贝，并在下次请求该资源时提供该拷贝的技术，当 web 缓存发现请求的资源已经被存储，它会拦截请求，返回该资源的拷贝，而不会去源服务器重新下载。">
-<meta property="og:updated_time" content="2017-07-30T11:20:44.000Z">
+<meta property="og:updated_time" content="2017-07-30T11:31:29.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浅谈HTTP缓存">
 <meta name="twitter:description" content="什么是缓存缓存是指存储指定资源的一份拷贝，并在下次请求该资源时提供该拷贝的技术，当 web 缓存发现请求的资源已经被存储，它会拦截请求，返回该资源的拷贝，而不会去源服务器重新下载。">
@@ -189,7 +189,7 @@
 <p>该字段告诉服务器如果客户端传来的 Etag 值跟服务器上的不一致，则直接返回 412 状态码(Precondition Failed)。</p>
 <p>Last-Modified 与 ETag 是可以一起使用的，服务器会优先验证 ETag，一致的情况下，才会继续比对 Last-Modified，最后才决定是否返回 304。</p>
 <h2 id="浏览器到底怎么判断缓存"><a href="#浏览器到底怎么判断缓存" class="headerlink" title="浏览器到底怎么判断缓存"></a>浏览器到底怎么判断缓存</h2><p>说了这么多，这么多字段混在一起的话，浏览器究竟怎么去判断缓存？</p>
-<h3 id="强缓存"><a href="#强缓存" class="headerlink" title="强缓存"></a>强缓存</h3><p>强缓存就是之前扯的那一大堆 Pragma Expires 以及 Cache-control，命中强缓存之后的状态码是 200</p>
+<h3 id="强缓存"><a href="#强缓存" class="headerlink" title="强缓存"></a>强缓存</h3><p>强缓存就是之前扯的那一大堆 Pragma Expires 以及 Cache-control，命中强缓存之后的状态码是 200，后面会跟上 from cache。当然，现在高版本的 chrome 换成了 from disk cache（磁盘缓存） 和 from memory cache（内存缓存）。 </p>
 <h3 id="协商缓存"><a href="#协商缓存" class="headerlink" title="协商缓存"></a>协商缓存</h3><p>协商缓存就是之前扯的 Last-Modified/If-None-Match 或者 ETag/If-None-Match，命中协商缓存之后的状态码是 304</p>
 <h3 id="判别规则"><a href="#判别规则" class="headerlink" title="判别规则"></a>判别规则</h3><p>1.浏览器首先根据这个资源的头部判断是否命中强缓存，如果命中就直接从缓存中加载资源，不会再发请求。</p>
 <p>2.如果没有命中强缓存，就会发一个请求到服务器端，服务器根据这个头部里面的 If-None-Match 或者 If-None-Match 来判断是否命中协商缓存，如果命中就返回 304，浏览器会直接从缓存中拿资源。</p>

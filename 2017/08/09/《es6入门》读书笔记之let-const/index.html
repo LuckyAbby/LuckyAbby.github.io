@@ -4,26 +4,19 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>使用charles进行抓包 | LuckyAbby|To Do My Best</title>
+  <title>《es6入门》读书笔记之let const | LuckyAbby|To Do My Best</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="进行移动端开发的时候尤其是 ios 开发的时候，使用 charles 进行快速的抓包，提高我们的开发效率 。">
-<meta name="keywords" content="技术,charles">
+  <meta name="description" content="let const 与 varlet 与 const 创建了块级作用域。 为什么要有块级作用域我觉得这也是 ES5 中还没有完善的地方之一，没有块级作用域会导致一大堆问题。比如：控制计数的循环变量会泄漏成全局变量，在使用块级作用域的比如 if 语句以及 for while 循环等地方都会导致问题出现。 与 var 最具体的区别在于： 1. 不存在变量提升var 命令会发生变量提升的现象，即变量可以">
+<meta name="keywords" content="技术,JavaScript,ES6">
 <meta property="og:type" content="article">
-<meta property="og:title" content="使用charles进行抓包">
-<meta property="og:url" content="http://yoursite.com/2017/08/08/使用charles进行ios抓包/index.html">
+<meta property="og:title" content="《es6入门》读书笔记之let const">
+<meta property="og:url" content="http://yoursite.com/2017/08/09/《es6入门》读书笔记之let-const/index.html">
 <meta property="og:site_name" content="LuckyAbby|To Do My Best">
-<meta property="og:description" content="进行移动端开发的时候尤其是 ios 开发的时候，使用 charles 进行快速的抓包，提高我们的开发效率 。">
-<meta property="og:image" content="http://ojzeprg7w.bkt.clouddn.com/charles1.png">
-<meta property="og:image" content="http://ojzeprg7w.bkt.clouddn.com/charles2.png">
-<meta property="og:image" content="http://ojzeprg7w.bkt.clouddn.com/charles3.png">
-<meta property="og:image" content="http://ojzeprg7w.bkt.clouddn.com/charles4.png">
-<meta property="og:image" content="http://ojzeprg7w.bkt.clouddn.com/charles5.png">
-<meta property="og:image" content="http://ojzeprg7w.bkt.clouddn.com/charles6.png">
-<meta property="og:updated_time" content="2017-08-08T15:42:18.000Z">
+<meta property="og:description" content="let const 与 varlet 与 const 创建了块级作用域。 为什么要有块级作用域我觉得这也是 ES5 中还没有完善的地方之一，没有块级作用域会导致一大堆问题。比如：控制计数的循环变量会泄漏成全局变量，在使用块级作用域的比如 if 语句以及 for while 循环等地方都会导致问题出现。 与 var 最具体的区别在于： 1. 不存在变量提升var 命令会发生变量提升的现象，即变量可以">
+<meta property="og:updated_time" content="2017-08-09T15:10:02.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="使用charles进行抓包">
-<meta name="twitter:description" content="进行移动端开发的时候尤其是 ios 开发的时候，使用 charles 进行快速的抓包，提高我们的开发效率 。">
-<meta name="twitter:image" content="http://ojzeprg7w.bkt.clouddn.com/charles1.png">
+<meta name="twitter:title" content="《es6入门》读书笔记之let const">
+<meta name="twitter:description" content="let const 与 varlet 与 const 创建了块级作用域。 为什么要有块级作用域我觉得这也是 ES5 中还没有完善的地方之一，没有块级作用域会导致一大堆问题。比如：控制计数的循环变量会泄漏成全局变量，在使用块级作用域的比如 if 语句以及 for while 循环等地方都会导致问题出现。 与 var 最具体的区别在于： 1. 不存在变量提升var 命令会发生变量提升的现象，即变量可以">
   
     <link rel="alternative" href="/atom.xml" title="LuckyAbby|To Do My Best" type="application/atom+xml">
   
@@ -140,7 +133,7 @@
 </nav>
 
       <div class="body-wrap">
-        <article id="post-使用charles进行ios抓包" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-《es6入门》读书笔记之let-const" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -150,7 +143,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      使用charles进行抓包
+      《es6入门》读书笔记之let const
     </h1>
   
 
@@ -158,35 +151,32 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>进行移动端开发的时候尤其是 ios 开发的时候，使用 charles 进行快速的抓包，提高我们的开发效率 。</p>
-<a id="more"></a>
-<h3 id="抓取-HTTP-请求"><a href="#抓取-HTTP-请求" class="headerlink" title="抓取 HTTP 请求"></a>抓取 HTTP 请求</h3><p>1.安装完成之后打开 charles, 选择在“Proxy”菜单下的“Proxy Settings”子菜单。打开“Proxy Settings”对话框，可以设置 charles 的端口号，一般设置为 8888 。如图：</p>
-<p><img src="http://ojzeprg7w.bkt.clouddn.com/charles1.png" alt=""></p>
-<p>2.打开自己电脑的”网络偏好设置”，可以查看自己电脑的 IP 地址：</p>
-<p><img src="http://ojzeprg7w.bkt.clouddn.com/charles2.png" alt=""></p>
-<p>3.打开自己手机的手动代理，将服务器设置成自己电脑的 IP 地址，将端口号设置成自己在第一步中设置的端口号：</p>
-<p><img src="http://ojzeprg7w.bkt.clouddn.com/charles3.png" alt=""></p>
-<h3 id="抓取-HTTPS-请求"><a href="#抓取-HTTPS-请求" class="headerlink" title="抓取 HTTPS 请求"></a>抓取 HTTPS 请求</h3><p>1.安装证书</p>
-<p>在菜单中选择 ”Help“，选择“SSL Proxying”—&gt;“Install Charles Root Certificate，之后会进入到钥匙串管理界面。</p>
-<p><img src="http://ojzeprg7w.bkt.clouddn.com/charles4.png" alt=""></p>
-<p>2.设置证书信任</p>
-<p>双击对应的证书，将“使用此证书时”的选项设置成始终信任。</p>
-<p><img src="http://ojzeprg7w.bkt.clouddn.com/charles5.png" alt=""></p>
-<p><img src="http://ojzeprg7w.bkt.clouddn.com/charles6.png" alt=""></p>
-<h3 id="手机安装证书"><a href="#手机安装证书" class="headerlink" title="手机安装证书"></a>手机安装证书</h3><p>安卓这个时候已经可以直接代理了，但是 ios 还需要进一步设置：</p>
-<p>1.手机已经设置好了代理。<br>2.在手机的浏览器中访问：<a href="http://charlesproxy.com/getssl，安装证书即可。" target="_blank" rel="external">http://charlesproxy.com/getssl，安装证书即可。</a></p>
+        <h2 id="let-const-与-var"><a href="#let-const-与-var" class="headerlink" title="let const 与 var"></a>let const 与 var</h2><p>let 与 const 创建了块级作用域。</p>
+<h4 id="为什么要有块级作用域"><a href="#为什么要有块级作用域" class="headerlink" title="为什么要有块级作用域"></a>为什么要有块级作用域</h4><p>我觉得这也是 ES5 中还没有完善的地方之一，没有块级作用域会导致一大堆问题。比如：控制计数的循环变量会泄漏成全局变量，在使用块级作用域的比如 if 语句以及 for while 循环等地方都会导致问题出现。</p>
+<p>与 var 最具体的区别在于：</p>
+<h4 id="1-不存在变量提升"><a href="#1-不存在变量提升" class="headerlink" title="1. 不存在变量提升"></a>1. 不存在变量提升</h4><p>var 命令会发生变量提升的现象，即变量可以放在声明之前使用，值是 undefined。 而在 let const 中，变量只有声明之后才可以使用，在声明之前是不存在的，如果在声明之前使用会报错。</p>
+<h4 id="2-暂时性死区"><a href="#2-暂时性死区" class="headerlink" title="2. 暂时性死区"></a>2. 暂时性死区</h4><p>在一个块级作用域内，使用 let const 声明的变量在声明之前是不能获取的，使用阮老师的例子就是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">if (true) &#123;</div><div class="line">  // TDZ开始</div><div class="line">  tmp = &apos;abc&apos;; // ReferenceError</div><div class="line">  console.log(tmp); // ReferenceError</div><div class="line"></div><div class="line">  let tmp; // TDZ结束</div><div class="line">  console.log(tmp); // undefined</div><div class="line"></div><div class="line">  tmp = 123;</div><div class="line">  console.log(tmp); // 123</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>在使用 let const 声明 tmp 之前，都属于 变量的tmp 的“死区”。</p>
+<h4 id="3-不允许重复声明"><a href="#3-不允许重复声明" class="headerlink" title="3. 不允许重复声明"></a>3. 不允许重复声明</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">let a = 1;</div><div class="line">var a = 2; // error: &apos;a&apos; has already been declared</div></pre></td></tr></table></figure>
+<h4 id="4-全局变量不属于顶层变量"><a href="#4-全局变量不属于顶层变量" class="headerlink" title="4. 全局变量不属于顶层变量"></a>4. 全局变量不属于顶层变量</h4><p>js 里面的顶层变量，在浏览器里面是 window ，在 Node.js 里面是 global， 在 ES5 使用 var 声明的变量会自动挂载在顶层变量上面，但是使用 let const 声明的变量不会挂载在顶层变量上。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var d = 1;</div><div class="line">console.log(window.d); // 1</div><div class="line"></div><div class="line">let g = 1;</div><div class="line">console.log(window.g); // undefined</div></pre></td></tr></table></figure>
+<h3 id="let-与-const-的区别"><a href="#let-与-const-的区别" class="headerlink" title="let 与 const 的区别"></a>let 与 const 的区别</h3><p>let可以先声明再赋值，但是 const在声明的时候就需要赋值。</p>
+<p>使用 let 定义的是一个变量，在后面还可以改变这个变量的值，但是使用 const 创建的是一个常量的，但是要弄懂这个常量的本质。</p>
+<p>在 js 里面，如果是基本数据类型，存放的就是就是这个变量的值。但是对于引用数据类型，比如 数据对象等等，存放的是它的地址，因此下面的一些操作是合法的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">const foo = &#123;&#125;;</div><div class="line"></div><div class="line">// 为 foo 添加一个属性，可以成功</div><div class="line">foo.prop = 123;</div><div class="line">foo.prop // 123</div><div class="line"></div><div class="line">// 将 foo 指向另一个对象，就会报错</div><div class="line">foo = &#123;&#125;; // TypeError: &quot;foo&quot; is read-only</div></pre></td></tr></table></figure>
+<p>如果想把对象冻结，可以使用 Object.freeze 方法。<br>将对象和对象的属性冻结。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">var constantize = (obj) =&gt; &#123;</div><div class="line">  Object.freeze(obj);</div><div class="line">  Object.keys(obj).forEach( (key, i) =&gt; &#123;</div><div class="line">    if ( typeof obj[key] === &apos;object&apos; ) &#123;</div><div class="line">      constantize( obj[key] );</div><div class="line">    &#125;</div><div class="line">  &#125;);</div><div class="line">`</div></pre></td></tr></table></figure></p>
 
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/2017/08/08/使用charles进行ios抓包/" class="archive-article-date">
-  	<time datetime="2017-08-08T14:51:51.000Z" itemprop="datePublished"><i class="icon-clock"></i>2017-08-08</time>
+      <a href="/2017/08/09/《es6入门》读书笔记之let-const/" class="archive-article-date">
+  	<time datetime="2017-08-09T15:08:03.000Z" itemprop="datePublished"><i class="icon-clock"></i>2017-08-09</time>
 </a>
       
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/charles/">charles</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术/">技术</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ES6/">ES6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术/">技术</a></li></ul>
 	</div>
 
       
@@ -199,18 +189,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/08/09/《es6入门》读书笔记之let-const/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          《es6入门》读书笔记之let const
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/08/06/前端性能优化-雅虎35条规则翻译/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">前端性能优化-雅虎35条规则翻译</div>
+    <a href="/2017/08/08/使用charles进行ios抓包/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">使用charles进行抓包</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -256,7 +237,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="使用charles进行ios抓包" data-title="使用charles进行抓包" data-url="http://yoursite.com/2017/08/08/使用charles进行ios抓包/"></div>
+	<div class="ds-thread" data-thread-key="《es6入门》读书笔记之let-const" data-title="《es6入门》读书笔记之let const" data-url="http://yoursite.com/2017/08/09/《es6入门》读书笔记之let-const/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">

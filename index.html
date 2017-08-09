@@ -130,6 +130,69 @@
       <div class="body-wrap">
         
   
+    <article id="post-《es6入门》读书笔记之let-const" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/08/09/《es6入门》读书笔记之let-const/">《es6入门》读书笔记之let const</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="let-const-与-var"><a href="#let-const-与-var" class="headerlink" title="let const 与 var"></a>let const 与 var</h2><p>let 与 const 创建了块级作用域。</p>
+<h4 id="为什么要有块级作用域"><a href="#为什么要有块级作用域" class="headerlink" title="为什么要有块级作用域"></a>为什么要有块级作用域</h4><p>我觉得这也是 ES5 中还没有完善的地方之一，没有块级作用域会导致一大堆问题。比如：控制计数的循环变量会泄漏成全局变量，在使用块级作用域的比如 if 语句以及 for while 循环等地方都会导致问题出现。</p>
+<p>与 var 最具体的区别在于：</p>
+<h4 id="1-不存在变量提升"><a href="#1-不存在变量提升" class="headerlink" title="1. 不存在变量提升"></a>1. 不存在变量提升</h4><p>var 命令会发生变量提升的现象，即变量可以放在声明之前使用，值是 undefined。 而在 let const 中，变量只有声明之后才可以使用，在声明之前是不存在的，如果在声明之前使用会报错。</p>
+<h4 id="2-暂时性死区"><a href="#2-暂时性死区" class="headerlink" title="2. 暂时性死区"></a>2. 暂时性死区</h4><p>在一个块级作用域内，使用 let const 声明的变量在声明之前是不能获取的，使用阮老师的例子就是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">if (true) &#123;</div><div class="line">  // TDZ开始</div><div class="line">  tmp = &apos;abc&apos;; // ReferenceError</div><div class="line">  console.log(tmp); // ReferenceError</div><div class="line"></div><div class="line">  let tmp; // TDZ结束</div><div class="line">  console.log(tmp); // undefined</div><div class="line"></div><div class="line">  tmp = 123;</div><div class="line">  console.log(tmp); // 123</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>在使用 let const 声明 tmp 之前，都属于 变量的tmp 的“死区”。</p>
+<h4 id="3-不允许重复声明"><a href="#3-不允许重复声明" class="headerlink" title="3. 不允许重复声明"></a>3. 不允许重复声明</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">let a = 1;</div><div class="line">var a = 2; // error: &apos;a&apos; has already been declared</div></pre></td></tr></table></figure>
+<h4 id="4-全局变量不属于顶层变量"><a href="#4-全局变量不属于顶层变量" class="headerlink" title="4. 全局变量不属于顶层变量"></a>4. 全局变量不属于顶层变量</h4><p>js 里面的顶层变量，在浏览器里面是 window ，在 Node.js 里面是 global， 在 ES5 使用 var 声明的变量会自动挂载在顶层变量上面，但是使用 let const 声明的变量不会挂载在顶层变量上。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var d = 1;</div><div class="line">console.log(window.d); // 1</div><div class="line"></div><div class="line">let g = 1;</div><div class="line">console.log(window.g); // undefined</div></pre></td></tr></table></figure>
+<h3 id="let-与-const-的区别"><a href="#let-与-const-的区别" class="headerlink" title="let 与 const 的区别"></a>let 与 const 的区别</h3><p>let可以先声明再赋值，但是 const在声明的时候就需要赋值。</p>
+<p>使用 let 定义的是一个变量，在后面还可以改变这个变量的值，但是使用 const 创建的是一个常量的，但是要弄懂这个常量的本质。</p>
+<p>在 js 里面，如果是基本数据类型，存放的就是就是这个变量的值。但是对于引用数据类型，比如 数据对象等等，存放的是它的地址，因此下面的一些操作是合法的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">const foo = &#123;&#125;;</div><div class="line"></div><div class="line">// 为 foo 添加一个属性，可以成功</div><div class="line">foo.prop = 123;</div><div class="line">foo.prop // 123</div><div class="line"></div><div class="line">// 将 foo 指向另一个对象，就会报错</div><div class="line">foo = &#123;&#125;; // TypeError: &quot;foo&quot; is read-only</div></pre></td></tr></table></figure>
+<p>如果想把对象冻结，可以使用 Object.freeze 方法。<br>将对象和对象的属性冻结。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">var constantize = (obj) =&gt; &#123;</div><div class="line">  Object.freeze(obj);</div><div class="line">  Object.keys(obj).forEach( (key, i) =&gt; &#123;</div><div class="line">    if ( typeof obj[key] === &apos;object&apos; ) &#123;</div><div class="line">      constantize( obj[key] );</div><div class="line">    &#125;</div><div class="line">  &#125;);</div><div class="line">`</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2017/08/09/《es6入门》读书笔记之let-const/" class="archive-article-date">
+  	<time datetime="2017-08-09T15:08:03.000Z" itemprop="datePublished"><i class="icon-clock"></i>2017-08-09</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ES6/">ES6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术/">技术</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-使用charles进行ios抓包" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -165,6 +228,56 @@
 		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/charles/">charles</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术/">技术</a></li></ul>
 	</div>
 
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-前端性能优化-雅虎35条规则翻译" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/08/06/前端性能优化-雅虎35条规则翻译/">前端性能优化-雅虎35条规则翻译</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>其实很早之前就想这篇文章了，可是实在不知道从哪里入手，总结了一些自己在项目中做的性能优化，后来发现其实也都是雅虎35条规则里面的，其实规则也说的很清楚了，后来干脆就想翻译这个规则了，有些自己没有尝试过的也当了解了。</p>
+<h2 id="tag-content"><a href="#tag-content" class="headerlink" title="tag:content"></a>tag:content</h2><h3 id="1-Minimize-HTTP-Requests"><a href="#1-Minimize-HTTP-Requests" class="headerlink" title="1.Minimize HTTP Requests"></a>1.Minimize HTTP Requests</h3><p>到终端用户的响应时间中80%花费在前端，大多数时间花在下载页面的组件：图片、样式、脚本、Flash 等等。减少组件数目就是减少渲染页面的 HTTP 请求数，这是使得页面更快的关键。</p>
+<p>一个减少页面组件数目的方式就是简化页面的设计。但是真有保持页面富内容的同时达到更快的响应时间的方法嘛？或许这有一些技术可以做到：</p>
+<p>1.合并文件（Combined files）通过将多个脚本、css文件合并到一个脚本文件、样式文件中来减少 HTTP 请求。但是当页面之间的脚本相差很大的时候，合并会很有挑战性。</p>
+<p>2.CSS 精灵（CSS Sprites）能更好地减少图片的请求数目。你可以把你所有的背景图合并到一张图片中然后通过 background-image 和 background-position 属性来正确地展示背景图片。</p>
+<p>3.</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2017/08/06/前端性能优化-雅虎35条规则翻译/" class="archive-article-date">
+  	<time datetime="2017-08-06T15:08:04.000Z" itemprop="datePublished"><i class="icon-clock"></i>2017-08-06</time>
+</a>
+      
       
 
       <div class="clearfix"></div>
@@ -338,111 +451,6 @@
 
 
   
-    <article id="post-常见的POST提交数据的方式" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/26/常见的POST提交数据的方式/">常见的POST提交数据的方式</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>请求分为状态行、请求头以及消息主体，我们通过 POST 发送到数据是放在消息主体中的，通过请求头的 content-type 就能控制数据的提交方式，服务器端根据这个字段就能知道请求的消息主体是何种编码方式了，这样就能正确地对主体进行解析。</p>
-        <p class="article-more-link">
-          <a class="article-more-a"  href="/2017/07/26/常见的POST提交数据的方式/#more">more >></a>
-        </p>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2017/07/26/常见的POST提交数据的方式/" class="archive-article-date">
-  	<time datetime="2017-07-26T15:55:55.000Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-26</time>
-</a>
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTTP/">HTTP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术/">技术</a></li></ul>
-	</div>
-
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-css-浮动" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/25/css-浮动/">css 浮动以及常见的清除浮动</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="CSS-浮动"><a href="#CSS-浮动" class="headerlink" title="CSS 浮动"></a>CSS 浮动</h2><p>浮动很类似于印刷排版中的文字环绕效果。浮动的盒子可以向左或者向右移动，直到它的外边缘碰到包含盒子或另一个浮动盒子的边为止。由于浮动盒子不在文档的普通流中，相当于不占用空间，所以文档的普通流中的块框表现得就像浮动框不存在一样。</p>
-<p>同时这种特性会导致包含浮动盒子的父元素塌陷，无法自动延伸高度，从而使得父元素的高度为 0 。</p>
-        <p class="article-more-link">
-          <a class="article-more-a"  href="/2017/07/25/css-浮动/#more">more >></a>
-        </p>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2017/07/25/css-浮动/" class="archive-article-date">
-  	<time datetime="2017-07-24T16:48:22.000Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-25</time>
-</a>
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术/">技术</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/浮动/">浮动</a></li></ul>
-	</div>
-
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -527,7 +535,7 @@ MathJax.Hub.Queue(function() {
     
     	<section class="tools-section tools-section-tag">
     			<div class="widget tagcloud" id="js-tagcloud">
-    				<a href="/tags/C/" style="font-size: 16px;">C</a> <a href="/tags/CSS/" style="font-size: 16px;">CSS</a> <a href="/tags/ES6/" style="font-size: 10px;">ES6</a> <a href="/tags/Git/" style="font-size: 12px;">Git</a> <a href="/tags/HTTP/" style="font-size: 14px;">HTTP</a> <a href="/tags/JavaScript/" style="font-size: 18px;">JavaScript</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/RESTful/" style="font-size: 10px;">RESTful</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/charles/" style="font-size: 10px;">charles</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/事件/" style="font-size: 10px;">事件</a> <a href="/tags/发布订阅模式/" style="font-size: 10px;">发布订阅模式</a> <a href="/tags/技术/" style="font-size: 20px;">技术</a> <a href="/tags/数据结构/" style="font-size: 16px;">数据结构</a> <a href="/tags/浮动/" style="font-size: 10px;">浮动</a> <a href="/tags/生活/" style="font-size: 10px;">生活</a> <a href="/tags/盒模型/" style="font-size: 10px;">盒模型</a> <a href="/tags/缓存/" style="font-size: 10px;">缓存</a> <a href="/tags/胡诌/" style="font-size: 10px;">胡诌</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/随记/" style="font-size: 12px;">随记</a>
+    				<a href="/tags/C/" style="font-size: 16px;">C</a> <a href="/tags/CSS/" style="font-size: 16px;">CSS</a> <a href="/tags/ES6/" style="font-size: 12px;">ES6</a> <a href="/tags/Git/" style="font-size: 12px;">Git</a> <a href="/tags/HTTP/" style="font-size: 14px;">HTTP</a> <a href="/tags/JavaScript/" style="font-size: 18px;">JavaScript</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/RESTful/" style="font-size: 10px;">RESTful</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/charles/" style="font-size: 10px;">charles</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/事件/" style="font-size: 10px;">事件</a> <a href="/tags/发布订阅模式/" style="font-size: 10px;">发布订阅模式</a> <a href="/tags/技术/" style="font-size: 20px;">技术</a> <a href="/tags/数据结构/" style="font-size: 16px;">数据结构</a> <a href="/tags/浮动/" style="font-size: 10px;">浮动</a> <a href="/tags/生活/" style="font-size: 10px;">生活</a> <a href="/tags/盒模型/" style="font-size: 10px;">盒模型</a> <a href="/tags/缓存/" style="font-size: 10px;">缓存</a> <a href="/tags/胡诌/" style="font-size: 10px;">胡诌</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/随记/" style="font-size: 12px;">随记</a>
     			</div>
     	</section>
     

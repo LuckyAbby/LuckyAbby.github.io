@@ -235,56 +235,6 @@
 
 
   
-    <article id="post-前端性能优化-雅虎35条规则翻译" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/06/前端性能优化-雅虎35条规则翻译/">前端性能优化-雅虎35条规则翻译</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>其实很早之前就想这篇文章了，可是实在不知道从哪里入手，总结了一些自己在项目中做的性能优化，后来发现其实也都是雅虎35条规则里面的，其实规则也说的很清楚了，后来干脆就想翻译这个规则了，有些自己没有尝试过的也当了解了。</p>
-<h2 id="tag-content"><a href="#tag-content" class="headerlink" title="tag:content"></a>tag:content</h2><h3 id="1-Minimize-HTTP-Requests"><a href="#1-Minimize-HTTP-Requests" class="headerlink" title="1.Minimize HTTP Requests"></a>1.Minimize HTTP Requests</h3><p>到终端用户的响应时间中80%花费在前端，大多数时间花在下载页面的组件：图片、样式、脚本、Flash 等等。减少组件数目就是减少渲染页面的 HTTP 请求数，这是使得页面更快的关键。</p>
-<p>一个减少页面组件数目的方式就是简化页面的设计。但是真有保持页面富内容的同时达到更快的响应时间的方法嘛？或许这有一些技术可以做到：</p>
-<p>1.合并文件（Combined files）通过将多个脚本、css文件合并到一个脚本文件、样式文件中来减少 HTTP 请求。但是当页面之间的脚本相差很大的时候，合并会很有挑战性。</p>
-<p>2.CSS 精灵（CSS Sprites）能更好地减少图片的请求数目。你可以把你所有的背景图合并到一张图片中然后通过 background-image 和 background-position 属性来正确地展示背景图片。</p>
-<p>3.</p>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2017/08/06/前端性能优化-雅虎35条规则翻译/" class="archive-article-date">
-  	<time datetime="2017-08-06T15:08:04.000Z" itemprop="datePublished"><i class="icon-clock"></i>2017-08-06</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
     <article id="post-谈-JavaScript-设计模式-发布订阅模式" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -422,6 +372,58 @@
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags"></i>
 		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTTP/">HTTP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术/">技术</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/缓存/">缓存</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-常见的POST提交数据的方式" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/26/常见的POST提交数据的方式/">常见的POST提交数据的方式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>请求分为状态行、请求头以及消息主体，我们通过 POST 发送到数据是放在消息主体中的，通过请求头的 content-type 就能控制数据的提交方式，服务器端根据这个字段就能知道请求的消息主体是何种编码方式了，这样就能正确地对主体进行解析。</p>
+        <p class="article-more-link">
+          <a class="article-more-a"  href="/2017/07/26/常见的POST提交数据的方式/#more">more >></a>
+        </p>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2017/07/26/常见的POST提交数据的方式/" class="archive-article-date">
+  	<time datetime="2017-07-26T15:55:55.000Z" itemprop="datePublished"><i class="icon-clock"></i>2017-07-26</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTTP/">HTTP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术/">技术</a></li></ul>
 	</div>
 
       

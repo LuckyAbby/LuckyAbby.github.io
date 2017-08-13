@@ -6,16 +6,17 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <title>实现CSS居中的多种方法 | LuckyAbby|To Do My Best</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="居中在 CSS 中用的也比较常见，总结几种自己比较熟悉的居中的写法。当然，肯定还有更多更不错的写法，对于文中不足的地方也欢迎指正。 假设现在给出这种场景：12345&amp;lt;div class=&quot;parent&quot;&amp;gt;	&amp;lt;div class=&quot;child&quot;&amp;gt;		Child	&amp;lt;/div&amp;gt;&amp;lt;/div&amp;gt; 其中在 class=&amp;#39;child&amp;#39; 这个 div">
+  <meta name="description" content="居中在 CSS 中用的也比较常见，总结几种自己比较熟悉的居中的写法。当然，肯定还有更多更不错的写法，对于文中不足的地方也欢迎指正。">
+<meta name="keywords" content="技术,CSS,居中">
 <meta property="og:type" content="article">
 <meta property="og:title" content="实现CSS居中的多种方法">
 <meta property="og:url" content="http://yoursite.com/2017/08/13/实现CSS居中的多种方法/index.html">
 <meta property="og:site_name" content="LuckyAbby|To Do My Best">
-<meta property="og:description" content="居中在 CSS 中用的也比较常见，总结几种自己比较熟悉的居中的写法。当然，肯定还有更多更不错的写法，对于文中不足的地方也欢迎指正。 假设现在给出这种场景：12345&amp;lt;div class=&quot;parent&quot;&amp;gt;	&amp;lt;div class=&quot;child&quot;&amp;gt;		Child	&amp;lt;/div&amp;gt;&amp;lt;/div&amp;gt; 其中在 class=&amp;#39;child&amp;#39; 这个 div">
-<meta property="og:updated_time" content="2017-08-13T07:49:01.000Z">
+<meta property="og:description" content="居中在 CSS 中用的也比较常见，总结几种自己比较熟悉的居中的写法。当然，肯定还有更多更不错的写法，对于文中不足的地方也欢迎指正。">
+<meta property="og:updated_time" content="2017-08-13T07:50:14.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="实现CSS居中的多种方法">
-<meta name="twitter:description" content="居中在 CSS 中用的也比较常见，总结几种自己比较熟悉的居中的写法。当然，肯定还有更多更不错的写法，对于文中不足的地方也欢迎指正。 假设现在给出这种场景：12345&amp;lt;div class=&quot;parent&quot;&amp;gt;	&amp;lt;div class=&quot;child&quot;&amp;gt;		Child	&amp;lt;/div&amp;gt;&amp;lt;/div&amp;gt; 其中在 class=&amp;#39;child&amp;#39; 这个 div">
+<meta name="twitter:description" content="居中在 CSS 中用的也比较常见，总结几种自己比较熟悉的居中的写法。当然，肯定还有更多更不错的写法，对于文中不足的地方也欢迎指正。">
   
     <link rel="alternative" href="/atom.xml" title="LuckyAbby|To Do My Best" type="application/atom+xml">
   
@@ -151,6 +152,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>居中在 CSS 中用的也比较常见，总结几种自己比较熟悉的居中的写法。当然，肯定还有更多更不错的写法，对于文中不足的地方也欢迎指正。</p>
+<a id="more"></a>
 <p>假设现在给出这种场景：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"parent"</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"child"</span>&gt;</span></div><div class="line">		Child</div><div class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure></p>
 <p>其中在 <code>class=&#39;child&#39;</code> 这个 div 中的内容长度是不一定的，现在需要实现这个 div 的居中。</p>
 <h2 id="水平居中"><a href="#水平居中" class="headerlink" title="水平居中"></a>水平居中</h2><h3 id="1-1-display-inline-block"><a href="#1-1-display-inline-block" class="headerlink" title="1.1 display: inline-block"></a>1.1 display: inline-block</h3><p>在块级父容器中让行内元素或者类行内元素居中，只需使用 text-align: center，<br>这种方法可以让 inline/inline-block/inline-table/inline/flex 居中。</p>
@@ -192,6 +194,11 @@
   	<time datetime="2017-08-13T02:33:15.000Z" itemprop="datePublished"><i class="icon-clock"></i>2017-08-13</time>
 </a>
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/居中/">居中</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术/">技术</a></li></ul>
+	</div>
+
       
 
       <div class="clearfix"></div>
@@ -348,7 +355,7 @@ MathJax.Hub.Queue(function() {
     
     	<section class="tools-section tools-section-tag">
     			<div class="widget tagcloud" id="js-tagcloud">
-    				<a href="/tags/C/" style="font-size: 16px;">C</a> <a href="/tags/CSS/" style="font-size: 16px;">CSS</a> <a href="/tags/ES6/" style="font-size: 16px;">ES6</a> <a href="/tags/Generator/" style="font-size: 10px;">Generator</a> <a href="/tags/Git/" style="font-size: 12px;">Git</a> <a href="/tags/HTTP/" style="font-size: 14px;">HTTP</a> <a href="/tags/JavaScript/" style="font-size: 18px;">JavaScript</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/RESTful/" style="font-size: 10px;">RESTful</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/async-await/" style="font-size: 10px;">async/await</a> <a href="/tags/charles/" style="font-size: 10px;">charles</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/事件/" style="font-size: 10px;">事件</a> <a href="/tags/发布订阅模式/" style="font-size: 10px;">发布订阅模式</a> <a href="/tags/技术/" style="font-size: 20px;">技术</a> <a href="/tags/数据结构/" style="font-size: 16px;">数据结构</a> <a href="/tags/浮动/" style="font-size: 10px;">浮动</a> <a href="/tags/生活/" style="font-size: 10px;">生活</a> <a href="/tags/盒模型/" style="font-size: 10px;">盒模型</a> <a href="/tags/缓存/" style="font-size: 10px;">缓存</a> <a href="/tags/胡诌/" style="font-size: 10px;">胡诌</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/随记/" style="font-size: 12px;">随记</a>
+    				<a href="/tags/C/" style="font-size: 15px;">C</a> <a href="/tags/CSS/" style="font-size: 16.67px;">CSS</a> <a href="/tags/ES6/" style="font-size: 15px;">ES6</a> <a href="/tags/Generator/" style="font-size: 10px;">Generator</a> <a href="/tags/Git/" style="font-size: 11.67px;">Git</a> <a href="/tags/HTTP/" style="font-size: 13.33px;">HTTP</a> <a href="/tags/JavaScript/" style="font-size: 18.33px;">JavaScript</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/RESTful/" style="font-size: 10px;">RESTful</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/async-await/" style="font-size: 10px;">async/await</a> <a href="/tags/charles/" style="font-size: 10px;">charles</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/事件/" style="font-size: 10px;">事件</a> <a href="/tags/发布订阅模式/" style="font-size: 10px;">发布订阅模式</a> <a href="/tags/居中/" style="font-size: 10px;">居中</a> <a href="/tags/技术/" style="font-size: 20px;">技术</a> <a href="/tags/数据结构/" style="font-size: 15px;">数据结构</a> <a href="/tags/浮动/" style="font-size: 10px;">浮动</a> <a href="/tags/生活/" style="font-size: 10px;">生活</a> <a href="/tags/盒模型/" style="font-size: 10px;">盒模型</a> <a href="/tags/缓存/" style="font-size: 10px;">缓存</a> <a href="/tags/胡诌/" style="font-size: 10px;">胡诌</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/随记/" style="font-size: 11.67px;">随记</a>
     			</div>
     	</section>
     

@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>前端模块化开发 | LuckyAbby|To Do My Best</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="ES6 以来，有了 module 的体系，替代了之前比较常用的 CommonJS 和 AMD 规范，使得在编译时就能确定模块的依赖关系，同时使得前端在复杂项目时可以更好的分工和规范。 这篇文章主要介绍前端的模块化开发，主要包括 ES6 的 module 以及三个主要的模块化开发规范 CommonJS AMD 以及 CMD。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端模块化开发">
+<meta property="og:url" content="http://yoursite.com/2017/08/16/前端模块化开发/index.html">
+<meta property="og:site_name" content="LuckyAbby|To Do My Best">
+<meta property="og:description" content="ES6 以来，有了 module 的体系，替代了之前比较常用的 CommonJS 和 AMD 规范，使得在编译时就能确定模块的依赖关系，同时使得前端在复杂项目时可以更好的分工和规范。 这篇文章主要介绍前端的模块化开发，主要包括 ES6 的 module 以及三个主要的模块化开发规范 CommonJS AMD 以及 CMD。">
+<meta property="og:updated_time" content="2017-08-17T03:16:53.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前端模块化开发">
+<meta name="twitter:description" content="ES6 以来，有了 module 的体系，替代了之前比较常用的 CommonJS 和 AMD 规范，使得在编译时就能确定模块的依赖关系，同时使得前端在复杂项目时可以更好的分工和规范。 这篇文章主要介绍前端的模块化开发，主要包括 ES6 的 module 以及三个主要的模块化开发规范 CommonJS AMD 以及 CMD。">
+  
+    <link rel="alternative" href="/atom.xml" title="LuckyAbby|To Do My Best" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <script src="/style.js"></script>
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="/img/avatar.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Abby</a></h1>
+		</hgroup>
+
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/tags/技术/">技术</a></li>
+	        
+				<li><a href="/tags/随记/">随记</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="http://github.com/LuckyAbby" title="github">github</a>
+		        
+					<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/xia-yan-luo-47" title="zhihu">zhihu</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">Abby</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="/img/avatar.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Abby</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/tags/技术/">技术</a></li>
+		        
+					<li><a href="/tags/随记/">随记</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="http://github.com/LuckyAbby" title="github">github</a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/xia-yan-luo-47" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-前端模块化开发" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      前端模块化开发
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>ES6 以来，有了 module 的体系，替代了之前比较常用的 CommonJS 和 AMD 规范，使得在编译时就能确定模块的依赖关系，同时使得前端在复杂项目时可以更好的分工和规范。</p>
+<p>这篇文章主要介绍前端的模块化开发，主要包括 ES6 的 module 以及三个主要的模块化开发规范 CommonJS AMD 以及 CMD。</p>
+<a id="more"></a>
+<h2 id="ES6-Module"><a href="#ES6-Module" class="headerlink" title="ES6 Module"></a>ES6 Module</h2><p>ES6 的模块功能主要通过 export 以及 import 实现。模块中如果对外暴露接口就需要使用 export ，而如果想在模块中引用外部模块就需要使用 import。</p>
+<p>最典型的例子就是 React,在 React 中我们十分常见的写法就是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">import React from &apos;react&apos;;</div><div class="line">import &#123;func as fu, bar&#125; from &apos;./my_module&apos;;</div><div class="line">...</div><div class="line"></div><div class="line">export class MyClass extends React.Component &#123;</div><div class="line">	</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>当然我们不止是像 React 中导出一个类，只要想把模块中的变量、方法等等暴露出去，都可以使用 export。</p>
+<p>注意下面几点：</p>
+<ol>
+<li>在 import 中我们使用了大括号，其中大括号中的变量名必须和被导入模块中对外暴露的借口名称相同，其实就是一个解构操作。</li>
+</ol>
+<p>2.在 import 的时候我们使用了 as 来区别名，将输入的 func 变量重新取名为 fu,这样做的好处是如果同时引入的两个模块中都含有 func 方法，通过区别名的方式就可以区分开来。</p>
+<p>其实在 export 的时候我们就可以使用别名。</p>
+<p>3.同时注意 import 具有提升效果，因为是在编译阶段执行的，在代码运行之前。因此也不能使用一些运行时才能知道的语法结果，比如在 if else 语句之中判断 import 哪个模块。</p>
+<p>4.在导出的时候可以使用了 export default,指定默认输出。在使用 default 之后我们在 export 的时候就不需要再给自己的函数等等取名字了，可以使用匿名函数。这样在 import 的时候可以自己随意取名字。</p>
+<p>比如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">import $, &#123;clone&#125; from &apos;my_module&apos;;</div></pre></td></tr></table></figure></p>
+<p>在 my_module 中的写法就是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">export default function() &#123; // 对应 import 中的 $</div><div class="line">	...</div><div class="line">&#125;</div><div class="line"></div><div class="line">export function clone (obj) &#123; // 对应 import 中的 &#123;clone&#125;</div><div class="line">	...</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><strong> 注意一个模块里面只能又一个 default </strong></p>
+<h2 id="CommonJS"><a href="#CommonJS" class="headerlink" title="CommonJS"></a>CommonJS</h2><p>CommonJS 主要是在 Node 服务器端的规范。</p>
+<p>CommonJS 也认为一个文件就是一个模块，必须通过某种导出才能使得别的模块使用该模块的对外接口。只是在 ES6 中使用 import export ，但是在 CommonJS 中使用 module.exports 对象进行导出，并且一个模块中只有这一个统一的出口。在外部模块中，我们使用 require 进行加载，这个方法读取一个文件并且返回文件中的 module.exports 对象。</p>
+<p>例如：</p>
+<p>定义一个模块 my_modules：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">function bar() &#123;</div><div class="line">	...</div><div class="line">&#125;</div><div class="line"></div><div class="line">fucntion func() &#123;</div><div class="line">	....</div><div class="line">&#125;</div><div class="line">module.exports = &#123;</div><div class="line">	bar: bar,</div><div class="line">	func: func</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>加载模块：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var needModules = require(./my_modules);</div><div class="line">needModules.bar();</div><div class="line">needModules.func();</div></pre></td></tr></table></figure>
+<p>主要注意几点：<br>1.加载的文件如果是“／”开头表示记载绝对路径的模块，以“./”开头表示加载相对路径的模块文件，两者都不含的话表示从系统的核心模块或者 node_modules 已经安装的模块。</p>
+<p>2.模块加载会有缓存，存放在 require.cache 之中，并且缓存是根据绝对路径是识别的，同样的模块名放在不同的路径之中多次 require 的时候还是不会重新加载模块，除非使用 delete require.cache.</p>
+<p>3.CommonJS是同步加载的，因此更适合服务器端。只有加载完成之后才能进行下面的操作。因为在服务器端模块文件一般存放在本地，再加上有缓存，加载速度十分快。因此这种就不适合用在浏览器端，浏览器端的各个 script 标签中的文件来自各个服务器，如果上个模块记载的时间很长，就会导致浏览器“假死”，因此浏览器端我们采用另外一种异步的加载方式–AMD。</p>
+<h2 id="AMD"><a href="#AMD" class="headerlink" title="AMD"></a>AMD</h2><p>AMD（Asynchronous Module Definition）就是异步加载模块，模块的加载不会影响后面代码的执行。所以依赖这个模块的代码都在一个回调函数中，等到所有模块加载完成之后就会执行这个回调函数。最常见的支持 AMD 规范的就是 RequireJS。</p>
+<p>在 AMD 中，模块的加载也是使用 <code>require([dependencies], function(){})</code> 语句，但是不同于 CommonJS,它的参数除了有需要加载的模块文件之后，还需要约定一个回调函数，由这个回调函数去规定当模块都加载完成之后执行什么操作，加载的模块会以参数形式传入该回调函数函数，从而在回调函数内部就可以使用这些模块。</p>
+<p>而模块的定义主要是使用 <code>define(id?, dependencies, factory)</code>语句，其中 id 可选，定义模块的标识。 dependencies 可选参数，表示当前模块依赖的模块，是一个数组。 factory 是一个工厂方法，表示模块初始化需要执行的函数或者对象。一般我们会在这个 factory 中 return 出一个对象来暴露出我们的对外接口等等。</p>
+<p>举个栗子：<br>定义一个模块 my_modules<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">define([&apos;math&apos;], function() &#123;</div><div class="line">	function bar() &#123;</div><div class="line">	    ...</div><div class="line">    &#125;</div><div class="line">    return &#123;</div><div class="line">        bar: bar</div><div class="line">    &#125;;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>加载模块<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">require([my_modules], function(my) &#123;</div><div class="line">	my.bar();</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<h2 id="CMD"><a href="#CMD" class="headerlink" title="CMD"></a>CMD</h2><p>CMD（Common Module Definition）就是通用模块定义。CMD 是从国内发展出去的，实现主要是 SeaJS, 和 AMD 都是解决异步加载以及模块依赖的问题，但是在模块的定义方式上面有点不同。</p>
+<p>在 CMD 中，定义模块使用 <code>define(id?, deps?,factory)</code>，其中 id、depes 可以省略，字符串 id 表示模块标识，数组 deps 是模块依赖。当 factory 是一个函数的时候表示模块的构造方法，默认接受三个参数 require、export、module。</p>
+<p>举个栗子：<br>定义一个模块 my_module<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">define(function(require, export, module) &#123;</div><div class="line">    var person = &#123;name: &apos;abby&apos;, age: 20&#125;;</div><div class="line">    var _ = require(&apos;lodash&apos;); // 需要的时候才去加载模块 lodash</div><div class="line">    var shallow = _clone(person);</div><div class="line">	// 支持异步加载模块,当多个模块加载完成之后才执行回调</div><div class="line">    require.async(&apos;./a&apos;, ./b&apos;, function(a, b) &#123;</div><div class="line">        a.doSomething();</div><div class="line">        b.doSomething();</div><div class="line">    &#125;);</div><div class="line"></div><div class="line">    bar() &#123;</div><div class="line">    	...</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // 在导出模块的时候支持了 CommonJS 和 AMD 的写法。</div><div class="line">    return &#123;</div><div class="line">        bar: bar</div><div class="line">    &#125;;</div><div class="line">    或者</div><div class="line">    module.exports = &#123;</div><div class="line">        bar: bar</div><div class="line">    &#125;</div><div class="line">    或者</div><div class="line">    exports.bar = bar //此时注意不能写成对象形式</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<h3 id="AMD-CMD-区别"><a href="#AMD-CMD-区别" class="headerlink" title="AMD CMD 区别"></a>AMD CMD 区别</h3><p>1.AMD推崇依赖前置，在定义模块的时候就声明依赖的模块。CMD 推崇依赖就近，只有在需要用的时候才去require 执行。</p>
+<p>2.对于依赖的模块，AMD 提前执行，但是 CMD 的思想是 lazy loading, 延迟执行.</p>
+<p>本文只是很浅显的介绍，具体的用法可以参考文档。具体项目中使用哪种分情况而定。</p>
+<p>参考资料：</p>
+<p><a href="http://es6.ruanyifeng.com/#docs/module" target="_blank" rel="external">Module</a><br><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import" target="_blank" rel="external">import</a><br><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export" target="_blank" rel="external">export</a><br><a href="http://javascript.ruanyifeng.com/nodejs/module.html" target="_blank" rel="external">CommonJS规范</a><br><a href="http://requirejs.org/docs/whyamd.html" target="_blank" rel="external">Why AMD</a><br><a href="http://www.ruanyifeng.com/blog/2012/10/asynchronous_module_definition.html" target="_blank" rel="external">Javascript模块化编程（二）：AMD规范</a><br><a href="http://www.ruanyifeng.com/blog/2012/11/require_js.html" target="_blank" rel="external">Javascript模块化编程（三）：require.js的用法</a><br><a href="http://www.cnblogs.com/dolphinX/p/4381855.html" target="_blank" rel="external">前端模块化</a><br><a href="https://github.com/seajs/seajs/issues/242" target="_blank" rel="external">CMD 模块定义规范 #242</a><br><a href="https://www.zhihu.com/question/20351507" target="_blank" rel="external">AMD 和 CMD 的区别有哪些</a></p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2017/08/16/前端模块化开发/" class="archive-article-date">
+  	<time datetime="2017-08-16T08:51:31.000Z" itemprop="datePublished"><i class="icon-clock"></i>2017-08-16</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2017/08/13/实现CSS居中的多种方法/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">实现CSS居中的多种方法</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a>
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a>
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+<div class="share_addthis share_jia">
+  <div class="sharing addthis_toolbox share">
+  	<span class="jiathis_txt">Share to: &nbsp; </span>
+    <a class="addthis_button_facebook_like"></a>
+    <a class="addthis_button_tweet"></a>
+    <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-560c64c35486b3d4" async="async"></script>
+</div>
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="前端模块化开发" data-title="前端模块化开发" data-url="http://yoursite.com/2017/08/16/前端模块化开发/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"luckyabby"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2017 Abby
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: true,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+<script src="/./main.js"></script>
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="/tags/C/" style="font-size: 15px;">C</a> <a href="/tags/CSS/" style="font-size: 16.67px;">CSS</a> <a href="/tags/ES6/" style="font-size: 15px;">ES6</a> <a href="/tags/Generator/" style="font-size: 10px;">Generator</a> <a href="/tags/Git/" style="font-size: 11.67px;">Git</a> <a href="/tags/HTTP/" style="font-size: 13.33px;">HTTP</a> <a href="/tags/JavaScript/" style="font-size: 18.33px;">JavaScript</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/RESTful/" style="font-size: 10px;">RESTful</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/async-await/" style="font-size: 10px;">async/await</a> <a href="/tags/charles/" style="font-size: 10px;">charles</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/事件/" style="font-size: 10px;">事件</a> <a href="/tags/发布订阅模式/" style="font-size: 10px;">发布订阅模式</a> <a href="/tags/居中/" style="font-size: 10px;">居中</a> <a href="/tags/技术/" style="font-size: 20px;">技术</a> <a href="/tags/数据结构/" style="font-size: 15px;">数据结构</a> <a href="/tags/浮动/" style="font-size: 10px;">浮动</a> <a href="/tags/生活/" style="font-size: 10px;">生活</a> <a href="/tags/盒模型/" style="font-size: 10px;">盒模型</a> <a href="/tags/缓存/" style="font-size: 10px;">缓存</a> <a href="/tags/胡诌/" style="font-size: 10px;">胡诌</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/随记/" style="font-size: 11.67px;">随记</a>
+    			</div>
+    	</section>
+    
+
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">大三&lt;br&gt;&lt;br&gt;一只还在自我修炼的程序媛&lt;br&gt;萌妹子&lt;br&gt;爱读书&lt;br&gt;摄影健身</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>

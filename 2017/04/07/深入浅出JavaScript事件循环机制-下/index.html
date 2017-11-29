@@ -6,13 +6,14 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <title>深入浅出JavaScript事件循环机制(下) | LuckyAbby|To Do My Best</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="在上一篇文章里面我大致介绍了JavaScript的事件循环机制，但是最后还留下了一段代码和几个问题。 那我们先从这段代码开始看哇">
-<meta name="keywords" content="技术,JavaScript">
+  <meta name="description" content="在上一篇文章里面我大致介绍了JavaScript的事件循环机制，但是最后还留下了一段代码和几个问题。
+那我们先从这段代码开始看哇">
 <meta property="og:type" content="article">
 <meta property="og:title" content="深入浅出JavaScript事件循环机制(下)">
 <meta property="og:url" content="http://yoursite.com/2017/04/07/深入浅出JavaScript事件循环机制-下/index.html">
 <meta property="og:site_name" content="LuckyAbby|To Do My Best">
-<meta property="og:description" content="在上一篇文章里面我大致介绍了JavaScript的事件循环机制，但是最后还留下了一段代码和几个问题。 那我们先从这段代码开始看哇">
+<meta property="og:description" content="在上一篇文章里面我大致介绍了JavaScript的事件循环机制，但是最后还留下了一段代码和几个问题。
+那我们先从这段代码开始看哇">
 <meta property="og:image" content="http://ojzeprg7w.bkt.clouddn.com/%E5%8D%9A%E5%AE%A251.JPG">
 <meta property="og:image" content="http://ojzeprg7w.bkt.clouddn.com/%E5%8D%9A%E5%AE%A252.JPG">
 <meta property="og:image" content="http://ojzeprg7w.bkt.clouddn.com/%E5%8D%9A%E5%AE%A253.JPG">
@@ -23,10 +24,11 @@
 <meta property="og:image" content="http://ojzeprg7w.bkt.clouddn.com/%E5%8D%9A%E5%AE%A258%E6%94%B9.JPG">
 <meta property="og:image" content="http://ojzeprg7w.bkt.clouddn.com/%E5%8D%9A%E5%AE%A259.JPG">
 <meta property="og:image" content="http://ojzeprg7w.bkt.clouddn.com/%E5%8D%9A%E5%AE%A260.JPG">
-<meta property="og:updated_time" content="2017-04-18T01:43:59.000Z">
+<meta property="og:updated_time" content="2017-04-18T09:44:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深入浅出JavaScript事件循环机制(下)">
-<meta name="twitter:description" content="在上一篇文章里面我大致介绍了JavaScript的事件循环机制，但是最后还留下了一段代码和几个问题。 那我们先从这段代码开始看哇">
+<meta name="twitter:description" content="在上一篇文章里面我大致介绍了JavaScript的事件循环机制，但是最后还留下了一段代码和几个问题。
+那我们先从这段代码开始看哇">
 <meta name="twitter:image" content="http://ojzeprg7w.bkt.clouddn.com/%E5%8D%9A%E5%AE%A251.JPG">
   
     <link rel="alternative" href="/atom.xml" title="LuckyAbby|To Do My Best" type="application/atom+xml">
@@ -383,7 +385,7 @@ MathJax.Hub.Queue(function() {
     
     	<section class="tools-section tools-section-tag">
     			<div class="widget tagcloud" id="js-tagcloud">
-    				<a href="/tags/C/" style="font-size: 15px;">C</a> <a href="/tags/CSS/" style="font-size: 16.67px;">CSS</a> <a href="/tags/ES6/" style="font-size: 15px;">ES6</a> <a href="/tags/Generator/" style="font-size: 10px;">Generator</a> <a href="/tags/Git/" style="font-size: 11.67px;">Git</a> <a href="/tags/HTTP/" style="font-size: 13.33px;">HTTP</a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/JavaScript/" style="font-size: 18.33px;">JavaScript</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/RESTful/" style="font-size: 10px;">RESTful</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/async-await/" style="font-size: 10px;">async/await</a> <a href="/tags/charles/" style="font-size: 10px;">charles</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/事件/" style="font-size: 10px;">事件</a> <a href="/tags/发布订阅模式/" style="font-size: 10px;">发布订阅模式</a> <a href="/tags/居中/" style="font-size: 10px;">居中</a> <a href="/tags/技术/" style="font-size: 20px;">技术</a> <a href="/tags/数据结构/" style="font-size: 15px;">数据结构</a> <a href="/tags/模块化/" style="font-size: 10px;">模块化</a> <a href="/tags/浮动/" style="font-size: 10px;">浮动</a> <a href="/tags/生活/" style="font-size: 10px;">生活</a> <a href="/tags/盒模型/" style="font-size: 10px;">盒模型</a> <a href="/tags/缓存/" style="font-size: 10px;">缓存</a> <a href="/tags/胡诌/" style="font-size: 10px;">胡诌</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/随记/" style="font-size: 11.67px;">随记</a>
+    				<a href="/tags/C/" style="font-size: 15px;">C</a> <a href="/tags/CSS/" style="font-size: 12.5px;">CSS</a> <a href="/tags/ES6/" style="font-size: 10px;">ES6</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/JavaScript/" style="font-size: 17.5px;">JavaScript</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/技术/" style="font-size: 20px;">技术</a> <a href="/tags/数据结构/" style="font-size: 15px;">数据结构</a> <a href="/tags/生活/" style="font-size: 10px;">生活</a> <a href="/tags/随记/" style="font-size: 10px;">随记</a>
     			</div>
     	</section>
     

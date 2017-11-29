@@ -7,7 +7,6 @@
   <title>深入浅出Javascript事件循环机制(上) | LuckyAbby|To Do My Best</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="最近琢磨了好久的Javascript的事件循环机制，看了很多国内的博客总觉得写的还是不够深，很多都只说了Javascript的事件分为同步任务和异步任务，遇到同步任务就放在执行栈中执行，而碰到异步任务就放到任务队列之中，等到执行栈执行完毕之后再去执行任务队列之中的事件。自己对大概的基础有所了解之后也没接着深入去查资料，这就导致我在面试的时候被面试官一点一点深挖的时候就懵了(囧">
-<meta name="keywords" content="技术,JavaScript">
 <meta property="og:type" content="article">
 <meta property="og:title" content="深入浅出Javascript事件循环机制(上)">
 <meta property="og:url" content="http://yoursite.com/2017/04/07/深入浅出Javascript事件循环机制-上/index.html">
@@ -22,7 +21,7 @@
 <meta property="og:image" content="http://ojzeprg7w.bkt.clouddn.com/%E5%8D%9A%E5%AE%A247.png">
 <meta property="og:image" content="http://ojzeprg7w.bkt.clouddn.com/%E5%8D%9A%E5%AE%A248.png">
 <meta property="og:image" content="http://ojzeprg7w.bkt.clouddn.com/%E5%8D%9A%E5%AE%A249.png">
-<meta property="og:updated_time" content="2017-04-18T01:43:20.000Z">
+<meta property="og:updated_time" content="2017-04-18T09:43:22.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深入浅出Javascript事件循环机制(上)">
 <meta name="twitter:description" content="最近琢磨了好久的Javascript的事件循环机制，看了很多国内的博客总觉得写的还是不够深，很多都只说了Javascript的事件分为同步任务和异步任务，遇到同步任务就放在执行栈中执行，而碰到异步任务就放到任务队列之中，等到执行栈执行完毕之后再去执行任务队列之中的事件。自己对大概的基础有所了解之后也没接着深入去查资料，这就导致我在面试的时候被面试官一点一点深挖的时候就懵了(囧">
@@ -390,7 +389,7 @@ MathJax.Hub.Queue(function() {
     
     	<section class="tools-section tools-section-tag">
     			<div class="widget tagcloud" id="js-tagcloud">
-    				<a href="/tags/C/" style="font-size: 15px;">C</a> <a href="/tags/CSS/" style="font-size: 16.67px;">CSS</a> <a href="/tags/ES6/" style="font-size: 15px;">ES6</a> <a href="/tags/Generator/" style="font-size: 10px;">Generator</a> <a href="/tags/Git/" style="font-size: 11.67px;">Git</a> <a href="/tags/HTTP/" style="font-size: 13.33px;">HTTP</a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/JavaScript/" style="font-size: 18.33px;">JavaScript</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/RESTful/" style="font-size: 10px;">RESTful</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/async-await/" style="font-size: 10px;">async/await</a> <a href="/tags/charles/" style="font-size: 10px;">charles</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/事件/" style="font-size: 10px;">事件</a> <a href="/tags/发布订阅模式/" style="font-size: 10px;">发布订阅模式</a> <a href="/tags/居中/" style="font-size: 10px;">居中</a> <a href="/tags/技术/" style="font-size: 20px;">技术</a> <a href="/tags/数据结构/" style="font-size: 15px;">数据结构</a> <a href="/tags/模块化/" style="font-size: 10px;">模块化</a> <a href="/tags/浮动/" style="font-size: 10px;">浮动</a> <a href="/tags/生活/" style="font-size: 10px;">生活</a> <a href="/tags/盒模型/" style="font-size: 10px;">盒模型</a> <a href="/tags/缓存/" style="font-size: 10px;">缓存</a> <a href="/tags/胡诌/" style="font-size: 10px;">胡诌</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/随记/" style="font-size: 11.67px;">随记</a>
+    				<a href="/tags/C/" style="font-size: 15px;">C</a> <a href="/tags/CSS/" style="font-size: 12.5px;">CSS</a> <a href="/tags/ES6/" style="font-size: 10px;">ES6</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/JavaScript/" style="font-size: 17.5px;">JavaScript</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/技术/" style="font-size: 20px;">技术</a> <a href="/tags/数据结构/" style="font-size: 15px;">数据结构</a> <a href="/tags/生活/" style="font-size: 10px;">生活</a> <a href="/tags/随记/" style="font-size: 10px;">随记</a>
     			</div>
     	</section>
     

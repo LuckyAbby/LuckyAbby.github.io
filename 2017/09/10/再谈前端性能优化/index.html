@@ -4,24 +4,24 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>Git基础知识 | LuckyAbby|To Do My Best</title>
+  <title>再谈前端性能优化 | LuckyAbby|To Do My Best</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Git是Git一种分布式版本控制系统，相比于之前的集中式版本控制系统有很明显的区别。">
+  <meta name="description" content="这篇博客自己已经想写很久了，一直不知道怎么写，或者说没有自信怎么去把这个一直在说的问题说清楚，因为这么偏实践的知识点自己并没有全部去实践过，更多的只是停留在自己知道。
+提到性能优化首先想到的肯定是雅虎35条军规，很多条例大家都已经烂熟于心了，今天我谈谈我以现在的视角去整体性思考的前端性能优化。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Git基础知识">
-<meta property="og:url" content="http://yoursite.com/2017/06/20/Git基础知识/index.html">
+<meta property="og:title" content="再谈前端性能优化">
+<meta property="og:url" content="http://yoursite.com/2017/09/10/再谈前端性能优化/index.html">
 <meta property="og:site_name" content="LuckyAbby|To Do My Best">
-<meta property="og:description" content="Git是Git一种分布式版本控制系统，相比于之前的集中式版本控制系统有很明显的区别。">
-<meta property="og:image" content="http://ojzeprg7w.bkt.clouddn.com/git1.png">
-<meta property="og:image" content="http://ojzeprg7w.bkt.clouddn.com/git2.png">
-<meta property="og:image" content="http://ojzeprg7w.bkt.clouddn.com/git3.png">
-<meta property="og:image" content="http://ojzeprg7w.bkt.clouddn.com/git5.png">
-<meta property="og:image" content="http://ojzeprg7w.bkt.clouddn.com/git6.png">
-<meta property="og:updated_time" content="2017-06-20T23:38:08.000Z">
+<meta property="og:description" content="这篇博客自己已经想写很久了，一直不知道怎么写，或者说没有自信怎么去把这个一直在说的问题说清楚，因为这么偏实践的知识点自己并没有全部去实践过，更多的只是停留在自己知道。
+提到性能优化首先想到的肯定是雅虎35条军规，很多条例大家都已经烂熟于心了，今天我谈谈我以现在的视角去整体性思考的前端性能优化。">
+<meta property="og:image" content="http://ojzeprg7w.bkt.clouddn.com/%E4%BC%98%E5%8C%961.png">
+<meta property="og:image" content="http://ojzeprg7w.bkt.clouddn.com/%E4%BC%98%E5%8C%962-2.png">
+<meta property="og:updated_time" content="2017-11-04T16:58:36.051Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Git基础知识">
-<meta name="twitter:description" content="Git是Git一种分布式版本控制系统，相比于之前的集中式版本控制系统有很明显的区别。">
-<meta name="twitter:image" content="http://ojzeprg7w.bkt.clouddn.com/git1.png">
+<meta name="twitter:title" content="再谈前端性能优化">
+<meta name="twitter:description" content="这篇博客自己已经想写很久了，一直不知道怎么写，或者说没有自信怎么去把这个一直在说的问题说清楚，因为这么偏实践的知识点自己并没有全部去实践过，更多的只是停留在自己知道。
+提到性能优化首先想到的肯定是雅虎35条军规，很多条例大家都已经烂熟于心了，今天我谈谈我以现在的视角去整体性思考的前端性能优化。">
+<meta name="twitter:image" content="http://ojzeprg7w.bkt.clouddn.com/%E4%BC%98%E5%8C%961.png">
   
     <link rel="alternative" href="/atom.xml" title="LuckyAbby|To Do My Best" type="application/atom+xml">
   
@@ -138,7 +138,7 @@
 </nav>
 
       <div class="body-wrap">
-        <article id="post-Git基础知识" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-再谈前端性能优化" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -148,7 +148,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Git基础知识
+      再谈前端性能优化
     </h1>
   
 
@@ -156,34 +156,43 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Git是Git一种分布式版本控制系统，相比于之前的集中式版本控制系统有很明显的区别。</p>
-<a id="more"></a>
-<h2 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h2><p>集中式版本控制系统(Central VCS)中有一个中央服务器，版本库是存放在中央服务器上，而自己的电脑需要先从中央服务器获取最新的版本，等自己的代码更新完了之后再全部推送给中央服务器。<br>集中式版本控制系统有个很明显的缺点就是需要联网。<br>而分布式管理系统却不需要联网，因为每个人的电脑上面都有完整的版本库，没有中央服务器，在未联网的环境下面也可以工作，而当需要和他人合作的时候只需要把自己修改的地方推送给别人即可。</p>
-<p>集中式版本控制见下图：<br><img src="http://ojzeprg7w.bkt.clouddn.com/git1.png" alt=""></p>
-<p>分布式版本控制见下图：<br><img src="http://ojzeprg7w.bkt.clouddn.com/git2.png" alt=""></p>
-<h2 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h2><p>Git和其他版本控制系统的区别在于它是记录快照而不是比较差异，其他版本控制系统记录的主要是一组基本的文件和这些文件随时间不断修改之后与之前的差异，而Git是当提交数据之后制作全部文件的快照并将这个快照的索引值保存下来。</p>
-<p>Git有三种状态，已提交(committed)、已修改(modified)、以及处于暂存区(staged)，由此引申出工作区、暂存区以及版本库的概念。初始化一个Git仓库的时候使用的是 git init 命令，其中会创建一个在文件夹中看不见的目录 .git 就是版本库，可以通过 ls -ah 命令看到 。在版本库中有一个 stage 或者 index 称为暂存区，版本库中还有一个 master 分支，以及指向 master 的一个指针 HEAD ,用下面的图表示就是：<br><img src="http://ojzeprg7w.bkt.clouddn.com/git3.png" alt=""></p>
-<h4 id="工作区"><a href="#工作区" class="headerlink" title="工作区"></a>工作区</h4><p>其中工作区就是本地电脑中的文件，例如<br><img src="http://ojzeprg7w.bkt.clouddn.com/git5.png" alt=""><br>其中我在本地的 gitTest 目录就是我的工作区，我在里面新建了一个文件readme.txt,在其中写入一句话Hello,Git.</p>
-<h4 id="版本库"><a href="#版本库" class="headerlink" title="版本库"></a>版本库</h4><p>将一个工作区的文件添加到版本库需要经过两步：</p>
-<p>1.通过 git add 命令将本地文件的时间戳、长度，当前文档对象的id等信息保存到一个树形目录中即暂存区，就是上图中的index目录。</p>
-<p>2.通过 git commit 命令将暂存区中的文件制作快照一次性提交到 master 分支中。<br>其中 index 中存放的不是自己真正的文件而是时间戳、长度等信息，真正的文件是存放在 objects 对象中的。</p>
-<p>具体可见下图<br><img src="http://ojzeprg7w.bkt.clouddn.com/git6.png" alt=""></p>
-<p>首先通过 git status 可以查看当前工作区的状态，这里因为是刚新建的文件，因此未被追踪，使用 git add 命令加入暂存区使其被追踪，之后通过使用 git commit -m ‘’命令制作快照，同时自己的暂存区便会被清空。其中’’中间的文字是描述性的话，主要是说明这次提交做了什么，方便code review。commit 之后会发现它会提示你一个文件被修改，增加了一行。其实最保险的做法是在 git status 之后使用 git diff 来查看之前都做了什么修改，免得误操作，也十分推荐这种做法。</p>
-<p>这些大概是最基本的知识，剩下的一些会在接下来的整理中继续总结。</p>
+        <p>这篇博客自己已经想写很久了，一直不知道怎么写，或者说没有自信怎么去把这个一直在说的问题说清楚，因为这么偏实践的知识点自己并没有全部去实践过，更多的只是停留在自己知道。</p>
+<p>提到性能优化首先想到的肯定是雅虎35条军规，很多条例大家都已经烂熟于心了，今天我谈谈我以现在的视角去整体性思考的前端性能优化。<br><a id="more"></a></p>
+<p>提到性能优化，更多的关注点应该是放在首屏上面，毕竟如果首页打开需要十秒钟的话，用户多半都走了。 </p>
+<p>提到首屏优化的话，如果从现在的我的角度来想，先想到的会是这个页面出现在我的眼前经历了哪些步骤，在这些步骤中有哪些可以进行优化的。</p>
+<p>好了，这个问题又涉及到了一个最经典的问题就是：从输入 URL 到页面渲染在用户的面前经历了哪些过程。</p>
+<p>才疏学浅的我今天就粗陋地回答一些，然后结合这些过程说下我对性能优化的理解。有些地方因为自己也不熟悉或者没有接触过的自己留坑，希望各位大佬们能释疑。</p>
+<h3 id="1-DNS解析"><a href="#1-DNS解析" class="headerlink" title="1.DNS解析"></a>1.DNS解析</h3><p>当你在访问 www.google.com 的时候其实是在访问谷歌的某台机器，而这台机器的唯一的标识是 IP 地址，但是对于用户来说，不可能记住这个长串的数字，因此需要 DNS 做一次域名的解析。</p>
+<p>用下面的图来表示这个访问的过程。<br><img src="http://ojzeprg7w.bkt.clouddn.com/%E4%BC%98%E5%8C%961.png" alt=""></p>
+<p>当要查询 www.google.com 的 IP 的时候，会先向本地域名服务器发起请求，如果没有的话会再向根域名服务器发送一个请求，如果根域名服务器也不存在该域名时，本地域名会向 com 顶级域名服务器发送一个请求，依次类推下去。直到最后本地域名服务器得到 google 的 IP 地址。</p>
+<p>好了，每次 DNS 解析都需要经历上面 8 个步骤，有点太麻烦了。其实真正的 DNS 解析是有涉及到缓存的，每次查询在找到之后再之后的查找中只需要从缓存中查询就可以了。</p>
+<p>具体的过程是：</p>
+<p>1.浏览器缓存：浏览器会缓存已经查询到的域名一阵子时间。</p>
+<p>2.系统缓存：系统也会缓存已经查询的域名。</p>
+<p>3.路由器缓存：当请求经过你的路由器的时候也会有缓存。</p>
+<p>4.ISP 缓存： ISP 也会缓存。</p>
+<p>5.最后才是之前说的递归查询。</p>
+<p>缓存其实也是用的比较常见的手段，在这里的缓存感觉不太好受我们的控制，机制就是如此。自己对于这块其实也不是特别了解。</p>
+<h3 id="2-建立-TCP-连接"><a href="#2-建立-TCP-连接" class="headerlink" title="2.建立 TCP 连接"></a>2.建立 TCP 连接</h3><p>接着要开始建立 TCP 连接了，其实这一块自己并不熟悉。关于这一块的优化自己几乎不了解，如果有很了解的可以探讨。</p>
+<p>值得一提的是 TCP 建立连接是需要三次握手的，这三次握手需要花费一些时间。但是目前的 HTTP 1.1 都已经通过一个 connection 头来保持同一个 TCP 连接。</p>
+<h3 id="3-发送-HTTP-请求"><a href="#3-发送-HTTP-请求" class="headerlink" title="3.发送 HTTP 请求"></a>3.发送 HTTP 请求</h3><p>之后就是向服务器发送 HTTP 请求，比如我们还是输入 www.google.com，在 chrome 的 NetWork 里面我们能看到第一个请求信息是：</p>
+<p><img src="http://ojzeprg7w.bkt.clouddn.com/%E4%BC%98%E5%8C%962-2.png" alt=""></p>
+<p>之后在第一个 HTML 页面的渲染之中会遇到很多资源的加载，因此还会不断地发送请求，在这张图里面也能看到浏览器其实在一直发送请求。</p>
+<p>优化的重点也就来了，其实请求是十分耗费时间的。如果对于并行请求还好，对于一些串行请求，必须等到前面的加载完了才能加载下面的就更好费时间。</p>
+<p>所以这里很明显就能想到如果我们减少一些请求呢？</p>
+<p>因此我们看到雅虎 35 条军规前面提及的就是让我们减少 HTTP 请求的数目。 具体的做法里面其实也有提到：</p>
+<p>-合并文件：如合并js，合并css都能减少请求数。如果页面间脚本和样式差异很大，合并会更具挑战性。</p>
+<p>-雪碧图：可以合并多个背景图片，通过background-image 和 background-position 来显示不同部分。</p>
+<p>未完待续</p>
 
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/2017/06/20/Git基础知识/" class="archive-article-date">
-  	<time datetime="2017-06-20T15:35:55.000Z" itemprop="datePublished"><i class="icon-clock"></i>2017-06-20</time>
+      <a href="/2017/09/10/再谈前端性能优化/" class="archive-article-date">
+  	<time datetime="2017-09-10T09:46:36.000Z" itemprop="datePublished"><i class="icon-clock"></i>2017-09-10</time>
 </a>
       
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/">Git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术/">技术</a></li></ul>
-	</div>
-
       
 
       <div class="clearfix"></div>
@@ -194,18 +203,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/09/10/再谈前端性能优化/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          再谈前端性能优化
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/05/21/C语言实现数据结构-串/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">C语言实现数据结构-串</div>
+    <a href="/2017/06/20/Git基础知识/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Git基础知识</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -251,7 +251,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="Git基础知识" data-title="Git基础知识" data-url="http://yoursite.com/2017/06/20/Git基础知识/"></div>
+	<div class="ds-thread" data-thread-key="再谈前端性能优化" data-title="再谈前端性能优化" data-url="http://yoursite.com/2017/09/10/再谈前端性能优化/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">

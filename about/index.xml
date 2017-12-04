@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>About on nodejh</title>
+    <link>http://nodejh.com/about/</link>
+    <description>Recent content in About on nodejh</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 04 Dec 2017 14:02:37 +0200</lastBuildDate>
+    
+	<atom:link href="http://nodejh.com/about/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+  </channel>
+</rss>

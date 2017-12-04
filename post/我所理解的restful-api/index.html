@@ -1,0 +1,300 @@
+    <!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="author" content="Abby">
+		<meta name="description" content="My Blog">
+		<meta name="generator" content="Hugo 0.26" />
+		<title>我所理解的RESTful api &middot; nodejh</title>
+		<link rel="shortcut icon" href="http://nodejh.com/images/favicon.ico">
+		<link rel="stylesheet" href="http://nodejh.com/css/style.css">
+		<link rel="stylesheet" href="http://nodejh.com/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://nodejh.com/css/font-awesome.min.css">
+		
+
+		
+		<link href="http://nodejh.com/index.xml" rel="alternate" type="application/rss+xml" title="nodejh" />
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://nodejh.com/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://nodejh.com/post'>Archive</a>
+	<a href='http://nodejh.com/tags'>Tags</a>
+	<a href='http://nodejh.com/about'>About</a>
+
+	
+
+	
+	<a class="cta" href="http://nodejh.com/index.xml">Subscribe</a>
+	
+</nav>
+
+
+        <section id="wrapper" class="post">
+            <article>
+                <header>
+                    <h1>
+                        我所理解的RESTful api
+                    </h1>
+                    <h2 class="headline">
+                    Jul 9, 2017 18:23
+                    · 1012 words
+                    · 3 minutes read
+                      <span class="tags">
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                  
+                    <div id="toc">
+                      <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#url-只表示资源的位置">URL 只表示资源的位置</a></li>
+<li><a href="#使用-http-动作次表示操作">使用 HTTP 动作次表示操作</a></li>
+<li><a href="#资源的传递约定格式-返回需要状态码">资源的传递约定格式，返回需要状态码</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+                    </div>
+                  
+                
+                <section id="post-body">
+                    <p>在解释我所理解的 RESTful api 的时候，先说说为什么会有 RESTful 结构， 因为之前的网页都是没有做到前后端分离的，使用一些类似于 JSP 进行嵌套，这样子就不易于前后端协作开发。所以就需要规范一些 api ，使得前后端通过 api 就能明晰地进行协作开发，只要按照 api 约定好的格式去传数据就好了。而这个 RESTful api就是 REST 风格的接口。至于 REST 风格是什么，英文全称是 REpresentational State Transfer，中文翻译为表现层状态转移，具体是什么我也看的很懵。。。</p>
+
+<p></p>
+
+<p>现在就说说 RESTful api 好了。我理解的用一句话总结就是 URL 只表示资源的位置，使用 HTTP 的动作词表示操作。</p>
+
+<h5 id="url-只表示资源的位置">URL 只表示资源的位置</h5>
+
+<p>URL里面只表示资源的位置，不能出现对资源的操作，因此只允许有名词，并且推荐使用复数，不允许出现动词，比如：</p>
+
+<pre><code>example.com／api/v1/books 获取所有的书本信息
+example.com/api/v1/markets 获取所有的商场信息
+</code></pre>
+
+<p>这里的<code>v1</code>表示版本信息，可以省略的。Github 就是这种做法：<a href="https://developer.github.com/v3/media/#request-specific-version">Github 的api</a>。</p>
+
+<p>有一些不好的例子：</p>
+
+<pre><code>example.com／api/v1/getBooks 获取所有的书本信息
+example.com／api/v1/deleteBooks 删除所有的书本信息
+</code></pre>
+
+<h5 id="使用-http-动作次表示操作">使用 HTTP 动作次表示操作</h5>
+
+<p>在 RESTful api 里面使用的动作次一般包括 GET POST PUT DELETE PATCH
+例如：</p>
+
+<pre><code>GET example.com／api/v1/books／id 获取某个指定id的书的信息
+## 典型的例子就是: https://www.zhihu.com/question/20284816 获取id是20284816编号的问题
+POST example.com/api/v1/books 新建一个书的信息
+PUT example.com/api/v1/books/{id} 修改某本书的信息
+PATCH example.com/api/v1/books/{id} 修改某本书的信息（局部更新）
+DELSTE example.com/api/v1/books／{id} 删除某本书的信息
+</code></pre>
+
+<p>这里区分一下 PATCH 与 PUT 的区别
+如果需要修改一个联系人的电话号码 这个联系人的信息是放在 userInfo 这个对象里面的，需要修改的只是 userPhone 这个字段，这个对象里面还有比如 userName userSex 等等字段 ，如果是 PUT 需要传一整个新的对象过去，这个对象除了电话号码是修改过的之外别的都是没变的，因此这样就比较浪费。但是PATCH 是只需要提供 userPhone 过去就好了，所以是局部更新。</p>
+
+<h5 id="资源的传递约定格式-返回需要状态码">资源的传递约定格式，返回需要状态码</h5>
+
+<p>客户端和服务端之间传递的资源约定好格式，一般最常用的是 JSON，当然还有 XML等等，这也是这种资源的表现层。</p>
+
+<p>使用 HTTP 状态码 传递服务器端的状态信息。例如使用 200 表示操作成功，404 表示未找到资源，500 表示服务器内部错误等。</p>
+
+<p>对于一些状态码的后端要给出明确的文本信息，便于理解。</p>
+
+<p>总的来说 ，RESTful api 只是一种推荐使用的规范，不是必须使用的，使用只是因为方便前后端沟通，应该根据实际情况变动。</p>
+                </section>
+            </article>
+
+            
+
+            
+                <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = ''; 
+
+     
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+            
+
+            
+                <ul id="post-list" class="archive readmore">
+    <h3>Read more</h3>
+    
+    
+        
+        <li>
+            <a href="http://nodejh.com/post/%E5%89%8D%E7%AB%AF%E6%A8%A1%E5%9D%97%E5%8C%96%E5%BC%80%E5%8F%91/">前端模块化开发<aside class="dates">Oct 18</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://nodejh.com/post/%E5%AE%9E%E7%8E%B0css%E5%B1%85%E4%B8%AD%E7%9A%84%E5%A4%9A%E7%A7%8D%E6%96%B9%E6%B3%95/">实现CSS居中的多种方法 <aside class="dates">Sep 18</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://nodejh.com/post/%E8%B0%88http1.0-1.1-2.0/">谈HTTP/1.0 /1.1 /2.0<aside class="dates">Sep 15</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://nodejh.com/post/es6%E5%85%A5%E9%97%A8%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%E4%B9%8Basync-await/">《es6入门》读书笔记之async/await<aside class="dates">Sep 1</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://nodejh.com/post/es6%E5%85%A5%E9%97%A8%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%E4%B9%8Bgenerator/">《es6入门》读书笔记之Generator<aside class="dates">Aug 29</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://nodejh.com/post/es6%E5%85%A5%E9%97%A8%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%E4%B9%8Blet-const/">《es6入门》读书笔记之let const<aside class="dates">Aug 28</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://nodejh.com/post/%E8%B0%88-javascript-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F--%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F/">谈 JavaScript 设计模式--发布订阅模式<aside class="dates">Aug 23</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://nodejh.com/post/%E6%B5%85%E8%B0%88http%E7%BC%93%E5%AD%98/">浅谈HTTP缓存<aside class="dates">Aug 18</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://nodejh.com/post/css%E9%87%8C%E7%9A%84%E7%9B%92%E6%A8%A1%E5%9E%8B/">css里面的盒模型<aside class="dates">Aug 8</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://nodejh.com/post/react%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">React学习笔记<aside class="dates">Jul 22</aside></a>
+        </li>
+        
+   
+</ul>
+            
+
+            <footer id="footer">
+    
+        <div id="social">
+
+	
+	
+    <a class="symbol" href="">
+        <i class="fa fa-facebook-square"></i>
+    </a>
+    
+    <a class="symbol" href="https://www.github.com/LuckyAbby">
+        <i class="fa fa-github-square"></i>
+    </a>
+    
+    <a class="symbol" href="">
+        <i class="fa fa-twitter-square"></i>
+    </a>
+    
+
+
+</div>
+
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> Abby
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://nodejh.com/js/jquery-2.2.4.min.js"></script>
+<script src="http://nodejh.com/js/main.js"></script>
+<script src="http://nodejh.com/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+  
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-84989670-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+
+
+<script>
+var baiduAnalytics = '39843ea392201290bd6f76173d2e1633';
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?" + baiduAnalytics;
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+    </body>
+</html>

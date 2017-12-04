@@ -1,0 +1,391 @@
+    <!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="author" content="Abby">
+		<meta name="description" content="My Blog">
+		<meta name="generator" content="Hugo 0.26" />
+		<title>webpack学习笔记 &middot; nodejh</title>
+		<link rel="shortcut icon" href="http://nodejh.com/images/favicon.ico">
+		<link rel="stylesheet" href="http://nodejh.com/css/style.css">
+		<link rel="stylesheet" href="http://nodejh.com/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://nodejh.com/css/font-awesome.min.css">
+		
+
+		
+		<link href="http://nodejh.com/index.xml" rel="alternate" type="application/rss+xml" title="nodejh" />
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://nodejh.com/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://nodejh.com/post'>Archive</a>
+	<a href='http://nodejh.com/tags'>Tags</a>
+	<a href='http://nodejh.com/about'>About</a>
+
+	
+
+	
+	<a class="cta" href="http://nodejh.com/index.xml">Subscribe</a>
+	
+</nav>
+
+
+        <section id="wrapper" class="post">
+            <article>
+                <header>
+                    <h1>
+                        webpack学习笔记
+                    </h1>
+                    <h2 class="headline">
+                    Jul 8, 2017 15:23
+                    · 1373 words
+                    · 3 minutes read
+                      <span class="tags">
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                  
+                    <div id="toc">
+                      <nav id="TableOfContents">
+<ul>
+<li><a href="#webpack学习笔记">webpack学习笔记</a>
+<ul>
+<li>
+<ul>
+<li><a href="#入口-entry">入口（entry）</a>
+<ul>
+<li>
+<ul>
+<li><a href="#单个入口">单个入口</a></li>
+<li><a href="#多个入口">多个入口</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#输出-output">输出(output)</a></li>
+<li><a href="#loader">Loader</a></li>
+<li><a href="#plugin-插件">Plugin(插件)</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+                    </div>
+                  
+                
+                <section id="post-body">
+                    <h1 id="webpack学习笔记">webpack学习笔记</h1>
+
+<p>最近研究了一阵子webpack，刚开始还是觉得很难啃，后来慢慢觉得好梳理一些了，就做了一些很简单的笔记，好记性不如烂笔头嘛哈哈哈。</p>
+
+<p></p>
+
+<h3 id="入口-entry">入口（entry）</h3>
+
+<p>入口就是告诉webpack从哪个文件开始生成依赖关系图表，并从依赖关系图表知道要打包哪些文件。可以有多个入口文件，入口文件的可以是一个String、Array、Object。</p>
+
+<h5 id="单个入口">单个入口</h5>
+
+<pre><code>module.exports = {
+  entry: './path/src/app.js'
+}
+</code></pre>
+
+<p>这种写法是省略了main的省略写法，实际上写法是：</p>
+
+<pre><code>module.exports = {
+  entry: {
+    main: './path/src/app.js'
+  }
+}
+</code></pre>
+
+<h5 id="多个入口">多个入口</h5>
+
+<pre><code>module.exports = {
+  entry: {
+    pageOne: './path/pageOne/index.js',
+    pageTwo: './path/pageTwo/index.js'
+  }
+}
+或者写成数组形式
+module.exports = {
+  entry: [./path/pageOne/index.js, ./path/pageTwo/index.js]
+}
+</code></pre>
+
+<p>当向 entry 传入数组的时候会建立多个主入口，这种方式适用于当多个依赖文件一起注入，并且把依赖文件导向一个chunk的时候。</p>
+
+<h3 id="输出-output">输出(output)</h3>
+
+<p>输出就是 webpack 打包之后生成的文件所在的位置，也就是说你要告诉webpack打包之后的文件放在哪里，入口可以有多个但是输出配置只能指定一个。如果生成了多个chunk，应该使用占位符来标志每个chunk的唯一性。</p>
+
+<pre><code>module.exports = {
+  entry: {
+    pageOne: './path/pageOne/index.js',
+    pageTwo: './path/pageTwo/index.js'
+  },
+  output: {
+    filename: '[name].js',
+    path: __dirname + '/page',
+    chunkFilename: '[id].[hash].js'
+  }
+}
+</code></pre>
+
+<p>这里的[name]就是占位符，还有其余一些别的占位符（<a href="https://webpack.js.org/configuration/output/#output-filename)。">https://webpack.js.org/configuration/output/#output-filename)。</a>
+占位符指的是相应的入口的名字，譬如这里就是 pageOne.js pageTwo.js，这里的 chunkFilename 是不在入口列表中但是需要被打包的文件，一般是按需加载(异步)模块的，这些文件一般没有被列在 entry 之中。之前看到一个很好的回答:<a href="http://react-china.org/t/webpack-output-filename-output-chunkfilename/2256">怎么理解webpack中的output.filename 和output.chunkFilename</a>。</p>
+
+<h3 id="loader">Loader</h3>
+
+<p>因为 webpack 把所有文件都当成模块处理但是它却只理解 JavaScript,因此需要webpack loader 会将已被添加到依赖图中的文件，转换为模块，loader 对模块的源代码进行转换，在加载文件的时候进行预处理文件，loader 可以将文件从不同的语言转换为 JavaScript。
+loader写法一般是两步： test 以及 use</p>
+
+<pre><code>module: {
+    rules: [
+      {
+        test: /\.js|jsx?$/,
+        exclude: /node_modules/,
+        loader: 'babel',
+      },
+      test: /\.css$/,
+      use: [
+        { loader: 'style-loader' },
+        {
+          loader: 'css-loader',
+          options: {
+            modules: true
+          }
+        }
+      ]
+    ]
+  }
+</code></pre>
+
+<p>test 是表示需要处理的文件名或者后缀格式，一般是正则表达式。</p>
+
+<p>exclude 表示忽略掉的文件路径。</p>
+
+<p>include 表示loader是处理哪些路径里面的文件。</p>
+
+<p>loader 表示使用什么加载器。</p>
+
+<p>loader另外一些特性包括：</p>
+
+<p>1.loader 接收查询参数。用于 loader 间传递配置。</p>
+
+<p>2.loader 也能够使用 options 对象进行配置。</p>
+
+<p>3.loader能被链式调用，loader 链中的第一个 loader 返回值给下一个 loader。在最后一个 loader，返回 webpack 所预期的 JavaScript。</p>
+
+<h3 id="plugin-插件">Plugin(插件)</h3>
+
+<p>plugin可以做一些 loader 无法解决的事情，webpack plugin 是一个有 apply 属性的 JavaScript 对象。 apply 属性会被 webpack compiler 调用，并且 compiler 对象可在整个 compilation 生命周期访问。这是文档上面的例子。</p>
+
+<pre><code>function ConsoleLogOnBuildWebpackPlugin() {
+
+};
+
+ConsoleLogOnBuildWebpackPlugin.prototype.apply = function(compiler) {
+  compiler.plugin('run', function(compiler, callback) {
+    console.log(&quot;webpack 构建过程开始！！！&quot;);
+
+    callback();
+  });
+};
+</code></pre>
+
+<p>使用 plugin ,需要向 plugins 属性传入 new 实例。举例说常见的插件:</p>
+
+<ul>
+<li>CommonsChunkPlugin
+这个插件是用来将多个文件公用的模块打包成一个独立的 js 文件，之后在各个公用文件之间就只需要引入这个独立的 js 文件即可。</li>
+<li>html-webpack-plugin
+html-webpack-plugin，是用来生产page的，其中filename是生产的文件路径和名称，template是使用的模板，inject是指将js放在body还是head里。为true会将js放到body里.</li>
+</ul>
+
+<pre><code>new HtmlWebpackPlugin({
+  filename: 'pa ge.html',
+  template: 'pa ge.html',
+  inject: true
+}),
+</code></pre>
+                </section>
+            </article>
+
+            
+
+            
+                <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = ''; 
+
+     
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+            
+
+            
+                <ul id="post-list" class="archive readmore">
+    <h3>Read more</h3>
+    
+    
+        
+        <li>
+            <a href="http://nodejh.com/post/%E5%89%8D%E7%AB%AF%E6%A8%A1%E5%9D%97%E5%8C%96%E5%BC%80%E5%8F%91/">前端模块化开发<aside class="dates">Oct 18</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://nodejh.com/post/%E5%AE%9E%E7%8E%B0css%E5%B1%85%E4%B8%AD%E7%9A%84%E5%A4%9A%E7%A7%8D%E6%96%B9%E6%B3%95/">实现CSS居中的多种方法 <aside class="dates">Sep 18</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://nodejh.com/post/%E8%B0%88http1.0-1.1-2.0/">谈HTTP/1.0 /1.1 /2.0<aside class="dates">Sep 15</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://nodejh.com/post/es6%E5%85%A5%E9%97%A8%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%E4%B9%8Basync-await/">《es6入门》读书笔记之async/await<aside class="dates">Sep 1</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://nodejh.com/post/es6%E5%85%A5%E9%97%A8%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%E4%B9%8Bgenerator/">《es6入门》读书笔记之Generator<aside class="dates">Aug 29</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://nodejh.com/post/es6%E5%85%A5%E9%97%A8%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%E4%B9%8Blet-const/">《es6入门》读书笔记之let const<aside class="dates">Aug 28</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://nodejh.com/post/%E8%B0%88-javascript-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F--%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F/">谈 JavaScript 设计模式--发布订阅模式<aside class="dates">Aug 23</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://nodejh.com/post/%E6%B5%85%E8%B0%88http%E7%BC%93%E5%AD%98/">浅谈HTTP缓存<aside class="dates">Aug 18</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://nodejh.com/post/css%E9%87%8C%E7%9A%84%E7%9B%92%E6%A8%A1%E5%9E%8B/">css里面的盒模型<aside class="dates">Aug 8</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://nodejh.com/post/react%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">React学习笔记<aside class="dates">Jul 22</aside></a>
+        </li>
+        
+   
+</ul>
+            
+
+            <footer id="footer">
+    
+        <div id="social">
+
+	
+	
+    <a class="symbol" href="">
+        <i class="fa fa-facebook-square"></i>
+    </a>
+    
+    <a class="symbol" href="https://www.github.com/LuckyAbby">
+        <i class="fa fa-github-square"></i>
+    </a>
+    
+    <a class="symbol" href="">
+        <i class="fa fa-twitter-square"></i>
+    </a>
+    
+
+
+</div>
+
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> Abby
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://nodejh.com/js/jquery-2.2.4.min.js"></script>
+<script src="http://nodejh.com/js/main.js"></script>
+<script src="http://nodejh.com/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+  
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-84989670-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+
+
+<script>
+var baiduAnalytics = '39843ea392201290bd6f76173d2e1633';
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?" + baiduAnalytics;
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+    </body>
+</html>

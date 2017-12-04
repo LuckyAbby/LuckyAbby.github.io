@@ -1,0 +1,444 @@
+    <!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="author" content="Abby">
+		<meta name="description" content="My Blog">
+		<meta name="generator" content="Hugo 0.26" />
+		<title>C语言实现数据结构--串 &middot; nodejh</title>
+		<link rel="shortcut icon" href="http://nodejh.com/images/favicon.ico">
+		<link rel="stylesheet" href="http://nodejh.com/css/style.css">
+		<link rel="stylesheet" href="http://nodejh.com/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://nodejh.com/css/font-awesome.min.css">
+		
+
+		
+		<link href="http://nodejh.com/index.xml" rel="alternate" type="application/rss+xml" title="nodejh" />
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://nodejh.com/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://nodejh.com/post'>Archive</a>
+	<a href='http://nodejh.com/tags'>Tags</a>
+	<a href='http://nodejh.com/about'>About</a>
+
+	
+
+	
+	<a class="cta" href="http://nodejh.com/index.xml">Subscribe</a>
+	
+</nav>
+
+
+        <section id="wrapper" class="post">
+            <article>
+                <header>
+                    <h1>
+                        C语言实现数据结构--串
+                    </h1>
+                    <h2 class="headline">
+                    May 30, 2017 15:33
+                    · 2425 words
+                    · 5 minutes read
+                      <span class="tags">
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                  
+                    <div id="toc">
+                      <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#串的实现与表示">串的实现与表示</a></li>
+<li><a href="#定长顺序存储">定长顺序存储</a></li>
+<li><a href="#堆分配存储">堆分配存储</a></li>
+<li><a href="#链式存储">链式存储</a></li>
+<li><a href="#块链的定义">块链的定义</a></li>
+<li><a href="#串的模式匹配算法">串的模式匹配算法</a>
+<ul>
+<li><a href="#bf算法">BF算法</a>
+<ul>
+<li><a href="#算法的实现">算法的实现</a></li>
+<li><a href="#讨论bf算法的时间复杂度">讨论BF算法的时间复杂度</a></li>
+</ul></li>
+<li><a href="#kpm算法">KPM算法</a>
+<ul>
+<li><a href="#kpm算法的实现">KPM算法的实现</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+                    </div>
+                  
+                
+                <section id="post-body">
+                    <p>串即字符串，是由零个或多个字符组成的有限序列，是数据元素为单个字符的特殊线性表。</p>
+
+<p>串长：串中字符的个数（n≥0）. n=0 时称为空串。空白串：由一个或多个空格符组成的串。</p>
+
+<p>空串和空白串的区别是：空串(Null String)是指长度为零的串；而空白串(Blank String),是指包含一个或多个空白字符的字符串。
+
+先弄清楚几个基本概念</p>
+
+<p>子串：串S中任意个连续的字符序列叫S的子串。</p>
+
+<p>子串位置：子串的第一个字符在主串中的序号。</p>
+
+<p>字符位置：字符在串中的序号。</p>
+
+<p>串相等：串长度相等，且对应位置上字符相等。</p>
+
+<p>空串是任意串的子串；任意串S都是S本身的子串，除S本身外，S的其他子串称为S的真子串。</p>
+
+<h2 id="串的实现与表示">串的实现与表示</h2>
+
+<p>首先强调：串与线性表的运算有所不同，是以“串的整体”作为操作对象，例如查找某子串，在主串某位置上插入一个子串等。
+串有三种机内表示方法：</p>
+
+<p>1.定长顺序存储表示：用一组地址连续的存储单元存储串值的字符序列，属静态存储方式</p>
+
+<p>2.堆分配存储表示：用一组地址连续的存储单元存储串值的字符序列,但存储空间是在程序执行过程中动态分配而得。</p>
+
+<p>3.串的块链存储表示：链式方式存储。其实其中1、2都属于顺序存储，3属于链式存储。</p>
+
+<h2 id="定长顺序存储">定长顺序存储</h2>
+
+<p>用一组连续的存储单元来存放串，直接使用定长的字符数组来定义，数组的上界预先给出，故称为静态存储分配。</p>
+
+<p>例如：</p>
+
+<pre><code class="language-C">#define Maxstrlen 255    //用户可用的最大串长
+typedef unsigned char SString[ Maxstrlen＋1 ] ;   
+SString s;   //s 是一个可容纳255个字符的顺序串。
+</code></pre>
+
+<p>一般用SString[0]来存放串长信息;C语言约定在串尾加结束符&rsquo;\0&rsquo;，但不计入串长;若字符串超过Maxstrlen 则自动截断。</p>
+
+<h2 id="堆分配存储">堆分配存储</h2>
+
+<p>堆分配存储特点：仍用一组连续的存储单元来存放串，但存储空间是在程序执行过程中动态分配而得。思路是利用malloc函数合理预设串长空间。若在操作中串值改变，还可以利用realloc函数按新串长度增加空间（即动态数组概念）。
+堆T的存储结构描述：</p>
+
+<pre><code class="language-C">Typedef struct {
+    char *ch;    //若非空串,按串长分配空间; 否则ch=NULL
+    int length;  //串长度
+}HString
+
+</code></pre>
+
+<h2 id="链式存储">链式存储</h2>
+
+<p>链式存储特点 ：用链表存储串值，易插入和删除。
+其中主要有两种方法：法1：链表结点的数据分量长度取1个字符； 法2：链表结点（数据域）大小取n。很直观地就能看出法1存储密度为 &lt; 法2存储密度。显然，若数据元素很多，用法2存储更优—称为块链结构。</p>
+
+<h2 id="块链的定义">块链的定义</h2>
+
+<pre><code class="language-C">#define  CHUNKSIZE  80   //每块大小，可由用户定义
+//首先定义结点类型
+typedef struct  Chunk {
+    char ch [ CHUNKSIZE ]; //每个结点中的数据域
+    struct Chunk * next ;  //每个结点中的指针域
+}Chunk;
+//其次定义用链式存储的串类型
+typedef struct {
+    Chunk  *head;  //头指针
+    Chunk  *tail;  //尾指针
+    int  curLen;   //串的当前长度
+   } Lstring;
+</code></pre>
+
+<h2 id="串的模式匹配算法">串的模式匹配算法</h2>
+
+<p>算法目的：确定主串中所含子串第一次出现的位置（定位），定位问题称为串的模式匹配(Pattern Matching)，即子串定位运算，它是串处理系统中最重要的操作之一。典型函数为Index(S,T,pos)。
+典型的算法有：1.BF算法&ndash;带回溯，速度慢 2.KMP算法&ndash;避免回溯，匹配速度快。</p>
+
+<h3 id="bf算法">BF算法</h3>
+
+<p>假设S=&lsquo;ababcabcacbab&rsquo;，T=&lsquo;abcac&rsquo;，pos=1，求：串T在串S中第pos个字符之后的位置。</p>
+
+<blockquote>
+<p>BF算法设计思想：
+将主串S的第pos个字符和模式T的第1个字符比较，
+若相等，继续逐个比较后续字符；
+若不等，从主串S的下一字符（pos+1）起，重新与T第一个字符比较。<br />
+直到主串S的一个连续子串字符序列与模式T相等,返回值为S中与T匹配的子序列第一个字符的序号，即匹配成功。否则，匹配失败，返回值0.</p>
+</blockquote>
+
+<h4 id="算法的实现">算法的实现</h4>
+
+<pre><code class="language-C">int Index(SString S, SString T, int pos)
+{    
+    int i = pos;
+    int j = 1;
+    while (i &lt;= S[0] &amp;&amp; j&lt;=T[0])
+    {
+        if (S[i] == T[j])
+        {
+            ++i;
+            ++j; //继续比较后续字符
+        }
+        else
+        {
+            i = i-j+2; //指针回溯到下一首位，重新开始匹配
+            j = 1;
+        }
+    }
+    if (j &gt; T[0]) return i-T[0];  //子串结束，说明匹配成功
+    else return 0;
+}
+
+</code></pre>
+
+<h4 id="讨论bf算法的时间复杂度">讨论BF算法的时间复杂度</h4>
+
+<p>若n为主串长度，m为子串长度，则：
+(1)最好的情况—每趟不成功的匹配都发生在第一对字符比较时
+如：s=&lsquo;aaaaaaaaaabc&rsquo;；t=&lsquo;bc&rsquo;
+设匹配成功发生在si处，则字符比较次数在前面i-1趟中共比较了i-1次，第i趟成功匹配共比较了m次，因此总共比较了i-1+m次。所有成功匹配的可能共有n-m+1种。
+设从si开始与t匹配成功的概率为pi，在等概率情况下pi=1/(n-m+1),因此，最好情况下平均比较次数（期望值）为：
+<img src="http://ojzeprg7w.bkt.clouddn.com/%E4%B8%B21.JPG" alt="" />
+(2)最坏的情况：不成功的匹配都发生在T的最后一个字符.
+每趟比较都要进行 m 次，这样比较的趟数要 n-m+1 趟，所需要比较字符的总次数为(n-m+1)m。由于m&lt;&lt;n，(n-m+1)m≈(n×m)。
+因此，最坏的情况下的时间复杂度为 O(n×m)。</p>
+
+<h3 id="kpm算法">KPM算法</h3>
+
+<p>改进的KPM算法，相比于BF算法来说，其改进在于：每当一趟匹配过程中出现字符比较不等时，不回溯i指针，而是利用已经得到的“部分匹配”的结果，将模式向右“滑动”尽可能远的一段距离后，继续进行比较。指针 i 没有回溯，<strong>算法时间复杂度O(n+m)</strong>。</p>
+
+<p>为什么可以这样呢？
+回顾方法一中的匹配，有几次的比较是不必进行的。因为从第三趟部分匹配的结果可看出，主串中第4、5、6个字符必然是’b&rsquo;,&lsquo;c&rsquo;和&rsquo;a&rsquo;，因模式中的第一个字符是a，因此它无需再和这三个字符比较，而仅需将模式向右滑动三个字符的位置继续i=7，j=2时的字符比较即可。
+根据这个原理，我们只要知道模式串（一般较短）中的字符比较结果并记录下来，那么在与主串中比较时，就可象上例，利用部分匹配的结果，使指针i 不回溯进行比较，将时间复杂度控制在O(n+m)的数量级上。</p>
+
+<h4 id="kpm算法的实现">KPM算法的实现</h4>
+
+<pre><code class="language-C">void getNext(char* t, int next[])
+{
+    int i=0,j=-1;
+    next[0]=-1;
+    while(t[i])
+    {
+        if(j == -1 || t[i] == t[j])
+        {
+            j++;i++;
+            next[i]=j;
+        }
+        else
+        {
+            j=next[j];
+        }
+    }
+}
+
+int indexKMP(char* s, char* t, int pos)
+{
+    int len = strlen(t);
+    int* next = (int *)malloc(sizeof(int)*len);
+    int i = pos, j = 0;
+    getNext(t, next);
+    while(s[i] &amp;&amp; t[j])
+    {
+        if(j == -1 || s[i] == t[j])
+        {
+            i++;j++;
+        }
+        else
+        {
+            j=next[j];
+        }
+    }
+    if(j &gt;= len)
+    {
+        return i-j;
+    }
+    else
+    {
+        return -1;
+    }
+}
+</code></pre>
+
+<p>欢迎指正~</p>
+                </section>
+            </article>
+
+            
+
+            
+                <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = ''; 
+
+     
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+            
+
+            
+                <ul id="post-list" class="archive readmore">
+    <h3>Read more</h3>
+    
+    
+        
+        <li>
+            <a href="http://nodejh.com/post/%E5%89%8D%E7%AB%AF%E6%A8%A1%E5%9D%97%E5%8C%96%E5%BC%80%E5%8F%91/">前端模块化开发<aside class="dates">Oct 18</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://nodejh.com/post/%E5%AE%9E%E7%8E%B0css%E5%B1%85%E4%B8%AD%E7%9A%84%E5%A4%9A%E7%A7%8D%E6%96%B9%E6%B3%95/">实现CSS居中的多种方法 <aside class="dates">Sep 18</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://nodejh.com/post/%E8%B0%88http1.0-1.1-2.0/">谈HTTP/1.0 /1.1 /2.0<aside class="dates">Sep 15</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://nodejh.com/post/es6%E5%85%A5%E9%97%A8%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%E4%B9%8Basync-await/">《es6入门》读书笔记之async/await<aside class="dates">Sep 1</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://nodejh.com/post/es6%E5%85%A5%E9%97%A8%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%E4%B9%8Bgenerator/">《es6入门》读书笔记之Generator<aside class="dates">Aug 29</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://nodejh.com/post/es6%E5%85%A5%E9%97%A8%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%E4%B9%8Blet-const/">《es6入门》读书笔记之let const<aside class="dates">Aug 28</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://nodejh.com/post/%E8%B0%88-javascript-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F--%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F/">谈 JavaScript 设计模式--发布订阅模式<aside class="dates">Aug 23</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://nodejh.com/post/%E6%B5%85%E8%B0%88http%E7%BC%93%E5%AD%98/">浅谈HTTP缓存<aside class="dates">Aug 18</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://nodejh.com/post/css%E9%87%8C%E7%9A%84%E7%9B%92%E6%A8%A1%E5%9E%8B/">css里面的盒模型<aside class="dates">Aug 8</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://nodejh.com/post/react%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">React学习笔记<aside class="dates">Jul 22</aside></a>
+        </li>
+        
+   
+</ul>
+            
+
+            <footer id="footer">
+    
+        <div id="social">
+
+	
+	
+    <a class="symbol" href="">
+        <i class="fa fa-facebook-square"></i>
+    </a>
+    
+    <a class="symbol" href="https://www.github.com/LuckyAbby">
+        <i class="fa fa-github-square"></i>
+    </a>
+    
+    <a class="symbol" href="">
+        <i class="fa fa-twitter-square"></i>
+    </a>
+    
+
+
+</div>
+
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> Abby
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://nodejh.com/js/jquery-2.2.4.min.js"></script>
+<script src="http://nodejh.com/js/main.js"></script>
+<script src="http://nodejh.com/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+  
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-84989670-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+
+
+<script>
+var baiduAnalytics = '39843ea392201290bd6f76173d2e1633';
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?" + baiduAnalytics;
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+    </body>
+</html>

@@ -1,0 +1,324 @@
+    <!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="author" content="Abby">
+		<meta name="description" content="My Blog">
+		<meta name="generator" content="Hugo 0.26" />
+		<title>谈 JavaScript 设计模式--发布订阅模式 &middot; nodejh</title>
+		<link rel="shortcut icon" href="http://nodejh.com/images/favicon.ico">
+		<link rel="stylesheet" href="http://nodejh.com/css/style.css">
+		<link rel="stylesheet" href="http://nodejh.com/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://nodejh.com/css/font-awesome.min.css">
+		
+
+		
+		<link href="http://nodejh.com/index.xml" rel="alternate" type="application/rss+xml" title="nodejh" />
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://nodejh.com/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://nodejh.com/post'>Archive</a>
+	<a href='http://nodejh.com/tags'>Tags</a>
+	<a href='http://nodejh.com/about'>About</a>
+
+	
+
+	
+	<a class="cta" href="http://nodejh.com/index.xml">Subscribe</a>
+	
+</nav>
+
+
+        <section id="wrapper" class="post">
+            <article>
+                <header>
+                    <h1>
+                        谈 JavaScript 设计模式--发布订阅模式
+                    </h1>
+                    <h2 class="headline">
+                    Aug 23, 2017 15:23
+                    · 796 words
+                    · 2 minutes read
+                      <span class="tags">
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                  
+                
+                <section id="post-body">
+                    <p>发布订阅模式又称观察者模式，在现实生活中运用的十分常见。</p>
+
+<p>比如某次你去商场看上了一件漂亮裙子，可是这件裙子没有你的号了，店员和你说可以先登记，等来货了会通知你。这个时候，你只需要在小本本上写下自己需要的裙子以及如果裙子到了需要进行的后续操作，可能是打电话通知你，也可能是给你送过来。这就是订阅的过程。</p>
+
+<p>而如果这个店家知道观察者模式的话，他关心的只是登记的每件衣服，以及后面的注册的全部回调函数。因为可能人和你眼光一样好，登记了同一件衣服，但是注册了不同的回调函数。当每件衣服到了之后，店家只要对外宣布衣服到了，然后执行这件衣服注册的回调函数。这就是发布的过程。</p>
+
+<p>我们将上面的过程抽象一下，对于发布订阅模式可以抽象出下面三步。</p>
+
+<p>1.需要指定谁是发布者。</p>
+
+<p>2.记录下来每个独一无二的发布项以及每个发布项的回调函数。</p>
+
+<p>3.发布消息的时候，会对每个发布项的回调函数进行遍历执行。</p>
+
+<p>说到这里，其实我们常用的事件也是一种发布订阅模式，比如</p>
+
+<pre><code>document.body.addEventListener( 'click', function(){ alert(&quot;我被点击了&quot;);
+}, false );
+
+document.body.click(); //模拟body点击
+</code></pre>
+
+<p>我们在 body 上面注册一个点击事件，当点击之后会有一个回调函数执行。这就是订阅的过程。当 body 被点击之后就会向外面发布‘我被点击了’，这个时候就会去执行点击这个发布项后面所有注册的回调函数。</p>
+
+<p>说了这么大一堆，用代码实现的过程就是：</p>
+
+<pre><code>var event = {
+  list: [], //存放每一个发布项和以及回调函数
+
+  // 订阅
+  subscribe: function(type, func) {
+    if (!this.list[type]) {
+	  this.list[type] = [];
+    } else {
+	  this.list[type].push(func);
+    }
+},
+
+// 发布
+  publish: function() {
+    var type = Array.prototype.shift.call(arguments);
+    var funcs = this.list[type];
+    if(!funcs || funcs.length === 0) {
+	  return false;
+    }
+    for(var i = 0,func; func = funcs[i++]) {
+	  func.apply(this, arguments);
+    }
+},
+
+  unsubscribe: function(type, func) {
+    var funcs = this.list[type];
+
+    if(!funcs) { // 如果对应的发布项没有被订阅，直接返回
+	  return false;
+    }
+    if(!func) { //如果未制定取消的函数，则默认取消整个发布项后面的回调函数
+	  funcs &amp;&amp; (funcs.length = 0);
+    } else {
+	  for( var l = funcs.length - 1; l &gt;= 0; l--) { // 反向遍历函数
+	    var _func = funcs[l];
+		  if (_func === func) {
+		    funcs.splice(1, 1);
+          }
+        }
+    }
+}
+};
+</code></pre>
+
+<p>下面使用代码来测试</p>
+
+<pre><code>var store = {};
+var installEvent = function( obj ){
+  for ( var i in event ){
+    obj[ i ] = event[ i ];
+    }
+}
+installEvent(store);
+
+store.subscribe('mini-skirt', fn1 = function() { // 小明订阅了这个超短裙
+  console.log('请给我寄过来');
+});
+
+store.subscribe('one-piece-dress', fn2 = function() { // 小红订阅了连衣裙
+  console.log('请通知我到货了');
+});
+
+store.unsubscribe('mini-skirt', fn1); // 删除小明的订阅
+
+store.unsubscribe('one-piece-dress', fn2); // 删除了小红的订阅
+</code></pre>
+
+                </section>
+            </article>
+
+            
+
+            
+                <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = ''; 
+
+     
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+            
+
+            
+                <ul id="post-list" class="archive readmore">
+    <h3>Read more</h3>
+    
+    
+        
+        <li>
+            <a href="http://nodejh.com/post/%E5%89%8D%E7%AB%AF%E6%A8%A1%E5%9D%97%E5%8C%96%E5%BC%80%E5%8F%91/">前端模块化开发<aside class="dates">Oct 18</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://nodejh.com/post/%E5%AE%9E%E7%8E%B0css%E5%B1%85%E4%B8%AD%E7%9A%84%E5%A4%9A%E7%A7%8D%E6%96%B9%E6%B3%95/">实现CSS居中的多种方法 <aside class="dates">Sep 18</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://nodejh.com/post/%E8%B0%88http1.0-1.1-2.0/">谈HTTP/1.0 /1.1 /2.0<aside class="dates">Sep 15</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://nodejh.com/post/es6%E5%85%A5%E9%97%A8%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%E4%B9%8Basync-await/">《es6入门》读书笔记之async/await<aside class="dates">Sep 1</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://nodejh.com/post/es6%E5%85%A5%E9%97%A8%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%E4%B9%8Bgenerator/">《es6入门》读书笔记之Generator<aside class="dates">Aug 29</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://nodejh.com/post/es6%E5%85%A5%E9%97%A8%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%E4%B9%8Blet-const/">《es6入门》读书笔记之let const<aside class="dates">Aug 28</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://nodejh.com/post/%E8%B0%88-javascript-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F--%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F/">谈 JavaScript 设计模式--发布订阅模式<aside class="dates">Aug 23</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://nodejh.com/post/%E6%B5%85%E8%B0%88http%E7%BC%93%E5%AD%98/">浅谈HTTP缓存<aside class="dates">Aug 18</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://nodejh.com/post/css%E9%87%8C%E7%9A%84%E7%9B%92%E6%A8%A1%E5%9E%8B/">css里面的盒模型<aside class="dates">Aug 8</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://nodejh.com/post/react%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">React学习笔记<aside class="dates">Jul 22</aside></a>
+        </li>
+        
+   
+</ul>
+            
+
+            <footer id="footer">
+    
+        <div id="social">
+
+	
+	
+    <a class="symbol" href="">
+        <i class="fa fa-facebook-square"></i>
+    </a>
+    
+    <a class="symbol" href="https://www.github.com/LuckyAbby">
+        <i class="fa fa-github-square"></i>
+    </a>
+    
+    <a class="symbol" href="">
+        <i class="fa fa-twitter-square"></i>
+    </a>
+    
+
+
+</div>
+
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> Abby
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://nodejh.com/js/jquery-2.2.4.min.js"></script>
+<script src="http://nodejh.com/js/main.js"></script>
+<script src="http://nodejh.com/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+  
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-84989670-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+
+
+<script>
+var baiduAnalytics = '39843ea392201290bd6f76173d2e1633';
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?" + baiduAnalytics;
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+    </body>
+</html>

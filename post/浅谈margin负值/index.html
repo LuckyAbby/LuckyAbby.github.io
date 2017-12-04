@@ -1,0 +1,451 @@
+    <!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="author" content="Abby">
+		<meta name="description" content="My Blog">
+		<meta name="generator" content="Hugo 0.26" />
+		<title>浅谈margin负值 &middot; nodejh</title>
+		<link rel="shortcut icon" href="http://nodejh.com/images/favicon.ico">
+		<link rel="stylesheet" href="http://nodejh.com/css/style.css">
+		<link rel="stylesheet" href="http://nodejh.com/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://nodejh.com/css/font-awesome.min.css">
+		
+
+		
+		<link href="http://nodejh.com/index.xml" rel="alternate" type="application/rss+xml" title="nodejh" />
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://nodejh.com/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://nodejh.com/post'>Archive</a>
+	<a href='http://nodejh.com/tags'>Tags</a>
+	<a href='http://nodejh.com/about'>About</a>
+
+	
+
+	
+	<a class="cta" href="http://nodejh.com/index.xml">Subscribe</a>
+	
+</nav>
+
+
+        <section id="wrapper" class="post">
+            <article>
+                <header>
+                    <h1>
+                        浅谈margin负值
+                    </h1>
+                    <h2 class="headline">
+                    Oct 4, 2016 15:47
+                    · 1437 words
+                    · 3 minutes read
+                      <span class="tags">
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                  
+                    <div id="toc">
+                      <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#margin负值的原理">margin负值的原理</a></li>
+<li><a href="#实际小demo">实际小DEMO</a>
+<ul>
+<li>
+<ul>
+<li><a href="#当设置margin-top为负值的时候">当设置margin-top为负值的时候</a></li>
+<li><a href="#当设置margin-left为负值的时候">当设置margin-left为负值的时候</a></li>
+<li><a href="#当设置margin-right为负值的时候">当设置margin-right为负值的时候</a></li>
+<li><a href="#当设置margin-bottom为负值的时候">当设置margin-bottom为负值的时候</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#margin负值的实际应用">margin负值的实际应用</a></li>
+<li><a href="#最后">最后</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+                    </div>
+                  
+                
+                <section id="post-body">
+                    
+
+<p>margin负值在平常代码中似乎很少用到过，最近接触了之后才觉得效果比较让我惊讶，想着自己健忘还是写下来，还克服懒癌从印象笔记挪到blog，说不定以后还能给别人看见呢(捂脸逃)。</p>
+
+<h3 id="margin负值的原理">margin负值的原理</h3>
+
+<p>为了方便理解负值margin，我们引入参考线的定义，参考线就是就是margin移动的基准点，而margin的值就是移动的数值。
+margin的参考线有两类，一类是top、left，它们以外元素作为参考线，另一类是right、bottom，它们以自身作为参考线。
+简单点说就是：
+- top负值就是以包含块(Containing block) 内容区域的上边或者上方相连元素 margin 的下边为参考线;
+- left负值就是以包含块(Containing block) 内容区域的左边或者左方相连元素 margin 的右边为参考线;
+- right负值就是以元素本身border的右边为参考线；
+- bottom负值就是以元素本身border的下边为参考线；
+另外关于包含块的定义具体请参考<a href="http://w3help.org/zh-cn/kb/008/">KB008包含块(Containing block)</a>。</p>
+
+<p>下面这张图很直观地解释了margin的移动，其中红色箭头表示正值时候的移动方向，当margin为负值的时候就反方向移动。
+<img src="http://ojzeprg7w.bkt.clouddn.com/%E6%B5%8B%E8%AF%95.png" alt="margin原理图" /></p>
+
+<p>总地来说，就是当margin-top、left为负值的时候与参考线的距离减少，当margin-right、bottom为负值的时候参考线就向左、上面移动。</p>
+
+<h3 id="实际小demo">实际小DEMO</h3>
+
+<h5 id="当设置margin-top为负值的时候">当设置margin-top为负值的时候</h5>
+
+<pre><code>&lt;div class=&quot;box&quot;&gt;
+     &lt;div class=&quot;one&quot;&gt;one&lt;/div&gt;
+    &lt;div class=&quot;two&quot;&gt;two&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;style&gt;
+.box {
+    width:200px;
+    height: 200px;
+    border: 1px black solid;
+}
+.box div {
+    width:100px;
+    height: 100px;
+}
+.one {
+	background:gray;
+}
+.two {
+	background:orange;
+	margin-top:-50px;
+}
+&lt;/style&gt;
+</code></pre>
+
+<p>结果如下图
+<img src="http://ojzeprg7w.bkt.clouddn.com/top.png" alt="top为负值测试图" /></p>
+
+<p>当设置class为two的div的margin-top为-50的时候，它的参考线是div.one的下边，整个div.two向上移动使得与参考线的距离减少50px。</p>
+
+<h5 id="当设置margin-left为负值的时候">当设置margin-left为负值的时候</h5>
+
+<pre><code>&lt;div class=&quot;box&quot;&gt;
+     &lt;div class=&quot;one&quot;&gt;one&lt;/div&gt;
+    &lt;div class=&quot;two&quot;&gt;two&lt;/div&gt;
+&lt;/div&gt;
+&lt;style&gt;
+.box {
+    width:200px;
+    height: 200px;
+    border: 1px black solid;
+}
+.box div {
+    width:100px;
+    height: 100px;
+}
+.one {
+	background:gray;
+	float: left;
+}
+.two {
+	background:orange;
+    margin-left: -50px;
+    float: left;
+}
+&lt;/style&gt;
+</code></pre>
+
+<p>结果如下图
+<img src="http://ojzeprg7w.bkt.clouddn.com/left.png" alt="left为负值侧视图" /></p>
+
+<p>设置float:left使得两个div浮动起来，然后设置div.two的margin-left为-50px,div.two的参考线就是div.one的右边，于是div.two左移与参考线距离减少50px。</p>
+
+<h5 id="当设置margin-right为负值的时候">当设置margin-right为负值的时候</h5>
+
+<pre><code>&lt;div class=&quot;box&quot;&gt;
+     &lt;div class=&quot;one&quot;&gt;one&lt;/div&gt;
+    &lt;div class=&quot;two&quot;&gt;two&lt;/div&gt;
+&lt;/div&gt;
+&lt;style&gt;
+.box {
+    width:200px;
+    height: 200px;
+    border: 1px black solid;
+}
+.box div {
+    width:100px;
+    height: 100px;
+}
+.one {
+    background:gray;
+    float:left;
+    margin-right:-50px;
+}
+.two {
+    background:orange;
+    float:left;
+}
+&lt;/style&gt;
+</code></pre>
+
+<p>结果如下图
+<img src="http://ojzeprg7w.bkt.clouddn.com/left.png" alt="right为负值侧视图" /></p>
+
+<p>仍然让两个div左浮动，设置div.one的margin-right为-50px,这时候的参考线是本身的右边界，margin-right为负值于是参考线向反方向即左方向移动。</p>
+
+<h5 id="当设置margin-bottom为负值的时候">当设置margin-bottom为负值的时候</h5>
+
+<pre><code>&lt;div class=&quot;box&quot;&gt;
+     &lt;div class=&quot;one&quot;&gt;one&lt;/div&gt;
+    &lt;div class=&quot;two&quot;&gt;two&lt;/div&gt;
+&lt;/div&gt;
+&lt;style&gt;
+.box {
+    width:200px;
+    height: 200px;
+    border: 1px black solid;
+}
+.box div {
+    width:100px;
+    height: 100px;
+}
+.one {
+    background:gray;
+    margin-bottom:-50px;
+}
+.two {
+    background:orange;
+}
+&lt;/style&gt;
+</code></pre>
+
+<p>结果如下图
+<img src="http://ojzeprg7w.bkt.clouddn.com/top.png" alt="bottom为负值测试图" /></p>
+
+<p>当设置div.one的margin-bottom为负值的时候，此时的参考线是自身的下边界，bottom为负值于是参考线向反方向即向上方移动。</p>
+
+<h3 id="margin负值的实际应用">margin负值的实际应用</h3>
+
+<ol>
+<li>边框去重
+有的时候我们做Tab选项卡的时候不希望tab元素和父元素都加上边框，因此就可以给tab元素添加一像素的margin。详见<a href="http://www.hicss.net/i-know-you-do-not-know-the-negative-margin/">我知道你不知道的负Margin</a>。</li>
+<li>左右布局
+当用margin负值之后就可以通过改变margin-top等的值成为负值之后不需要使用float就可以实现左右布局</li>
+</ol>
+
+<pre><code>&lt;div class=&quot;container&quot;&gt;
+    &lt;div class=&quot;left&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;right&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;style&gt;
+.container {
+	width:400px;
+	order: 1px solid black;
+	padding:10px
+}
+.left {
+	width: 100px;
+	height:400px;
+	background-color:gray;
+}
+.right {
+	width: 300px;
+	height:400px;
+	margin:-400px 0 0 100px;
+	background-color:orange;
+}
+&lt;/style&gt;
+</code></pre>
+
+<p>结果如图
+<img src="http://ojzeprg7w.bkt.clouddn.com/buju.png" alt="利用margin左右排版测试图" /></p>
+
+<h3 id="最后">最后</h3>
+
+<p>因为自己做的项目还不多，很多问题其实自己还并没有遇到过，先总结出来仅供参考，也是第一次写技术博客，有不对的地方烦请指出改正。
+参考资料
+1. <a href="http://www.hicss.net/i-know-you-do-not-know-the-negative-margin/">我知道你不知道的负Margin</a>
+2. <a href="http://blog.acwong.org/2014/12/06/negative-margins/">实用的margin负值</a></p>
+
+                </section>
+            </article>
+
+            
+
+            
+                <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = ''; 
+
+     
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+            
+
+            
+                <ul id="post-list" class="archive readmore">
+    <h3>Read more</h3>
+    
+    
+        
+        <li>
+            <a href="http://nodejh.com/post/%E5%89%8D%E7%AB%AF%E6%A8%A1%E5%9D%97%E5%8C%96%E5%BC%80%E5%8F%91/">前端模块化开发<aside class="dates">Oct 18</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://nodejh.com/post/%E5%AE%9E%E7%8E%B0css%E5%B1%85%E4%B8%AD%E7%9A%84%E5%A4%9A%E7%A7%8D%E6%96%B9%E6%B3%95/">实现CSS居中的多种方法 <aside class="dates">Sep 18</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://nodejh.com/post/%E8%B0%88http1.0-1.1-2.0/">谈HTTP/1.0 /1.1 /2.0<aside class="dates">Sep 15</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://nodejh.com/post/es6%E5%85%A5%E9%97%A8%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%E4%B9%8Basync-await/">《es6入门》读书笔记之async/await<aside class="dates">Sep 1</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://nodejh.com/post/es6%E5%85%A5%E9%97%A8%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%E4%B9%8Bgenerator/">《es6入门》读书笔记之Generator<aside class="dates">Aug 29</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://nodejh.com/post/es6%E5%85%A5%E9%97%A8%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%E4%B9%8Blet-const/">《es6入门》读书笔记之let const<aside class="dates">Aug 28</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://nodejh.com/post/%E8%B0%88-javascript-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F--%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F/">谈 JavaScript 设计模式--发布订阅模式<aside class="dates">Aug 23</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://nodejh.com/post/%E6%B5%85%E8%B0%88http%E7%BC%93%E5%AD%98/">浅谈HTTP缓存<aside class="dates">Aug 18</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://nodejh.com/post/css%E9%87%8C%E7%9A%84%E7%9B%92%E6%A8%A1%E5%9E%8B/">css里面的盒模型<aside class="dates">Aug 8</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://nodejh.com/post/react%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">React学习笔记<aside class="dates">Jul 22</aside></a>
+        </li>
+        
+   
+</ul>
+            
+
+            <footer id="footer">
+    
+        <div id="social">
+
+	
+	
+    <a class="symbol" href="">
+        <i class="fa fa-facebook-square"></i>
+    </a>
+    
+    <a class="symbol" href="https://www.github.com/LuckyAbby">
+        <i class="fa fa-github-square"></i>
+    </a>
+    
+    <a class="symbol" href="">
+        <i class="fa fa-twitter-square"></i>
+    </a>
+    
+
+
+</div>
+
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> Abby
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://nodejh.com/js/jquery-2.2.4.min.js"></script>
+<script src="http://nodejh.com/js/main.js"></script>
+<script src="http://nodejh.com/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+  
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-84989670-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+
+
+<script>
+var baiduAnalytics = '39843ea392201290bd6f76173d2e1633';
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?" + baiduAnalytics;
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+    </body>
+</html>

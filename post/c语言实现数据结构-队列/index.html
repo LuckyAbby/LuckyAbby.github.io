@@ -1,0 +1,440 @@
+    <!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="author" content="Abby">
+		<meta name="description" content="My Blog">
+		<meta name="generator" content="Hugo 0.26" />
+		<title>C语言实现数据结构--线性表 &middot; nodejh</title>
+		<link rel="shortcut icon" href="http://nodejh.com/images/favicon.ico">
+		<link rel="stylesheet" href="http://nodejh.com/css/style.css">
+		<link rel="stylesheet" href="http://nodejh.com/css/highlight.css">
+		
+
+		
+		<link rel="stylesheet" href="http://nodejh.com/css/font-awesome.min.css">
+		
+
+		
+		<link href="http://nodejh.com/index.xml" rel="alternate" type="application/rss+xml" title="nodejh" />
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://nodejh.com/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://nodejh.com/post'>Archive</a>
+	<a href='http://nodejh.com/tags'>Tags</a>
+	<a href='http://nodejh.com/about'>About</a>
+
+	
+
+	
+	<a class="cta" href="http://nodejh.com/index.xml">Subscribe</a>
+	
+</nav>
+
+
+        <section id="wrapper" class="post">
+            <article>
+                <header>
+                    <h1>
+                        C语言实现数据结构--线性表
+                    </h1>
+                    <h2 class="headline">
+                    May 22, 2017 15:29
+                    · 1371 words
+                    · 3 minutes read
+                      <span class="tags">
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                  
+                    <div id="toc">
+                      <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#链队列">链队列</a>
+<ul>
+<li><a href="#链队的表示">链队的表示</a></li>
+<li><a href="#链队的基本操作">链队的基本操作</a>
+<ul>
+<li><a href="#1-链队的初始化">1. 链队的初始化</a></li>
+<li><a href="#2-链队的销毁">2. 链队的销毁</a></li>
+<li><a href="#3-入队">3. 入队</a></li>
+<li><a href="#4-出队">4. 出队</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#顺序队列">顺序队列</a>
+<ul>
+<li><a href="#顺序队列的表示">顺序队列的表示</a></li>
+<li><a href="#存在的问题">存在的问题</a></li>
+<li><a href="#循环队列">循环队列</a></li>
+<li><a href="#循环队列的基本操作">循环队列的基本操作</a>
+<ul>
+<li><a href="#1-初始化">1. 初始化</a></li>
+<li><a href="#2-求队列长度">2. 求队列长度</a></li>
+<li><a href="#3-入队-1">3. 入队</a></li>
+<li><a href="#4-出队-1">4. 出队</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+                    </div>
+                  
+                
+                <section id="post-body">
+                    <p>队列 (Queue)：简称队，是另一种限定性的线性表，它只允许在表的一端插入元素，而在另一端删除元素。q=(a1, a2, a3, … an),其中a1为队头，an为队尾。</p>
+
+<p>队列在生活中也比较常见，例如购物排队——新来的成员总是加入队尾,每次离开的成员总是队列头上的。</p>
+
+<p>队列按存储方式可以分为两种：顺序队列和链队列。
+</p>
+
+<h2 id="链队列">链队列</h2>
+
+<p>链式队列中每个元素定义成一个结点，含数据域与指针域（指向下一结点），并设头尾指针。用图表示就是。
+<img src="http://ojzeprg7w.bkt.clouddn.com/%E9%98%9F%E5%88%9711_%E7%9C%8B%E5%9B%BE%E7%8E%8B.png" alt="" /></p>
+
+<h3 id="链队的表示">链队的表示</h3>
+
+<p>前面的链式结构，总是使用一个结点的结构来表示链表，但是在这里使用新的存储结构。定义一个结点结构，和一个队列结构。两个结构嵌套。</p>
+
+<pre><code class="language-C">//定义节点结构
+typedef struct QNode
+{
+    QElemType   data;   /*数据域*/
+    struct QNode   * next;   /*指针域*/
+ }QNode, *QueuePtr;
+
+//定义队列结构
+ typedef struct
+ {
+    QueuePtr front;
+    QueuePtr rear;
+ }LinkQueue;
+</code></pre>
+
+<h3 id="链队的基本操作">链队的基本操作</h3>
+
+<h4 id="1-链队的初始化">1. 链队的初始化</h4>
+
+<pre><code class="language-C">Status initQueue(LinkQueue *Q)
+{
+    Q.front = Q.rear = (QueuePtr)malloc(sizeof(QNode));
+    if(!Q.front) exit(OVERFLOW);
+    Q.front-&gt;next = NULL;
+    return OK;
+}
+</code></pre>
+
+<h4 id="2-链队的销毁">2. 链队的销毁</h4>
+
+<pre><code class="language-C">Status destroyQueue(LinkQueue *Q)
+{
+    while (Q.front)
+    {
+        Q.rear = Q.front-&gt;next;
+        free(Q.front);
+        Q.front = Q.rear;
+    }
+   return OK;
+}
+</code></pre>
+
+<h4 id="3-入队">3. 入队</h4>
+
+<pre><code class="language-C">Status enQueue(LinkQueue *Q, QElemType e)
+{
+    QueuePtr p = (QueuePtr)malloc(sizeof(QNode));
+    if(!p) exit(OVERFLOW);
+    //插入数据
+    p-&gt;data = e;
+    p-&gt;next = NULL;
+    //Q.rear一直指向队尾
+    Q.rear-&gt;next = p;
+    Q.rear = p;
+    return OK;
+ }
+
+</code></pre>
+
+<h4 id="4-出队">4. 出队</h4>
+
+<pre><code class="language-C">Status deQueue(LinkQueue *Q, QElemType e)
+{
+    if(Q.front == Q.rear)return ERROR;
+    QueuePtr p = Q.front-&gt;next;
+    e = p-&gt;data;
+    Q.front-&gt;next = p-&gt;next;   //队头元素p出队
+    if(Q.rear == p)   //如果队中只有一个元素p, 则p出队后成为空队
+    Q.rear = Q.front;     //给队尾指针赋值
+    free(p);   //释放存储空间
+    return OK;
+}
+</code></pre>
+
+<h2 id="顺序队列">顺序队列</h2>
+
+<p>用一组连续的存储单元依次存放队列的元素，并设两个指针front、rear分别指示队头和队尾元素的位置。
+front：指向实际的队头；rear：指向实际队尾的下一位置。
+初态：front＝rear＝0；队空：front＝rear;队满：rear＝M;
+入队：q[rear]=x; rear＝ rear+1; 出队：x=q[front];front=front+1;</p>
+
+<h3 id="顺序队列的表示">顺序队列的表示</h3>
+
+<pre><code class="language-C">#define MAXQSIZE  100
+typedef struct
+{
+    QElemType *base;
+    int  front;   //头指针指示器
+    int  rear;  //尾指针指示器
+} SqQueue;
+
+</code></pre>
+
+<h3 id="存在的问题">存在的问题</h3>
+
+<p>随着入队、出队操作的进行，整个队列会整体向后移动，这样就出现了下图的现象：队尾指针虽然已经移到了最后，而队列却未真满的“假溢出”现象，使得队列的空间没有得到有效的利用。
+<img src="http://ojzeprg7w.bkt.clouddn.com/%E9%98%9F%E5%88%972.png" alt="" /></p>
+
+<p>那我们该如何解决假溢出的问题呢？
+有以下两种方法：
+1.将队中元素向队头移动
+当移动数据较多时将会影响队列的操作速度。
+2.采用循环队列：Q[0]接在Q[MAXQSIZE-1]之后
+一个更有效的方法是将队列的数据区Q[0 .. MAXQSIZE-1]看成是首尾相连的环，即将表示队首的元素Q[0]与表示队尾的元素Q[MAXQSIZE–1]连接起来，形成一个环形表，这就成了循环队列。当Q.rear=MAXQSIZE-1时再入队，令Q.rear=0, 则可以利用已被删除的元素空间。如下图。
+<img src="http://ojzeprg7w.bkt.clouddn.com/%E9%98%9F%E5%88%973.JPG" alt="" /></p>
+
+<h3 id="循环队列">循环队列</h3>
+
+<p>在循环队列中，不可以根据等式front == rear可以判别队满和队空。因为此时条件是相同的，解决这种问题的方法一般有两种。
+1.少用（损失）一个空间,以尾指针加1等于头指针作为队满的标志。因此：当front==rear，表示循环队列为空；当front ==（rear+1）% MAXLEN，表示循环队列为满。
+2.在定义结构体时，附设一个存储循环队列中元素个数的变量n，当n==0时表示队空；当n==MAXLEN时为队满。</p>
+
+<h3 id="循环队列的基本操作">循环队列的基本操作</h3>
+
+<h4 id="1-初始化">1. 初始化</h4>
+
+<pre><code class="language-C">Status initQueue (SqQueue *Q)
+{
+    Q.base=(QElemType *) malloc(MAXQSIZE * sizeof(QElemType));
+    if (!Q.base) exit(OVERFLOW);
+    Q.front = Q.rear = 0;
+    return OK;
+}
+
+</code></pre>
+
+<h4 id="2-求队列长度">2. 求队列长度</h4>
+
+<pre><code class="language-C">int queueLength(SqQueue *Q)
+{
+    return (Q.rear - Q.front+MAXQSIZE) % MAXQSIZE;
+}
+
+</code></pre>
+
+<h4 id="3-入队-1">3. 入队</h4>
+
+<pre><code class="language-C">Status enQueue (SqQueue *Q, QElemType e)
+{
+    if((Q.rear+1)%MAXQSIZE == Q.front)  return ERROR;
+    Q.base[Q.rear] = e;
+    Q.rear = (Q.rear+1) % MAXQSIZE;
+    return OK;
+}
+</code></pre>
+
+<h4 id="4-出队-1">4. 出队</h4>
+
+<pre><code class="language-C">Status deQueue (SqQueue *Q, QElemType e)
+{
+    if(Q.front == Q.rear)
+    return ERROR;
+    e = Q.base[Q.front];
+    Q.front = (Q.front+1)%MAXQSIZE;
+    return OK;
+}
+</code></pre>
+
+<p>欢迎指正 orz&hellip;</p>
+                </section>
+            </article>
+
+            
+
+            
+                <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = ''; 
+
+     
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+            
+
+            
+                <ul id="post-list" class="archive readmore">
+    <h3>Read more</h3>
+    
+    
+        
+        <li>
+            <a href="http://nodejh.com/post/%E5%89%8D%E7%AB%AF%E6%A8%A1%E5%9D%97%E5%8C%96%E5%BC%80%E5%8F%91/">前端模块化开发<aside class="dates">Oct 18</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://nodejh.com/post/%E5%AE%9E%E7%8E%B0css%E5%B1%85%E4%B8%AD%E7%9A%84%E5%A4%9A%E7%A7%8D%E6%96%B9%E6%B3%95/">实现CSS居中的多种方法 <aside class="dates">Sep 18</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://nodejh.com/post/%E8%B0%88http1.0-1.1-2.0/">谈HTTP/1.0 /1.1 /2.0<aside class="dates">Sep 15</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://nodejh.com/post/es6%E5%85%A5%E9%97%A8%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%E4%B9%8Basync-await/">《es6入门》读书笔记之async/await<aside class="dates">Sep 1</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://nodejh.com/post/es6%E5%85%A5%E9%97%A8%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%E4%B9%8Bgenerator/">《es6入门》读书笔记之Generator<aside class="dates">Aug 29</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://nodejh.com/post/es6%E5%85%A5%E9%97%A8%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%E4%B9%8Blet-const/">《es6入门》读书笔记之let const<aside class="dates">Aug 28</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://nodejh.com/post/%E8%B0%88-javascript-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F--%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F/">谈 JavaScript 设计模式--发布订阅模式<aside class="dates">Aug 23</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://nodejh.com/post/%E6%B5%85%E8%B0%88http%E7%BC%93%E5%AD%98/">浅谈HTTP缓存<aside class="dates">Aug 18</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://nodejh.com/post/css%E9%87%8C%E7%9A%84%E7%9B%92%E6%A8%A1%E5%9E%8B/">css里面的盒模型<aside class="dates">Aug 8</aside></a>
+        </li>
+        
+   
+    
+        
+        <li>
+            <a href="http://nodejh.com/post/react%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">React学习笔记<aside class="dates">Jul 22</aside></a>
+        </li>
+        
+   
+</ul>
+            
+
+            <footer id="footer">
+    
+        <div id="social">
+
+	
+	
+    <a class="symbol" href="">
+        <i class="fa fa-facebook-square"></i>
+    </a>
+    
+    <a class="symbol" href="https://www.github.com/LuckyAbby">
+        <i class="fa fa-github-square"></i>
+    </a>
+    
+    <a class="symbol" href="">
+        <i class="fa fa-twitter-square"></i>
+    </a>
+    
+
+
+</div>
+
+    
+    <p class="small">
+    
+       © Copyright 2017 <i class="fa fa-heart" aria-hidden="true"></i> Abby
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://nodejh.com/js/jquery-2.2.4.min.js"></script>
+<script src="http://nodejh.com/js/main.js"></script>
+<script src="http://nodejh.com/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+  
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-84989670-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+
+
+<script>
+var baiduAnalytics = '39843ea392201290bd6f76173d2e1633';
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?" + baiduAnalytics;
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+    </body>
+</html>

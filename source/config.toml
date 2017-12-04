@@ -1,7 +1,7 @@
 # Site settings
-baseurl = "http://nodejh.com/"
+baseurl = "http://luckyabby.com/"
 languageCode = "zh-cn"
-title = "nodejh"
+title = "luckyabby"
 theme = "hugo-theme-cactus-plus"
 # Enter your tracking code to enable Google Analytics
 googleAnalytics = "UA-84989670-1"
@@ -10,7 +10,7 @@ hasCJKLanguage = true
 [params]
 	name = "Abby"
 	description = "My Blog"
-	bio = "Web Developer"
+	bio = "努力成为一只厉害的程序媛"
 
 	enableRSS = true
 

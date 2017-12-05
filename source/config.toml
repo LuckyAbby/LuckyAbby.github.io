@@ -10,7 +10,7 @@ hasCJKLanguage = true
 [params]
 	name = "Abby"
 	description = "My Blog"
-	bio = "努力成为一只厉害的程序媛"
+	bio = "Web Developer"
 
 	enableRSS = true
 
@@ -20,7 +20,7 @@ hasCJKLanguage = true
 	# Disqus comment
 	disqusShortname = ""
 	# Enable disqus comment, true|false
-	enableDisqus = true
+	enableDisqus = false
 
 	# Enable summary, true|false
 	enableSummary = true

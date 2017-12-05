@@ -7,7 +7,7 @@
 		<meta name="author" content="Abby">
 		<meta name="description" content="My Blog">
 		<meta name="generator" content="Hugo 0.26" />
-		<title>谈 JavaScript 设计模式--发布订阅模式 &middot; luckyabby</title>
+		<title>博客迁移到hugo &middot; luckyabby</title>
 		<link rel="shortcut icon" href="http://luckyabby.com/images/favicon.ico">
 		<link rel="stylesheet" href="http://luckyabby.com/css/style.css">
 		<link rel="stylesheet" href="http://luckyabby.com/css/highlight.css">
@@ -44,19 +44,17 @@
             <article>
                 <header>
                     <h1>
-                        谈 JavaScript 设计模式--发布订阅模式
+                        博客迁移到hugo
                     </h1>
                     <h2 class="headline">
-                    Aug 23, 2017 15:23
-                    · 796 words
-                    · 2 minutes read
+                    Dec 5, 2017 10:06
+                    · 1028 words
+                    · 3 minutes read
                       <span class="tags">
                       
                       
                           
-                              <a href="http://luckyabby.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F">设计模式</a>
-                          
-                              <a href="http://luckyabby.com/tags/js">JS</a>
+                              <a href="http://luckyabby.com/tags/hugo">hugo</a>
                           
                       
                       
@@ -65,101 +63,135 @@
                 </header>
                 
                   
+                    <div id="toc">
+                      <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#为什么要迁移">为什么要迁移</a></li>
+<li><a href="#迁移">迁移</a>
+<ul>
+<li><a href="#安装-hugo">安装 hugo</a>
+<ul>
+<li><a href="#mac下安装">mac下安装</a></li>
+<li><a href="#其他操作系统安装">其他操作系统安装</a></li>
+</ul></li>
+<li><a href="#生成站点">生成站点</a></li>
+<li><a href="#生成博客">生成博客</a></li>
+<li><a href="#安装主题">安装主题</a></li>
+<li><a href="#部署到-github">部署到 Github</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+                    </div>
+                  
                 
                 <section id="post-body">
-                    <p>发布订阅模式又称观察者模式，在现实生活中运用的十分常见。</p>
+                    
 
-<p>比如某次你去商场看上了一件漂亮裙子，可是这件裙子没有你的号了，店员和你说可以先登记，等来货了会通知你。这个时候，你只需要在小本本上写下自己需要的裙子以及如果裙子到了需要进行的后续操作，可能是打电话通知你，也可能是给你送过来。这就是订阅的过程。
-<!-- more --></p>
+<p>在经过昨天一天的捣鼓之后，把之前写过的博客从hexo迁移到了hugo</p>
 
-<p>而如果这个店家知道观察者模式的话，他关心的只是登记的每件衣服，以及后面的注册的全部回调函数。因为可能人和你眼光一样好，登记了同一件衣服，但是注册了不同的回调函数。当每件衣服到了之后，店家只要对外宣布衣服到了，然后执行这件衣服注册的回调函数。这就是发布的过程。</p>
+<!-- more -->
 
-<p>我们将上面的过程抽象一下，对于发布订阅模式可以抽象出下面三步。</p>
+<h2 id="为什么要迁移">为什么要迁移</h2>
 
-<p>1.需要指定谁是发布者。</p>
+<p>hexo 太慢了，编译到部署一般需要3s左右，而 hugo 却快的多，大概只需要几十毫秒的样子。没有对比就没有伤害。。</p>
 
-<p>2.记录下来每个独一无二的发布项以及每个发布项的回调函数。</p>
+<p>其实很早就想迁移了，只是之前一直太懒了，没动，等我 hexo 的博客长草了一个多月之后终于决定要迁移了。。。</p>
 
-<p>3.发布消息的时候，会对每个发布项的回调函数进行遍历执行。</p>
+<h2 id="迁移">迁移</h2>
 
-<p>说到这里，其实我们常用的事件也是一种发布订阅模式，比如</p>
+<p>hugo 和 hexo 一样，也是静态网站生成器，但是是用最近很热门的 Go 语言编写的，高效快速部署是最典型的特征。</p>
 
-<pre><code>document.body.addEventListener( 'click', function(){ alert(&quot;我被点击了&quot;);
-}, false );
+<h3 id="安装-hugo">安装 hugo</h3>
 
-document.body.click(); //模拟body点击
+<h4 id="mac下安装">mac下安装</h4>
+
+<p>使用 Homebrew 安装</p>
+
+<pre><code>brew install hugo
 </code></pre>
 
-<p>我们在 body 上面注册一个点击事件，当点击之后会有一个回调函数执行。这就是订阅的过程。当 body 被点击之后就会向外面发布‘我被点击了’，这个时候就会去执行点击这个发布项后面所有注册的回调函数。</p>
+<h4 id="其他操作系统安装">其他操作系统安装</h4>
 
-<p>说了这么大一堆，用代码实现的过程就是：</p>
+<p>其他操作系统的安装包可以在<a href="https://github.com/gohugoio/hugo/releases">hugo/release</a>里面找到，点击下载即可。</p>
 
-<pre><code>var event = {
-  list: [], //存放每一个发布项和以及回调函数
+<h3 id="生成站点">生成站点</h3>
 
-  // 订阅
-  subscribe: function(type, func) {
-    if (!this.list[type]) {
-	  this.list[type] = [];
-    } else {
-	  this.list[type].push(func);
-    }
-},
+<p>使用 hugo 可以快速生成站点。</p>
 
-// 发布
-  publish: function() {
-    var type = Array.prototype.shift.call(arguments);
-    var funcs = this.list[type];
-    if(!funcs || funcs.length === 0) {
-	  return false;
-    }
-    for(var i = 0,func; func = funcs[i++]) {
-	  func.apply(this, arguments);
-    }
-},
-
-  unsubscribe: function(type, func) {
-    var funcs = this.list[type];
-
-    if(!funcs) { // 如果对应的发布项没有被订阅，直接返回
-	  return false;
-    }
-    if(!func) { //如果未制定取消的函数，则默认取消整个发布项后面的回调函数
-	  funcs &amp;&amp; (funcs.length = 0);
-    } else {
-	  for( var l = funcs.length - 1; l &gt;= 0; l--) { // 反向遍历函数
-	    var _func = funcs[l];
-		  if (_func === func) {
-		    funcs.splice(1, 1);
-          }
-        }
-    }
-}
-};
+<pre><code>hugo new site /yourPath
 </code></pre>
 
-<p>下面使用代码来测试</p>
+<p>使用上述命令会在你想要的路径下面生成一个站点，接着你使用<code>cd yourPath</code>进入到自己的站点里面，可以看到如下图的站点目录结构</p>
 
-<pre><code>var store = {};
-var installEvent = function( obj ){
-  for ( var i in event ){
-    obj[ i ] = event[ i ];
-    }
-}
-installEvent(store);
-
-store.subscribe('mini-skirt', fn1 = function() { // 小明订阅了这个超短裙
-  console.log('请给我寄过来');
-});
-
-store.subscribe('one-piece-dress', fn2 = function() { // 小红订阅了连衣裙
-  console.log('请通知我到货了');
-});
-
-store.unsubscribe('mini-skirt', fn1); // 删除小明的订阅
-
-store.unsubscribe('one-piece-dress', fn2); // 删除了小红的订阅
+<pre><code>▸ archetypes/
+▸ content/
+▸ data/
+▸ themes/
+▸ layouts/
+▸ static/
+config.toml
 </code></pre>
+
+<p>一般的配置信息写在 config.toml里面，文章在content里面，archetypes 里面一般放的是使用 hugo new 生成页面的时候头部配置信息格式。themes里面放的是你需要的主题。</p>
+
+<h3 id="生成博客">生成博客</h3>
+
+<p>使用 <code>hugo new yourBlogName.md</code>命令生成的页面一般放在 content 目录下面，但是到时候我们的博客可能有一些除了博客之外的页面，比如 about 页面等等，因此我们可以使用 <code>hugo new post/yourBlogName.md</code>生成一篇博客，我们把所有的博客都放在新建的一个 post 目录下面，这个 post 目录是默认放在 content 目录下面的。</p>
+
+<p>这个时候我们查看 yourBlogName.md，会发现自动配置的头部信息格式如下</p>
+
+<pre><code>---
+title: &quot;YourBlogName&quot;
+date: 2017-12-05T11:34:20+08:00
+draft: true
+---
+
+## Hello
+
+hello hugo!
+</code></pre>
+
+<p>这个头部配置的信息是和 archetypes 里面的 default.md 里面的格式一样的，是可以改成自己想要的格式的。</p>
+
+<pre><code>### default.md格式
+
+---
+title: &quot;{{ replace .TranslationBaseName &quot;-&quot; &quot; &quot; | title }}&quot;
+date: {{ .Date }}
+draft: true
+---
+</code></pre>
+
+<h3 id="安装主题">安装主题</h3>
+
+<p>你可以从<a href="https://themes.gohugo.io/">主题列表</a>里面选择自己喜欢的主题，如果你和我一样恰好也喜欢<a href="https://themes.gohugo.io/hugo-theme-cactus-plus/">Cactus Plus</a> 的话，你可以把它 clone 下来。</p>
+
+<pre><code>cd themes
+git clone https://github.com/nodejh/hugo-theme-cactus-plus.git
+</code></pre>
+
+<p>接下来只需要 <strong>按照这个主题的文档进行配置一些页面的信息</strong> 就好了 ，最后只需要运行<code>hugo server</code>命令,在浏览器里打开： <a href="http://localhost:1313">http://localhost:1313</a> 即可。</p>
+
+<h3 id="部署到-github">部署到 Github</h3>
+
+<p>这个时候我们可以部署到 Github Pages，免费托管美滋滋。只需要在你自己的 github 里面创建一个命名为 yourGithubName.github.io 的仓库。</p>
+
+<p>注意，如果你的文章头部有 draft=true ，先去掉，然后在站点根目录执行 hugo 命令生成最终页面，其实 public 目录下面存放的就是你最后生成的所有静态页面，最后只需要把 public 目录里面的文件 push 到你的仓库里面就好了。</p>
+
+<pre><code>cd public
+$ git init
+$ git remote add origin https://github.com/yourGithubName/yourGithubName.github.io.git
+$ git add -A
+$ git commit -m &quot;first commit&quot;
+$ git push -u origin master
+</code></pre>
+
+<p>在浏览器里面访问：<a href="http://yourGithubName.github.io/">http://yourGithubName.github.io/</a></p>
+
+<p>大功告成，嘻嘻。</p>
 
                 </section>
             </article>

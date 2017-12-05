@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>模块化开发 on luckyabby</title>
+    <link>http://luckyabby.com/tags/%E6%A8%A1%E5%9D%97%E5%8C%96%E5%BC%80%E5%8F%91/</link>
+    <description>Recent content in 模块化开发 on luckyabby</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Wed, 18 Oct 2017 17:23:25 +0800</lastBuildDate>
+    
+	<atom:link href="http://luckyabby.com/tags/%E6%A8%A1%E5%9D%97%E5%8C%96%E5%BC%80%E5%8F%91/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>前端模块化开发</title>
+      <link>http://luckyabby.com/post/%E5%89%8D%E7%AB%AF%E6%A8%A1%E5%9D%97%E5%8C%96%E5%BC%80%E5%8F%91/</link>
+      <pubDate>Wed, 18 Oct 2017 17:23:25 +0800</pubDate>
+      
+      <guid>http://luckyabby.com/post/%E5%89%8D%E7%AB%AF%E6%A8%A1%E5%9D%97%E5%8C%96%E5%BC%80%E5%8F%91/</guid>
+      <description>&lt;p&gt;ES6 以来，有了 module 的体系，替代了之前比较常用的 CommonJS 和 AMD 规范，使得在编译时就能确定模块的依赖关系，同时使得前端在复杂项目时可以更好的分工和规范。&lt;/p&gt;
+
+&lt;p&gt;这篇文章主要介绍前端的模块化开发，主要包括 ES6 的 module 以及三个主要的模块化开发规范 CommonJS AMD 以及 CMD。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

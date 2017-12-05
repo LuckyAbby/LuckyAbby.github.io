@@ -1,5 +1,5 @@
 ---
-title: "《es6入门》读书笔记之async/await"
+title: "《ES6入门》读书笔记之async/await"
 date: 2017-09-01T15:23:25+08:00
 tags: ['es6','JS']
 ---

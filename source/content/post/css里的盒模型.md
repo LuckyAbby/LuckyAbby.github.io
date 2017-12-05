@@ -1,6 +1,7 @@
 ---
 title: "css里面的盒模型"
 date: 2017-08-08T15:23:25+08:00
+tags: ['盒模型','CSS']
 ---
 css 的盒模型主要有两种，分为 w3c 的标准模型以及 IE 的传统模型。 它们都是对content、padding、border以及margin的计算，但是主要的区别在于计算的方式不一样
 

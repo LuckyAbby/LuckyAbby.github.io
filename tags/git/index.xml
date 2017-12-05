@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Git on luckyabby</title>
+    <link>http://luckyabby.com/tags/git/</link>
+    <description>Recent content in Git on luckyabby</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sun, 18 Jun 2017 15:23:25 +0800</lastBuildDate>
+    
+	<atom:link href="http://luckyabby.com/tags/git/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Git常用命令</title>
+      <link>http://luckyabby.com/post/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</link>
+      <pubDate>Sun, 18 Jun 2017 15:23:25 +0800</pubDate>
+      
+      <guid>http://luckyabby.com/post/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</guid>
+      <description>&lt;p&gt;在前面的介绍中说完了 Git 的基本知识，这里记录一下自己常用的 Git 命令。常用的命令其实也就那么一些，一些很复杂的命令我觉得等到用的时候去查就好了，还有最重要的是我觉得理解原理更重要。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Git基础知识</title>
+      <link>http://luckyabby.com/post/git%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</link>
+      <pubDate>Thu, 08 Jun 2017 17:22:25 +0800</pubDate>
+      
+      <guid>http://luckyabby.com/post/git%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</guid>
+      <description>Git是Git一种分布式版本控制系统，相比于之前的集中式版本控制系统有很明显的区别。 区别 集中式版本控制系统(Central VCS)中有一个中</description>
+    </item>
+    
+  </channel>
+</rss>

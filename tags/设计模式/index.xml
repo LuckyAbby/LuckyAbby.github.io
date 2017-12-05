@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>设计模式 on luckyabby</title>
+    <link>http://luckyabby.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</link>
+    <description>Recent content in 设计模式 on luckyabby</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Wed, 23 Aug 2017 15:23:25 +0800</lastBuildDate>
+    
+	<atom:link href="http://luckyabby.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>谈 JavaScript 设计模式--发布订阅模式</title>
+      <link>http://luckyabby.com/post/%E8%B0%88-javascript-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F--%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F/</link>
+      <pubDate>Wed, 23 Aug 2017 15:23:25 +0800</pubDate>
+      
+      <guid>http://luckyabby.com/post/%E8%B0%88-javascript-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F--%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F/</guid>
+      <description>发布订阅模式又称观察者模式，在现实生活中运用的十分常见。 比如某次你去商场看上了一件漂亮裙子，可是这件裙子没有你的号了，店员和你说可以先登记，</description>
+    </item>
+    
+  </channel>
+</rss>

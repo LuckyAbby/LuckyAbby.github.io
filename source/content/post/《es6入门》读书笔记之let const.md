@@ -1,6 +1,7 @@
 ---
-title: "《es6入门》读书笔记之let const"
+title: "《ES6入门》读书笔记之let const"
 date: 2017-08-28T15:23:25+08:00
+tags: ['es6','JS']
 ---
 ## let const 与 var
 

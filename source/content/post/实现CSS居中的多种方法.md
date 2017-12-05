@@ -1,8 +1,10 @@
 ---
 title: "实现CSS居中的多种方法 "
 date: 2017-09-18T15:23:25+08:00
+tags: ['居中布局','CSS']
 ---
 居中在 CSS 中用的也比较常见，总结几种自己比较熟悉的居中的写法。当然，肯定还有更多更不错的写法，对于文中不足的地方也欢迎指正。
+<!-- more -->
 
 假设现在给出这种场景：
 ```html
@@ -178,7 +180,7 @@ date: 2017-09-18T15:23:25+08:00
 
 这种就只需要把前几种的结合起来就行了，主要有三种常见的方法。
 
-### 3.1 `inline-block text-align table-cell vertical-align`
+### 3.1 inline-block text-align table-cell vertical-align
 
 ```css
 .child {
@@ -194,7 +196,7 @@ date: 2017-09-18T15:23:25+08:00
 /*子元素文字会继承居中，因此要在上面写上向左边居中*/
 ```
 
-### 3.2 `absolute + transform`
+### 3.2 absolute + transform
 
 ```css
 .parent {
@@ -208,7 +210,7 @@ date: 2017-09-18T15:23:25+08:00
 }
 ```
 
-### 3.3 `flex + align-items + justify-content`
+### 3.3 flex + align-items + justify-content
 
 ```css
 .parent {

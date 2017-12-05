@@ -43,7 +43,7 @@
     </item>
     
     <item>
-      <title>《es6入门》读书笔记之async/await</title>
+      <title>《ES6入门》读书笔记之async/await</title>
       <link>http://luckyabby.com/post/es6%E5%85%A5%E9%97%A8%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%E4%B9%8Basync-await/</link>
       <pubDate>Fri, 01 Sep 2017 15:23:25 +0800</pubDate>
       
@@ -57,7 +57,7 @@
     </item>
     
     <item>
-      <title>《es6入门》读书笔记之Generator</title>
+      <title>《ES6入门》读书笔记之Generator</title>
       <link>http://luckyabby.com/post/es6%E5%85%A5%E9%97%A8%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%E4%B9%8Bgenerator/</link>
       <pubDate>Tue, 29 Aug 2017 15:23:25 +0800</pubDate>
       
@@ -66,7 +66,7 @@
     </item>
     
     <item>
-      <title>《es6入门》读书笔记之let const</title>
+      <title>《ES6入门》读书笔记之let const</title>
       <link>http://luckyabby.com/post/es6%E5%85%A5%E9%97%A8%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%E4%B9%8Blet-const/</link>
       <pubDate>Mon, 28 Aug 2017 15:23:25 +0800</pubDate>
       
@@ -124,7 +124,7 @@
       <pubDate>Tue, 18 Jul 2017 15:23:25 +0800</pubDate>
       
       <guid>http://luckyabby.com/post/js%E9%87%8C%E9%9D%A2%E7%9A%84%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/</guid>
-      <description>为什么会有浅拷贝与深拷贝 在说浅拷贝与深拷贝的时候先说说为什么会有浅拷贝与深拷贝。在js里面，变量分为基本类型与引用类型。对于基本类型，基本类</description>
+      <description>为什么会有浅拷贝与深拷贝 在说浅拷贝与深拷贝的时候先说说为什么会有浅拷贝与深拷贝。在js里面，变量分为基本类型与引用类型。 对于基本类型，基本类</description>
     </item>
     
     <item>
@@ -133,7 +133,7 @@
       <pubDate>Sun, 09 Jul 2017 18:23:25 +0800</pubDate>
       
       <guid>http://luckyabby.com/post/%E6%88%91%E6%89%80%E7%90%86%E8%A7%A3%E7%9A%84restful-api/</guid>
-      <description>&lt;p&gt;在解释我所理解的 RESTful api 的时候，先说说为什么会有 RESTful 结构， 因为之前的网页都是没有做到前后端分离的，使用一些类似于 JSP 进行嵌套，这样子就不易于前后端协作开发。所以就需要规范一些 api ，使得前后端通过 api 就能明晰地进行协作开发，只要按照 api 约定好的格式去传数据就好了。而这个 RESTful api就是 REST 风格的接口。至于 REST 风格是什么，英文全称是 REpresentational State Transfer，中文翻译为表现层状态转移，具体是什么我也看的很懵。。。&lt;/p&gt;
+      <description>&lt;p&gt;在解释我所理解的 RESTful api 的时候，先说说为什么会有 RESTful 结构， 因为之前的网页都是没有做到前后端分离的，使用一些类似于 JSP 进行嵌套，这样子就不易于前后端协作开发。所以就需要规范一些 api ，使得前后端通过 api 就能明晰地进行协作开发，只要按照 api 约定好的格式去传数据就好了。&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
     </item>
@@ -181,22 +181,18 @@
 
 &lt;p&gt;串长：串中字符的个数（n≥0）. n=0 时称为空串。空白串：由一个或多个空格符组成的串。&lt;/p&gt;
 
-&lt;p&gt;空串和空白串的区别是：空串(Null String)是指长度为零的串；而空白串(Blank String),是指包含一个或多个空白字符的字符串。
+&lt;p&gt;空串和空白串的区别是：空串(Null String)是指长度为零的串；而空白串(Blank String),是指包含一个或多个空白字符的字符串。&lt;/p&gt;
 
-先弄清楚几个基本概念&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
-      <title>C语言实现数据结构--线性表</title>
+      <title>C语言实现数据结构--队列</title>
       <link>http://luckyabby.com/post/c%E8%AF%AD%E8%A8%80%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E9%98%9F%E5%88%97/</link>
       <pubDate>Mon, 22 May 2017 15:29:25 +0800</pubDate>
       
       <guid>http://luckyabby.com/post/c%E8%AF%AD%E8%A8%80%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E9%98%9F%E5%88%97/</guid>
-      <description>&lt;p&gt;队列 (Queue)：简称队，是另一种限定性的线性表，它只允许在表的一端插入元素，而在另一端删除元素。q=(a1, a2, a3, … an),其中a1为队头，an为队尾。&lt;/p&gt;
-
-&lt;p&gt;队列在生活中也比较常见，例如购物排队——新来的成员总是加入队尾,每次离开的成员总是队列头上的。&lt;/p&gt;
-
-&lt;p&gt;队列按存储方式可以分为两种：顺序队列和链队列。
+      <description>&lt;p&gt;队列 (Queue)：简称队，是另一种限定性的线性表，它只允许在表的一端插入元素，而在另一端删除元素。q=(a1, a2, a3, … an),其中a1为队头，an为队尾。
 &lt;/p&gt;</description>
     </item>
     
@@ -215,7 +211,10 @@
       <pubDate>Thu, 18 May 2017 15:23:25 +0800</pubDate>
       
       <guid>http://luckyabby.com/post/c%E8%AF%AD%E8%A8%80%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84--%E7%BA%BF%E6%80%A7%E8%A1%A8/</guid>
-      <description></description>
+      <description>&lt;p&gt;线性表是一种最简单的线性结构。
+线性结构是一个数据元素的有序集。比较典型的线性结构：线性表、栈、队列、串等。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -224,7 +223,9 @@
       <pubDate>Thu, 06 Apr 2017 19:22:25 +0800</pubDate>
       
       <guid>http://luckyabby.com/post/%E5%8D%81%E5%88%86%E9%92%9F%E8%AF%BB%E6%87%82-javascript-%E4%B8%AD%E7%9A%84-this/</guid>
-      <description></description>
+      <description>&lt;p&gt;最近刚熬过了一大波考试和大作业，半个月没更文还有点心生愧疚Orz。今天就总结一下 JS 里面的 this，之前面试的时候也被面试官问到过，自己下来就整理了一下。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>

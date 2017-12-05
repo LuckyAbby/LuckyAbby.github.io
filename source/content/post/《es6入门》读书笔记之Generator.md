@@ -1,8 +1,11 @@
 ---
-title: "《es6入门》读书笔记之Generator"
+title: "《ES6入门》读书笔记之Generator"
 date: 2017-08-29T15:23:25+08:00
+tags: ['es6','JS']
 ---
 Generator 函数有两个特征:1. function 和函数名之间有一个`*`号。2. 函数体内部使用 yield 表达式，定义不同的内部状态，表达函数暂停执行。
+
+<!-- more -->
 
 执行 Generator 函数会返回一个遍历器对象。这个遍历器函数可以使用 next 方法遍历 Generator 函数内部的每一个状态。比如：
 ```

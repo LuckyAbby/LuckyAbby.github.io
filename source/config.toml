@@ -18,9 +18,9 @@ hasCJKLanguage = true
 	enableToc = true
 
 	# Disqus comment
-	disqusShortname = ""
+	disqusShortname = "luckyabby"
 	# Enable disqus comment, true|false
-	enableDisqus = false
+	enableDisqus = true
 
 	# Enable summary, true|false
 	enableSummary = true

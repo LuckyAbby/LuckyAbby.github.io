@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>luckyabby</title>
-    <link>http://luckyabby.com/categories/</link>
-    <description>Recent content on luckyabby</description>
+    <title>闭包 on luckyabby</title>
+    <link>http://luckyabby.com/tags/%E9%97%AD%E5%8C%85/</link>
+    <description>Recent content in 闭包 on luckyabby</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Fri, 08 Dec 2017 16:11:59 +0800</lastBuildDate>
     
-	<atom:link href="http://luckyabby.com/categories/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://luckyabby.com/tags/%E9%97%AD%E5%8C%85/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>

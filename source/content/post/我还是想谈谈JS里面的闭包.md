@@ -158,6 +158,7 @@ newClosure(); // 0 1 2 3 4
 **非官方劝退：前端开发，从入门到放弃**
 
 参考链接：
+
 [闭包](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Closures)
 
 [闭包的概念、形式与应用](https://www.ibm.com/developerworks/cn/linux/l-cn-closure/)

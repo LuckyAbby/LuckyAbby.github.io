@@ -21,7 +21,7 @@ draft = false
 
 现在，我就发大绝招了，徒手撸一个闭包。
 
-```
+```js
 function sayHello(name) {
   let str = `Hello,${name}`;
   function say() {
@@ -45,7 +45,7 @@ myHello(); // Hello,abby
 #### 栗子1: 闭包并不是一定需要 return 某个函数
 
 虽然常见的闭包都是 return 出来一个函数，但是闭包并不一定非要 return，return 出一个函数只是为了能在作用域范围之外访问一个变量，我们用另一种方式也能做到，比如：
-```
+```js
 let say;
 function sayHello(name) {
   let str = `Hello,${name}`;
@@ -63,7 +63,7 @@ say(); // Hello,abby
 #### 栗子2: 同一个调用函数生成同一个闭包环境，在里面声明的所有函数同时具有这个环境里面自由变量的引用。
 
 这句话说起来很绕，其实我给个很简单的例子就可以了。
-```
+```js
 let get, up, down
 function setUp() {
   let number = 20
@@ -88,7 +88,7 @@ get(); // 21
 #### 栗子3: 每一个调用函数都会创建不同的闭包环境。
 
 还是给一个很简单的例子。
-```
+```js
 function newClosure() {
   let array = [1, 2];
   return function(num) {
@@ -106,7 +106,7 @@ myClosure(5); // array:1,2,3,5
 
 #### 栗子4: 在循环里面创建闭包
 在 let 被引入之前，一个常见的错误就是在循环中创建闭包，例如：
-```
+```js
 function newClosure() {
   for(var i = 0; i < 5; i++) {
     setTimeout(function() {
@@ -121,7 +121,7 @@ newClosure(); // 5个5
 这里我要说的是我们如何才能得到我们想要的01234,在这里有两种做法。
 
 一种是 **创建一个新的闭包对象，这样每个闭包对象里面的变量就互不影响**。例如下面的代码种每次 log(i)都会创建不同的闭包对象，所有的回调函数不会指向同一个环境。
-```
+```js
 function log(i) {
   return function() {
     console.log(i);
@@ -137,7 +137,7 @@ newClosure(); // 0 1 2 3 4
 ```
 
 另一种做法就是使用自执行函数，外部的匿名函数会立即执行，并把 i 作为它的参数，此时函数内 e 变量就拥有了 i 的一个拷贝。当传递给 setTimeout 的匿名函数执行时，它就拥有了对 e 的引用，而这个值是不会被循环改变的。写法如下：
-```
+```js
 function newClosure() {
   for(var i = 0; i < 5; i++) {
     (function(e) {

@@ -168,3 +168,5 @@ newClosure(); // 0 1 2 3 4
 [闭包和引用](http://bonsaiden.github.io/JavaScript-Garden/zh/#function.closures)
 
 [深入理解javascript原型和闭包（15）——闭包](http://www.cnblogs.com/wangfupeng1988/p/3994065.html)
+
+[how do javascript closures work](https://stackoverflow.com/questions/111102/how-do-javascript-closures-work)

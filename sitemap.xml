@@ -174,12 +174,6 @@
   </url>
   
   <url>
-    <loc>http://luckyabby.com/tags/</loc>
-    <lastmod>2018-01-02T16:22:57+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>http://luckyabby.com/tags/c/</loc>
     <lastmod>2017-05-30T15:33:25+08:00</lastmod>
     <priority>0</priority>
@@ -266,6 +260,12 @@
   <url>
     <loc>http://luckyabby.com/tags/%E5%B1%85%E4%B8%AD%E5%B8%83%E5%B1%80/</loc>
     <lastmod>2017-09-18T15:23:25+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://luckyabby.com/tags/%E6%80%BB%E7%BB%93/</loc>
+    <lastmod>2018-01-02T16:22:57+08:00</lastmod>
     <priority>0</priority>
   </url>
   

@@ -31,9 +31,9 @@ hasCJKLanguage = true
 	enableGoogleAnalytics = true
 
 	# Enable Baidu Analytics
-	enableBaiduAnalytics = true
+	enableBaiduAnalytics = false
 	# Baidu Analytics Code
-	baiduAnalytics = '39843ea392201290bd6f76173d2e1633'
+	baiduAnalytics = ''
 
 	# Add custom assets with their paths relative to the static folder
 	customCSS = []

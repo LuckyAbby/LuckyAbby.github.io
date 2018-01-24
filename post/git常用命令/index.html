@@ -48,8 +48,8 @@
                     </h1>
                     <h2 class="headline">
                     Jun 18, 2017 15:23
-                    · 2411 words
-                    · 5 minutes read
+                    · 2713 words
+                    · 6 minutes read
                       <span class="tags">
                       
                       
@@ -80,6 +80,7 @@
 <li><a href="#reset">reset</a></li>
 <li><a href="#撤销修改">撤销修改</a></li>
 <li><a href="#远程仓库">远程仓库</a></li>
+<li><a href="#分支管理">分支管理</a></li>
 <li><a href="#参考">参考：</a></li>
 </ul></li>
 </ul></li>
@@ -182,6 +183,14 @@ git &lt;verb&gt; --help
 <p>说完拉取数据之后，还有一个命令<code>git push [remote-name] [branch-name]</code>可以将本地的数据推到远程仓库上面，如果在推数据前，已经有其他人推送了若干更新，那这个 push 就会被拒绝。必须先把他们的更新抓取到本地，合并到自己的项目中，然后才可以再次推送。</p>
 
 <p>对远程仓库如果想更名可以使用<code>git remote rename &lt;name&gt; &lt;anothername&gt;</code>命令，如果想删除，可以使用<code>git remote rm &lt;name&gt;</code>。</p>
+
+<h3 id="分支管理">分支管理</h3>
+
+<p>有时候当新建的分支多了之后，对一些分支进行管理的时候可能会遇到不知道哪些分支已经合并过的问题。</p>
+
+<p>这个时候我们可以使用<code>git branche --merged</code>来列出所有已经合并到当前分支的所有分支。注意当前分支就是前面带有<code>*</code>的分支。同样我们也可以使用<code>git branch --no-merged</code>来列出所有还未被合并到当前分支的分支。</p>
+
+<p>当你对一个已经合并过的分支使用<code>git branch -d branchName</code>的时候会直接删除这个分支，但是对一个还未合并过的分支使用这个命令的时候会提示你<code>error: The branch 'test' is not fully merged.If you are sure you want to delete it, run 'git branch -D test'.</code>。但是当你确实是想删掉这个分支的话，也可以使用<code>git branch -D branchName</code>删掉这个未合并过的分支</p>
 
 <p>上面罗列出来的就是常用的一些命令，先写到这里，下次再对一些内容进行补充。</p>
 

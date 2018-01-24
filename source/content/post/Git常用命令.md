@@ -86,6 +86,13 @@ git <verb> --help
 
 对远程仓库如果想更名可以使用`git remote rename <name> <anothername>`命令，如果想删除，可以使用`git remote rm <name>`。
 
+### 分支管理
+有时候当新建的分支多了之后，对一些分支进行管理的时候可能会遇到不知道哪些分支已经合并过的问题。
+
+这个时候我们可以使用`git branche --merged`来列出所有已经合并到当前分支的所有分支。注意当前分支就是前面带有`*`的分支。同样我们也可以使用`git branch --no-merged`来列出所有还未被合并到当前分支的分支。
+
+当你对一个已经合并过的分支使用`git branch -d branchName`的时候会直接删除这个分支，但是对一个还未合并过的分支使用这个命令的时候会提示你`error: The branch 'test' is not fully merged.If you are sure you want to delete it, run 'git branch -D test'.`。但是当你确实是想删掉这个分支的话，也可以使用`git branch -D branchName`删掉这个未合并过的分支
+
 上面罗列出来的就是常用的一些命令，先写到这里，下次再对一些内容进行补充。
 
 ### 参考：

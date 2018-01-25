@@ -48,7 +48,7 @@
                     </h1>
                     <h2 class="headline">
                     Jun 18, 2017 15:23
-                    · 2713 words
+                    · 2763 words
                     · 6 minutes read
                       <span class="tags">
                       
@@ -132,7 +132,7 @@ git &lt;verb&gt; --help
 
 <p>对未暂存的文件使用<code>git diff</code>命令能查看工作区这次修改的文件和上次提交的文件之间的区别，使用<code>git status</code>命令是查看具体有哪些文件有改动，在使用<code>git status</code>之后推荐使用<code>git diff</code>来查看具体的改动是什么。</p>
 
-<p>注意这里 <code>git diff</code>是查看未暂存的文件和上次提交的区别，如果是查看已经暂存的文件和上次提交的文件的区别使用 <code>git diff --cached</code>。</p>
+<p>注意这里 <code>git diff</code>是查看未暂存的文件和暂存区域快照的区别，也就是修改之后还没有暂存起来的变化内容。如果是查看已经暂存的文件和上次提交的快照文件的区别使用 <code>git diff --cached</code>（Git 1.6.1 及更高版本还允许使用 <code>git diff --staged</code>）。</p>
 
 <h3 id="移除文件">移除文件</h3>
 

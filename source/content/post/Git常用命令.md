@@ -42,11 +42,25 @@ git <verb> --help
 注意这里 `git diff`是查看未暂存的文件和暂存区域快照的区别，也就是修改之后还没有暂存起来的变化内容。如果是查看已经暂存的文件和上次提交的快照文件的区别使用 `git diff --cached`（Git 1.6.1 及更高版本还允许使用 `git diff --staged`）。
 
 ### 移除文件
-移除文件主要使用的有两个命令`rm`,`git rm`。移除文件主要是从暂存区移除文件，然后提交，这时候可以使用`git rm`命令,然后再提交，也可以使用`rm`命令，然后再`git add`,`git commit`。
+移除文件主要使用的有两个命令`rm`,`git rm`。
 
-这两个命令最主要的区别就是使用`rm`仅仅是删除工作区域的文件，需要再使用`git add`命令，而`git rm`相当于删除暂存区的文件，可以一步做完。
+对于使用`git add`加入暂存区但是还未提交的文件，可以使用`git rm -f`命令,也可以使用`rm`命令，然后再`git add`。
 
-如果在删除之前修改过并且放在暂存区之后就需要使用强制删除 `-f` 选项。还有一种情况是有时候我们只希望删除暂存区的一些不起作用的文件但是希望在工作区保留这些文件，可以使用`git rm --cached`命令。
+对于已经提交的文件，可以使用`git rm`命令,然后使用`git commit`,也可以使用`rm`命令，然后再`git add`,`git commit`。
+
+这两个命令最主要的区别就是使用`rm`仅仅是删除工作区域的文件，需要再使用`git add/rm`命令，而`git rm`相当于删除暂存区的文件，可以一步做完。
+
+还有一种情况：我们想删除一些已经加入暂存区或者已经提交的文件但是希望在工作区保留这些文件，例如应该加入.gitignore中的一些文件误上传，可以使用`git rm --cached`命令。
+
+### 重命名
+对于加入暂存区的文件或者已经提交的文件可以使用`git mv name.js othername`来重命名文件。对于已经提交的文件，使用该命令相当于运行了下面三条命令：`mv name.js othername` `git rm name.js` `git add othername`，相比而言,`git mv`要轻便很多
+
+### 查看历史提交
+查看历史消息一般使用`git log`，这个命令有很多参数可以使用，例如 -p 选项可以展开显示每次提交的内容差异等等，这里不细说。
+
+这里可以推荐使用一个打log更方便的命令`git config --global alias.lo "log --graph --pretty=format:'%Cred%h%Creset - %C(yellow)%an%Creset<%ae> ,%C(bold blue)%ar%Creset :%Cgreen%s%Creset'"`
+
+输入之后再输入`git lo`就可以打出更简单易懂的信息了。这里用的其实就是`pretty=format`参数来格式化我们自己想要的输出。其中`%C`可以来规定颜色。
 
 ### 修改前一次提交
 如果在提交的时候发现自己的commit的信息写错了，你想修改这一次提交的信息，就可以使用`git commit -- amend`命令。

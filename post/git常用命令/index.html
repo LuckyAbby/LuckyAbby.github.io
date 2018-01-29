@@ -48,7 +48,7 @@
                     </h1>
                     <h2 class="headline">
                     Jun 18, 2017 15:23
-                    · 3097 words
+                    · 3210 words
                     · 7 minutes read
                       <span class="tags">
                       
@@ -177,6 +177,8 @@ git &lt;verb&gt; --help
 <p>可以使用<code>git log</code>查看每个 commit 的 id，也可以使用<code>git reflog</code>，这个命令记录了每一次提交，如果自己想退回到某个版本去，可以使用<code>git reset --hard HEAD^</code>，在 git 中用 HEAD 表示当前版本， HEAD^表示上一个版本，如果想退回到前几十个版本之前，可以直接使用<code>git reset --hard commitID</code>就可以直接将HEAD指针指向那个版本。</p>
 
 <h3 id="撤销修改">撤销修改</h3>
+
+<p>可以使用<code>git commit --amend</code>修改最后一次提交，比如漏加文件或者提交信息写错了想修改。使用这个命令如果不增加新的文件的话会重新编辑你的提交信息，如果漏加文件，使用<code>git add</code>增加文件之后再使用这个命令会使得提交合并成一次提交。</p>
 
 <p>如果自己将工作区的某个文件改动完之后<strong>还未添加到暂存区</strong>发现之前的改动是完全没有必要的，这个时候也有一个命令可以撤销之前的修改，就是<code>git checkout -- file</code>。</p>
 

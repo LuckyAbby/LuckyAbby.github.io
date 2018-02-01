@@ -90,7 +90,7 @@ git <verb> --help
 ### 远程仓库
 在本地建了一个仓库之后如果需要关联到某个远程仓库进行文件的上传下拉等操作，需要先使用`git remote add <name> <url>`将远程的仓库关联到本地仓库，这里的 name 是自己为这个仓库取得名字，url是远程仓库的地址。
 
-可以使用`git remote -v`来查看自己的仓库关联了哪些远程仓库，关联到远程仓库之后可以使用`git fetch <remote-name>`将远程分支上面的数据抓取到本地。
+可以使用`git remote -v`来查看自己的仓库关联了哪些远程仓库，关联到远程仓库之后可以使用`git fetch <remote-name>`将远程分支上面的数据抓取到本地。在克隆完某个项目后，至少可以看到一个名为 origin 的远程库，**Git 默认使用这个名字来标识你所克隆的原始仓库**：
 
 之后可以使用`git branch -a`查看自己的分支并可以使用`git checkout <branch-name>`切换到自己新抓取的那个分支上面看看都下拉了什么，也可以使用`git merge`合并分支。
 
@@ -98,7 +98,7 @@ git <verb> --help
 
 这样我们有另一个命令叫`git pull`，这个命令自动抓取数据下来，会将远端分支自动合并到本地仓库中当前分支。相当于fetch + merge。
 
-说完拉取数据之后，还有一个命令`git push [remote-name] [branch-name]`可以将本地的数据推到远程仓库上面，如果在推数据前，已经有其他人推送了若干更新，那这个 push 就会被拒绝。必须先把他们的更新抓取到本地，合并到自己的项目中，然后才可以再次推送。
+说完拉取数据之后，还有一个命令`git push [remote-name] [branch-name]`(`git push origin master`)可以将本地的数据推到远程仓库上面，如果在推数据前，已经有其他人推送了若干更新，那这个 push 就会被拒绝。必须先把他们的更新抓取到本地，合并到自己的项目中，然后才可以再次推送。
 
 对远程仓库如果想更名可以使用`git remote rename <name> <anothername>`命令，如果想删除，可以使用`git remote rm <name>`。
 

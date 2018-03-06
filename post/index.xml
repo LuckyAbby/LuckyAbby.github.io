@@ -6,10 +6,19 @@
     <description>Recent content in Posts on luckyabby</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 02 Jan 2018 16:22:57 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 06 Mar 2018 21:01:09 +0800</lastBuildDate>
     
 	<atom:link href="http://luckyabby.com/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>踩坑篇--使用 fetch 上传文件</title>
+      <link>http://luckyabby.com/post/%E8%B8%A9%E5%9D%91%E7%AF%87/</link>
+      <pubDate>Tue, 06 Mar 2018 21:01:09 +0800</pubDate>
+      
+      <guid>http://luckyabby.com/post/%E8%B8%A9%E5%9D%91%E7%AF%87/</guid>
+      <description>这个坑是自己最近使用 fetch 给后端上传文件的时候踩到的，需求很简单，就是需要给后端上传一个文件以及需要的几个字段。看，简单吧。。 于是，撸起袖子准备</description>
+    </item>
     
     <item>
       <title>2017年,一切都过得很温暖</title>

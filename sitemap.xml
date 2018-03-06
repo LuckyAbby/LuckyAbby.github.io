@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://luckyabby.com/post/%E8%B8%A9%E5%9D%91%E7%AF%87/</loc>
+    <lastmod>2018-03-06T21:01:09+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://luckyabby.com/post/2017%E5%B9%B4%E4%B8%80%E5%88%87%E9%83%BD%E8%BF%87%E5%BE%97%E5%BE%88%E6%B8%A9%E6%9A%96/</loc>
     <lastmod>2018-01-02T16:22:57+08:00</lastmod>
   </url>
@@ -169,7 +174,7 @@
   
   <url>
     <loc>http://luckyabby.com/categories/</loc>
-    <lastmod>2018-01-02T16:22:57+08:00</lastmod>
+    <lastmod>2018-03-06T21:01:09+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -181,7 +186,7 @@
   
   <url>
     <loc>http://luckyabby.com/categories/</loc>
-    <lastmod>2018-01-02T16:22:57+08:00</lastmod>
+    <lastmod>2018-03-06T21:01:09+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -217,7 +222,7 @@
   
   <url>
     <loc>http://luckyabby.com/tags/js/</loc>
-    <lastmod>2017-12-08T16:11:59+08:00</lastmod>
+    <lastmod>2018-03-06T21:01:09+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -229,7 +234,7 @@
   
   <url>
     <loc>http://luckyabby.com/post/</loc>
-    <lastmod>2018-01-02T16:22:57+08:00</lastmod>
+    <lastmod>2018-03-06T21:01:09+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -247,7 +252,7 @@
   
   <url>
     <loc>http://luckyabby.com/</loc>
-    <lastmod>2018-01-02T16:22:57+08:00</lastmod>
+    <lastmod>2018-03-06T21:01:09+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -290,6 +295,12 @@
   <url>
     <loc>http://luckyabby.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</loc>
     <lastmod>2017-08-23T15:23:25+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://luckyabby.com/tags/%E8%B8%A9%E5%9D%91/</loc>
+    <lastmod>2018-03-06T21:01:09+08:00</lastmod>
     <priority>0</priority>
   </url>
   

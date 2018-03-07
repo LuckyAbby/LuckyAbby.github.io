@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>luckyabby</title>
+    <title>Categories on luckyabby</title>
     <link>http://luckyabby.com/categories/</link>
-    <description>Recent content on luckyabby</description>
+    <description>Recent content in Categories on luckyabby</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Tue, 06 Mar 2018 21:01:09 +0800</lastBuildDate>
@@ -12,30 +12,12 @@
     
     
     <item>
-      <title>踩坑篇--使用 fetch 上传文件</title>
-      <link>http://luckyabby.com/post/%E8%B8%A9%E5%9D%91%E7%AF%87/</link>
+      <title></title>
+      <link>http://luckyabby.com/categories/</link>
       <pubDate>Tue, 06 Mar 2018 21:01:09 +0800</pubDate>
       
-      <guid>http://luckyabby.com/post/%E8%B8%A9%E5%9D%91%E7%AF%87/</guid>
-      <description>这个坑是自己最近使用 fetch 给后端上传文件的时候踩到的，需求很简单，就是需要给后端上传一个文件以及需要的几个字段。看，简单吧。。 于是，撸起袖子准备</description>
-    </item>
-    
-    <item>
-      <title>2017年,一切都过得很温暖</title>
-      <link>http://luckyabby.com/post/2017%E5%B9%B4%E4%B8%80%E5%88%87%E9%83%BD%E8%BF%87%E5%BE%97%E5%BE%88%E6%B8%A9%E6%9A%96/</link>
-      <pubDate>Tue, 02 Jan 2018 16:22:57 +0800</pubDate>
-      
-      <guid>http://luckyabby.com/post/2017%E5%B9%B4%E4%B8%80%E5%88%87%E9%83%BD%E8%BF%87%E5%BE%97%E5%BE%88%E6%B8%A9%E6%9A%96/</guid>
-      <description>总结是从自己的公众号上复制过来的，2017年总的来说，没有达到之前的预期，但是一切却也过的还不错。 一月 愿得一人心 白首不分离 我和node的相遇</description>
-    </item>
-    
-    <item>
-      <title>我还是想谈谈JS里面的闭包</title>
-      <link>http://luckyabby.com/post/%E6%88%91%E8%BF%98%E6%98%AF%E6%83%B3%E8%B0%88%E8%B0%88js%E9%87%8C%E9%9D%A2%E7%9A%84%E9%97%AD%E5%8C%85/</link>
-      <pubDate>Fri, 08 Dec 2017 16:11:59 +0800</pubDate>
-      
-      <guid>http://luckyabby.com/post/%E6%88%91%E8%BF%98%E6%98%AF%E6%83%B3%E8%B0%88%E8%B0%88js%E9%87%8C%E9%9D%A2%E7%9A%84%E9%97%AD%E5%8C%85/</guid>
-      <description>其实自己不太写闭包了的，就那么一两句话谁都能背出来。可是闭包偏偏就是那种初学者十次面试八次可能会遇到，答不上来就是送命题、答得出来也不加分题</description>
+      <guid>http://luckyabby.com/categories/</guid>
+      <description></description>
     </item>
     
   </channel>

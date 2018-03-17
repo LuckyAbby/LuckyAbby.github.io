@@ -111,6 +111,27 @@ git <verb> --help
 
 上面罗列出来的就是常用的一些命令，先写到这里，下次再对一些内容进行补充。
 
+### 挑拣(cherry-pick)之前的历史
+
+挑拣类似于针对某次特定提交的衍合。它首先提取某次提交的补丁，然后试着应用在当前分支上。如果某个特性分支上有多个提交，但你只想引入其中之一就可以使用这种方法。
+
+假设现在你在 lyt/bugfix 分支上做了两个 commit 提交，但是你只想合并其中第一个提交，因此你可以使用 cherry-pick 挑选出这一个你想合并的 commit 。
+
+![](http://ojzeprg7w.bkt.clouddn.com/gitnn1.png)
+
+代码如下：
+![](http://ojzeprg7w.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-16%20%E4%B8%8B%E5%8D%885.24.55.png)
+
+之后你的提交记录就会变成这样：
+
+![](http://ojzeprg7w.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-16%20%E4%B8%8B%E5%8D%885.43.55.png)
+
+注意此时的 c5' 和之前的 c5 虽然内容是一样的，但是会得到不同的SHA-1值，因为应用日期不同。
+
+如果在挑拣的过程遇到冲突，手动解决冲突，再 continue 代码如下：
+
+![](http://ojzeprg7w.bkt.clouddn.com/gitnnnn3.png)
+
 ### 参考：
 
 《Pro Git》

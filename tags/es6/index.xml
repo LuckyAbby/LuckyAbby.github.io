@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Es6 on luckyabby</title>
+    <link>http://luckyabby.com/tags/es6/</link>
+    <description>Recent content in Es6 on luckyabby</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 01 Sep 2017 15:23:25 +0800</lastBuildDate>
+    
+	<atom:link href="http://luckyabby.com/tags/es6/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>《ES6入门》读书笔记之async/await</title>
+      <link>http://luckyabby.com/posts/es6%E5%85%A5%E9%97%A8%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%E4%B9%8Basync-await/</link>
+      <pubDate>Fri, 01 Sep 2017 15:23:25 +0800</pubDate>
+      
+      <guid>http://luckyabby.com/posts/es6%E5%85%A5%E9%97%A8%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%E4%B9%8Basync-await/</guid>
+      <description>&lt;h2 id=&#34;async-函数&#34;&gt;async 函数&lt;/h2&gt;
+
+&lt;h3 id=&#34;async&#34;&gt;async&lt;/h3&gt;
+
+&lt;p&gt;async 函数主要用来处理异步，相比于 Generator 和 yield ，主要有下面几点优点：
+&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>《ES6入门》读书笔记之Generator</title>
+      <link>http://luckyabby.com/posts/es6%E5%85%A5%E9%97%A8%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%E4%B9%8Bgenerator/</link>
+      <pubDate>Tue, 29 Aug 2017 15:23:25 +0800</pubDate>
+      
+      <guid>http://luckyabby.com/posts/es6%E5%85%A5%E9%97%A8%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%E4%B9%8Bgenerator/</guid>
+      <description>Generator 函数有两个特征:1. function 和函数名之间有一个*号。2. 函数体内部使用 yield 表达式，定义不同的内部状态，表达函数暂停执行。 执行 Generator 函数会返回一个遍历器</description>
+    </item>
+    
+    <item>
+      <title>《ES6入门》读书笔记之let const</title>
+      <link>http://luckyabby.com/posts/es6%E5%85%A5%E9%97%A8%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%E4%B9%8Blet-const/</link>
+      <pubDate>Mon, 28 Aug 2017 15:23:25 +0800</pubDate>
+      
+      <guid>http://luckyabby.com/posts/es6%E5%85%A5%E9%97%A8%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%E4%B9%8Blet-const/</guid>
+      <description>&lt;h2 id=&#34;let-const-与-var&#34;&gt;let const 与 var&lt;/h2&gt;
+
+&lt;p&gt;let 与 const 创建了块级作用域。&lt;/p&gt;
+
+&lt;h4 id=&#34;为什么要有块级作用域&#34;&gt;为什么要有块级作用域&lt;/h4&gt;
+
+&lt;p&gt;我觉得这也是 ES5 中还没有完善的地方之一，没有块级作用域会导致一大堆问题。比如：控制计数的循环变量会泄漏成全局变量，在使用块级作用域的比如 if 语句以及 for while 循环等地方都会导致问题出现。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>ES6--扩展运算符与剩余操作符</title>
+      <link>http://luckyabby.com/posts/es6--%E6%89%A9%E5%B1%95%E8%BF%90%E7%AE%97%E7%AC%A6%E4%B8%8E%E5%89%A9%E4%BD%99%E6%93%8D%E4%BD%9C%E7%AC%A6/</link>
+      <pubDate>Mon, 20 Mar 2017 19:23:25 +0800</pubDate>
+      
+      <guid>http://luckyabby.com/posts/es6--%E6%89%A9%E5%B1%95%E8%BF%90%E7%AE%97%E7%AC%A6%E4%B8%8E%E5%89%A9%E4%BD%99%E6%93%8D%E4%BD%9C%E7%AC%A6/</guid>
+      <description>&lt;p&gt;扩展运算符与剩余操作符都是以三点开头的操作符，二者长的很像，只是在用法上有些差别。它们已经被 ES6 数组支持，能解决很多之前 arguments 解决起来很麻烦的问题。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

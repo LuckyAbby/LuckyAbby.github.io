@@ -13,19 +13,19 @@
     
     <item>
       <title>谈HTTP/1.0 /1.1 /2.0</title>
-      <link>http://luckyabby.com/post/%E8%B0%88http1.0-1.1-2.0/</link>
+      <link>http://luckyabby.com/posts/%E8%B0%88http1.0-1.1-2.0/</link>
       <pubDate>Fri, 15 Sep 2017 19:12:39 +0800</pubDate>
       
-      <guid>http://luckyabby.com/post/%E8%B0%88http1.0-1.1-2.0/</guid>
+      <guid>http://luckyabby.com/posts/%E8%B0%88http1.0-1.1-2.0/</guid>
       <description>HTTP 协议定义的是七层协议中的应用层，TCP 协议定义的是七层协议中的传输层。HTTP 连接是基于 TCP 的。所以很多 HTTP 协议的瓶颈都是基于 TCP 协议的。比如 TCP</description>
     </item>
     
     <item>
       <title>浅谈HTTP缓存</title>
-      <link>http://luckyabby.com/post/%E6%B5%85%E8%B0%88http%E7%BC%93%E5%AD%98/</link>
+      <link>http://luckyabby.com/posts/%E6%B5%85%E8%B0%88http%E7%BC%93%E5%AD%98/</link>
       <pubDate>Fri, 18 Aug 2017 19:23:25 +0800</pubDate>
       
-      <guid>http://luckyabby.com/post/%E6%B5%85%E8%B0%88http%E7%BC%93%E5%AD%98/</guid>
+      <guid>http://luckyabby.com/posts/%E6%B5%85%E8%B0%88http%E7%BC%93%E5%AD%98/</guid>
       <description>缓存是指存储指定资源的一份拷贝，并在下次请求该资源时提供该拷贝的技术，当 web 缓存发现请求的资源已经被存储，它会拦截请求，返回该资源的拷贝，而不</description>
     </item>
     

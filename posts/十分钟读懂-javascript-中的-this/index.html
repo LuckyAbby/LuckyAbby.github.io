@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		
+		<meta name="description" content="My Blog">
+		<meta name="generator" content="Hugo 0.40" />
+		<title>十分钟读懂 javascript 中的 this &middot; luckyabby</title>
+		<link rel="shortcut icon" href="http://luckyabby.com/images/favicon.ico">
+		<link rel="stylesheet" href="http://luckyabby.com/css/style.css">
+		<link rel="stylesheet" href="http://luckyabby.com/css/highlight.css">
+
+		
+		<link rel="stylesheet" href="http://luckyabby.com/css/font-awesome.min.css">
+		
+
+		
+		<link href="http://luckyabby.com/index.xml" rel="alternate" type="application/rss+xml" title="luckyabby" />
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://luckyabby.com/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://luckyabby.com/posts'>Archive</a>
+	<a href='http://luckyabby.com/tags'>Tags</a>
+	<a href='http://luckyabby.com/about'>About</a>
+
+	
+
+	
+	<a class="cta" href="http://luckyabby.com/index.xml">Subscribe</a>
+	
+</nav>
+
+
+        <section id="wrapper" class="post">
+            <article>
+                <header>
+                    <h1>
+                        十分钟读懂 javascript 中的 this
+                    </h1>
+                    <h2 class="headline">
+                    Apr 6, 2017 19:22
+                    · 0 word
+                    · 0 minute read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://luckyabby.com/tags/js">JS</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                  
+                    <div id="toc">
+                      <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#1-作为普通函数被调用">1. 作为普通函数被调用</a></li>
+<li><a href="#2-作为对象的属性被调用">2. 作为对象的属性被调用</a></li>
+<li><a href="#3-作为构造函数被调用">3. 作为构造函数被调用</a></li>
+<li><a href="#4-作为-call-apply-bind-方法的调用">4. 作为 call/apply/bind 方法的调用</a></li>
+<li><a href="#5-严格模式下面">5. 严格模式下面</a></li>
+<li><a href="#6-settimeout-setinterval中的this">6. setTimeout、setInterval中的this</a></li>
+<li><a href="#7-构造函数-prototype-属性">7. 构造函数 prototype 属性</a></li>
+<li><a href="#8-eval函数">8. Eval函数</a></li>
+<li><a href="#9-箭头函数">9. 箭头函数</a></li>
+</ul></li>
+</ul>
+</nav>
+                    </div>
+                  
+                
+                <section id="post-body">
+                    <p>最近刚熬过了一大波考试和大作业，半个月没更文还有点心生愧疚Orz。今天就总结一下 JS 里面的 this，之前面试的时候也被面试官问到过，自己下来就整理了一下。</p>
+
+<p></p>
+
+<p>在我之前的一篇文章<a href="http://luckyabby.com/2017/03/27/%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87/">你不知道的执行上下文</a>中有提到过 this，对那篇文章进行概括就是：
+1. 上下文是在函数调用的时候被创建的。
+2. this 是组成上下文的一部分。</p>
+
+<p>因此每次函数被调用的时候就会产生一个新的 this。具体的分为下面几种。</p>
+
+<h2 id="1-作为普通函数被调用">1. 作为普通函数被调用</h2>
+
+<p>在全局环境里面，this 永远指向 window，因此作为普通函数被调用的时候，this 也是指向 window。</p>
+
+<pre><code class="language-javascript">var name = 'Abby';
+function fn() {
+    console.log(this); //window
+    console.log(this.name); //Abby
+}
+
+fn();
+</code></pre>
+
+<p>这里，fn 其实是作为 window 的一个方法被调用的，而 name 也是 window 的一个属性，因此 fn() 实际上就是 window.fn()。</p>
+
+<h2 id="2-作为对象的属性被调用">2. 作为对象的属性被调用</h2>
+
+<p>如果函数作为一个对象的属性方法，并且被调用的时候，this 就指向这个对象。</p>
+
+<pre><code class="language-javascript">var name = 'Jane';
+var person = {
+	name: 'Abby',
+	sayName: function() {
+		console.log(this.name);
+	}
+};
+var sayNameWin = person.sayName;
+
+person.sayName(); //Abby
+sayNameWin(); //Jane   作为 window 的方法被调用的
+</code></pre>
+
+<p>在这里，sayName 方法是作为 person 的一个属性方法被调用的，因此指向 person，但是 sayNameWin 方法却是作为 window 的一个属性方法被调用的，因此 console.log 的值是 Jane。我们再看一个变形。</p>
+
+<pre><code class="language-javascript">var person1 = {
+	name: 'Jane',
+	sayName: function() {
+		console.log(this.name)
+	}
+}
+
+var person2 = {
+	name: 'Abby',
+	sayName: person1.sayName
+}
+
+person2.sayName(); //Abby  作为 person2 的属性方法被调用
+</code></pre>
+
+<p>**但是当在在对象方法中再定义函数，这时候 this 又是 window **。</p>
+
+<pre><code class="language-javascript">var name = 'Jane';
+var person = {
+    name: 'Abby',
+    sayName: function () {
+        function fn(){
+            console.log(this);      //window
+            console.log(this.name);    //Jane
+        }
+        fn();
+    }
+}
+person.sayName();
+</code></pre>
+
+<p>如果想让 this 指向 person 的话，只需要用 that 保存下来 this 的值即可，也可以使用 apply 等改变 this。</p>
+
+<pre><code class="language-javascript">var name = 'Jane';
+var person = {
+    name: 'Abby',
+    sayName: function () {
+    	var that = this;
+        function fn(){
+            console.log(that);      //Object {name: &quot;Abby&quot;}
+            console.log(that.name);    //Abby
+        }
+        fn();
+    }
+}
+
+person.sayName();
+</code></pre>
+
+<h2 id="3-作为构造函数被调用">3. 作为构造函数被调用</h2>
+
+<p>作为构造函数被调用的时候，this 代表它即将 new 出来的对象。</p>
+
+<pre><code class="language-javascript">function Person(name) {
+	this.name = name;
+	console.log(this);  //Person {name: &quot;Abby&quot;}
+}
+
+var person = new Person('Abby');
+console.log(person.name);  //Abby
+</code></pre>
+
+<p>如果不加 new,表示即作为普通函数调用，指向 window</p>
+
+<pre><code class="language-javascript">function Person(name) {
+	this.name = name;
+	console.log(this);  //window
+}
+
+Person('Jane');
+console.log(window.name); //Jane
+</code></pre>
+
+<h2 id="4-作为-call-apply-bind-方法的调用">4. 作为 call/apply/bind 方法的调用</h2>
+
+<p>作为 call/apply/bind 方法被调用的时候指向传入的值</p>
+
+<pre><code class="language-javascript">var person = {
+	name: 'Abby'
+};
+function fn() {
+	console.log(this); //Object {name: &quot;Abby&quot;}
+	console.log(this.name); //Abby
+}
+
+fn.apply(person);
+</code></pre>
+
+<h2 id="5-严格模式下面">5. 严格模式下面</h2>
+
+<p>在严格模式下，在全局环境中执行函数调用的时候 this 并不会指向 window 而是会指向 undefined</p>
+
+<pre><code class="language-javascript">'use strict';
+function person() {
+  console.log(this); //undefined
+};
+
+person();
+
+</code></pre>
+
+<h2 id="6-settimeout-setinterval中的this">6. setTimeout、setInterval中的this</h2>
+
+<p>《 javascript 高级程序设计》中写到：“超时调用的代码需要调用 window 对象的 setTimeout方法”。setTimeout/setInterval 执行的时候，this 默认指向 window 对象，除非手动改变 this 的指向。</p>
+
+<pre><code class="language-javascript">var name = 'Jane';
+function Person(){
+    this.name = 'Abby';
+    this.sayName=function(){
+    	console.log(this); //window
+        console.log(this.name); //Jane
+        };
+    setTimeout(this.sayName, 10);
+    }
+
+var person=new Person();
+</code></pre>
+
+<p>在这里如果想改变 this，可是使用 apply/call/bind 等，也可以使用 that 保存 this。
+<strong>setTimeout 中的回调函数在严格模式下也指向 window 而不是 undefined (是个坑)</strong>
+因为 setTimeout 的回调函数如果没有指定的 this ，会做一个隐式的操作，将全局上下文注入进去，不管是在严格还是非严格模式下。</p>
+
+<pre><code class="language-javascript">'use strict';
+
+function person() {
+  console.log(this);  //window
+}
+
+setTimeout(person, 0);
+
+</code></pre>
+
+<h2 id="7-构造函数-prototype-属性">7. 构造函数 prototype 属性</h2>
+
+<pre><code class="language-javascript">var name = 'Jane';
+function Person(){
+    this.name = 'Abby';
+}
+Person.prototype.sayName = function () {
+    console.log(this);        // Person {name: &quot;Abby&quot;}
+    console.log(this.name);      // Abby
+}
+var person = new Person();
+person.sayName();
+</code></pre>
+
+<p>在 Person.prototype.sayName 函数中，this 指向的 person 对象。即便是在整个原型链中,this 也代表当前对象的值。</p>
+
+<h2 id="8-eval函数">8. Eval函数</h2>
+
+<p>在 Eval 中，this 指向当前作用域的对象。</p>
+
+<pre><code class="language-javascript">var name = 'Jane';
+var person = {
+    name: 'Abby',
+    getName: function(){
+        eval(&quot;console.log(this.name)&quot;);
+    }
+}
+person.getName();  //Abby
+
+var getNameWin=person.getName;
+getNameWin();  //Jane
+</code></pre>
+
+<p>在这里，和不使用 Eval ，作为对象的方法调用的时候得出的结果是一样的。</p>
+
+<h2 id="9-箭头函数">9. 箭头函数</h2>
+
+<p>箭头函数里面 this 始终指向外部对象，因为箭头函数没有 this，因此它自身不能进行new实例化，同时也不能使用 call, apply, bind 等方法来改变 this 的指向。</p>
+
+<pre><code class="language-javascript">var person = {
+    name: 'Abby',
+    sayName: function() {
+        var fn = () =&gt; {
+            return () =&gt; {
+                console.log(this);   //Object {name: &quot;Abby&quot;}
+                console.log(this.name); //Abby
+            }
+        }
+        fn()();
+    }
+}
+person.sayName();
+</code></pre>
+
+<p>如果有不恰当之处，欢迎指出。</p>
+
+<p>参考资料：</p>
+
+<p><a href="http://www.cnblogs.com/wangfupeng1988/p/3988422.html">深入理解javascript原型和闭包（10）——this</a></p>
+
+<p><a href="https://www.ibm.com/developerworks/cn/web/1207_wangqf_jsthis/index.html">深入浅出 JavaScript 中的 this</a></p>
+
+<p><a href="http://www.cnblogs.com/justany/archive/2012/11/01/the_keyword_this_in_javascript.html">http://www.cnblogs.com/justany/archive/2012/11/01/the_keyword_this_in_javascript.html</a></p>
+                </section>
+            </article>
+
+            
+
+            
+                <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'luckyabby'; 
+
+     
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+            
+
+            
+                <ul id="post-list" class="archive readmore">
+    <h3>Read more</h3>
+
+    
+    
+    
+        <li>
+            <a href="/posts/%E5%88%9D%E7%BA%A7webpack%E9%85%8D%E7%BD%AE%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%9A%84%E5%BC%83%E5%9D%91%E4%B9%8B%E8%B7%AF/">初级webpack配置工程师的弃坑之路<aside class="dates">Mar 23 2018</aside></a>
+        </li>
+    
+        <li>
+            <a href="/posts/%E5%88%86%E6%94%AF%E7%9A%84%E6%95%B4%E5%90%88git-rebase-or-git-merge/">分支的整合：git rebase Or git merge<aside class="dates">Mar 14 2018</aside></a>
+        </li>
+    
+        <li>
+            <a href="/posts/css%E5%B8%B8%E8%A7%81%E7%9A%84%E6%B5%AE%E5%8A%A8%E4%B8%8E%E6%B8%85%E9%99%A4%E6%B5%AE%E5%8A%A8/">CSS常见的浮动与清除浮动<aside class="dates">Mar 14 2018</aside></a>
+        </li>
+    
+        <li>
+            <a href="/posts/%E8%B8%A9%E5%9D%91%E7%AF%87/">踩坑篇--使用 fetch 上传文件<aside class="dates">Mar 6 2018</aside></a>
+        </li>
+    
+        <li>
+            <a href="/posts/2017%E5%B9%B4%E4%B8%80%E5%88%87%E9%83%BD%E8%BF%87%E5%BE%97%E5%BE%88%E6%B8%A9%E6%9A%96/">2017年,一切都过得很温暖<aside class="dates">Jan 2 2018</aside></a>
+        </li>
+    
+        <li>
+            <a href="/posts/%E6%88%91%E8%BF%98%E6%98%AF%E6%83%B3%E8%B0%88%E8%B0%88js%E9%87%8C%E9%9D%A2%E7%9A%84%E9%97%AD%E5%8C%85/">我还是想谈谈JS里面的闭包<aside class="dates">Dec 8 2017</aside></a>
+        </li>
+    
+        <li>
+            <a href="/posts/chmod%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/">chmod命令详解<aside class="dates">Dec 8 2017</aside></a>
+        </li>
+    
+        <li>
+            <a href="/posts/blog%E8%BF%81%E7%A7%BB%E5%88%B0hugo/">博客迁移到hugo<aside class="dates">Dec 5 2017</aside></a>
+        </li>
+    
+        <li>
+            <a href="/posts/%E5%89%8D%E7%AB%AF%E6%A8%A1%E5%9D%97%E5%8C%96%E5%BC%80%E5%8F%91/">前端模块化开发<aside class="dates">Oct 18 2017</aside></a>
+        </li>
+    
+        <li>
+            <a href="/posts/%E5%AE%9E%E7%8E%B0css%E5%B1%85%E4%B8%AD%E7%9A%84%E5%A4%9A%E7%A7%8D%E6%96%B9%E6%B3%95/">实现CSS居中的多种方法 <aside class="dates">Sep 18 2017</aside></a>
+        </li>
+    
+</ul>
+
+            
+
+            <footer id="footer">
+    
+        <div id="social">
+
+	
+	
+    <a class="symbol" href="">
+        <i class="fa fa-facebook-square"></i>
+    </a>
+    
+    <a class="symbol" href="https://www.github.com/LuckyAbby">
+        <i class="fa fa-github-square"></i>
+    </a>
+    
+    <a class="symbol" href="">
+        <i class="fa fa-twitter-square"></i>
+    </a>
+    
+
+
+</div>
+
+    
+    <p class="small">
+    
+       © Copyright 2018 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://luckyabby.com/js/jquery-3.3.1.min.js"></script>
+<script src="http://luckyabby.com/js/main.js"></script>
+<script src="http://luckyabby.com/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+  
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-84989670-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+
+
+
+    </body>
+</html>

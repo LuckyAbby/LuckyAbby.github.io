@@ -13,10 +13,10 @@
     
     <item>
       <title>博客迁移到hugo</title>
-      <link>http://luckyabby.com/post/blog%E8%BF%81%E7%A7%BB%E5%88%B0hugo/</link>
+      <link>http://luckyabby.com/posts/blog%E8%BF%81%E7%A7%BB%E5%88%B0hugo/</link>
       <pubDate>Tue, 05 Dec 2017 10:06:52 +0800</pubDate>
       
-      <guid>http://luckyabby.com/post/blog%E8%BF%81%E7%A7%BB%E5%88%B0hugo/</guid>
+      <guid>http://luckyabby.com/posts/blog%E8%BF%81%E7%A7%BB%E5%88%B0hugo/</guid>
       <description>在经过昨天一天的捣鼓之后，把之前写过的博客从hexo迁移到了hugo 为什么要迁移 hexo 太慢了，编译到部署一般需要3s左右，而 hugo 却快的多，大概只需</description>
     </item>
     

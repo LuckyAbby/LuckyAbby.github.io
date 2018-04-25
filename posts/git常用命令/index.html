@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		
+		<meta name="description" content="My Blog">
+		<meta name="generator" content="Hugo 0.40" />
+		<title>Git常用命令 &middot; luckyabby</title>
+		<link rel="shortcut icon" href="http://luckyabby.com/images/favicon.ico">
+		<link rel="stylesheet" href="http://luckyabby.com/css/style.css">
+		<link rel="stylesheet" href="http://luckyabby.com/css/highlight.css">
+
+		
+		<link rel="stylesheet" href="http://luckyabby.com/css/font-awesome.min.css">
+		
+
+		
+		<link href="http://luckyabby.com/index.xml" rel="alternate" type="application/rss+xml" title="luckyabby" />
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://luckyabby.com/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://luckyabby.com/posts'>Archive</a>
+	<a href='http://luckyabby.com/tags'>Tags</a>
+	<a href='http://luckyabby.com/about'>About</a>
+
+	
+
+	
+	<a class="cta" href="http://luckyabby.com/index.xml">Subscribe</a>
+	
+</nav>
+
+
+        <section id="wrapper" class="post">
+            <article>
+                <header>
+                    <h1>
+                        Git常用命令
+                    </h1>
+                    <h2 class="headline">
+                    Jun 18, 2017 15:23
+                    · 0 word
+                    · 0 minute read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://luckyabby.com/tags/git">Git</a>
+                          
+                              <a href="http://luckyabby.com/tags/js">JS</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                  
+                    <div id="toc">
+                      <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#配置">配置</a></li>
+<li><a href="#帮助">帮助</a></li>
+<li><a href="#diff">diff</a></li>
+<li><a href="#移除文件">移除文件</a></li>
+<li><a href="#重命名">重命名</a></li>
+<li><a href="#查看历史提交">查看历史提交</a></li>
+<li><a href="#修改前一次提交">修改前一次提交</a></li>
+<li><a href="#reset">reset</a></li>
+<li><a href="#撤销修改">撤销修改</a></li>
+<li><a href="#远程仓库">远程仓库</a></li>
+<li><a href="#分支管理">分支管理</a></li>
+<li><a href="#挑拣-cherry-pick-之前的历史">挑拣(cherry-pick)之前的历史</a></li>
+<li><a href="#参考">参考：</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+                    </div>
+                  
+                
+                <section id="post-body">
+                    <p>在前面的介绍中说完了 Git 的基本知识，这里记录一下自己常用的 Git 命令。常用的命令其实也就那么一些，一些很复杂的命令我觉得等到用的时候去查就好了，还有最重要的是我觉得理解原理更重要。</p>
+
+<p></p>
+
+<h3 id="配置">配置</h3>
+
+<p>在向远程仓库提交信息之前最重要的就是配置你的账号和邮箱，这些出现在每次的commit信息之中。</p>
+
+<pre><code>git config --global user.name
+git config --global user.email
+</code></pre>
+
+<p>使用<code>--global</code>选项，配置的信息是放在用户主目录上的。如果想在自己的项目里面使用单独的配置账号邮箱，可以不加这个选项，这个时候的配置信息是放在.git/config里面的。</p>
+
+<pre><code>git config --list
+</code></pre>
+
+<p>使用<code>--list</code>参数可以看到所有的配置信息，可能会看到重复的变量名，那就说明它们来自不同的配置文件，不过最终 Git 实际采用的是最后一个。</p>
+
+<p>同时配置的时候可以为一些常用的命令命别名，这样可以提高工作效率，例如</p>
+
+<pre><code>git config --global alias.co checkout
+git config --global alias.br branch
+git config --global alias.ci commit
+git config --global alias.st status
+</code></pre>
+
+<p>这样我们想切换分支的时候只需要使用 <code>git co</code>即可。</p>
+
+<h3 id="帮助">帮助</h3>
+
+<p>查看命令怎么用有一个很好的的方式的是查看 Git 自身的 help，这是随时查看不需要联网的。可以使用下面的命令</p>
+
+<pre><code>git help &lt;verb&gt;
+或者
+git &lt;verb&gt; --help
+</code></pre>
+
+<h3 id="diff">diff</h3>
+
+<p>对未暂存的文件使用<code>git diff</code>命令能查看工作区这次修改的文件和上次提交的文件之间的区别，使用<code>git status</code>命令是查看具体有哪些文件有改动，在使用<code>git status</code>之后推荐使用<code>git diff</code>来查看具体的改动是什么。</p>
+
+<p>注意这里 <code>git diff</code>是查看未暂存的文件和暂存区域快照的区别，也就是修改之后还没有暂存起来的变化内容。如果是查看已经暂存的文件和上次提交的快照文件的区别使用 <code>git diff --cached</code>（Git 1.6.1 及更高版本还允许使用 <code>git diff --staged</code>）。</p>
+
+<h3 id="移除文件">移除文件</h3>
+
+<p>移除文件主要使用的有两个命令<code>rm</code>,<code>git rm</code>。</p>
+
+<p>对于使用<code>git add</code>加入暂存区但是还未提交的文件，可以使用<code>git rm -f</code>命令,也可以使用<code>rm</code>命令，然后再<code>git add</code>。</p>
+
+<p>对于已经提交的文件，可以使用<code>git rm</code>命令,然后使用<code>git commit</code>,也可以使用<code>rm</code>命令，然后再<code>git add</code>,<code>git commit</code>。</p>
+
+<p>这两个命令最主要的区别就是使用<code>rm</code>仅仅是删除工作区域的文件，需要再使用<code>git add/rm</code>命令，而<code>git rm</code>相当于删除暂存区的文件，可以一步做完。</p>
+
+<p>还有一种情况：我们想删除一些已经加入暂存区或者已经提交的文件但是希望在工作区保留这些文件，例如应该加入.gitignore中的一些文件误上传，可以使用<code>git rm --cached</code>命令。</p>
+
+<h3 id="重命名">重命名</h3>
+
+<p>对于加入暂存区的文件或者已经提交的文件可以使用<code>git mv name.js othername</code>来重命名文件。对于已经提交的文件，使用该命令相当于运行了下面三条命令：<code>mv name.js othername</code> <code>git rm name.js</code> <code>git add othername</code>，相比而言,<code>git mv</code>要轻便很多</p>
+
+<h3 id="查看历史提交">查看历史提交</h3>
+
+<p>查看历史消息一般使用<code>git log</code>，这个命令有很多参数可以使用，例如 -p 选项可以展开显示每次提交的内容差异等等，这里不细说。</p>
+
+<p>这里可以推荐使用一个打log更方便的命令<code>git config --global alias.lo &quot;log --graph --pretty=format:'%Cred%h%Creset - %C(yellow)%an%Creset&lt;%ae&gt; ,%C(bold blue)%ar%Creset :%Cgreen%s%Creset'&quot;</code></p>
+
+<p>输入之后再输入<code>git lo</code>就可以打出更简单易懂的信息了。这里用的其实就是<code>pretty=format</code>参数来格式化我们自己想要的输出。其中<code>%C</code>可以来规定颜色。</p>
+
+<h3 id="修改前一次提交">修改前一次提交</h3>
+
+<p>如果在提交的时候发现自己的commit的信息写错了，你想修改这一次提交的信息，就可以使用<code>git commit -- amend</code>命令。</p>
+
+<p>这个命令主要是用来修改最后一次提交，使用之后会出现 git 默认的文本编辑器，编辑它确认没问题后保存退出，就会使用新的提交说明覆盖刚才失误的提交。</p>
+
+<p>如果在上一次的提交中发现还有一部分信息需要一起提交，也可以先<code>git add</code>上忘记的文件，然后使用<code>git commit -- amend</code>命令，成为一次提交。</p>
+
+<h3 id="reset">reset</h3>
+
+<p>如果自己在使用<code>git add</code>添加文件到暂存区的时候，一不小心将两个文件添加了，或者不小心使用了<code>-- all</code>参数，可是自己只想添加一个文件，这个时候如果想撤销之前的操作，就可以使用<code>git reset HEAD &lt;file&gt;</code>命令，这样这个文件就会变成未暂存的状态。</p>
+
+<p>这个命令还有一个很强大的地方，就是可以<strong>回退版本</strong>，同时对于一个文件自己可以修改无数次，每次修改提交之后就会有一个commit 的 id，这个 id 是一个SHA1计算出来的一个非常大的数字，每个 id 都会是唯一的。</p>
+
+<p>可以使用<code>git log</code>查看每个 commit 的 id，也可以使用<code>git reflog</code>，这个命令记录了每一次提交，如果自己想退回到某个版本去，可以使用<code>git reset --hard HEAD^</code>，在 git 中用 HEAD 表示当前版本， HEAD^表示上一个版本，如果想退回到前几十个版本之前，可以直接使用<code>git reset --hard commitID</code>就可以直接将HEAD指针指向那个版本。</p>
+
+<h3 id="撤销修改">撤销修改</h3>
+
+<p>可以使用<code>git commit --amend</code>修改最后一次提交，比如漏加文件或者提交信息写错了想修改。使用这个命令如果不增加新的文件的话会重新编辑你的提交信息，如果漏加文件，使用<code>git add</code>增加文件之后再使用这个命令会使得提交合并成一次提交。</p>
+
+<p>如果自己将工作区的某个文件改动完之后<strong>还未添加到暂存区</strong>发现之前的改动是完全没有必要的，这个时候也有一个命令可以撤销之前的修改，就是<code>git checkout -- file</code>。</p>
+
+<p>这个命令只有自己真的觉得自己的修改是完全没有必要的情况下再使用，因为这个命令会将之前版本的复制过来重写整个文件，如果觉得自己当前的修改是想保留下来可以提交之后选择回退版本。</p>
+
+<p>如果自己的文件在改动之后已经<strong>添加到暂存区</strong>了，这个时候可以使用<code>git reset HEAD &lt;file&gt;</code>命令，使文件变成未暂存的状态，然后使用 checkout 即可。</p>
+
+<p>如果已经提交了，可以选择版本回退到自己想要的版本。</p>
+
+<h3 id="远程仓库">远程仓库</h3>
+
+<p>在本地建了一个仓库之后如果需要关联到某个远程仓库进行文件的上传下拉等操作，需要先使用<code>git remote add &lt;name&gt; &lt;url&gt;</code>将远程的仓库关联到本地仓库，这里的 name 是自己为这个仓库取得名字，url是远程仓库的地址。</p>
+
+<p>可以使用<code>git remote -v</code>来查看自己的仓库关联了哪些远程仓库，关联到远程仓库之后可以使用<code>git fetch &lt;remote-name&gt;</code>将远程分支上面的数据抓取到本地。在克隆完某个项目后，至少可以看到一个名为 origin 的远程库，<strong>Git 默认使用这个名字来标识你所克隆的原始仓库</strong>：</p>
+
+<p>之后可以使用<code>git branch -a</code>查看自己的分支并可以使用<code>git checkout &lt;branch-name&gt;</code>切换到自己新抓取的那个分支上面看看都下拉了什么，也可以使用<code>git merge</code>合并分支。</p>
+
+<p>一般我们都会选择克隆一个仓库到本地，这个时候查看<code>git remote -v</code>会发现自动将远程仓库命名为 origin，所以<code>git fetch origin</code>会拉取上次自从上次fetch之后别人上传的更新，fetch只会拉取数据到本地，但不会自动合并到当前工作分支。</p>
+
+<p>这样我们有另一个命令叫<code>git pull</code>，这个命令自动抓取数据下来，会将远端分支自动合并到本地仓库中当前分支。相当于fetch + merge。</p>
+
+<p>说完拉取数据之后，还有一个命令<code>git push [remote-name] [branch-name]</code>(<code>git push origin master</code>)可以将本地的数据推到远程仓库上面，如果在推数据前，已经有其他人推送了若干更新，那这个 push 就会被拒绝。必须先把他们的更新抓取到本地，合并到自己的项目中，然后才可以再次推送。</p>
+
+<p>对远程仓库如果想更名可以使用<code>git remote rename &lt;name&gt; &lt;anothername&gt;</code>命令，如果想删除，可以使用<code>git remote rm &lt;name&gt;</code>。</p>
+
+<h3 id="分支管理">分支管理</h3>
+
+<p>有时候当新建的分支多了之后，对一些分支进行管理的时候可能会遇到不知道哪些分支已经合并过的问题。</p>
+
+<p>这个时候我们可以使用<code>git branche --merged</code>来列出所有已经合并到当前分支的所有分支。注意当前分支就是前面带有<code>*</code>的分支。同样我们也可以使用<code>git branch --no-merged</code>来列出所有还未被合并到当前分支的分支。</p>
+
+<p>当你对一个已经合并过的分支使用<code>git branch -d branchName</code>的时候会直接删除这个分支，但是对一个还未合并过的分支使用这个命令的时候会提示你<code>error: The branch 'test' is not fully merged.If you are sure you want to delete it, run 'git branch -D test'.</code>。但是当你确实是想删掉这个分支的话，也可以使用<code>git branch -D branchName</code>删掉这个未合并过的分支</p>
+
+<p>上面罗列出来的就是常用的一些命令，先写到这里，下次再对一些内容进行补充。</p>
+
+<p>&mdash;&mdash;&mdash;-2018.03.20补充&mdash;&mdash;&mdash;&ndash;</p>
+
+<h3 id="挑拣-cherry-pick-之前的历史">挑拣(cherry-pick)之前的历史</h3>
+
+<p>挑拣类似于针对某次特定提交的衍合。它首先提取某次提交的补丁，然后试着应用在当前分支上。如果某个特性分支上有多个提交，但你只想引入其中之一就可以使用这种方法。</p>
+
+<p>假设现在你在 lyt/bugfix 分支上做了两个 commit 提交，但是你只想合并其中第一个提交，因此你可以使用 cherry-pick 挑选出这一个你想合并的 commit 。</p>
+
+<p><img src="http://ojzeprg7w.bkt.clouddn.com/gitnn1.png" alt="" /></p>
+
+<p>代码如下：
+<img src="http://ojzeprg7w.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-16%20%E4%B8%8B%E5%8D%885.24.55.png" alt="" /></p>
+
+<p>之后你的提交记录就会变成这样：</p>
+
+<p><img src="http://ojzeprg7w.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-16%20%E4%B8%8B%E5%8D%885.43.55.png" alt="" /></p>
+
+<p>注意此时的 c5&rsquo; 和之前的 c5 虽然内容是一样的，但是会得到不同的SHA-1值，因为应用日期不同。</p>
+
+<p>如果在挑拣的过程遇到冲突，手动解决冲突，再 continue 代码如下：</p>
+
+<p><img src="http://ojzeprg7w.bkt.clouddn.com/gitnnnn3.png" alt="" /></p>
+
+<h3 id="参考">参考：</h3>
+
+<p>《Pro Git》</p>
+
+<p><a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000">廖雪峰老师的Git教程</a></p>
+                </section>
+            </article>
+
+            
+
+            
+                <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'luckyabby'; 
+
+     
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+            
+
+            
+                <ul id="post-list" class="archive readmore">
+    <h3>Read more</h3>
+
+    
+    
+    
+        <li>
+            <a href="/posts/%E5%88%9D%E7%BA%A7webpack%E9%85%8D%E7%BD%AE%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%9A%84%E5%BC%83%E5%9D%91%E4%B9%8B%E8%B7%AF/">初级webpack配置工程师的弃坑之路<aside class="dates">Mar 23 2018</aside></a>
+        </li>
+    
+        <li>
+            <a href="/posts/%E5%88%86%E6%94%AF%E7%9A%84%E6%95%B4%E5%90%88git-rebase-or-git-merge/">分支的整合：git rebase Or git merge<aside class="dates">Mar 14 2018</aside></a>
+        </li>
+    
+        <li>
+            <a href="/posts/css%E5%B8%B8%E8%A7%81%E7%9A%84%E6%B5%AE%E5%8A%A8%E4%B8%8E%E6%B8%85%E9%99%A4%E6%B5%AE%E5%8A%A8/">CSS常见的浮动与清除浮动<aside class="dates">Mar 14 2018</aside></a>
+        </li>
+    
+        <li>
+            <a href="/posts/%E8%B8%A9%E5%9D%91%E7%AF%87/">踩坑篇--使用 fetch 上传文件<aside class="dates">Mar 6 2018</aside></a>
+        </li>
+    
+        <li>
+            <a href="/posts/2017%E5%B9%B4%E4%B8%80%E5%88%87%E9%83%BD%E8%BF%87%E5%BE%97%E5%BE%88%E6%B8%A9%E6%9A%96/">2017年,一切都过得很温暖<aside class="dates">Jan 2 2018</aside></a>
+        </li>
+    
+        <li>
+            <a href="/posts/%E6%88%91%E8%BF%98%E6%98%AF%E6%83%B3%E8%B0%88%E8%B0%88js%E9%87%8C%E9%9D%A2%E7%9A%84%E9%97%AD%E5%8C%85/">我还是想谈谈JS里面的闭包<aside class="dates">Dec 8 2017</aside></a>
+        </li>
+    
+        <li>
+            <a href="/posts/chmod%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/">chmod命令详解<aside class="dates">Dec 8 2017</aside></a>
+        </li>
+    
+        <li>
+            <a href="/posts/blog%E8%BF%81%E7%A7%BB%E5%88%B0hugo/">博客迁移到hugo<aside class="dates">Dec 5 2017</aside></a>
+        </li>
+    
+        <li>
+            <a href="/posts/%E5%89%8D%E7%AB%AF%E6%A8%A1%E5%9D%97%E5%8C%96%E5%BC%80%E5%8F%91/">前端模块化开发<aside class="dates">Oct 18 2017</aside></a>
+        </li>
+    
+        <li>
+            <a href="/posts/%E5%AE%9E%E7%8E%B0css%E5%B1%85%E4%B8%AD%E7%9A%84%E5%A4%9A%E7%A7%8D%E6%96%B9%E6%B3%95/">实现CSS居中的多种方法 <aside class="dates">Sep 18 2017</aside></a>
+        </li>
+    
+</ul>
+
+            
+
+            <footer id="footer">
+    
+        <div id="social">
+
+	
+	
+    <a class="symbol" href="">
+        <i class="fa fa-facebook-square"></i>
+    </a>
+    
+    <a class="symbol" href="https://www.github.com/LuckyAbby">
+        <i class="fa fa-github-square"></i>
+    </a>
+    
+    <a class="symbol" href="">
+        <i class="fa fa-twitter-square"></i>
+    </a>
+    
+
+
+</div>
+
+    
+    <p class="small">
+    
+       © Copyright 2018 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://luckyabby.com/js/jquery-3.3.1.min.js"></script>
+<script src="http://luckyabby.com/js/main.js"></script>
+<script src="http://luckyabby.com/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+  
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-84989670-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+
+
+
+    </body>
+</html>

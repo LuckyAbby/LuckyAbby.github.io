@@ -13,82 +13,82 @@
     
     <item>
       <title>初级webpack配置工程师的弃坑之路</title>
-      <link>http://luckyabby.com/post/%E5%88%9D%E7%BA%A7webpack%E9%85%8D%E7%BD%AE%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%9A%84%E5%BC%83%E5%9D%91%E4%B9%8B%E8%B7%AF/</link>
+      <link>http://luckyabby.com/posts/%E5%88%9D%E7%BA%A7webpack%E9%85%8D%E7%BD%AE%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%9A%84%E5%BC%83%E5%9D%91%E4%B9%8B%E8%B7%AF/</link>
       <pubDate>Fri, 23 Mar 2018 10:49:18 +0800</pubDate>
       
-      <guid>http://luckyabby.com/post/%E5%88%9D%E7%BA%A7webpack%E9%85%8D%E7%BD%AE%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%9A%84%E5%BC%83%E5%9D%91%E4%B9%8B%E8%B7%AF/</guid>
+      <guid>http://luckyabby.com/posts/%E5%88%9D%E7%BA%A7webpack%E9%85%8D%E7%BD%AE%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%9A%84%E5%BC%83%E5%9D%91%E4%B9%8B%E8%B7%AF/</guid>
       <description>webpack webpack 是一个模块打包机，它能分析你项目的依赖结构。从入口文件的js文件进行打包，碰到 CSS 以及图片等等其它的类型的文件采用 loader 或者插件进行处理，最后</description>
     </item>
     
     <item>
       <title>分支的整合：git rebase Or git merge</title>
-      <link>http://luckyabby.com/post/%E5%88%86%E6%94%AF%E7%9A%84%E6%95%B4%E5%90%88git-rebase-or-git-merge/</link>
+      <link>http://luckyabby.com/posts/%E5%88%86%E6%94%AF%E7%9A%84%E6%95%B4%E5%90%88git-rebase-or-git-merge/</link>
       <pubDate>Wed, 14 Mar 2018 20:56:29 +0800</pubDate>
       
-      <guid>http://luckyabby.com/post/%E5%88%86%E6%94%AF%E7%9A%84%E6%95%B4%E5%90%88git-rebase-or-git-merge/</guid>
+      <guid>http://luckyabby.com/posts/%E5%88%86%E6%94%AF%E7%9A%84%E6%95%B4%E5%90%88git-rebase-or-git-merge/</guid>
       <description>Git 整合分支一般有 git merge 和 git rebase 两种。rebase 通常就是我们所说的“变基”、“衍合”。 假设我们现在有两个分支，master和 develop 分支，master</description>
     </item>
     
     <item>
       <title>CSS常见的浮动与清除浮动</title>
-      <link>http://luckyabby.com/post/css%E5%B8%B8%E8%A7%81%E7%9A%84%E6%B5%AE%E5%8A%A8%E4%B8%8E%E6%B8%85%E9%99%A4%E6%B5%AE%E5%8A%A8/</link>
+      <link>http://luckyabby.com/posts/css%E5%B8%B8%E8%A7%81%E7%9A%84%E6%B5%AE%E5%8A%A8%E4%B8%8E%E6%B8%85%E9%99%A4%E6%B5%AE%E5%8A%A8/</link>
       <pubDate>Wed, 14 Mar 2018 15:30:13 +0800</pubDate>
       
-      <guid>http://luckyabby.com/post/css%E5%B8%B8%E8%A7%81%E7%9A%84%E6%B5%AE%E5%8A%A8%E4%B8%8E%E6%B8%85%E9%99%A4%E6%B5%AE%E5%8A%A8/</guid>
+      <guid>http://luckyabby.com/posts/css%E5%B8%B8%E8%A7%81%E7%9A%84%E6%B5%AE%E5%8A%A8%E4%B8%8E%E6%B8%85%E9%99%A4%E6%B5%AE%E5%8A%A8/</guid>
       <description>这篇博客自己之前好像是写过的。。后来换电脑之后博客静态文件备份好像丢了几篇博客(突然心痛)。最近又遇到这个问题，想着再写一遍就当温习一遍了。</description>
     </item>
     
     <item>
       <title>踩坑篇--使用 fetch 上传文件</title>
-      <link>http://luckyabby.com/post/%E8%B8%A9%E5%9D%91%E7%AF%87/</link>
+      <link>http://luckyabby.com/posts/%E8%B8%A9%E5%9D%91%E7%AF%87/</link>
       <pubDate>Tue, 06 Mar 2018 21:01:09 +0800</pubDate>
       
-      <guid>http://luckyabby.com/post/%E8%B8%A9%E5%9D%91%E7%AF%87/</guid>
+      <guid>http://luckyabby.com/posts/%E8%B8%A9%E5%9D%91%E7%AF%87/</guid>
       <description>这个坑是自己最近使用 fetch 给后端上传文件的时候踩到的，需求很简单，就是需要给后端上传一个文件以及需要的几个字段。看，简单吧。。 于是，撸起袖子准备</description>
     </item>
     
     <item>
       <title>2017年,一切都过得很温暖</title>
-      <link>http://luckyabby.com/post/2017%E5%B9%B4%E4%B8%80%E5%88%87%E9%83%BD%E8%BF%87%E5%BE%97%E5%BE%88%E6%B8%A9%E6%9A%96/</link>
+      <link>http://luckyabby.com/posts/2017%E5%B9%B4%E4%B8%80%E5%88%87%E9%83%BD%E8%BF%87%E5%BE%97%E5%BE%88%E6%B8%A9%E6%9A%96/</link>
       <pubDate>Tue, 02 Jan 2018 16:22:57 +0800</pubDate>
       
-      <guid>http://luckyabby.com/post/2017%E5%B9%B4%E4%B8%80%E5%88%87%E9%83%BD%E8%BF%87%E5%BE%97%E5%BE%88%E6%B8%A9%E6%9A%96/</guid>
+      <guid>http://luckyabby.com/posts/2017%E5%B9%B4%E4%B8%80%E5%88%87%E9%83%BD%E8%BF%87%E5%BE%97%E5%BE%88%E6%B8%A9%E6%9A%96/</guid>
       <description>总结是从自己的公众号上复制过来的，2017年总的来说，没有达到之前的预期，但是一切却也过的还不错。 一月 愿得一人心 白首不分离 我和node的相遇</description>
     </item>
     
     <item>
       <title>我还是想谈谈JS里面的闭包</title>
-      <link>http://luckyabby.com/post/%E6%88%91%E8%BF%98%E6%98%AF%E6%83%B3%E8%B0%88%E8%B0%88js%E9%87%8C%E9%9D%A2%E7%9A%84%E9%97%AD%E5%8C%85/</link>
+      <link>http://luckyabby.com/posts/%E6%88%91%E8%BF%98%E6%98%AF%E6%83%B3%E8%B0%88%E8%B0%88js%E9%87%8C%E9%9D%A2%E7%9A%84%E9%97%AD%E5%8C%85/</link>
       <pubDate>Fri, 08 Dec 2017 16:11:59 +0800</pubDate>
       
-      <guid>http://luckyabby.com/post/%E6%88%91%E8%BF%98%E6%98%AF%E6%83%B3%E8%B0%88%E8%B0%88js%E9%87%8C%E9%9D%A2%E7%9A%84%E9%97%AD%E5%8C%85/</guid>
+      <guid>http://luckyabby.com/posts/%E6%88%91%E8%BF%98%E6%98%AF%E6%83%B3%E8%B0%88%E8%B0%88js%E9%87%8C%E9%9D%A2%E7%9A%84%E9%97%AD%E5%8C%85/</guid>
       <description>其实自己不太写闭包了的，就那么一两句话谁都能背出来。可是闭包偏偏就是那种初学者十次面试八次可能会遇到，答不上来就是送命题、答得出来也不加分题</description>
     </item>
     
     <item>
       <title>chmod命令详解</title>
-      <link>http://luckyabby.com/post/chmod%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/</link>
+      <link>http://luckyabby.com/posts/chmod%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/</link>
       <pubDate>Fri, 08 Dec 2017 10:25:33 +0800</pubDate>
       
-      <guid>http://luckyabby.com/post/chmod%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/</guid>
+      <guid>http://luckyabby.com/posts/chmod%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/</guid>
       <description>文件的权限 chmod 命令用于改变文件或者目录的访问权限，Linux系统可以控制谁通过何种方式对文件或者目录进行访问与操作。 文件或者目录的访问角色可以</description>
     </item>
     
     <item>
       <title>博客迁移到hugo</title>
-      <link>http://luckyabby.com/post/blog%E8%BF%81%E7%A7%BB%E5%88%B0hugo/</link>
+      <link>http://luckyabby.com/posts/blog%E8%BF%81%E7%A7%BB%E5%88%B0hugo/</link>
       <pubDate>Tue, 05 Dec 2017 10:06:52 +0800</pubDate>
       
-      <guid>http://luckyabby.com/post/blog%E8%BF%81%E7%A7%BB%E5%88%B0hugo/</guid>
+      <guid>http://luckyabby.com/posts/blog%E8%BF%81%E7%A7%BB%E5%88%B0hugo/</guid>
       <description>在经过昨天一天的捣鼓之后，把之前写过的博客从hexo迁移到了hugo 为什么要迁移 hexo 太慢了，编译到部署一般需要3s左右，而 hugo 却快的多，大概只需</description>
     </item>
     
     <item>
       <title>前端模块化开发</title>
-      <link>http://luckyabby.com/post/%E5%89%8D%E7%AB%AF%E6%A8%A1%E5%9D%97%E5%8C%96%E5%BC%80%E5%8F%91/</link>
+      <link>http://luckyabby.com/posts/%E5%89%8D%E7%AB%AF%E6%A8%A1%E5%9D%97%E5%8C%96%E5%BC%80%E5%8F%91/</link>
       <pubDate>Wed, 18 Oct 2017 17:23:25 +0800</pubDate>
       
-      <guid>http://luckyabby.com/post/%E5%89%8D%E7%AB%AF%E6%A8%A1%E5%9D%97%E5%8C%96%E5%BC%80%E5%8F%91/</guid>
+      <guid>http://luckyabby.com/posts/%E5%89%8D%E7%AB%AF%E6%A8%A1%E5%9D%97%E5%8C%96%E5%BC%80%E5%8F%91/</guid>
       <description>&lt;p&gt;ES6 以来，有了 module 的体系，替代了之前比较常用的 CommonJS 和 AMD 规范，使得在编译时就能确定模块的依赖关系，同时使得前端在复杂项目时可以更好的分工和规范。&lt;/p&gt;
 
 &lt;p&gt;这篇文章主要介绍前端的模块化开发，主要包括 ES6 的 module 以及三个主要的模块化开发规范 CommonJS AMD 以及 CMD。&lt;/p&gt;
@@ -98,28 +98,28 @@
     
     <item>
       <title>实现CSS居中的多种方法 </title>
-      <link>http://luckyabby.com/post/%E5%AE%9E%E7%8E%B0css%E5%B1%85%E4%B8%AD%E7%9A%84%E5%A4%9A%E7%A7%8D%E6%96%B9%E6%B3%95/</link>
+      <link>http://luckyabby.com/posts/%E5%AE%9E%E7%8E%B0css%E5%B1%85%E4%B8%AD%E7%9A%84%E5%A4%9A%E7%A7%8D%E6%96%B9%E6%B3%95/</link>
       <pubDate>Mon, 18 Sep 2017 15:23:25 +0800</pubDate>
       
-      <guid>http://luckyabby.com/post/%E5%AE%9E%E7%8E%B0css%E5%B1%85%E4%B8%AD%E7%9A%84%E5%A4%9A%E7%A7%8D%E6%96%B9%E6%B3%95/</guid>
+      <guid>http://luckyabby.com/posts/%E5%AE%9E%E7%8E%B0css%E5%B1%85%E4%B8%AD%E7%9A%84%E5%A4%9A%E7%A7%8D%E6%96%B9%E6%B3%95/</guid>
       <description>居中在 CSS 中用的也比较常见，总结几种自己比较熟悉的居中的写法。当然，肯定还有更多更不错的写法，对于文中不足的地方也欢迎指正。 假设现在给出这种场</description>
     </item>
     
     <item>
       <title>谈HTTP/1.0 /1.1 /2.0</title>
-      <link>http://luckyabby.com/post/%E8%B0%88http1.0-1.1-2.0/</link>
+      <link>http://luckyabby.com/posts/%E8%B0%88http1.0-1.1-2.0/</link>
       <pubDate>Fri, 15 Sep 2017 19:12:39 +0800</pubDate>
       
-      <guid>http://luckyabby.com/post/%E8%B0%88http1.0-1.1-2.0/</guid>
+      <guid>http://luckyabby.com/posts/%E8%B0%88http1.0-1.1-2.0/</guid>
       <description>HTTP 协议定义的是七层协议中的应用层，TCP 协议定义的是七层协议中的传输层。HTTP 连接是基于 TCP 的。所以很多 HTTP 协议的瓶颈都是基于 TCP 协议的。比如 TCP</description>
     </item>
     
     <item>
       <title>《ES6入门》读书笔记之async/await</title>
-      <link>http://luckyabby.com/post/es6%E5%85%A5%E9%97%A8%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%E4%B9%8Basync-await/</link>
+      <link>http://luckyabby.com/posts/es6%E5%85%A5%E9%97%A8%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%E4%B9%8Basync-await/</link>
       <pubDate>Fri, 01 Sep 2017 15:23:25 +0800</pubDate>
       
-      <guid>http://luckyabby.com/post/es6%E5%85%A5%E9%97%A8%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%E4%B9%8Basync-await/</guid>
+      <guid>http://luckyabby.com/posts/es6%E5%85%A5%E9%97%A8%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%E4%B9%8Basync-await/</guid>
       <description>&lt;h2 id=&#34;async-函数&#34;&gt;async 函数&lt;/h2&gt;
 
 &lt;h3 id=&#34;async&#34;&gt;async&lt;/h3&gt;
@@ -130,19 +130,19 @@
     
     <item>
       <title>《ES6入门》读书笔记之Generator</title>
-      <link>http://luckyabby.com/post/es6%E5%85%A5%E9%97%A8%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%E4%B9%8Bgenerator/</link>
+      <link>http://luckyabby.com/posts/es6%E5%85%A5%E9%97%A8%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%E4%B9%8Bgenerator/</link>
       <pubDate>Tue, 29 Aug 2017 15:23:25 +0800</pubDate>
       
-      <guid>http://luckyabby.com/post/es6%E5%85%A5%E9%97%A8%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%E4%B9%8Bgenerator/</guid>
+      <guid>http://luckyabby.com/posts/es6%E5%85%A5%E9%97%A8%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%E4%B9%8Bgenerator/</guid>
       <description>Generator 函数有两个特征:1. function 和函数名之间有一个*号。2. 函数体内部使用 yield 表达式，定义不同的内部状态，表达函数暂停执行。 执行 Generator 函数会返回一个遍历器</description>
     </item>
     
     <item>
       <title>《ES6入门》读书笔记之let const</title>
-      <link>http://luckyabby.com/post/es6%E5%85%A5%E9%97%A8%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%E4%B9%8Blet-const/</link>
+      <link>http://luckyabby.com/posts/es6%E5%85%A5%E9%97%A8%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%E4%B9%8Blet-const/</link>
       <pubDate>Mon, 28 Aug 2017 15:23:25 +0800</pubDate>
       
-      <guid>http://luckyabby.com/post/es6%E5%85%A5%E9%97%A8%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%E4%B9%8Blet-const/</guid>
+      <guid>http://luckyabby.com/posts/es6%E5%85%A5%E9%97%A8%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%E4%B9%8Blet-const/</guid>
       <description>&lt;h2 id=&#34;let-const-与-var&#34;&gt;let const 与 var&lt;/h2&gt;
 
 &lt;p&gt;let 与 const 创建了块级作用域。&lt;/p&gt;
@@ -156,55 +156,55 @@
     
     <item>
       <title>谈 JavaScript 设计模式--发布订阅模式</title>
-      <link>http://luckyabby.com/post/%E8%B0%88-javascript-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F--%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F/</link>
+      <link>http://luckyabby.com/posts/%E8%B0%88-javascript-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F--%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F/</link>
       <pubDate>Wed, 23 Aug 2017 15:23:25 +0800</pubDate>
       
-      <guid>http://luckyabby.com/post/%E8%B0%88-javascript-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F--%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F/</guid>
+      <guid>http://luckyabby.com/posts/%E8%B0%88-javascript-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F--%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F/</guid>
       <description>发布订阅模式又称观察者模式，在现实生活中运用的十分常见。 比如某次你去商场看上了一件漂亮裙子，可是这件裙子没有你的号了，店员和你说可以先登记，</description>
     </item>
     
     <item>
       <title>浅谈HTTP缓存</title>
-      <link>http://luckyabby.com/post/%E6%B5%85%E8%B0%88http%E7%BC%93%E5%AD%98/</link>
+      <link>http://luckyabby.com/posts/%E6%B5%85%E8%B0%88http%E7%BC%93%E5%AD%98/</link>
       <pubDate>Fri, 18 Aug 2017 19:23:25 +0800</pubDate>
       
-      <guid>http://luckyabby.com/post/%E6%B5%85%E8%B0%88http%E7%BC%93%E5%AD%98/</guid>
+      <guid>http://luckyabby.com/posts/%E6%B5%85%E8%B0%88http%E7%BC%93%E5%AD%98/</guid>
       <description>缓存是指存储指定资源的一份拷贝，并在下次请求该资源时提供该拷贝的技术，当 web 缓存发现请求的资源已经被存储，它会拦截请求，返回该资源的拷贝，而不</description>
     </item>
     
     <item>
       <title>css里面的盒模型</title>
-      <link>http://luckyabby.com/post/css%E9%87%8C%E7%9A%84%E7%9B%92%E6%A8%A1%E5%9E%8B/</link>
+      <link>http://luckyabby.com/posts/css%E9%87%8C%E7%9A%84%E7%9B%92%E6%A8%A1%E5%9E%8B/</link>
       <pubDate>Tue, 08 Aug 2017 15:23:25 +0800</pubDate>
       
-      <guid>http://luckyabby.com/post/css%E9%87%8C%E7%9A%84%E7%9B%92%E6%A8%A1%E5%9E%8B/</guid>
+      <guid>http://luckyabby.com/posts/css%E9%87%8C%E7%9A%84%E7%9B%92%E6%A8%A1%E5%9E%8B/</guid>
       <description>css 的盒模型主要有两种，分为 w3c 的标准模型以及 IE 的传统模型。 它们都是对content、padding、border以及margin的计算，但是主</description>
     </item>
     
     <item>
       <title>React学习笔记</title>
-      <link>http://luckyabby.com/post/react%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
+      <link>http://luckyabby.com/posts/react%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
       <pubDate>Sat, 22 Jul 2017 15:23:25 +0800</pubDate>
       
-      <guid>http://luckyabby.com/post/react%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid>
+      <guid>http://luckyabby.com/posts/react%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid>
       <description>想把学习 React 的一些零碎的知识点记下来，也是一些我自己的理解，可能比较琐碎，也可能比较肤浅。 在我看来，React 的一些特性主要体现在以下的几个方</description>
     </item>
     
     <item>
       <title>js里面的深拷贝与浅拷贝</title>
-      <link>http://luckyabby.com/post/js%E9%87%8C%E9%9D%A2%E7%9A%84%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/</link>
+      <link>http://luckyabby.com/posts/js%E9%87%8C%E9%9D%A2%E7%9A%84%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/</link>
       <pubDate>Tue, 18 Jul 2017 15:23:25 +0800</pubDate>
       
-      <guid>http://luckyabby.com/post/js%E9%87%8C%E9%9D%A2%E7%9A%84%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/</guid>
+      <guid>http://luckyabby.com/posts/js%E9%87%8C%E9%9D%A2%E7%9A%84%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/</guid>
       <description>为什么会有浅拷贝与深拷贝 在说浅拷贝与深拷贝的时候先说说为什么会有浅拷贝与深拷贝。在js里面，变量分为基本类型与引用类型。 对于基本类型，基本类</description>
     </item>
     
     <item>
       <title>我所理解的RESTful api</title>
-      <link>http://luckyabby.com/post/%E6%88%91%E6%89%80%E7%90%86%E8%A7%A3%E7%9A%84restful-api/</link>
+      <link>http://luckyabby.com/posts/%E6%88%91%E6%89%80%E7%90%86%E8%A7%A3%E7%9A%84restful-api/</link>
       <pubDate>Sun, 09 Jul 2017 18:23:25 +0800</pubDate>
       
-      <guid>http://luckyabby.com/post/%E6%88%91%E6%89%80%E7%90%86%E8%A7%A3%E7%9A%84restful-api/</guid>
+      <guid>http://luckyabby.com/posts/%E6%88%91%E6%89%80%E7%90%86%E8%A7%A3%E7%9A%84restful-api/</guid>
       <description>&lt;p&gt;在解释我所理解的 RESTful api 的时候，先说说为什么会有 RESTful 结构， 因为之前的网页都是没有做到前后端分离的，使用一些类似于 JSP 进行嵌套，这样子就不易于前后端协作开发。所以就需要规范一些 api ，使得前后端通过 api 就能明晰地进行协作开发，只要按照 api 约定好的格式去传数据就好了。&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -212,10 +212,10 @@
     
     <item>
       <title>webpack学习笔记</title>
-      <link>http://luckyabby.com/post/webpack%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
+      <link>http://luckyabby.com/posts/webpack%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
       <pubDate>Sat, 08 Jul 2017 15:23:25 +0800</pubDate>
       
-      <guid>http://luckyabby.com/post/webpack%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid>
+      <guid>http://luckyabby.com/posts/webpack%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid>
       <description>&lt;h1 id=&#34;webpack学习笔记&#34;&gt;webpack学习笔记&lt;/h1&gt;
 
 &lt;p&gt;最近研究了一阵子webpack，刚开始还是觉得很难啃，后来慢慢觉得好梳理一些了，就做了一些很简单的笔记，好记性不如烂笔头嘛哈哈哈。&lt;/p&gt;
@@ -225,10 +225,10 @@
     
     <item>
       <title>Git常用命令</title>
-      <link>http://luckyabby.com/post/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</link>
+      <link>http://luckyabby.com/posts/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</link>
       <pubDate>Sun, 18 Jun 2017 15:23:25 +0800</pubDate>
       
-      <guid>http://luckyabby.com/post/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</guid>
+      <guid>http://luckyabby.com/posts/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</guid>
       <description>&lt;p&gt;在前面的介绍中说完了 Git 的基本知识，这里记录一下自己常用的 Git 命令。常用的命令其实也就那么一些，一些很复杂的命令我觉得等到用的时候去查就好了，还有最重要的是我觉得理解原理更重要。&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -236,19 +236,19 @@
     
     <item>
       <title>Git基础知识</title>
-      <link>http://luckyabby.com/post/git%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</link>
+      <link>http://luckyabby.com/posts/git%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</link>
       <pubDate>Thu, 08 Jun 2017 17:22:25 +0800</pubDate>
       
-      <guid>http://luckyabby.com/post/git%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</guid>
+      <guid>http://luckyabby.com/posts/git%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</guid>
       <description>Git是Git一种分布式版本控制系统，相比于之前的集中式版本控制系统有很明显的区别。 区别 集中式版本控制系统(Central VCS)中有一个中</description>
     </item>
     
     <item>
       <title>C语言实现数据结构--串</title>
-      <link>http://luckyabby.com/post/c%E8%AF%AD%E8%A8%80%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E4%B8%B2/</link>
+      <link>http://luckyabby.com/posts/c%E8%AF%AD%E8%A8%80%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E4%B8%B2/</link>
       <pubDate>Tue, 30 May 2017 15:33:25 +0800</pubDate>
       
-      <guid>http://luckyabby.com/post/c%E8%AF%AD%E8%A8%80%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E4%B8%B2/</guid>
+      <guid>http://luckyabby.com/posts/c%E8%AF%AD%E8%A8%80%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E4%B8%B2/</guid>
       <description>&lt;p&gt;串即字符串，是由零个或多个字符组成的有限序列，是数据元素为单个字符的特殊线性表。&lt;/p&gt;
 
 &lt;p&gt;串长：串中字符的个数（n≥0）. n=0 时称为空串。空白串：由一个或多个空格符组成的串。&lt;/p&gt;
@@ -260,29 +260,29 @@
     
     <item>
       <title>C语言实现数据结构--队列</title>
-      <link>http://luckyabby.com/post/c%E8%AF%AD%E8%A8%80%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E9%98%9F%E5%88%97/</link>
+      <link>http://luckyabby.com/posts/c%E8%AF%AD%E8%A8%80%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E9%98%9F%E5%88%97/</link>
       <pubDate>Mon, 22 May 2017 15:29:25 +0800</pubDate>
       
-      <guid>http://luckyabby.com/post/c%E8%AF%AD%E8%A8%80%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E9%98%9F%E5%88%97/</guid>
+      <guid>http://luckyabby.com/posts/c%E8%AF%AD%E8%A8%80%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E9%98%9F%E5%88%97/</guid>
       <description>&lt;p&gt;队列 (Queue)：简称队，是另一种限定性的线性表，它只允许在表的一端插入元素，而在另一端删除元素。q=(a1, a2, a3, … an),其中a1为队头，an为队尾。
 &lt;/p&gt;</description>
     </item>
     
     <item>
       <title>C语言实现数据结构-栈</title>
-      <link>http://luckyabby.com/post/c%E8%AF%AD%E8%A8%80%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%A0%88/</link>
+      <link>http://luckyabby.com/posts/c%E8%AF%AD%E8%A8%80%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%A0%88/</link>
       <pubDate>Sat, 20 May 2017 15:23:25 +0800</pubDate>
       
-      <guid>http://luckyabby.com/post/c%E8%AF%AD%E8%A8%80%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%A0%88/</guid>
+      <guid>http://luckyabby.com/posts/c%E8%AF%AD%E8%A8%80%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%A0%88/</guid>
       <description>栈是仅在表尾进行插入、删除操作的线性表。即栈 S= (a1, a2, a3, ………,an-1, an)，其中表尾(即 an 端)称为栈顶 /top，表头(即 a1 端)称为栈底/b</description>
     </item>
     
     <item>
       <title>C语言实现数据结构--线性表</title>
-      <link>http://luckyabby.com/post/c%E8%AF%AD%E8%A8%80%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84--%E7%BA%BF%E6%80%A7%E8%A1%A8/</link>
+      <link>http://luckyabby.com/posts/c%E8%AF%AD%E8%A8%80%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84--%E7%BA%BF%E6%80%A7%E8%A1%A8/</link>
       <pubDate>Thu, 18 May 2017 15:23:25 +0800</pubDate>
       
-      <guid>http://luckyabby.com/post/c%E8%AF%AD%E8%A8%80%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84--%E7%BA%BF%E6%80%A7%E8%A1%A8/</guid>
+      <guid>http://luckyabby.com/posts/c%E8%AF%AD%E8%A8%80%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84--%E7%BA%BF%E6%80%A7%E8%A1%A8/</guid>
       <description>&lt;p&gt;线性表是一种最简单的线性结构。
 线性结构是一个数据元素的有序集。比较典型的线性结构：线性表、栈、队列、串等。&lt;/p&gt;
 
@@ -291,10 +291,10 @@
     
     <item>
       <title>十分钟读懂 javascript 中的 this</title>
-      <link>http://luckyabby.com/post/%E5%8D%81%E5%88%86%E9%92%9F%E8%AF%BB%E6%87%82-javascript-%E4%B8%AD%E7%9A%84-this/</link>
+      <link>http://luckyabby.com/posts/%E5%8D%81%E5%88%86%E9%92%9F%E8%AF%BB%E6%87%82-javascript-%E4%B8%AD%E7%9A%84-this/</link>
       <pubDate>Thu, 06 Apr 2017 19:22:25 +0800</pubDate>
       
-      <guid>http://luckyabby.com/post/%E5%8D%81%E5%88%86%E9%92%9F%E8%AF%BB%E6%87%82-javascript-%E4%B8%AD%E7%9A%84-this/</guid>
+      <guid>http://luckyabby.com/posts/%E5%8D%81%E5%88%86%E9%92%9F%E8%AF%BB%E6%87%82-javascript-%E4%B8%AD%E7%9A%84-this/</guid>
       <description>&lt;p&gt;最近刚熬过了一大波考试和大作业，半个月没更文还有点心生愧疚Orz。今天就总结一下 JS 里面的 this，之前面试的时候也被面试官问到过，自己下来就整理了一下。&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -302,10 +302,10 @@
     
     <item>
       <title>ES6--扩展运算符与剩余操作符</title>
-      <link>http://luckyabby.com/post/es6--%E6%89%A9%E5%B1%95%E8%BF%90%E7%AE%97%E7%AC%A6%E4%B8%8E%E5%89%A9%E4%BD%99%E6%93%8D%E4%BD%9C%E7%AC%A6/</link>
+      <link>http://luckyabby.com/posts/es6--%E6%89%A9%E5%B1%95%E8%BF%90%E7%AE%97%E7%AC%A6%E4%B8%8E%E5%89%A9%E4%BD%99%E6%93%8D%E4%BD%9C%E7%AC%A6/</link>
       <pubDate>Mon, 20 Mar 2017 19:23:25 +0800</pubDate>
       
-      <guid>http://luckyabby.com/post/es6--%E6%89%A9%E5%B1%95%E8%BF%90%E7%AE%97%E7%AC%A6%E4%B8%8E%E5%89%A9%E4%BD%99%E6%93%8D%E4%BD%9C%E7%AC%A6/</guid>
+      <guid>http://luckyabby.com/posts/es6--%E6%89%A9%E5%B1%95%E8%BF%90%E7%AE%97%E7%AC%A6%E4%B8%8E%E5%89%A9%E4%BD%99%E6%93%8D%E4%BD%9C%E7%AC%A6/</guid>
       <description>&lt;p&gt;扩展运算符与剩余操作符都是以三点开头的操作符，二者长的很像，只是在用法上有些差别。它们已经被 ES6 数组支持，能解决很多之前 arguments 解决起来很麻烦的问题。&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -313,56 +313,56 @@
     
     <item>
       <title>Linux常用命令集合(持续更新)</title>
-      <link>http://luckyabby.com/post/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E9%9B%86%E5%90%88%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0/</link>
+      <link>http://luckyabby.com/posts/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E9%9B%86%E5%90%88%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0/</link>
       <pubDate>Sat, 18 Feb 2017 20:23:25 +0800</pubDate>
       
-      <guid>http://luckyabby.com/post/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E9%9B%86%E5%90%88%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0/</guid>
+      <guid>http://luckyabby.com/posts/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E9%9B%86%E5%90%88%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0/</guid>
       <description>自从开始接触命令行之后，就开始感叹命令行效率的强大，自己接触命令行也没多久，这篇博客就当自己的日记本，把自己常用的命令行写进来，有些自己总是</description>
     </item>
     
     <item>
       <title>深入浅出Javascript事件循环机制(下)</title>
-      <link>http://luckyabby.com/post/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BAjavascript%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%E6%9C%BA%E5%88%B6%E4%B8%8B/</link>
+      <link>http://luckyabby.com/posts/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BAjavascript%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%E6%9C%BA%E5%88%B6%E4%B8%8B/</link>
       <pubDate>Wed, 18 Jan 2017 15:23:25 +0800</pubDate>
       
-      <guid>http://luckyabby.com/post/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BAjavascript%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%E6%9C%BA%E5%88%B6%E4%B8%8B/</guid>
+      <guid>http://luckyabby.com/posts/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BAjavascript%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%E6%9C%BA%E5%88%B6%E4%B8%8B/</guid>
       <description>在上一篇文章里面我大致介绍了JavaScript的事件循环机制，但是最后还留下了一段代码和几个问题。 那我们先从这段代码开始看哇。 (function test() { setTimeout(function() {console.log(4)}, 0);</description>
     </item>
     
     <item>
       <title>深入浅出Javascript事件循环机制(上)</title>
-      <link>http://luckyabby.com/post/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BAjavascript%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%E6%9C%BA%E5%88%B6%E4%B8%8A/</link>
+      <link>http://luckyabby.com/posts/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BAjavascript%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%E6%9C%BA%E5%88%B6%E4%B8%8A/</link>
       <pubDate>Tue, 17 Jan 2017 15:23:25 +0800</pubDate>
       
-      <guid>http://luckyabby.com/post/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BAjavascript%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%E6%9C%BA%E5%88%B6%E4%B8%8A/</guid>
+      <guid>http://luckyabby.com/posts/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BAjavascript%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%E6%9C%BA%E5%88%B6%E4%B8%8A/</guid>
       <description>最近琢磨了好久的Javascript的事件循环机制，看了很多国内的博客总觉得写的还是不够深，很多都只说了Javascript的事件分为同步任</description>
     </item>
     
     <item>
       <title>你不知道的执行上下文</title>
-      <link>http://luckyabby.com/post/%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87/</link>
+      <link>http://luckyabby.com/posts/%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87/</link>
       <pubDate>Fri, 16 Dec 2016 13:47:18 +0800</pubDate>
       
-      <guid>http://luckyabby.com/post/%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87/</guid>
+      <guid>http://luckyabby.com/posts/%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87/</guid>
       <description>&lt;p&gt;执行上下文看似很好理解，可是当深入之后其实里面还有很多值得学习的地方，并且与很多我们耳熟能详的概念，譬如提升(hoisting)联系紧密。我的理解可能有所欠缺，只能把自己浅薄的理解说出来，大家仅供参考哇。也欢迎大家来找我讨论哇。
 &lt;/p&gt;</description>
     </item>
     
     <item>
       <title>外边距折叠--磨人的小妖精</title>
-      <link>http://luckyabby.com/post/%E5%A4%96%E8%BE%B9%E8%B7%9D%E6%8A%98%E5%8F%A0%E7%A3%A8%E4%BA%BA%E7%9A%84%E5%B0%8F%E5%A6%96%E7%B2%BE/</link>
+      <link>http://luckyabby.com/posts/%E5%A4%96%E8%BE%B9%E8%B7%9D%E6%8A%98%E5%8F%A0%E7%A3%A8%E4%BA%BA%E7%9A%84%E5%B0%8F%E5%A6%96%E7%B2%BE/</link>
       <pubDate>Sat, 12 Nov 2016 15:30:18 +0800</pubDate>
       
-      <guid>http://luckyabby.com/post/%E5%A4%96%E8%BE%B9%E8%B7%9D%E6%8A%98%E5%8F%A0%E7%A3%A8%E4%BA%BA%E7%9A%84%E5%B0%8F%E5%A6%96%E7%B2%BE/</guid>
+      <guid>http://luckyabby.com/posts/%E5%A4%96%E8%BE%B9%E8%B7%9D%E6%8A%98%E5%8F%A0%E7%A3%A8%E4%BA%BA%E7%9A%84%E5%B0%8F%E5%A6%96%E7%B2%BE/</guid>
       <description>外边距折叠(塌陷)这个问题，我在写页面的时候不知道遇到多少次了，以前都是对这个小妖精无可奈何，后来仔仔细细研究了一遍之后发现也没什么。(好像</description>
     </item>
     
     <item>
       <title>浅谈margin负值</title>
-      <link>http://luckyabby.com/post/%E6%B5%85%E8%B0%88margin%E8%B4%9F%E5%80%BC/</link>
+      <link>http://luckyabby.com/posts/%E6%B5%85%E8%B0%88margin%E8%B4%9F%E5%80%BC/</link>
       <pubDate>Tue, 04 Oct 2016 15:47:18 +0800</pubDate>
       
-      <guid>http://luckyabby.com/post/%E6%B5%85%E8%B0%88margin%E8%B4%9F%E5%80%BC/</guid>
+      <guid>http://luckyabby.com/posts/%E6%B5%85%E8%B0%88margin%E8%B4%9F%E5%80%BC/</guid>
       <description>margin负值在平常代码中似乎很少用到过，最近接触了之后才觉得效果比较让我惊讶，想着自己健忘还是写下来，还克服懒癌从印象笔记挪到blog，</description>
     </item>
     

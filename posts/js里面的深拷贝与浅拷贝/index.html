@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		
+		<meta name="description" content="My Blog">
+		<meta name="generator" content="Hugo 0.40" />
+		<title>js里面的深拷贝与浅拷贝 &middot; luckyabby</title>
+		<link rel="shortcut icon" href="http://luckyabby.com/images/favicon.ico">
+		<link rel="stylesheet" href="http://luckyabby.com/css/style.css">
+		<link rel="stylesheet" href="http://luckyabby.com/css/highlight.css">
+
+		
+		<link rel="stylesheet" href="http://luckyabby.com/css/font-awesome.min.css">
+		
+
+		
+		<link href="http://luckyabby.com/index.xml" rel="alternate" type="application/rss+xml" title="luckyabby" />
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://luckyabby.com/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://luckyabby.com/posts'>Archive</a>
+	<a href='http://luckyabby.com/tags'>Tags</a>
+	<a href='http://luckyabby.com/about'>About</a>
+
+	
+
+	
+	<a class="cta" href="http://luckyabby.com/index.xml">Subscribe</a>
+	
+</nav>
+
+
+        <section id="wrapper" class="post">
+            <article>
+                <header>
+                    <h1>
+                        js里面的深拷贝与浅拷贝
+                    </h1>
+                    <h2 class="headline">
+                    Jul 18, 2017 15:23
+                    · 1577 words
+                    · 4 minute read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://luckyabby.com/tags/js">JS</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                  
+                    <div id="toc">
+                      <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#为什么会有浅拷贝与深拷贝">为什么会有浅拷贝与深拷贝</a>
+<ul>
+<li><a href="#基本类型">基本类型</a></li>
+<li><a href="#引用类型">引用类型</a></li>
+</ul></li>
+<li><a href="#如何实现浅拷贝与深拷贝">如何实现浅拷贝与深拷贝</a>
+<ul>
+<li><a href="#实现浅拷贝">实现浅拷贝</a>
+<ul>
+<li><a href="#直接赋值">直接赋值</a></li>
+<li><a href="#array-prototype-concat-与-array-prototype-slice">Array.prototype.concat 与 Array.prototype.slice</a></li>
+<li><a href="#object-assign">Object.assign</a></li>
+</ul></li>
+<li><a href="#如何实现深拷贝">如何实现深拷贝</a>
+<ul>
+<li><a href="#json-parse与json-stringify">JSON.parse与JSON.stringify</a></li>
+</ul></li>
+<li><a href="#自己实现拷贝">自己实现拷贝</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+                    </div>
+                  
+                
+                <section id="post-body">
+                    
+
+<h3 id="为什么会有浅拷贝与深拷贝">为什么会有浅拷贝与深拷贝</h3>
+
+<p>在说浅拷贝与深拷贝的时候先说说为什么会有浅拷贝与深拷贝。在js里面，变量分为基本类型与引用类型。</p>
+
+<!-- more -->
+
+<p>对于基本类型，基本类型是简单的数据段，但是引用类型是指那样可能由多个值构成的对象等。深拷贝主要是由引用类型的复制引起的。</p>
+
+<h4 id="基本类型">基本类型</h4>
+
+<p>基本类型只有 Undefined Null Boolean Number String 这五种，基本类型的值存放在栈内存中，可以直接访问，当进行复制的时候，是重新开辟一块内存存放一个相同的值，这两个值相同但是是完全独立的，之后任何操作都是互不影响的。</p>
+
+<h4 id="引用类型">引用类型</h4>
+
+<p>引用类型在js中指的是对象和数组等等，引用类型的值是存放在堆内存中，但是不需要直接操作变量在堆内存中的位置，因此在栈内存中存放了引用类型的地址，因此对栈内存的值的操作其实是对堆内存的一个引用的操作，因此复制的时候也是复制一个地址过去，真实操作的时候还是对堆内存数据的操作。</p>
+
+<p>正是因为引用类型的值在栈内存中存放的只是一个地址，这个时候如果只是复制这个地址过去，操作新复制变量的时候还会对原来的变量值产生影响，这就是浅拷贝（shallow copy）的弊端，这些情况有时会让代码变得很混乱。</p>
+
+<h3 id="如何实现浅拷贝与深拷贝">如何实现浅拷贝与深拷贝</h3>
+
+<p>浅拷贝就是只将值复制过去，如果是基本类型直接复制，如果是引用类型也是将地址复制过去，因此对于引用类型的变量还会操作同一块数据。</p>
+
+<p>深拷贝就是递归地复制，直到最后一层是基本类型，因此深拷贝对基本类型直接复制，对于引用类型是递归复制，直到把最后一层的基本类型值复制过去，这样就完全成为两个变量值，之后不会再互相影响。</p>
+
+<p><strong>深浅拷贝最主要的区别只针对引用类型，不针对基本类型</strong></p>
+
+<h4 id="实现浅拷贝">实现浅拷贝</h4>
+
+<h5 id="直接赋值">直接赋值</h5>
+
+<p>最典型的浅拷贝就是直接赋值，例如：</p>
+
+<pre><code>let object1 ={a:1,b:2};
+let object2 = object1;
+object2.a = 3;
+console.log(object1.a); // 3
+</code></pre>
+
+<p>在上面对 object2 进行操作的时候也会改变原来 object1 的值。</p>
+
+<h5 id="array-prototype-concat-与-array-prototype-slice">Array.prototype.concat 与 Array.prototype.slice</h5>
+
+<p>MDN对于concat的描述：
+&gt; concat 方法并不修改调用它的对象(this 指向的对象) 和参数中的各个数组本身的值,而是将他们的每个元素拷贝一份放在组合成的新数组中.原数组中的元素有两种被拷贝的方式:
+对象引用(非对象直接量):concat 方法会复制对象引用放到组合的新数组里,原数组和新数组中的对象引用都指向同一个实际的对象,所以,当实际的对象被修改时,两个数组也同时会被修改.
+字符串和数字(是原始值,而不是包装原始值的 String 和 Number 对象): concat 方法会复制字符串和数字的值放到新数组里.</p>
+
+<p>对于slice的描述也如上，这两个方法都是浅复制，对于引用类型都只是复制了一份地址。
+具体见下例：</p>
+
+<pre><code>let arr = [1, {a: 2, b: 3}];
+let arrConcat = arr.concat();
+var arrSlice = arr.slice(0);
+arrSlice[1].a = 4;
+console.log(arr); //[1, {a: 4, b: 3}]
+console.log(arrSlice); //[1, {a: 4, b: 3}]
+</code></pre>
+
+<p>由此可见，这两个方法还是操作的是堆内存中的同一块区域数值。</p>
+
+<h5 id="object-assign">Object.assign</h5>
+
+<p>Object.assign() 方法用于将所有可枚举的属性的值从一个或多个源对象复制到目标对象。假设源对象中有属性是引用类型，那么也只会拷贝这个引用，也就是堆内存数据的地址。具体例子见下：</p>
+
+<pre><code>var obj = { a: 1, b: {c: 2, d: 3}};
+var copy = Object.assign({}, obj);
+copy.b.c = 4;
+console.log(obj.b); //{c: 4, d: 3}
+</code></pre>
+
+<p>这里copy中的b属性是一个对象，操作这个对象也会引起obj中b属性的变化。</p>
+
+<h4 id="如何实现深拷贝">如何实现深拷贝</h4>
+
+<h5 id="json-parse与json-stringify">JSON.parse与JSON.stringify</h5>
+
+<p>JSON.stringify()方法可以将一个JavaScript值转换为一个JSON字符串，相反，JSON.parse()方法解析一个JSON字符串，构造由字符串描述的JavaScript值或对象。
+见下面的例子：</p>
+
+<pre><code>var obj = {a: 1, b: 2};
+var copy = JSON.parse(JSON.stringify(obj));
+copy.a = 3;
+console.log(obj.a); //1
+</code></pre>
+
+<p>这种方法虽然能实现深拷贝，但是会丢弃对象的constructor,同时对于函数、正则表达式等等会无法拷贝。如下例:</p>
+
+<pre><code>var obj = {a: function() {}};
+var copy = JSON.parse(JSON.stringify(obj));
+console.log(copy.a); //undefined
+</code></pre>
+
+<h4 id="自己实现拷贝">自己实现拷贝</h4>
+
+<pre><code>function judgeClass(o) {
+  return Object.prototype.toString.call(o).slice(8, -1)
+}
+
+function copy(obj, deep) {
+  if (judgeClass(obj)!== 'Array' &amp;&amp; judgeClass(obj)!=='Object'){
+    return obj;
+  } else {
+      var name ,target = judgeClass(obj)==='Array' ? [] : {},value;
+      for(name in obj) {
+          value = obj[name];
+          if(value === obj) {
+              continue;
+          }
+          if(deep &amp;&amp; (judgeClass(value)==='Array' || judgeClass(value)==='Object')) {
+              target[name] = copy(deep, value);
+          } else {
+              target[name] = value;
+          }
+      }
+      return target;
+  }
+}
+</code></pre>
+
+<p>上面是大致实现的一个拷贝，实现参考了<a href="https://github.com/jquery/jquery/blob/1472290917f17af05e98007136096784f9051fab/src/core.js#L121">jQuery中<code>$_extend()</code> 方法</a>的实现,下面是测试的例子:</p>
+
+<pre><code>var oldValue = {name: 'abby', info:{age: 19, sex: '女'}};
+var copyValue = copy(oldValue, true);
+copyValue.info.age = 20;
+console.log(oldValue.info.age); // 19
+</code></pre>
+
+<p>这种方法也有缺陷就是对于一些新增的对象无法实现深拷贝，比如新增的Int16Array等对象，这种方法还需要不断改进。</p>
+
+                </section>
+            </article>
+
+            
+
+            
+                <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'luckyabby'; 
+
+     
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+            
+
+            
+                <ul id="post-list" class="archive readmore">
+    <h3>Read more</h3>
+
+    
+    
+    
+        <li>
+            <a href="/posts/%E5%88%9D%E7%BA%A7webpack%E9%85%8D%E7%BD%AE%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%9A%84%E5%BC%83%E5%9D%91%E4%B9%8B%E8%B7%AF/">初级webpack配置工程师的弃坑之路<aside class="dates">Mar 23 2018</aside></a>
+        </li>
+    
+        <li>
+            <a href="/posts/%E5%88%86%E6%94%AF%E7%9A%84%E6%95%B4%E5%90%88git-rebase-or-git-merge/">分支的整合：git rebase Or git merge<aside class="dates">Mar 14 2018</aside></a>
+        </li>
+    
+        <li>
+            <a href="/posts/css%E5%B8%B8%E8%A7%81%E7%9A%84%E6%B5%AE%E5%8A%A8%E4%B8%8E%E6%B8%85%E9%99%A4%E6%B5%AE%E5%8A%A8/">CSS常见的浮动与清除浮动<aside class="dates">Mar 14 2018</aside></a>
+        </li>
+    
+        <li>
+            <a href="/posts/%E8%B8%A9%E5%9D%91%E7%AF%87/">踩坑篇--使用 fetch 上传文件<aside class="dates">Mar 6 2018</aside></a>
+        </li>
+    
+        <li>
+            <a href="/posts/2017%E5%B9%B4%E4%B8%80%E5%88%87%E9%83%BD%E8%BF%87%E5%BE%97%E5%BE%88%E6%B8%A9%E6%9A%96/">2017年,一切都过得很温暖<aside class="dates">Jan 2 2018</aside></a>
+        </li>
+    
+        <li>
+            <a href="/posts/%E6%88%91%E8%BF%98%E6%98%AF%E6%83%B3%E8%B0%88%E8%B0%88js%E9%87%8C%E9%9D%A2%E7%9A%84%E9%97%AD%E5%8C%85/">我还是想谈谈JS里面的闭包<aside class="dates">Dec 8 2017</aside></a>
+        </li>
+    
+        <li>
+            <a href="/posts/chmod%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/">chmod命令详解<aside class="dates">Dec 8 2017</aside></a>
+        </li>
+    
+        <li>
+            <a href="/posts/blog%E8%BF%81%E7%A7%BB%E5%88%B0hugo/">博客迁移到hugo<aside class="dates">Dec 5 2017</aside></a>
+        </li>
+    
+        <li>
+            <a href="/posts/%E5%89%8D%E7%AB%AF%E6%A8%A1%E5%9D%97%E5%8C%96%E5%BC%80%E5%8F%91/">前端模块化开发<aside class="dates">Oct 18 2017</aside></a>
+        </li>
+    
+        <li>
+            <a href="/posts/%E5%AE%9E%E7%8E%B0css%E5%B1%85%E4%B8%AD%E7%9A%84%E5%A4%9A%E7%A7%8D%E6%96%B9%E6%B3%95/">实现CSS居中的多种方法 <aside class="dates">Sep 18 2017</aside></a>
+        </li>
+    
+</ul>
+
+            
+
+            <footer id="footer">
+    
+        <div id="social">
+
+	
+	
+    <a class="symbol" href="">
+        <i class="fa fa-facebook-square"></i>
+    </a>
+    
+    <a class="symbol" href="https://www.github.com/LuckyAbby">
+        <i class="fa fa-github-square"></i>
+    </a>
+    
+    <a class="symbol" href="">
+        <i class="fa fa-twitter-square"></i>
+    </a>
+    
+
+
+</div>
+
+    
+    <p class="small">
+    
+       © Copyright 2018 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://luckyabby.com/js/jquery-3.3.1.min.js"></script>
+<script src="http://luckyabby.com/js/main.js"></script>
+<script src="http://luckyabby.com/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+  
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-84989670-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+
+
+
+    </body>
+</html>

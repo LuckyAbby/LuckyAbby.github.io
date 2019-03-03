@@ -2,30 +2,30 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Linux on luckyabby</title>
-    <link>//luckyabby.com/tags/linux/</link>
+    <link>https://luckyabby.com/tags/linux/</link>
     <description>Recent content in Linux on luckyabby</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Fri, 08 Dec 2017 10:25:33 +0800</lastBuildDate>
     
-	<atom:link href="//luckyabby.com/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://luckyabby.com/tags/linux/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>chmod命令详解</title>
-      <link>//luckyabby.com/posts/chmod%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/</link>
+      <link>https://luckyabby.com/posts/chmod%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/</link>
       <pubDate>Fri, 08 Dec 2017 10:25:33 +0800</pubDate>
       
-      <guid>//luckyabby.com/posts/chmod%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/</guid>
+      <guid>https://luckyabby.com/posts/chmod%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/</guid>
       <description>文件的权限 chmod 命令用于改变文件或者目录的访问权限，Linux系统可以控制谁通过何种方式对文件或者目录进行访问与操作。 文件或者目录的访问角色可以</description>
     </item>
     
     <item>
       <title>Linux常用命令集合(持续更新)</title>
-      <link>//luckyabby.com/posts/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E9%9B%86%E5%90%88%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0/</link>
+      <link>https://luckyabby.com/posts/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E9%9B%86%E5%90%88%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0/</link>
       <pubDate>Sat, 18 Feb 2017 20:23:25 +0800</pubDate>
       
-      <guid>//luckyabby.com/posts/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E9%9B%86%E5%90%88%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0/</guid>
+      <guid>https://luckyabby.com/posts/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E9%9B%86%E5%90%88%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0/</guid>
       <description>自从开始接触命令行之后，就开始感叹命令行效率的强大，自己接触命令行也没多久，这篇博客就当自己的日记本，把自己常用的命令行写进来，有些自己总是</description>
     </item>
     

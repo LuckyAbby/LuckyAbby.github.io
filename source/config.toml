@@ -1,5 +1,5 @@
 # Site settings
-baseurl = "//luckyabby.com/"
+baseurl = "https://luckyabby.com/"
 languageCode = "zh-cn"
 title = "luckyabby"
 theme = "hugo-theme-cactus-plus"

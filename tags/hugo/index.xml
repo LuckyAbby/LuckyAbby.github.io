@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Hugo on luckyabby</title>
-    <link>//luckyabby.com/tags/hugo/</link>
+    <link>luckyabby.com/tags/hugo/</link>
     <description>Recent content in Hugo on luckyabby</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Tue, 05 Dec 2017 10:06:52 +0800</lastBuildDate>
     
-	<atom:link href="//luckyabby.com/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="luckyabby.com/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>博客迁移到hugo</title>
-      <link>//luckyabby.com/posts/blog%E8%BF%81%E7%A7%BB%E5%88%B0hugo/</link>
+      <link>luckyabby.com/posts/blog%E8%BF%81%E7%A7%BB%E5%88%B0hugo/</link>
       <pubDate>Tue, 05 Dec 2017 10:06:52 +0800</pubDate>
       
-      <guid>//luckyabby.com/posts/blog%E8%BF%81%E7%A7%BB%E5%88%B0hugo/</guid>
+      <guid>luckyabby.com/posts/blog%E8%BF%81%E7%A7%BB%E5%88%B0hugo/</guid>
       <description>在经过昨天一天的捣鼓之后，把之前写过的博客从hexo迁移到了hugo 为什么要迁移 hexo 太慢了，编译到部署一般需要3s左右，而 hugo 却快的多，大概只需</description>
     </item>
     

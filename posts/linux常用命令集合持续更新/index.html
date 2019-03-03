@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		
+		<meta name="description" content="My Blog">
+		<meta name="generator" content="Hugo 0.54.0" />
+		<title>Linux常用命令集合(持续更新) &middot; luckyabby</title>
+		<link rel="shortcut icon" href="http://luckyabby.com/images/favicon.ico">
+		<link rel="stylesheet" href="http://luckyabby.com/css/style.css">
+		<link rel="stylesheet" href="http://luckyabby.com/css/highlight.css">
+
+		
+		<link rel="stylesheet" href="http://luckyabby.com/css/font-awesome.min.css">
+		
+
+		
+		<link href="http://luckyabby.com/index.xml" rel="alternate" type="application/rss+xml" title="luckyabby" />
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://luckyabby.com/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://luckyabby.com/posts'>Archive</a>
+	<a href='http://luckyabby.com/tags'>Tags</a>
+	<a href='http://luckyabby.com/about'>About</a>
+
+	
+
+	
+	<a class="cta" href="http://luckyabby.com/index.xml">Subscribe</a>
+	
+</nav>
+
+
+        <section id="wrapper" class="post">
+            <article>
+                <header>
+                    <h1>
+                        Linux常用命令集合(持续更新)
+                    </h1>
+                    <h2 class="headline">
+                    Feb 18, 2017 20:23
+                    · 3109 words
+                    · 7 minute read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://luckyabby.com/tags/linux">Linux</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                  
+                    <div id="toc">
+                      <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#常用命令行">常用命令行</a>
+<ul>
+<li><a href="#1-cd">1. cd</a></li>
+<li><a href="#2-ls">2. ls</a></li>
+<li><a href="#3-cp">3. cp</a></li>
+<li><a href="#4-mv">4. mv</a></li>
+<li><a href="#5-rm">5. rm</a></li>
+<li><a href="#6-find">6. find</a></li>
+<li><a href="#7-mkdir">7. mkdir</a></li>
+<li><a href="#8-touch">8. touch</a></li>
+<li><a href="#9-vim命令">9. vim命令</a></li>
+<li><a href="#10-cat命令">10. cat命令</a></li>
+<li><a href="#11-ps命令">11. ps命令</a></li>
+<li><a href="#12-pstree命令">12. pstree命令</a></li>
+<li><a href="#13-top命令">13. top命令</a></li>
+<li><a href="#14-nice命令">14. nice命令</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+                    </div>
+                  
+                
+                <section id="post-body">
+                    
+
+<p>自从开始接触命令行之后，就开始感叹命令行效率的强大，自己接触命令行也没多久，这篇博客就当自己的日记本，把自己常用的命令行写进来，有些自己总是记不住，记下来也免得自己又得去查。</p>
+
+<h2 id="常用命令行">常用命令行</h2>
+
+<h3 id="1-cd">1. cd</h3>
+
+<p>后面的参数可以是绝对路径也可能是相对路径。</p>
+
+<pre><code>cd /A/b.html # 定位到目录A下面的b.html文件  
+cd ./        # 定位到当前目录 “.”表示当前目录    
+cd ../        # 定位到上层目录 “..”表示上一层目录
+</code></pre>
+
+<h3 id="2-ls">2. ls</h3>
+
+<p>ls主要用来查看文件和目录</p>
+
+<pre><code>-l ：列出长数据串，包含文件的属性与权限数据等  
+-a ：列出全部的文件，连同隐藏文件（开头为.的文件）一起列出来（常用）  
+-d ：仅列出目录本身，而不是列出目录的文件数据  
+-R ：连同子目录的内容一起列出（递归列出），等于该目录下的所有文件都会显示出来
+</code></pre>
+
+<p>这些参数可以同时使用，如下面的三个命令的区别</p>
+
+<pre><code>1. ls 显示当前下面的文件及文件夹
+2. ls -a 显示当前目录下的所有文件及文件夹包括隐藏的.和..等
+3. ls -al 显示当前目录下的所有文件及文件夹包括隐藏的.和..等并显示详细信息，详细信息包括大小，属组，创建时间
+</code></pre>
+
+<h3 id="3-cp">3. cp</h3>
+
+<p>cp=copy,就是复制的意思，可以将一个文件复制给另一个文件，也可以将多个文件复制到一个文件夹。</p>
+
+<pre><code>-a ：将文件的特性一起复制  
+-p ：连同文件的属性一起复制，而非使用默认方式，与-a相似，常用于备份  
+-i ：若目标文件已经存在时，在覆盖时会先询问操作的进行  
+-r ：递归持续复制，用于目录的复制行为  
+-u ：目标文件与源文件有差异时才会复制
+</code></pre>
+
+<pre><code>cp -a a.html b.html test #将a.html b.html连同特性一起复制到test目录下
+</code></pre>
+
+<p>如果把一个文件复制到一个目标文件中，而目标文件已经存在，那么，该目标文件的内容将被破坏。此命令中所有参数既可以是绝对路径名，也可以是相对路径名。通常会用到点.或点点..的形式。例如，下面的命令将指定文件复制到当前目录下：</p>
+
+<pre><code> cp ../mary/homework/assign .
+</code></pre>
+
+<p>所有目标文件指定的目录必须是己经存在的，cp命令不能创建目录。如果没有文件复制的权限，则系统会显示出错信息。 将文件file复制到目录/usr/men/tmp下，并改名为file1</p>
+
+<pre><code>cp file /usr/men/tmp/file1
+</code></pre>
+
+<p>将目录/usr/men下的所有文件及其子目录复制到目录/usr/zh中</p>
+
+<pre><code>cp -r /usr/men /usr/zh
+</code></pre>
+
+<p>交互式地将目录/usr/men中的以m打头的所有.c文件复制到目录/usr/zh中</p>
+
+<pre><code>cp -i /usr/men m*.c /usr/zh
+</code></pre>
+
+<h3 id="4-mv">4. mv</h3>
+
+<p>mv=move,可用来移动文件目录或者更名</p>
+
+<pre><code># 文件更名 将a改名为b
+mv a.html b.html
+# 文件移动 将a.html b.html移动到test目录下
+mv a.html b.html test
+</code></pre>
+
+<h3 id="5-rm">5. rm</h3>
+
+<p>rm=remove,删除的意思，可用来删除文件或者目录</p>
+
+<pre><code>-f ：就是force的意思，忽略不存在的文件，不会出现警告消息  
+-i ：互动模式，在删除前会询问用户是否操作  
+-r ：递归删除，最常用于目录删除，它是一个非常危险的参数
+</code></pre>
+
+<p>参数可以组合使用</p>
+
+<pre><code>rm -fr dir # 强制删除目录dir中的所有文件
+</code></pre>
+
+<h3 id="6-find">6. find</h3>
+
+<p>查找文件,使用起来较为复杂。</p>
+
+<pre><code>find &lt;指定目录&gt; &lt;指定条件&gt; &lt;指定动作&gt;
+　　- &lt;指定目录&gt;： 所要搜索的目录及其所有子目录。默认为当前目录。
+　　- &lt;指定条件&gt;： 所要搜索的文件的特征。
+　　- &lt;指定动作&gt;： 对搜索结果进行特定的处理
+</code></pre>
+
+<p>如果什么参数也不加，find默认搜索当前目录及其子目录，并且不过滤任何结果（也就是返回所有文件），将它们全都显示在屏幕上。</p>
+
+<pre><code># 与文件权限及名称有关的参数：  
+-name filename ：找出文件名为filename的文件  
+-size [+-]SIZE ：找出比SIZE还要大（+）或小（-）的文件  
+-tpye TYPE ：查找文件的类型为TYPE的文件，TYPE的值主要有：一般文件（f）、设备文件（b、c）、目录（d）、连接文件（l）、socket（s）、FIFO管道文件（p）；  
+-perm mode ：查找文件权限刚好等于mode的文件，mode用数字表示，如0755；  
+-perm -mode ：查找文件权限必须要全部包括mode权限的文件，mode用数字表示  
+-perm +mode ：查找文件权限包含任一mode的权限的文件，mode用数字表示  
+</code></pre>
+
+<pre><code># / 表示根目录
+# . 表示当前目录
+# 查找根目录下面名字为a.html的文件
+find / -name a.html
+# 查找当前目录中，所有文件名以my开头的文件，并显示它们的详细信息。
+find . -name 'my*' -ls
+# 查找当前目录中文件权限的0755的文件  
+find . -perm 0755
+</code></pre>
+
+<h3 id="7-mkdir">7. mkdir</h3>
+
+<p>用来创建一个目录</p>
+
+<pre><code>  -m, --mode=模式，设定权限&lt;模式&gt; (类似 chmod)，而不是 rwxrwxrwx 减 umask
+  -p, --parents  可以是一个路径名称。此时若路径中的某些目录尚不存在,加上此选项后,系统将自动建立好那些尚不存在的目录,即一次可以建立多个目录;
+  -v, --verbose  每次创建新目录都显示信息
+      --help   显示此帮助信息并退出
+      --version  输出版本信息并退出
+</code></pre>
+
+<p>实例</p>
+
+<pre><code># 创建test的目录
+mkdir test
+# 递归创建多个目录
+mkdir -p test2/test22
+# 创建权限为777的目录
+mkdir -m 11 test3
+</code></pre>
+
+<h3 id="8-touch">8. touch</h3>
+
+<p>可以修改文件或者目录的时间属性，包括存取时间和更改时间。若文件不存在，系统会建立一个新的文件。
+ls -l 可以显示档案的时间记录。</p>
+
+<pre><code># 将b.html的时间戳改为a.html的时间戳 如果美誉参考的文件则为系统的时间
+touch a.html b.html
+# 如果c.html不存在的话则创建该文件
+touch c.html
+</code></pre>
+
+<h3 id="9-vim命令">9. vim命令</h3>
+
+<p>该命令主要用于文本编辑，它接一个或多个文件名作为参数，如果文件存在就打开，如果文件不存在就以该文件名创建一个文件。vim是一个文本编辑器，常用的命令等使用多了以后再整理</p>
+
+<h3 id="10-cat命令">10. cat命令</h3>
+
+<p>常用来显示文件内容，或者将几个文件连接起来显示
+cat主要有三大功能：
+1. 一次显示整个文件:cat filename
+2. 从键盘创建一个文件:cat &gt; filename 只能创建新文件,不能编辑已有文件.
+3. 将几个文件合并为一个文件:cat file1 file2 &gt; file</p>
+
+<pre><code># 显示出c.html的具体内容
+cat c.html
+</code></pre>
+
+<h3 id="11-ps命令">11. ps命令</h3>
+
+<p>ps=process status,用来列出系统中当前运行的进程。ps命令列出的是当前那些进程的快照，就是执行ps命令的那个时刻的那些进程，如果想要动态的显示进程信息，就可以使用top命令。</p>
+
+<pre><code>#显示所有进程的信息
+ps -a
+#显示指定用户下面的进程信息
+ps -u root
+#显示所有进程信息，连同命令行
+ps -ef
+#列出目前所有的正在内存中的程序
+ps aux
+</code></pre>
+
+<p>其中部分显示命令的含义是</p>
+
+<pre><code>UID     //用户ID、但输出的是用户名
+PID     //进程的ID
+PPID    //父进程ID
+C       //进程占用CPU的百分比
+STIME   //进程启动到现在的时间
+TTY     //该进程在那个终端上运行，若与终端无关，则显示? 若为pts/0等，则表示由网络连接主机进程。
+CMD     //命令的名称和参数
+</code></pre>
+
+<h3 id="12-pstree命令">12. pstree命令</h3>
+
+<p>linux中，每一个进程都是由其父进程创建的。此命令以可视化方式显示进程，通过显示进程的树状图来展示进程间关系。如果指定了pid了，那么树的根是该pid，不然将会是init（pid： 1）。</p>
+
+<h3 id="13-top命令">13. top命令</h3>
+
+<p>top是一个更加有用的命令，可以监视系统中不同的进程所使用的资源。它提供实时的系统状态信息。显示进程的数据包括 PID、进程属主、优先级、%CPU、%memory等。可以使用这些显示指示出资源使用量。</p>
+
+<h3 id="14-nice命令">14. nice命令</h3>
+
+<p>通过nice命令的帮助，用户可以设置和改变进程的优先级。提高一个进程的优先级，内核会分配更多CPU时间片给这个进程。默认情况下，进程以0的优先级启动。进程优先级可以通过top命令显示的NI（nice value）列查看。进程优先级值的范围从-20到19。值越低，优先级越高。</p>
+
+<pre><code>#不加任何参数 显示当前的优先级 0
+nice
+#默认增加10个优先级
+nice nice
+</code></pre>
+
+<p>-n, &ndash;adjustment=ADJUST 指定程序运行优先级的调整值</p>
+
+<pre><code>#以参数“-n”的形式指定程序运行优先级的调整值，系统缺省优先级0加上调整值-21得到新的优先级-21(小于-20，因此程序最终的运行优先级为-20
+nice -n -21 nice
+#大于19显示19
+nice --adjustment=20 nice
+</code></pre>
+
+<p>还可以使用参数“-ADJUST”的形式来指定程序运行优先级的调整值，其中，ADJUST为指定的程序运行优先级调整值，可以为负数，也可以为正数</p>
+
+<pre><code>#显示-1
+nice --1 nice
+#显示1
+nice -+1 nice
+nice -1 nice
+</code></pre>
+
+<p>在nice命令中，可以同时指定多个程序运行优先级调整值，但只有最后一次指定的数值有效</p>
+
+<pre><code>#显示3
+nice -n -20 --adjustment +19 -3 nice
+</code></pre>
+
+                </section>
+            </article>
+
+            
+
+            
+                <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'luckyabby'; 
+
+     
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+            
+
+            
+
+            <footer id="footer">
+    
+        <div id="social">
+
+	
+	
+    <a class="symbol" href="">
+        <i class="fa fa-facebook-square"></i>
+    </a>
+    
+    <a class="symbol" href="https://www.github.com/LuckyAbby">
+        <i class="fa fa-github-square"></i>
+    </a>
+    
+    <a class="symbol" href="">
+        <i class="fa fa-twitter-square"></i>
+    </a>
+    
+
+
+</div>
+
+    
+    <p class="small">
+    
+        © Copyright 2019 ❤️
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://luckyabby.com/js/jquery-3.3.1.min.js"></script>
+<script src="http://luckyabby.com/js/main.js"></script>
+<script src="http://luckyabby.com/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+  
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-84989670-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+
+
+
+    </body>
+</html>

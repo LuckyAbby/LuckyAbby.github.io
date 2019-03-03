@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		
+		<meta name="description" content="My Blog">
+		<meta name="generator" content="Hugo 0.54.0" />
+		<title>前端模块化开发 &middot; luckyabby</title>
+		<link rel="shortcut icon" href="http://luckyabby.com/images/favicon.ico">
+		<link rel="stylesheet" href="http://luckyabby.com/css/style.css">
+		<link rel="stylesheet" href="http://luckyabby.com/css/highlight.css">
+
+		
+		<link rel="stylesheet" href="http://luckyabby.com/css/font-awesome.min.css">
+		
+
+		
+		<link href="http://luckyabby.com/index.xml" rel="alternate" type="application/rss+xml" title="luckyabby" />
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://luckyabby.com/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://luckyabby.com/posts'>Archive</a>
+	<a href='http://luckyabby.com/tags'>Tags</a>
+	<a href='http://luckyabby.com/about'>About</a>
+
+	
+
+	
+	<a class="cta" href="http://luckyabby.com/index.xml">Subscribe</a>
+	
+</nav>
+
+
+        <section id="wrapper" class="post">
+            <article>
+                <header>
+                    <h1>
+                        前端模块化开发
+                    </h1>
+                    <h2 class="headline">
+                    Oct 18, 2017 17:23
+                    · 2137 words
+                    · 5 minute read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://luckyabby.com/tags/%E6%A8%A1%E5%9D%97%E5%8C%96%E5%BC%80%E5%8F%91">模块化开发</a>
+                          
+                              <a href="http://luckyabby.com/tags/js">JS</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                  
+                    <div id="toc">
+                      <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#es6-module">ES6 Module</a></li>
+<li><a href="#commonjs">CommonJS</a></li>
+<li><a href="#amd">AMD</a></li>
+<li><a href="#cmd">CMD</a>
+<ul>
+<li><a href="#amd-cmd-区别">AMD CMD 区别</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+                    </div>
+                  
+                
+                <section id="post-body">
+                    <p>ES6 以来，有了 module 的体系，替代了之前比较常用的 CommonJS 和 AMD 规范，使得在编译时就能确定模块的依赖关系，同时使得前端在复杂项目时可以更好的分工和规范。</p>
+
+<p>这篇文章主要介绍前端的模块化开发，主要包括 ES6 的 module 以及三个主要的模块化开发规范 CommonJS AMD 以及 CMD。</p>
+
+<h2 id="es6-module">ES6 Module</h2>
+
+<p>ES6 的模块功能主要通过 export 以及 import 实现。模块中如果对外暴露接口就需要使用 export ，而如果想在模块中引用外部模块就需要使用 import。</p>
+
+<p>典型的栗子就是 React,在 React 中我们十分常见的写法就是：</p>
+
+<pre><code class="language-js">import React from 'react';
+import {func as fu, bar} from './my_module';
+...
+
+export class MyClass extends React.Component {
+
+}
+
+</code></pre>
+
+<p>当然我们不止是像 React 中导出一个类，只要想把模块中的变量、方法等等暴露出去，都可以使用 export。</p>
+
+<p>注意下面几点：</p>
+
+<p>1.在 import 中我们使用了大括号，其中大括号中的变量名必须和被导入模块中对外暴露的借口名称相同，其实就是一个解构操作。</p>
+
+<p>2.在 import 的时候我们使用了 as 来区别名，将输入的 func 变量重新取名为 fu,这样做的好处是如果同时引入的两个模块中都含有 func 方法，通过区别名的方式就可以区分开来。其实在 export 的时候我们就可以使用别名。</p>
+
+<p>3.同时注意 import 具有提升效果，因为是在编译阶段执行的，在代码运行之前。因此也不能使用一些运行时才能知道的语法结果，比如在 if else 语句之中判断 import 哪个模块。</p>
+
+<p>4.在导出的时候可以使用了 export default,指定默认输出。在使用 default 之后我们在 export 的时候就不需要再给自己的函数等等取名字了，可以使用匿名函数。这样在 import 的时候可以自己随意取名字。</p>
+
+<p>比如：</p>
+
+<pre><code class="language-js">import $, {clone} from 'my_module';
+</code></pre>
+
+<p>在 my_module 中的写法就是：</p>
+
+<pre><code class="language-js">export default function() { // 对应 import 中的 $
+    ...
+}
+
+export function clone (obj) { // 对应 import 中的 {clone}
+    ...
+}
+</code></pre>
+
+<p>** 注意一个模块里面只能又一个 default **</p>
+
+<h2 id="commonjs">CommonJS</h2>
+
+<p>CommonJS 主要是在 Node 服务器端的规范。</p>
+
+<p>CommonJS 也认为一个文件就是一个模块，必须通过某种导出才能使得别的模块使用该模块的对外接口。只是在 ES6 中使用 import export ，但是在 CommonJS 中使用 module.exports 对象进行导出，并且一个模块中只有这一个统一的出口。在外部模块中，我们使用 require 进行加载，这个方法读取一个文件并且返回文件中的 module.exports 对象。</p>
+
+<p>例如：</p>
+
+<p>定义一个模块 my_modules：</p>
+
+<pre><code class="language-js">function bar() {
+    ...
+}
+
+fucntion func() {
+    ....
+}
+module.exports = {
+    bar: bar,
+    func: func
+}
+</code></pre>
+
+<p>加载模块：</p>
+
+<pre><code class="language-js">var needModules = require(./my_modules);
+needModules.bar();
+needModules.func();
+</code></pre>
+
+<p>主要注意几点：
+1.加载的文件如果是“／”开头表示记载绝对路径的模块，以“./”开头表示加载相对路径的模块文件，两者都不含的话表示从系统的核心模块或者 node_modules 已经安装的模块。</p>
+
+<p>2.模块加载会有缓存，存放在 require.cache 之中，并且缓存是根据绝对路径是识别的，同样的模块名放在不同的路径之中多次 require 的时候还是不会重新加载模块，除非使用 delete require.cache.</p>
+
+<p>3.CommonJS是同步加载的，因此更适合服务器端。只有加载完成之后才能进行下面的操作。因为在服务器端模块文件一般存放在本地，再加上有缓存，加载速度十分快。因此这种就不适合用在浏览器端，浏览器端的各个 script 标签中的文件来自各个服务器，如果上个模块记载的时间很长，就会导致浏览器“假死”，因此浏览器端我们采用另外一种异步的加载方式&ndash;AMD。</p>
+
+<h2 id="amd">AMD</h2>
+
+<p>AMD（Asynchronous Module Definition）就是异步加载模块，模块的加载不会影响后面代码的执行。所以依赖这个模块的代码都在一个回调函数中，等到所有模块加载完成之后就会执行这个回调函数。最常见的支持 AMD 规范的就是 RequireJS。</p>
+
+<p>在 AMD 中，模块的加载也是使用 <code>require([dependencies], function(){})</code> 语句，但是不同于 CommonJS,它的参数除了有需要加载的模块文件之后，还需要约定一个回调函数，由这个回调函数去规定当模块都加载完成之后执行什么操作，加载的模块会以参数形式传入该回调函数函数，从而在回调函数内部就可以使用这些模块。</p>
+
+<p>而模块的定义主要是使用 <code>define(id?, dependencies, factory)</code>语句，其中 id 可选，定义模块的标识。 dependencies 可选参数，表示当前模块依赖的模块，是一个数组。 factory 是一个工厂方法，表示模块初始化需要执行的函数或者对象。一般我们会在这个 factory 中 return 出一个对象来暴露出我们的对外接口等等。</p>
+
+<p>举个栗子：
+定义一个模块 my_modules</p>
+
+<pre><code class="language-js">define(['math'], function() {
+    function bar() {
+        ...
+    }
+    return {
+        bar: bar
+    };
+});
+</code></pre>
+
+<p>加载模块</p>
+
+<pre><code class="language-js">require([my_modules], function(my) {
+    my.bar();
+})
+</code></pre>
+
+<h2 id="cmd">CMD</h2>
+
+<p>CMD（Common Module Definition）就是通用模块定义。CMD 是从国内发展出去的，实现主要是 SeaJS, 和 AMD 都是解决异步加载以及模块依赖的问题，但是在模块的定义方式上面有点不同。</p>
+
+<p>在 CMD 中，定义模块使用 <code>define(id?, deps?,factory)</code>，其中 id、depes 可以省略，字符串 id 表示模块标识，数组 deps 是模块依赖。当 factory 是一个函数的时候表示模块的构造方法，默认接受三个参数 require、export、module。</p>
+
+<p>再举个栗子：
+定义一个模块 my_module</p>
+
+<pre><code class="language-js">define(function(require, export, module) {
+    var person = {name: 'abby', age: 20};
+    var _ = require('lodash'); // 需要的时候才去加载模块 lodash
+    var shallow = _clone(person);
+	// 支持异步加载模块,当多个模块加载完成之后才执行回调
+    require.async('./a', './b', function(a, b) {
+        a.doSomething();
+        b.doSomething();
+    });
+
+    bar() {
+    	...
+    }
+
+    // 在导出模块的时候支持了 CommonJS 和 AMD 的写法。
+    return {
+        bar: bar
+    };
+    // 或者
+    module.exports = {
+        bar: bar
+    }
+    // 或者
+    exports.bar = bar //此时注意不能写成对象形式
+})
+</code></pre>
+
+<h3 id="amd-cmd-区别">AMD CMD 区别</h3>
+
+<p>1.AMD推崇依赖前置，在定义模块的时候就声明依赖的模块。CMD 推崇依赖就近，只有在需要用的时候才去require 执行。</p>
+
+<p>2.对于依赖的模块，AMD 提前执行，但是 CMD 的思想是 lazy loading, 延迟执行.</p>
+
+<p>本文只是很浅显的介绍，具体的用法可以参考文档。具体项目中使用哪种分情况而定。</p>
+
+<p>参考资料：</p>
+
+<p><a href="http://es6.ruanyifeng.com/#docs/module">Module</a></p>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import">import</a></p>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export">export</a></p>
+
+<p><a href="http://javascript.ruanyifeng.com/nodejs/module.html">CommonJS规范</a></p>
+
+<p><a href="http://requirejs.org/docs/whyamd.html">Why AMD</a></p>
+
+<p><a href="http://www.ruanyifeng.com/blog/2012/10/asynchronous_module_definition.html">Javascript模块化编程（二）：AMD规范</a></p>
+
+<p><a href="http://www.ruanyifeng.com/blog/2012/11/require_js.html">Javascript模块化编程（三）：require.js的用法</a></p>
+
+<p><a href="http://www.cnblogs.com/dolphinX/p/4381855.html">前端模块化</a></p>
+
+<p><a href="https://github.com/seajs/seajs/issues/242">CMD 模块定义规范 #242</a></p>
+
+<p><a href="https://www.zhihu.com/question/20351507">AMD 和 CMD 的区别有哪些</a></p>
+                </section>
+            </article>
+
+            
+
+            
+                <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'luckyabby'; 
+
+     
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+            
+
+            
+
+            <footer id="footer">
+    
+        <div id="social">
+
+	
+	
+    <a class="symbol" href="">
+        <i class="fa fa-facebook-square"></i>
+    </a>
+    
+    <a class="symbol" href="https://www.github.com/LuckyAbby">
+        <i class="fa fa-github-square"></i>
+    </a>
+    
+    <a class="symbol" href="">
+        <i class="fa fa-twitter-square"></i>
+    </a>
+    
+
+
+</div>
+
+    
+    <p class="small">
+    
+        © Copyright 2019 ❤️
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://luckyabby.com/js/jquery-3.3.1.min.js"></script>
+<script src="http://luckyabby.com/js/main.js"></script>
+<script src="http://luckyabby.com/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+  
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-84989670-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+
+
+
+    </body>
+</html>

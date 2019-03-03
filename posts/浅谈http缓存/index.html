@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		
+		<meta name="description" content="My Blog">
+		<meta name="generator" content="Hugo 0.54.0" />
+		<title>浅谈HTTP缓存 &middot; luckyabby</title>
+		<link rel="shortcut icon" href="http://luckyabby.com/images/favicon.ico">
+		<link rel="stylesheet" href="http://luckyabby.com/css/style.css">
+		<link rel="stylesheet" href="http://luckyabby.com/css/highlight.css">
+
+		
+		<link rel="stylesheet" href="http://luckyabby.com/css/font-awesome.min.css">
+		
+
+		
+		<link href="http://luckyabby.com/index.xml" rel="alternate" type="application/rss+xml" title="luckyabby" />
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://luckyabby.com/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://luckyabby.com/posts'>Archive</a>
+	<a href='http://luckyabby.com/tags'>Tags</a>
+	<a href='http://luckyabby.com/about'>About</a>
+
+	
+
+	
+	<a class="cta" href="http://luckyabby.com/index.xml">Subscribe</a>
+	
+</nav>
+
+
+        <section id="wrapper" class="post">
+            <article>
+                <header>
+                    <h1>
+                        浅谈HTTP缓存
+                    </h1>
+                    <h2 class="headline">
+                    Aug 18, 2017 19:23
+                    · 2793 words
+                    · 6 minute read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://luckyabby.com/tags/http">HTTP</a>
+                          
+                              <a href="http://luckyabby.com/tags/js">JS</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                  
+                    <div id="toc">
+                      <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#为什么需要缓存">为什么需要缓存</a>
+<ul>
+<li>
+<ul>
+<li><a href="#首先减少带宽">首先减少带宽</a></li>
+<li><a href="#其次缓解服务器压力">其次缓解服务器压力</a></li>
+<li><a href="#最重要的是提升网站的性能">最重要的是提升网站的性能</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#http-1-0-时代">http 1.0 时代</a>
+<ul>
+<li><a href="#pragma">Pragma</a></li>
+<li><a href="#expires">Expires</a></li>
+</ul></li>
+<li><a href="#http-1-1-时代">http 1.1 时代</a>
+<ul>
+<li><a href="#cache-control">Cache-Control</a>
+<ul>
+<li><a href="#完全不缓存">完全不缓存</a></li>
+<li><a href="#缓存过期">缓存过期</a></li>
+</ul></li>
+<li><a href="#last-modified">Last-Modified</a></li>
+<li><a href="#etag">ETag</a></li>
+</ul></li>
+<li><a href="#浏览器到底怎么判断缓存">浏览器到底怎么判断缓存</a>
+<ul>
+<li><a href="#强缓存">强缓存</a></li>
+<li><a href="#协商缓存">协商缓存</a></li>
+<li><a href="#判别规则">判别规则</a></li>
+</ul></li>
+<li><a href="#用户行为">用户行为</a></li>
+<li><a href="#实际应用">实际应用</a></li>
+</ul></li>
+</ul>
+</nav>
+                    </div>
+                  
+                
+                <section id="post-body">
+                    
+
+<p>缓存是指存储指定资源的一份拷贝，并在下次请求该资源时提供该拷贝的技术，当 web 缓存发现请求的资源已经被存储，它会拦截请求，返回该资源的拷贝，而不会去源服务器重新下载。
+<!-- more --></p>
+
+<h2 id="为什么需要缓存">为什么需要缓存</h2>
+
+<h4 id="首先减少带宽">首先减少带宽</h4>
+
+<p>使用缓存就不需要再去下载资源，这样使得网络带宽大幅减少。</p>
+
+<h4 id="其次缓解服务器压力">其次缓解服务器压力</h4>
+
+<p>服务器不需要给每次请求都返回数据，这样可以降低服务器的压力。</p>
+
+<h4 id="最重要的是提升网站的性能">最重要的是提升网站的性能</h4>
+
+<p>使用缓存可以减少用户等待的时间，这样可以使得网站的性能上升，给用户更好的体验。</p>
+
+<h2 id="http-1-0-时代">http 1.0 时代</h2>
+
+<p>主要通过 Pragma 和 Expires 这两个字段来规范。其实这样控制缓存很古老，但是有些较旧的客户端可能不支持 http 1.1，因此这两个头还在使用中。</p>
+
+<h3 id="pragma">Pragma</h3>
+
+<p>在响应头头里面设置这个字段值是 no-cache 的时候，意味着浏览器不会缓存资源，每次都要向服务器发送一次请求。</p>
+
+<h3 id="expires">Expires</h3>
+
+<p>Expires 可以用来设置缓存的时间，它的值是一个格林尼治时间，比如Mon, 20 Jul 2017 10:08:35 GMT 来告诉浏览器资源缓存过期时间，如果还没过该时间点则<strong>不发请求</strong>。</p>
+
+<p>当 Pragma 头部和 Expires 头部同时存在的时候 ，起作用的是 Pragma，因此当设置 Pragma 为 no-cache 之后又设置 Expires 的话还是会向服务器发送请求。</p>
+
+<p>使用这两个头部控制缓存当然会存在一些问题， Expires 定义的缓存时间是相对服务器上的时间而言的，如果客户端上的时间跟服务器上的时间不一致，那就没什么用了。因为这些问题 ，后来就有了 http 1.1 时代的缓存控制。</p>
+
+<h2 id="http-1-1-时代">http 1.1 时代</h2>
+
+<p>主要是通过 Cache-Control 来区分对缓存机制的支持，其中请求头和响应头都支持。</p>
+
+<h3 id="cache-control">Cache-Control</h3>
+
+<p>若报文中同时出现了 Expires 和 Cache-Control，则以 Cache-Control 为准。如果同时出现了三者，优先级从高到低分别是 Pragma -&gt; Cache-Control -&gt; Expires 。</p>
+
+<p>这个字段的值可以进行一些组合</p>
+
+<h4 id="完全不缓存">完全不缓存</h4>
+
+<p>缓存中不得存储任何关于客户端请求和服务端响应的内容。每次由客户端发起的请求都会下载完整的响应内容。</p>
+
+<pre><code>Cache-Control: no-cache, no-store, must-revalidate
+
+</code></pre>
+
+<h4 id="缓存过期">缓存过期</h4>
+
+<p>判断缓存是否过期的一个最常使用的标志是 max-age。相对 Expires 而言，max-age 是距离请求发起的时间的秒数。针对应用中那些不会改变的文件，通常可以手动设置一定的时长以保证缓存有效，例如图片、css、js等静态资源。</p>
+
+<pre><code>Cache-Control: max-age = 3600
+</code></pre>
+
+<p>这里指缓存有效时间是一个小时，一个小时内不发请求，但是一个小时之后需要从服务器拿到资源。</p>
+
+<p>讲到这里，决定客户端发送是否发送请求的头部控制就已经说完了。但是现在还有一个同样很重要的问题，<strong>是不是客户端发送请求之后，服务器端就必须要将全部的资源发回去。如果客户端发请求之后，服务器端资源并没有改变呢？</strong>。就这个问题，就需要一个缓存校验字段。</p>
+
+<h3 id="last-modified">Last-Modified</h3>
+
+<p>服务器将资源传递给客户端时，会将资源最后更改的时间以“Last-Modified: GMT”的形式加在实体首部上一起返回给客户端。例如</p>
+
+<pre><code>Last-Modified: Fri, 23 Jul 2017 01:47:00 GMT
+</code></pre>
+
+<p>这个时候客户端在请求资源的时候需要发送一个字段来标记时间，服务器端会根据这个时间与服务器上该资源的最终修改时间对比，若一致，则说明该资源没有被修改过。</p>
+
+<p>客户端发送的这个字段一般有两种：</p>
+
+<p><code>If-Modified-Since: Last-Modified-value</code></p>
+
+<p>该字段告诉服务器如果客户端传来的最后修改时间和服务器上的一致，直接返回 304 状态码即可，当前各大浏览器均是使用该字段来向服务器传递保存的 Last-Modified 的值。如果时间不一致的话，服务器会返回所有的这个资源并返回 200 状态码。</p>
+
+<p><code>If-Unmodified-Since: Last-Modified-value</code></p>
+
+<p>该字段告诉服务器如果客户端传来的最后修改时间和服务器上的不一致，则直接返回 412 状态码(Precondition Failed)。</p>
+
+<h3 id="etag">ETag</h3>
+
+<p>使用 Last-Modified 也存在一些问题，比如：</p>
+
+<p>1、一些文件也许会周期性的更改，但是他的内容并不改变(仅仅改变的修改时间)，这个时候我们并不希望客户端认为这个文件被修改了，而重新GET；</p>
+
+<p>2、某些文件修改非常频繁，比如在秒以下的时间内进行修改，(比方说1s内修改了N次)，If-Modified-Since能检查到的粒度是s级的，这种修改无法判断(或者说UNIX记录MTIME只能精确到秒)；</p>
+
+<p>3、某些服务器不能精确的得到文件的最后修改时间。</p>
+
+<p>为解决上面这个问题，又双叒叕有 ETag 字段来标注资源的唯一性。</p>
+
+<p>服务器端在返回的实体里面定义一个字段 ETag,这个字段的值是由某种算法计算出来的唯一标志符（比如md5）。</p>
+
+<p>而客户端需要在请求资源的时候发送一个字段去把服务器给它的这个 ETag 值再传给服务器，服务器会根据这个值和自己这个资源的ETag值进行对比，如果不同的话就返回这个资源并返回 200, 如果相同的话只需要返回 304 告诉浏览器直接从缓存中读取就可以了。</p>
+
+<p>客户端发送的这个字段一般有两种：</p>
+
+<p><code>If-None-Match: ETag-value</code></p>
+
+<p>告诉服务端如果 ETag 没匹配上需要重发资源数据，否则直接回送304 和响应报头即可。</p>
+
+<p>当前各浏览器均是使用的该请求首部来向服务器传递保存的 ETag 值。</p>
+
+<p><code>If-Match: ETag-value</code></p>
+
+<p>该字段告诉服务器如果客户端传来的 Etag 值跟服务器上的不一致，则直接返回 412 状态码(Precondition Failed)。</p>
+
+<p>Last-Modified 与 ETag 是可以一起使用的，服务器会优先验证 ETag，一致的情况下，才会继续比对 Last-Modified，最后才决定是否返回 304。</p>
+
+<h2 id="浏览器到底怎么判断缓存">浏览器到底怎么判断缓存</h2>
+
+<p>说了这么多，这么多字段混在一起的话，浏览器究竟怎么去判断缓存？</p>
+
+<h3 id="强缓存">强缓存</h3>
+
+<p>强缓存就是之前扯的那一大堆 Pragma Expires 以及 Cache-control，命中强缓存之后的状态码是 200，后面会跟上 from cache。当然，现在高版本的 chrome 换成了 from disk cache（磁盘缓存） 和 from memory cache（内存缓存）。</p>
+
+<h3 id="协商缓存">协商缓存</h3>
+
+<p>协商缓存就是之前扯的 Last-Modified/If-None-Match 或者 ETag/If-None-Match，命中协商缓存之后的状态码是 304</p>
+
+<h3 id="判别规则">判别规则</h3>
+
+<p>1.浏览器首先根据这个资源的头部判断是否命中强缓存，如果命中就直接从缓存中加载资源，不会再发请求。</p>
+
+<p>2.如果没有命中强缓存，就会发一个请求到服务器端，服务器根据这个头部里面的 If-None-Match 或者 If-None-Match 来判断是否命中协商缓存，如果命中就返回 304，浏览器会直接从缓存中拿资源。</p>
+
+<p>3.如果协商缓存也没有命中，就会直返回新的资源，并返回状态码 200。</p>
+
+<h2 id="用户行为">用户行为</h2>
+
+<p>用户在使用地址栏回车、页面链接跳转、新开窗口以及前进后退的时候 Cache-Control/Expires 都还接着有效。</p>
+
+<p>当用户在按F5进行刷新的时候，会忽略 Cache-Control/Expires 的设置，再次发送请求去服务器请求，而 Last-Modified/Etag 还是有效的，服务器会根据情况判断返回304还是200。</p>
+
+<p>当用户使用Ctrl+F5进行强制刷新的时候，只是所有的缓存机制都将失效，重新从服务器拉去资源。</p>
+
+<h2 id="实际应用">实际应用</h2>
+
+<p>当在实际应用中时，对于所有可缓存资源，一般需要指定一个 Expires 或 Cache-Control max-age以及一个Last-Modified或ETag。这样既能控制强缓存，也能控制协商缓存。但是由于 Cache-Control 只支持 http 1.1，如果需要兼容老设备，还是需要 Expires，它既支持 http1.0 也支持 http 1.1。</p>
+
+<p>但是如果对于一个不是经常改变的静态资源来说，我们可以通过服务器来告诉浏览器是否需要重新请求，这样就避免了很多 304。</p>
+
+<p>比如我们可以通过在 url 后面加上 md5 参数或者将 md5 参数写成文件名的一部分来实现。</p>
+
+<p>当资源没有变动的时候直接使用缓存，不用发起请求，当资源发生变化时，其 url 就会发生变化。网址一经更改，系统就会强制浏览器重新抓取资源。</p>
+
+<p>参考资料：</p>
+
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Caching_FAQ">HTTP 缓存</a></p>
+
+<p><a href="http://www.cnblogs.com/vajoy/p/5341664.html">浅谈浏览器http的缓存机制</a></p>
+
+<p><a href="https://developers.google.com/speed/docs/insights/LeverageBrowserCaching">使用浏览器缓存</a></p>
+
+<p><a href="http://imweb.io/topic/55c6f9bac222e3af6ce235b9">缓存策略</a></p>
+
+<p><a href="http://imweb.io/topic/5795dcb6fb312541492eda8c">HTTP缓存控制小结</a>
+<a href="http://www.alloyteam.com/2012/03/web-cache-2-browser-cache/">Web浏览器的缓存机制</a></p>
+
+                </section>
+            </article>
+
+            
+
+            
+                <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'luckyabby'; 
+
+     
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+            
+
+            
+
+            <footer id="footer">
+    
+        <div id="social">
+
+	
+	
+    <a class="symbol" href="">
+        <i class="fa fa-facebook-square"></i>
+    </a>
+    
+    <a class="symbol" href="https://www.github.com/LuckyAbby">
+        <i class="fa fa-github-square"></i>
+    </a>
+    
+    <a class="symbol" href="">
+        <i class="fa fa-twitter-square"></i>
+    </a>
+    
+
+
+</div>
+
+    
+    <p class="small">
+    
+        © Copyright 2019 ❤️
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://luckyabby.com/js/jquery-3.3.1.min.js"></script>
+<script src="http://luckyabby.com/js/main.js"></script>
+<script src="http://luckyabby.com/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+  
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-84989670-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+
+
+
+    </body>
+</html>

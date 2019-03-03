@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>闭包 on luckyabby</title>
+    <link>http://luckyabby.com/tags/%E9%97%AD%E5%8C%85/</link>
+    <description>Recent content in 闭包 on luckyabby</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 08 Dec 2017 16:11:59 +0800</lastBuildDate>
+    
+	<atom:link href="http://luckyabby.com/tags/%E9%97%AD%E5%8C%85/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>我还是想谈谈JS里面的闭包</title>
+      <link>http://luckyabby.com/posts/%E6%88%91%E8%BF%98%E6%98%AF%E6%83%B3%E8%B0%88%E8%B0%88js%E9%87%8C%E9%9D%A2%E7%9A%84%E9%97%AD%E5%8C%85/</link>
+      <pubDate>Fri, 08 Dec 2017 16:11:59 +0800</pubDate>
+      
+      <guid>http://luckyabby.com/posts/%E6%88%91%E8%BF%98%E6%98%AF%E6%83%B3%E8%B0%88%E8%B0%88js%E9%87%8C%E9%9D%A2%E7%9A%84%E9%97%AD%E5%8C%85/</guid>
+      <description>其实自己不太写闭包了的，就那么一两句话谁都能背出来。可是闭包偏偏就是那种初学者十次面试八次可能会遇到，答不上来就是送命题、答得出来也不加分题</description>
+    </item>
+    
+  </channel>
+</rss>

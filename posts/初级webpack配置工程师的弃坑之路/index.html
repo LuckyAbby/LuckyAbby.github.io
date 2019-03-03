@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		
+		<meta name="description" content="My Blog">
+		<meta name="generator" content="Hugo 0.54.0" />
+		<title>初级webpack配置工程师的弃坑之路 &middot; luckyabby</title>
+		<link rel="shortcut icon" href="http://luckyabby.com/images/favicon.ico">
+		<link rel="stylesheet" href="http://luckyabby.com/css/style.css">
+		<link rel="stylesheet" href="http://luckyabby.com/css/highlight.css">
+
+		
+		<link rel="stylesheet" href="http://luckyabby.com/css/font-awesome.min.css">
+		
+
+		
+		<link href="http://luckyabby.com/index.xml" rel="alternate" type="application/rss+xml" title="luckyabby" />
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://luckyabby.com/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://luckyabby.com/posts'>Archive</a>
+	<a href='http://luckyabby.com/tags'>Tags</a>
+	<a href='http://luckyabby.com/about'>About</a>
+
+	
+
+	
+	<a class="cta" href="http://luckyabby.com/index.xml">Subscribe</a>
+	
+</nav>
+
+
+        <section id="wrapper" class="post">
+            <article>
+                <header>
+                    <h1>
+                        初级webpack配置工程师的弃坑之路
+                    </h1>
+                    <h2 class="headline">
+                    Mar 23, 2018 10:49
+                    · 4439 words
+                    · 9 minute read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://luckyabby.com/tags/webpack">Webpack</a>
+                          
+                              <a href="http://luckyabby.com/tags/js">JS</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                  
+                    <div id="toc">
+                      <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#webpack">webpack</a></li>
+<li><a href="#安装-webpack">安装 webpack</a>
+<ul>
+<li><a href="#1-最简单的例子">1.最简单的例子</a></li>
+<li><a href="#2-使用配置文件">2.使用配置文件</a></li>
+<li><a href="#3-打包其他类型的文件">3.打包其他类型的文件</a>
+<ul>
+<li><a href="#3-1-打包-css">3.1 打包 CSS</a></li>
+<li><a href="#3-2-打包图片">3.2 打包图片</a></li>
+</ul></li>
+<li><a href="#4-分片打包">4.分片打包</a></li>
+<li><a href="#开发环境">开发环境</a>
+<ul>
+<li><a href="#1-自动打包代码">1.自动打包代码</a></li>
+<li><a href="#2-热加载hmr">2.热加载HMR</a></li>
+</ul></li>
+<li><a href="#生产环境">生产环境</a></li>
+<li><a href="#公共代码分离">公共代码分离</a>
+<ul>
+<li><a href="#webpack3-公共代码分离">webpack3 公共代码分离</a></li>
+<li><a href="#webpack4-公共代码分离">webpack4 公共代码分离</a></li>
+</ul></li>
+<li><a href="#指定环境">指定环境</a></li>
+<li><a href="#动态加载模块">动态加载模块</a></li>
+<li><a href="#推荐阅读">推荐阅读</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+                    </div>
+                  
+                
+                <section id="post-body">
+                    
+
+<h3 id="webpack">webpack</h3>
+
+<p>webpack 是一个模块打包机，它能分析你项目的依赖结构。从入口文件的js文件进行打包，碰到 CSS 以及图片等等其它的类型的文件采用 loader 或者插件进行处理，最后将处理完的文件打包成一个或者多个合适格式的文件。</p>
+
+<h3 id="安装-webpack">安装 webpack</h3>
+
+<p>首先初始化一个项目，安装 webpack</p>
+
+<pre><code>mkdir demo &amp;&amp; cd demo
+npm init
+### 直接 enter 完成 package.json 的初始化
+npm install --dev-save webpack
+### 将 webpack 安装在开发环境的依赖中
+</code></pre>
+
+<h4 id="1-最简单的例子">1.最简单的例子</h4>
+
+<p>建立如下的目录结构</p>
+
+<pre><code>|—— dist
+     |-- index.html
+|—— src
+     |-- index.js
+     |-- component.js     
+</code></pre>
+
+<p>index.js 文件中的代码如下：</p>
+
+<pre><code class="language-js">import component from './component.js';
+
+document.body.appendChild(component());
+</code></pre>
+
+<p>component.js 文件中的代码如下：</p>
+
+<pre><code class="language-js">export default function component(name) {
+  const ele = document.createElement('div');
+  ele.textContent = 'hi, webpack';
+  ele.className = name;
+  return ele;
+}
+</code></pre>
+
+<p>index.html 文件中的代码如下：</p>
+
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot;&gt;
+  &lt;title&gt;webpackTest&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;script src=&quot;./bundle.js&quot;&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<p>然后在命令行中运行下面的命令调用 webpack 将 index.js 文件打包成 bundle.js 文件。</p>
+
+<pre><code>./node_modules/.bin/webpack src/index.js dist/bundle.js
+</code></pre>
+
+<p>这样在命令行中就能看到如下的输出表示已经成功打包了。</p>
+
+<pre><code>Hash: 951039c05a4f2aae70b8
+Version: webpack 3.11.0
+Time: 91ms
+    Asset     Size  Chunks             Chunk Names
+bundle.js  3.12 kB       0  [emitted]  main
+   [0] ./src/index.js 81 bytes {0} [built]
+   [1] ./src/component.js 165 bytes {0} [built]
+</code></pre>
+
+<p>这时候你再通过浏览器打开 index.html 这个页面就能看到 <code>hi, webpack</code>这句话了，同时，在 dist 目录下面也有新生成的 bundle.js 文件了。</p>
+
+<p>好了，终于迈出第一步了。但是，这样使用还是太挫，我们需要提交一下姿势水平。</p>
+
+<h4 id="2-使用配置文件">2.使用配置文件</h4>
+
+<p>使用到 webpack 的配置文件才是发挥 webpack 最神奇文件的地方，当然，也是留坑最多的地方 :)</p>
+
+<p>在项目的目录下面新建  webpack.config.js 文件，如下：</p>
+
+<pre><code class="language-js">const path = require('path');
+
+module.exports = {
+  entry: './src/index.js',
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist')
+  }
+};
+
+</code></pre>
+
+<p>这里的 entry 指的是打包的入口，output指的是打包之后放在项目目录的 dist 目录下面，名称为 bundle.js。</p>
+
+<p>配置好了之后每次都需要使用<code>./node_modules/.bin/webpack</code>来调用 webpack 也会觉得麻烦，因此我们使用 npm 脚本。</p>
+
+<p>在 package.json 中添加：</p>
+
+<pre><code>&quot;dist&quot;: &quot;webpack --config webpack.config.js&quot;
+</code></pre>
+
+<p>这样我们就可以通过 npm run dist 来打包文件，也可以省略后面的<code>--config webpack.config.js</code>,因为默认的配置文件就是 webpack.config.js。</p>
+
+<h4 id="3-打包其他类型的文件">3.打包其他类型的文件</h4>
+
+<h5 id="3-1-打包-css">3.1 打包 CSS</h5>
+
+<p>webpack 自己是不能处理 css 文件的，只能依靠 css-loader 和 style-loader 进行处理。css-loader 解释@import 和 url() ，会 import/require() 后再解析(resolve)它们。</p>
+
+<p>首先需要先安装这两个插件:</p>
+
+<pre><code>npm install --save-dev style-loader css-loader
+</code></pre>
+
+<p>之后我们再在 src 目录下新建一个 style.css 文件：</p>
+
+<pre><code class="language-css">body {
+  color: #999;
+}
+</code></pre>
+
+<p>接着修改 index.js:</p>
+
+<pre><code class="language-js">import component from './component.js';
+import './style.css';
+
+document.body.appendChild(component());
+</code></pre>
+
+<p>这样我们就在 index.js 里面引入了 style.css, 需要在 webpack.config.js 里面去修改相关的配置信息：</p>
+
+<pre><code class="language-js">module.exports = {
+  entry: './src/index.js',
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist')
+  },
+  module: {
+    rules: [{
+      test: /\.css$/,
+      use: [
+        'style-loader',
+        'css-loader'
+      ]
+    }]
+  }
+};
+</code></pre>
+
+<p>这样我们再运行 npm run dist，就能看到打包出来的信息：</p>
+
+<pre><code>Hash: 1384c9fdaeca40d22cac
+Version: webpack 3.11.0
+Time: 972ms
+    Asset   Size  Chunks             Chunk Names
+bundle.js  20 kB       0  [emitted]  main
+   [0] ./src/index.js 103 bytes {0} [built]
+   [1] ./src/component.js 162 bytes {0} [built]
+   [2] ./src/style.css 1.07 kB {0} [built]
+   [3] ./node_modules/css-loader!./src/style.css 186 bytes {0} [built]
+    + 3 hidden modules
+</code></pre>
+
+<p>同时我们再通过浏览器打开 index.html 这个页面就能看到 <code>hi, webpack</code>的字体颜色已经变成 #999 了。</p>
+
+<h5 id="3-2-打包图片">3.2 打包图片</h5>
+
+<p>图片等静态资源在开发阶段时的相对路径与生产环境中的不尽相同，所以需要对这些文件进行路径转换，此时可以使用file-loader。</p>
+
+<p>首先<code>npm install --save-dev file-loader</code>安装 file-loader 对图片进行处理。</p>
+
+<p>我们在 src 下新加一张图片 bg.jpg 和一个 imgComponent.js 文件。现在我们的目录结构如下：</p>
+
+<pre><code>|—— dist
+     |-- index.html
+|—— src
+     |-- index.js
+     |-- component.js    
+     |-- imgComponent.js
+     |-- bg.jpg
+     |-- style.css
+|—— webpack.config.js
+</code></pre>
+
+<p>imgComponent.js 主要是创建一个 img，如下：</p>
+
+<pre><code class="language-js">export default function imgComponent(url) {
+  const ele = new Image();
+  ele.src = url;
+  return ele;
+}
+</code></pre>
+
+<p>再修改 index.js:</p>
+
+<pre><code class="language-js">import component from './component.js';
+import imgComponent from './imgComponent.js';
+
+import './style.css';
+import bgUrl from './bg.jpg';
+
+document.body.appendChild(component());
+document.body.appendChild(imgComponent(bgUrl));
+</code></pre>
+
+<p>最后我们修改 webpack.config.js:</p>
+
+<pre><code class="language-js">module: {
+    rules: [
+    ...
+    , {
+      test: /\.(jpg|png|jpeg)$/,
+      use: [
+        'file-loader'
+      ]
+    }]
+  }
+</code></pre>
+
+<p>再运行npm run dist之后我们就能看到图片已经打包进bundle.js里面了，在页面上就能看到图片了。</p>
+
+<h4 id="4-分片打包">4.分片打包</h4>
+
+<p>在上面的配置中我们都是打包成一个 bundle.js 文件，可是如果以后代码越来越复杂，就需要将原来的一个 bundle.js 打包成多个文件，在 html 里面去引入多个 js。</p>
+
+<p>修改 webpack.config.js 配置：</p>
+
+<pre><code class="language-js">module.exports = {
+  entry: {
+    index: './src/index.js',
+    component: './src/component.js',
+    imgComponent: './src/imgComponent.js',
+  },
+  output: {
+    filename: '[name].bundle.js',
+    path: path.resolve(__dirname, 'dist'),
+  },
+  ...
+};
+</code></pre>
+
+<p>这里我们打包三个文件，输出文件名中的 [name] 表示 entry 里面指定的名称，最后会生成三个 js 文件：index.bundle.js、component.bundle.js 以及 imgComponent.bundle.js。运行 npm run dist 就能看到，但是此时我们在 html 里面文件里面就需要再手动修改引入的文件，这样会比较麻烦。因此我们引入 HtmlWebpackPlugin 插件，这个插件会自动生成指定的文件。</p>
+
+<p>安装： <code>npm install --save-dev html-webpack-plugin</code></p>
+
+<p>修改配置：</p>
+
+<pre><code class="language-js">const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+module.exports = {
+  ...
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: 'webpack test demo',  // 生成的 HTML 文件的标题
+      filename: 'index.html' // 生成的 HTML 文件的文件名，默认 `index.html`
+    })
+  ]
+};
+</code></pre>
+
+<p>把之前的 bundle.js 以及 index.html 删掉，这样我们再编译就能看到自动生成了 index.html 文件放在 dist 目录下，其中引入了生成的三个 js 文件。</p>
+
+<p>但是这样每次都需要我们手动去删掉 dist 里面的文件，尤其是当加上 hash 打包之后就会更麻烦，因此我们需要 clean-webpack-plugin 插件来帮我们清理 dist 目录。</p>
+
+<p>安装 <code>npm install --save-dev clean-webpack-plugin</code></p>
+
+<p>修改配置</p>
+
+<pre><code class="language-js">...
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+
+module.exports = {
+  ...
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: 'webpack test demo',  // 生成的 HTML 文件的标题
+      filename: 'index.html' // 生成的 HTML 文件的文件名，默认 `index.html`
+    }),
+    new CleanWebpackPlugin(['dist'])
+  ]
+};
+</code></pre>
+
+<p>这样之后每次打包之前都会帮我们删掉 dist 目录。</p>
+
+<h4 id="开发环境">开发环境</h4>
+
+<h5 id="1-自动打包代码">1.自动打包代码</h5>
+
+<p>自己在开发环境下为了更高效的开发，不会自己手动一遍一遍去打包代码，因此需要 webpack-dev-server 帮你在代码发生改变的时候自动打包代码。</p>
+
+<p>同时为了区分开发环境和生产环境，我们使用 webpack-merge 分离开发环境 dev 和生产环境 prod。</p>
+
+<p>安装 <code>npm install --save-dev webpack-dev-server webpack-merge</code></p>
+
+<p>在项目目录下新建 webpack.dev.js 文件:</p>
+
+<pre><code class="language-js">const path = require('path');
+const Merge = require('webpack-merge');
+const CommonConfig = require('./webpack.config.js');
+
+module.exports = Merge(CommonConfig, {
+  devtool: 'cheap-module-eval-source-map',
+  devServer: {
+    contentBase: path.resolve(__dirname, 'dist'),
+    host: '127.0.0.1',
+    port: 8088,
+  }
+});
+</code></pre>
+
+<p>这里的 devtool 是选择一个合适的代码映射。代码映射其实就是将打包后的代码映射回原始的源码。尤其是当打包后的代码发生错误时，选择一个合适的代码映射就能追踪到错误发生的原始位置。</p>
+
+<p>devServer 里面的配置就是设置打包之后文件的位置，同时默认打开本机的 8088 端口。</p>
+
+<p>同时我们再修改 package.json 文件修改脚本：</p>
+
+<pre><code>&quot;scripts&quot;: {
+    &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;,
+    &quot;dist&quot;: &quot;webpack --config webpack.config.js&quot;,
+    &quot;dev&quot;: &quot;webpack-dev-server --config webpack.dev.js --open&quot;
+  }
+</code></pre>
+
+<p>我们再运行<code>npm run dev</code> 浏览器就会默认打开 8088 端口，同时能看到我们之前的页面。</p>
+
+<h5 id="2-热加载hmr">2.热加载HMR</h5>
+
+<p>HRM能够让应用运行的时候替换、增加或删除模块，而无需进行完全的重载,这样可以显著加快开发速度，一旦打开了 webpack-dev-server 的 hot 模式，在试图重新加载整个页面之前，热模式会尝试使用 HMR 来更新。</p>
+
+<p>修改 webpack.dev.js:</p>
+
+<pre><code class="language-js">...
+const webpack = require('webpack');
+
+module.exports = Merge(CommonConfig, {
+  devtool: 'cheap-module-eval-source-map',
+  devServer: {
+    contentBase: path.resolve(__dirname, 'dist'),
+    hot: true, // 告诉 dev-server 使用 HMR
+    hotOnly: true // 如果热加载失败了禁止刷新页面，可以分析失败原因
+    host: '127.0.0.1',
+    port: 8088,
+  },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin()
+  ]
+});
+</code></pre>
+
+<p>这时我们再修改 style.css 将 body 的字体颜色变成 red,再重新运行<code>npm run dev</code>,我们会发现页面并没有重新刷新（webpack默认行为是重载页面），但是字体颜色已经变成红色了。</p>
+
+<p>开启了 HMR 功能，HMR 的接口已经暴露在module.hot属性之下，我们就可以使用 <a href="https://webpack.js.org/api/hot-module-replacement/">HRM API</a>来使得依赖“被加载模块”的原模块在“被加载模块”发生改变时，检测到改变并接收改变之后的模块。</p>
+
+<h4 id="生产环境">生产环境</h4>
+
+<p>一般发布到开发环境的代码需要经过混淆压缩来保证安全，同时在生产环境下面的文件需要加上 hash 防止浏览器缓存。</p>
+
+<p>新建一个 webpack.prod.js:</p>
+
+<pre><code class="language-js"> const path = require('path');
+ const webpack = require('webpack');
+ const Merge = require('webpack-merge');
+ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+ const CommonConfig = require('./webpack.config.js');
+
+ module.exports = Merge(CommonConfig, {
+   devtool: 'cheap-module-source-map',
+   output: {
+     filename: '[name].[chunkhash].js'
+   },
+   plugins: [
+     new UglifyJSPlugin()
+   ]
+ });
+</code></pre>
+
+<p>在这里使用 [name].[chunkhash]就能在文件名字后面加上 hash ,这样就部署在开发环境的时候就不会有缓存问题。</p>
+
+<h4 id="公共代码分离">公共代码分离</h4>
+
+<h5 id="webpack3-公共代码分离">webpack3 公共代码分离</h5>
+
+<p>有时候我们需要在多个文件里面引入一个公共库，比如常见的 lodash。如果我们不把这些公共库的代码分开打包，我们的项目就会变得十分臃肿。在 webpack3 里面，我们使用 CommonsChunkPlugin 来分离公共库。当然咯，webapck4就把它废除了:)。</p>
+
+<p>安装 lodash :<code>npm install lodash</code></p>
+
+<p>修改index.js 引入 lodash:</p>
+
+<pre><code class="language-js"> import _ from 'lodash';
+
+ ...
+ document.body.appendChild(imgComponent(bgUrl));
+</code></pre>
+
+<p>同时我们也修改 component.js ，同样引入 lodash:</p>
+
+<pre><code class="language-js"> import _ from 'lodash';
+
+ export default function component(name) {
+   const ele = document.createElement('div');
+   ele.textContent = _.join(['hi', 'webpack'], ' ')
+   ele.className = name;
+   return ele;
+ }
+</code></pre>
+
+<p>如果此时我们直接运用 npm run dist 打包，我们会看到</p>
+
+<pre><code> Hash: 5c928a60ca077c1435a0
+ Version: webpack 3.11.0
+ Time: 1775ms
+                                Asset       Size   Chunks                    Chunk Names
+ 5fc6e7227e5d7416b1b72d7ff15be182.jpg      36 kB           [emitted]
+                      index.bundle.js     563 kB  0, 1, 2  [emitted]  [big]  index
+                  component.bundle.js     544 kB        1  [emitted]  [big]  component
+               imgComponent.bundle.js    2.77 kB        2  [emitted]         imgComponent
+                           index.html  329 bytes           [emitted]
+    [1] (webpack)/buildin/global.js 509 bytes {0} {1} [built]
+</code></pre>
+
+<p>此时 index.bundle.js 和 component.bundle.js 十分大，因为都引入了 lodash 这个库。因此我们需要把它抽取出来。</p>
+
+<p>修改 webpack.config.js:</p>
+
+<pre><code class="language-js"> module.exports = {
+   entry: {
+     index: './src/index.js',
+     component: './src/component.js',
+     imgComponent: './src/imgComponent.js',
+     vendor: [ // 第三方库可以统一放在这个入口一起合并
+       'lodash'
+     ]
+   },
+   ...
+   plugins: [
+     new HtmlWebpackPlugin({
+       title: 'webpack test demo',
+       filename: 'index.html'
+     }),
+     new CleanWebpackPlugin(['dist']),
+     new webpack.optimize.CommonsChunkPlugin({
+       name: 'vendor' // 抽取出的模块的模块名
+     }),
+   ],
+ };
+</code></pre>
+
+<p>我们在入口这里新建了一个 vendor 的入口，同时在 plugins 里面引入了插件，这样我们再打包看看终端输出：</p>
+
+<pre><code> Hash: a96dbe4172371d7bfbae
+ Version: webpack 3.11.0
+ Time: 1687ms
+                                Asset       Size   Chunks                    Chunk Names
+ 5fc6e7227e5d7416b1b72d7ff15be182.jpg      36 kB           [emitted]
+                      index.bundle.js    19.3 kB  0, 1, 2  [emitted]         index
+               imgComponent.bundle.js  375 bytes        1  [emitted]         imgComponent
+                  component.bundle.js  720 bytes        2  [emitted]         component
+                     vendor.bundle.js     545 kB        3  [emitted]  [big]  common
+                           index.html  392 bytes           [emitted]
+    [1] ./src/component.js 203 bytes {0} {2} [built]
+</code></pre>
+
+<p>我们看到此时 index.bundle.js 和 component.bundle.js 变得小了，同时 lodash 也被打包到 vendor.bundle.js 里面去了，从代码里面分离出来了，同样我们也可以打包一些公用的组件。</p>
+
+<h5 id="webpack4-公共代码分离">webpack4 公共代码分离</h5>
+
+<p>webpack4 已经废弃了 CommonsChunkPlugin 这个插件，使用两个新的配置项（optimization.splitChunks 和 optimization.runtimeChunk。</p>
+
+<p>修改 webpack.config.js:</p>
+
+<pre><code class="language-js">module.exports = {
+  entry: {
+      index: './src/index.js',
+      imgComponent: './src/imgComponent.js',
+      // vendor: [ // 第三方库可以统一放在这个入口一起合并
+      //   'lodash'
+      // ]
+    },
+  ...
+    // webpack4 使用这个配置项拆分打包
+    optimization: {
+      splitChunks: {
+        chunks: 'all',
+      },
+      runtimeChunk: true
+    },
+    plugins: [
+      ..
+      // new webpack.optimize.CommonsChunkPlugin({
+      //   name: 'vendor' // 抽取出的模块的模块名
+      // }),
+    ],
+}
+</code></pre>
+
+<p>通过设置 optimization.splitChunks.chunks:  &ldquo;all&rdquo; 来启动默认的代码分割配置项。</p>
+
+<p>当满足如下条件时，webpack 会自动打包 chunks:</p>
+
+<ul>
+<li>当前模块是公共模块（多处引用）或者模块来自 node_modules</li>
+<li>当前模块大小大于 30kb</li>
+<li>如果此模块是按需加载，并行请求的最大数量小于等于 5</li>
+<li>如果此模块在初始页面加载，并行请求的最大数量小于等于 3</li>
+</ul>
+
+<p>同样我们打包得到：</p>
+
+<pre><code>                               Asset       Size  Chunks             Chunk Names
+5fc6e7227e5d7416b1b72d7ff15be182.jpg   35.1 KiB          [emitted]
+      runtime~imgComponent.bundle.js   1.04 KiB       0  [emitted]  runtime~imgComponent
+             runtime~index.bundle.js   1.04 KiB       1  [emitted]  runtime~index
+             vendors~index.bundle.js   74.7 KiB       2  [emitted]  vendors~index
+              imgComponent.bundle.js  192 bytes       3  [emitted]  imgComponent
+                     index.bundle.js  844 bytes    4, 3  [emitted]  index
+                          index.html  480 bytes          [emitted]
+Entrypoint index = runtime~index.bundle.js vendors~index.bundle.js index.bundle.js
+Entrypoint imgComponent = runtime~imgComponent.bundle.js imgComponent.bundle.js
+</code></pre>
+
+<p>可以看到多了一个 vendors~index.bundle.js 文件，会把 lodash 抽取出来放在这个文件里面。 因为 lodash 是公用模块，大于 30kb,最大请求数量为2小于5，因此会被 webpack 自动打包创建一个包含 lodash 的分离代码块。当import调用时候，这个代码块就会与 index.js 代码被并行加载。也可以自己配置来更换自动打包的条件。</p>
+
+<p>通过设置 optimization.runtimeChunk: true 为每一个入口默认添加一个只包含 runtime 的 chunk。</p>
+
+<h4 id="指定环境">指定环境</h4>
+
+<p>许多库将通过与 process.env.NODE_ENV 环境变量关联，来决定库中应该引用哪些内容。例如，当不处于生产环境中时，某些库为了使调试变得容易，可能会添加额外的日志记录(log)和测试(test)。可以使用 webpack 内置的 DefinePlugin 为所有的依赖定义这个变量。</p>
+
+<p>修改 webpack.prod.js：</p>
+
+<pre><code class="language-js"> module.exports = Merge(CommonConfig, {
+  ...
+  plugins: [
+    new UglifyJSPlugin()
+  ],
+  new webpack.DefinePlugin({
+    'process.env.NODE_ENV': JSON.stringify('production')
+  })
+});
+</code></pre>
+
+<p>修改 webpack.dev.js:</p>
+
+<pre><code class="language-js"> module.exports = Merge(CommonConfig, {
+   ...
+   plugins: [
+     ...
+     new webpack.DefinePlugin({
+       'process.env.NODE_ENV': JSON.stringify('development')
+     })
+   ]
+ });
+</code></pre>
+
+<p>然后我们在 index.js 里面就可以直接访问 process.env.NODE_ENV 这个变量了，修改 index.js:</p>
+
+<pre><code class="language-js"> ...
+ if (process.env.NODE_ENV === 'development') {
+    console.log('开发环境');
+  }
+</code></pre>
+
+<p>这样我们运行 npm run dev 之后就能看到控制台输出了开发环境这几个字，表示能成功访问这个变量。</p>
+
+<h4 id="动态加载模块">动态加载模块</h4>
+
+<p>我们可以使用 import 动态加载模块，就不需要在页面初始的时候将所有模块加载出来，可以在我们需要的时候再加载模块，这样也能优化性能。</p>
+
+<p>我们修改 index.js：</p>
+
+<pre><code class="language-js"> import _ from 'lodash';
+
+ import './style.css';
+ import bgUrl from './bg.jpg';
+
+ const btn = document.createElement('button');
+ btn.innerHTML = 'click me';
+ document.body.appendChild(btn);
+
+ btn.onclick = function() {
+   import(/* webpackChunkName: &quot;component&quot; */ './component.js')
+   .then(function(module) {
+     const component = module.default; // 引入模块的默认函数
+     document.body.appendChild(component());
+   });
+ };
+</code></pre>
+
+<p>同时修改 webpack.config.js：</p>
+
+<pre><code class="language-js"> ...
+ module.exports = {
+  ...
+   output: {
+     filename: '[name].bundle.js',
+     chunkFilename: '[name].bundle.js', // 非入口文件打包出来的名字
+     path: path.resolve(__dirname, 'dist'),
+   },
+   ...
+}
+</code></pre>
+
+<p>import之后返回一个 promise，上面的注释中的 webpackChunkName结合 chunkFilename 可以表示新 chunk 的名称（不然会默认是数字）,同时还支持 webpackMode: &ldquo;lazy&rdquo; 注释，表示懒加载，不过这个也是默认的，可以省略。还有其余属性例如 &ldquo;lazy-once&rdquo;, &ldquo;eager&rdquo;, &ldquo;weak&rdquo;等。 详见 <a href="https://doc.webpack-china.org/api/module-methods/#import-">import</a></p>
+
+<p>打包之后我们打开页面只能看到有一个按钮，并没有 hi webpack 这句话。当我们点击按钮之后，页面上才会出现这句话，说明 ./component.js 是动态引入的。</p>
+
+<p>这个入门级的很长的文章暂时告一段落。。。写这个文章的目的只是为了帮自己梳理一下最近学的 webpack， 真正需要学习的还有很多，这篇文章远远不够。</p>
+
+<p>任重道远:) 互勉。</p>
+
+<p>代码地址：<a href="https://github.com/LuckyAbby/webpackTestDemo.git">https://github.com/LuckyAbby/webpackTestDemo.git</a></p>
+
+<h4 id="推荐阅读">推荐阅读</h4>
+
+<p><a href="https://zhuanlan.zhihu.com/p/35093098?utm_medium=social&amp;utm_source=wechat_session">对Webpack的hash稳定性的初步探索</a></p>
+
+<p><a href="https://webpack.js.org/guides/">Webpack Guides</a></p>
+
+                </section>
+            </article>
+
+            
+
+            
+                <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'luckyabby'; 
+
+     
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+            
+
+            
+
+            <footer id="footer">
+    
+        <div id="social">
+
+	
+	
+    <a class="symbol" href="">
+        <i class="fa fa-facebook-square"></i>
+    </a>
+    
+    <a class="symbol" href="https://www.github.com/LuckyAbby">
+        <i class="fa fa-github-square"></i>
+    </a>
+    
+    <a class="symbol" href="">
+        <i class="fa fa-twitter-square"></i>
+    </a>
+    
+
+
+</div>
+
+    
+    <p class="small">
+    
+        © Copyright 2019 ❤️
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://luckyabby.com/js/jquery-3.3.1.min.js"></script>
+<script src="http://luckyabby.com/js/main.js"></script>
+<script src="http://luckyabby.com/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+  
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-84989670-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+
+
+
+    </body>
+</html>

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		
+		<meta name="description" content="My Blog">
+		<meta name="generator" content="Hugo 0.54.0" />
+		<title>深入浅出Javascript事件循环机制(上) &middot; luckyabby</title>
+		<link rel="shortcut icon" href="http://luckyabby.com/images/favicon.ico">
+		<link rel="stylesheet" href="http://luckyabby.com/css/style.css">
+		<link rel="stylesheet" href="http://luckyabby.com/css/highlight.css">
+
+		
+		<link rel="stylesheet" href="http://luckyabby.com/css/font-awesome.min.css">
+		
+
+		
+		<link href="http://luckyabby.com/index.xml" rel="alternate" type="application/rss+xml" title="luckyabby" />
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://luckyabby.com/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://luckyabby.com/posts'>Archive</a>
+	<a href='http://luckyabby.com/tags'>Tags</a>
+	<a href='http://luckyabby.com/about'>About</a>
+
+	
+
+	
+	<a class="cta" href="http://luckyabby.com/index.xml">Subscribe</a>
+	
+</nav>
+
+
+        <section id="wrapper" class="post">
+            <article>
+                <header>
+                    <h1>
+                        深入浅出Javascript事件循环机制(上)
+                    </h1>
+                    <h2 class="headline">
+                    Jan 17, 2017 15:23
+                    · 2524 words
+                    · 6 minute read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://luckyabby.com/tags/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF">事件循环</a>
+                          
+                              <a href="http://luckyabby.com/tags/js">JS</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                  
+                    <div id="toc">
+                      <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#函数调用栈与任务队列">函数调用栈与任务队列</a></li>
+<li><a href="#从settimeout看事件循环机制">从setTimeout看事件循环机制</a></li>
+<li><a href="#小结">小结</a></li>
+<li><a href="#测试">测试</a></li>
+<li><a href="#问题">问题</a></li>
+</ul></li>
+</ul>
+</nav>
+                    </div>
+                  
+                
+                <section id="post-body">
+                    
+
+<p>最近琢磨了好久的Javascript的事件循环机制，看了很多国内的博客总觉得写的还是不够深，很多都只说了Javascript的事件分为同步任务和异步任务，遇到同步任务就放在执行栈中执行，而碰到异步任务就放到任务队列之中，等到执行栈执行完毕之后再去执行任务队列之中的事件。自己对大概的基础有所了解之后也没接着深入去查资料，这就导致我在面试的时候被面试官一点一点深挖的时候就懵了(囧
+<!-- more --></p>
+
+<h2 id="函数调用栈与任务队列">函数调用栈与任务队列</h2>
+
+<p>Javascript有一个main thread 主进程和call-stack（一个调用堆栈），在对一个调用堆栈中的task处理的时候，其他的都要等着。当在执行过程中遇到一些类似于setTimeout等异步操作的时候，会交给浏览器的其他模块(以webkit为例，是webcore模块)进行处理，当到达setTimeout指定的延时执行的时间之后，<strong>task(回调函数)会放入到任务队列之中</strong>。一般不同的异步任务的回调函数会放入不同的任务队列之中。等到调用栈中所有task执行完毕之后，接着去执行任务队列之中的task(回调函数)。</p>
+
+<p>用Philip Roberts的演讲<a href="https://vimeo.com/96425312">《Help, I&rsquo;m stuck in an event-loop》</a>之中的一张图表示就是</p>
+
+<p><img src="http://ojzeprg7w.bkt.clouddn.com/%E5%8D%9A%E5%AE%A241.JPG" alt="" /></p>
+
+<p>在上图中，调用栈中遇到DOM操作、ajax请求以及setTimeout等WebAPIs的时候就会交给浏览器内核的其他模块进行处理，webkit内核在Javasctipt执行引擎之外，有一个重要的模块是webcore模块。对于图中WebAPIs提到的三种API，webcore分别提供了DOM Binding、network、timer模块来处理底层实现。等到这些模块处理完这些操作的时候将回调函数放入任务队列中，之后等栈中的task执行完之后再去执行任务队列之中的回调函数。</p>
+
+<h2 id="从settimeout看事件循环机制">从setTimeout看事件循环机制</h2>
+
+<p>下面用Philip Roberts的演讲中的一个栗子来说明事件循环机制究竟是怎么执行setTimeout的。</p>
+
+<p><img src="http://ojzeprg7w.bkt.clouddn.com/%E5%8D%9A%E5%AE%A242.JPG" alt="" />
+首先main()函数的执行上下文入栈(对执行上下文还不了解的可以看我的上一篇博客)。</p>
+
+<p><img src="http://ojzeprg7w.bkt.clouddn.com/%E5%8D%9A%E5%AE%A243.png" alt="" />
+代码接着执行，遇到console.log(&lsquo;Hi&rsquo;),此时log(&lsquo;Hi&rsquo;)入栈，console.log方法只是一个webkit内核支持的普通的方法，所以log(&lsquo;Hi&rsquo;)方法立即被执行。此时输出&rsquo;Hi&rsquo;。</p>
+
+<p><img src="http://ojzeprg7w.bkt.clouddn.com/%E5%8D%9A%E5%AE%A244.png" alt="" />
+当遇到setTimeout的时候，执行引擎将其添加到栈中。</p>
+
+<p><img src="http://ojzeprg7w.bkt.clouddn.com/%E5%8D%9A%E5%AE%A245.JPG" alt="" />
+调用栈发现setTimeout是之前提到的WebAPIs中的API，因此将其出栈之后将延时执行的函数交给浏览器的timer模块进行处理。</p>
+
+<p><img src="http://ojzeprg7w.bkt.clouddn.com/%E5%8D%9A%E5%AE%A246.png" alt="" />
+timer模块去处理延时执行的函数，此时执行引擎接着执行将log(&lsquo;SJS&rsquo;)添加到栈中，此时输出&rsquo;SJS&rsquo;。</p>
+
+<p><img src="http://ojzeprg7w.bkt.clouddn.com/%E5%8D%9A%E5%AE%A247.png" alt="" />
+当timer模块中延时方法规定的时间到了之后就将其放入到任务队列之中，此时调用栈中的task已经全部执行完毕。</p>
+
+<p><img src="http://ojzeprg7w.bkt.clouddn.com/%E5%8D%9A%E5%AE%A248.png" alt="" />
+<img src="http://ojzeprg7w.bkt.clouddn.com/%E5%8D%9A%E5%AE%A249.png" alt="" />
+调用栈中的task执行完毕之后，执行引擎会接着看执行任务队列中是否有需要执行的回调函数。这里的cb函数被执行引擎添加到调用栈中，接着执行里面的代码，输出&rsquo;there&rsquo;。等到执行结束之后再出栈。</p>
+
+<h2 id="小结">小结</h2>
+
+<p>上面的这一个流程解释了当浏览器遇到setTimeout之后究竟是怎么执行的，相类似的还有前面图中提到的另外的API以及另外一些异步的操作。
+总结上文说的，主要就是以下几点：</p>
+
+<ul>
+<li>所有的代码都要通过函数调用栈中调用执行。</li>
+<li>当遇到前文中提到的APIs的时候，会交给浏览器内核的其他模块进行处理。</li>
+<li>任务队列中存放的是回调函数。</li>
+<li>等到调用栈中的task执行完之后再回去执行任务队列之中的task。</li>
+</ul>
+
+<h2 id="测试">测试</h2>
+
+<pre><code>for (var i = 0; i &lt; 5; i++) {
+    setTimeout(function() {
+      console.log(new Date, i);
+    }, 1000);
+}
+
+console.log(new Date, i);
+</code></pre>
+
+<p>这段代码是我从网上前不久的一篇文章<a href="https://juejin.im/post/58cf180b0ce4630057d6727c">80%应聘者都不及格的 JS 面试题</a>中找到的，现在我们就分析一下这段代码究竟是怎么输出最后文章中所说的最后的执行状态：
+&gt; 40% 的人会描述为：5 -&gt; 5,5,5,5,5，即第 1 个 5 直接输出，1 秒之后，输出 5 个 5；</p>
+
+<p>1.首先i=0时，满足条件，执行栈执行循环体里面的代码，发现是setTimeout，将其出栈之后把延时执行的函数交给Timer模块进行处理。</p>
+
+<p>2.当i=1,2,3,4时，均满足条件，情况和i=0时相同，因此timer模块里面有5个相同的延时执行的函数。</p>
+
+<p>3.当i=5的时候，不满足条件，因此for循环结束,console.log(new Date, i)入栈，此时的i已经变成了5。因此输出5。</p>
+
+<p>4.此时1s已经过去，timer模块将5个回调函数按照注册的顺序返回给任务队列。</p>
+
+<p>5.执行引擎去执行任务队列中的函数，5个function依次入栈执行之后再出栈，此时的i已经变成了5。因此几乎同时输出5个5。</p>
+
+<p>6.因此等待的1s的时间其实只有输出第一个5之后需要等待1s，<strong>这1s的时间是timer模块需要等到的规定的1s时间之后才将回调函数交给任务队列</strong>。等执行栈执行完毕之后再去执行任务对列中的5个回调函数。这期间是不需要等待1s的。因此输出的状态就是：5 -&gt; 5,5,5,5,5，即第1个 5 直接输出，1s之后，输出 5个5；</p>
+
+<h2 id="问题">问题</h2>
+
+<p>看到这里，对事件循环机制有了一个大概的了解了，可是细想，其中还有一些另外值得深入的问题。
+下面通过一个栗子来说明：</p>
+
+<pre><code>(function test() {
+    setTimeout(function() {console.log(4)}, 0);
+    new Promise(function executor(resolve) {
+        console.log(1);
+        for( var i=0 ; i&lt;10000 ; i++ ) {
+            i == 9999 &amp;&amp; resolve();
+        }
+        console.log(2);
+    }).then(function() {
+        console.log(5);
+    });
+    console.log(3);
+})()
+</code></pre>
+
+<p>在这段代码里面，多了一个promise，那么我们可以思考下面这个问题：</p>
+
+<p>1.promise的task会放在不同的任务队列里面，那么setTimeout的任务队列和promise的任务队列的执行顺序又是怎么的呢？</p>
+
+<p>2.到这里大家看了我说了这么多的task,那么上文中一直提到的task究竟包括了什么？具体是怎么分的？</p>
+
+<p>如果到这里大家还是没太懂的话，那么接下来我会接着深入再细说不同task的事件循环机制。</p>
+
+<p>当然，以上都是我自己鄙陋的见解，欢迎大家批评指正。</p>
+
+<p>参考资料：</p>
+
+<p><a href="http://ejohn.org/blog/how-javascript-timers-work/">JavaScript定时器的工作原理</a></p>
+
+<p><a href="https://vimeo.com/96425312">《Help, I&rsquo;m stuck in an event-loop》</a></p>
+
+<p><a href="http://www.alloyteam.com/2015/10/turning-to-javascript-series-from-settimeout-said-the-event-loop-model/">【转向Javascript系列】从setTimeout说事件循环模型</a></p>
+
+<p><a href="http://www.ruanyifeng.com/blog/2014/10/event-loop.html">JavaScript 运行机制详解：再谈Event Loop</a></p>
+
+                </section>
+            </article>
+
+            
+
+            
+                <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'luckyabby'; 
+
+     
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+            
+
+            
+
+            <footer id="footer">
+    
+        <div id="social">
+
+	
+	
+    <a class="symbol" href="">
+        <i class="fa fa-facebook-square"></i>
+    </a>
+    
+    <a class="symbol" href="https://www.github.com/LuckyAbby">
+        <i class="fa fa-github-square"></i>
+    </a>
+    
+    <a class="symbol" href="">
+        <i class="fa fa-twitter-square"></i>
+    </a>
+    
+
+
+</div>
+
+    
+    <p class="small">
+    
+        © Copyright 2019 ❤️
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://luckyabby.com/js/jquery-3.3.1.min.js"></script>
+<script src="http://luckyabby.com/js/main.js"></script>
+<script src="http://luckyabby.com/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+  
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-84989670-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+
+
+
+    </body>
+</html>

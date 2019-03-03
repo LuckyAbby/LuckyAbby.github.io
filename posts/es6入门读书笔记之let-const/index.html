@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		
+		<meta name="description" content="My Blog">
+		<meta name="generator" content="Hugo 0.54.0" />
+		<title>《ES6入门》读书笔记之let const &middot; luckyabby</title>
+		<link rel="shortcut icon" href="http://luckyabby.com/images/favicon.ico">
+		<link rel="stylesheet" href="http://luckyabby.com/css/style.css">
+		<link rel="stylesheet" href="http://luckyabby.com/css/highlight.css">
+
+		
+		<link rel="stylesheet" href="http://luckyabby.com/css/font-awesome.min.css">
+		
+
+		
+		<link href="http://luckyabby.com/index.xml" rel="alternate" type="application/rss+xml" title="luckyabby" />
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://luckyabby.com/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://luckyabby.com/posts'>Archive</a>
+	<a href='http://luckyabby.com/tags'>Tags</a>
+	<a href='http://luckyabby.com/about'>About</a>
+
+	
+
+	
+	<a class="cta" href="http://luckyabby.com/index.xml">Subscribe</a>
+	
+</nav>
+
+
+        <section id="wrapper" class="post">
+            <article>
+                <header>
+                    <h1>
+                        《ES6入门》读书笔记之let const
+                    </h1>
+                    <h2 class="headline">
+                    Aug 28, 2017 15:23
+                    · 715 words
+                    · 2 minute read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://luckyabby.com/tags/es6">es6</a>
+                          
+                              <a href="http://luckyabby.com/tags/js">JS</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                  
+                    <div id="toc">
+                      <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#let-const-与-var">let const 与 var</a>
+<ul>
+<li>
+<ul>
+<li><a href="#为什么要有块级作用域">为什么要有块级作用域</a></li>
+<li><a href="#1-不存在变量提升">1. 不存在变量提升</a></li>
+<li><a href="#2-暂时性死区">2. 暂时性死区</a></li>
+<li><a href="#3-不允许重复声明">3. 不允许重复声明</a></li>
+<li><a href="#4-全局变量不属于顶层变量">4. 全局变量不属于顶层变量</a></li>
+</ul></li>
+<li><a href="#let-与-const-的区别">let 与 const 的区别</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+                    </div>
+                  
+                
+                <section id="post-body">
+                    <h2 id="let-const-与-var">let const 与 var</h2>
+
+<p>let 与 const 创建了块级作用域。</p>
+
+<h4 id="为什么要有块级作用域">为什么要有块级作用域</h4>
+
+<p>我觉得这也是 ES5 中还没有完善的地方之一，没有块级作用域会导致一大堆问题。比如：控制计数的循环变量会泄漏成全局变量，在使用块级作用域的比如 if 语句以及 for while 循环等地方都会导致问题出现。</p>
+
+<p>与 var 最具体的区别在于：</p>
+
+<h4 id="1-不存在变量提升">1. 不存在变量提升</h4>
+
+<p>var 命令会发生变量提升的现象，即变量可以放在声明之前使用，值是 undefined。 而在 let const 中，变量只有声明之后才可以使用，在声明之前是不存在的，如果在声明之前使用会报错。</p>
+
+<h4 id="2-暂时性死区">2. 暂时性死区</h4>
+
+<p>在一个块级作用域内，使用 let const 声明的变量在声明之前是不能获取的，使用阮老师的例子就是</p>
+
+<pre><code>if (true) {
+  // TDZ开始
+  tmp = 'abc'; // ReferenceError
+  console.log(tmp); // ReferenceError
+
+  let tmp; // TDZ结束
+  console.log(tmp); // undefined
+
+  tmp = 123;
+  console.log(tmp); // 123
+}
+</code></pre>
+
+<p>在使用 let const 声明 tmp 之前，都属于 变量的tmp 的“死区”。</p>
+
+<h4 id="3-不允许重复声明">3. 不允许重复声明</h4>
+
+<pre><code>let a = 1;
+var a = 2; // error: 'a' has already been declared
+</code></pre>
+
+<h4 id="4-全局变量不属于顶层变量">4. 全局变量不属于顶层变量</h4>
+
+<p>js 里面的顶层变量，在浏览器里面是 window ，在 Node.js 里面是 global， 在 ES5 使用 var 声明的变量会自动挂载在顶层变量上面，但是使用 let const 声明的变量不会挂载在顶层变量上。</p>
+
+<pre><code>var d = 1;
+console.log(window.d); // 1
+
+let g = 1;
+console.log(window.g); // undefined
+</code></pre>
+
+<h3 id="let-与-const-的区别">let 与 const 的区别</h3>
+
+<p>let可以先声明再赋值，但是 const在声明的时候就需要赋值。</p>
+
+<p>使用 let 定义的是一个变量，在后面还可以改变这个变量的值，但是使用 const 创建的是一个常量的，但是要弄懂这个常量的本质。</p>
+
+<p>在 js 里面，如果是基本数据类型，存放的就是就是这个变量的值。但是对于引用数据类型，比如 数据对象等等，存放的是它的地址，因此下面的一些操作是合法的。</p>
+
+<pre><code>const foo = {};
+
+// 为 foo 添加一个属性，可以成功
+foo.prop = 123;
+foo.prop // 123
+
+// 将 foo 指向另一个对象，就会报错
+foo = {}; // TypeError: &quot;foo&quot; is read-only
+</code></pre>
+
+<p>如果想把对象冻结，可以使用 Object.freeze 方法。
+将对象和对象的属性冻结。
+<code>
+var constantize = (obj) =&gt; {
+  Object.freeze(obj);
+  Object.keys(obj).forEach( (key, i) =&gt; {
+    if ( typeof obj[key] === 'object' ) {
+      constantize( obj[key] );
+    }
+  });
+</code>`</p>
+                </section>
+            </article>
+
+            
+
+            
+                <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'luckyabby'; 
+
+     
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+            
+
+            
+
+            <footer id="footer">
+    
+        <div id="social">
+
+	
+	
+    <a class="symbol" href="">
+        <i class="fa fa-facebook-square"></i>
+    </a>
+    
+    <a class="symbol" href="https://www.github.com/LuckyAbby">
+        <i class="fa fa-github-square"></i>
+    </a>
+    
+    <a class="symbol" href="">
+        <i class="fa fa-twitter-square"></i>
+    </a>
+    
+
+
+</div>
+
+    
+    <p class="small">
+    
+        © Copyright 2019 ❤️
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://luckyabby.com/js/jquery-3.3.1.min.js"></script>
+<script src="http://luckyabby.com/js/main.js"></script>
+<script src="http://luckyabby.com/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+  
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-84989670-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+
+
+
+    </body>
+</html>

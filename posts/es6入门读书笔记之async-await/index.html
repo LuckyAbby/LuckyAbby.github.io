@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		
+		<meta name="description" content="My Blog">
+		<meta name="generator" content="Hugo 0.54.0" />
+		<title>《ES6入门》读书笔记之async/await &middot; luckyabby</title>
+		<link rel="shortcut icon" href="http://luckyabby.com/images/favicon.ico">
+		<link rel="stylesheet" href="http://luckyabby.com/css/style.css">
+		<link rel="stylesheet" href="http://luckyabby.com/css/highlight.css">
+
+		
+		<link rel="stylesheet" href="http://luckyabby.com/css/font-awesome.min.css">
+		
+
+		
+		<link href="http://luckyabby.com/index.xml" rel="alternate" type="application/rss+xml" title="luckyabby" />
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='http://luckyabby.com/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='http://luckyabby.com/posts'>Archive</a>
+	<a href='http://luckyabby.com/tags'>Tags</a>
+	<a href='http://luckyabby.com/about'>About</a>
+
+	
+
+	
+	<a class="cta" href="http://luckyabby.com/index.xml">Subscribe</a>
+	
+</nav>
+
+
+        <section id="wrapper" class="post">
+            <article>
+                <header>
+                    <h1>
+                        《ES6入门》读书笔记之async/await
+                    </h1>
+                    <h2 class="headline">
+                    Sep 1, 2017 15:23
+                    · 785 words
+                    · 2 minute read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="http://luckyabby.com/tags/es6">es6</a>
+                          
+                              <a href="http://luckyabby.com/tags/js">JS</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                  
+                    <div id="toc">
+                      <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#async-函数">async 函数</a>
+<ul>
+<li><a href="#async">async</a>
+<ul>
+<li>
+<ul>
+<li><a href="#1-内置执行器">1.内置执行器</a></li>
+<li><a href="#2-返回-promise-对象">2.返回 Promise 对象</a></li>
+<li><a href="#3-语义更清楚">3.语义更清楚</a></li>
+<li><a href="#1-async-函数返回一个-promise-对象-函数内部-return-语句返回的值是-then-方法回调函数的参数">1.async 函数返回一个 Promise 对象，函数内部 return 语句返回的值是 then 方法回调函数的参数。</a></li>
+<li><a href="#2-同时当-async-函数内部抛出错误的时候会使得-promise-状态变成-reject">2.同时当 async 函数内部抛出错误的时候会使得 Promise 状态变成 reject。</a></li>
+<li><a href="#3-必须等到-await-命令后面的-promise-对象执行完-才会使得-async-返回的-promise-对象的状态发生改变-才能调用-then-方法-除非遇到-return-语句或者抛出错误">3.必须等到 await 命令后面的 Promise 对象执行完，才会使得 async 返回的 Promise 对象的状态发生改变，才能调用 then 方法，除非遇到 return 语句或者抛出错误。</a></li>
+</ul></li>
+<li><a href="#async-函数实现原理">async 函数实现原理</a></li>
+</ul></li>
+<li><a href="#await">await</a>
+<ul>
+<li>
+<ul>
+<li><a href="#1-await-命令后面一般是一个-promise-对象-如果不是-会被转成一个立即被-resolve-的-promise-对象-如-await-12-那么这个-12-会被传入-then-回调的参数-如果-promise-对象的变成-reject-状态-参数会传给-catch">1.await 命令后面一般是一个 Promise 对象。如果不是，会被转成一个立即被 resolve 的 Promise 对象。如 await 12, 那么这个 12 会被传入 then 回调的参数。如果 Promise 对象的变成 reject 状态，参数会传给 catch。</a></li>
+<li><a href="#2-只要一个-await-后面的-promise-状态是-reject-整个-async-函数中止执行">2.只要一个 await 后面的 Promise 状态是 reject，整个 async 函数中止执行。</a></li>
+<li><a href="#3-一般可以使用-try-catch-去接收-reject-也可以使用自带的-catch">3.一般可以使用 try catch 去接收 reject ，也可以使用自带的 catch。</a></li>
+<li><a href="#4-如果-await-后面的异步操作出错-那么等同于async函数返回的-promise-对象被reject-可以使用-try-catch-对错误进行处理">4.如果 await 后面的异步操作出错，那么等同于async函数返回的 Promise 对象被reject，可以使用 try catch 对错误进行处理。</a></li>
+<li><a href="#5-如果多个-await-命令不存在继发关系-应该让它们同时触发">5.如果多个 await 命令不存在继发关系，应该让它们同时触发。</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+                    </div>
+                  
+                
+                <section id="post-body">
+                    <h2 id="async-函数">async 函数</h2>
+
+<h3 id="async">async</h3>
+
+<p>async 函数主要用来处理异步，相比于 Generator 和 yield ，主要有下面几点优点：</p>
+
+<h5 id="1-内置执行器">1.内置执行器</h5>
+
+<p>async 函数的执行与普通函数一摸一样，只需要执行即可，不需要像 Generator 函数需要调用 next 方法。因此更加方便。</p>
+
+<h5 id="2-返回-promise-对象">2.返回 Promise 对象</h5>
+
+<p>调用 async 函数返回一个 Promise 对象，因此可以调用 then 方法。如果里面还有 return 语句将作为 then 方法的参数。而 Generator 返回的是 Interator 对象。</p>
+
+<h5 id="3-语义更清楚">3.语义更清楚</h5>
+
+<p>async 表示函数里面有异步操作， await 表示紧跟在后面的表达式需要等待结果。</p>
+
+<p>async 需要主要下面几点：</p>
+
+<h5 id="1-async-函数返回一个-promise-对象-函数内部-return-语句返回的值是-then-方法回调函数的参数">1.async 函数返回一个 Promise 对象，函数内部 return 语句返回的值是 then 方法回调函数的参数。</h5>
+
+<pre><code>async function f() {
+  return 'hello world';
+}
+
+f().then(v =&gt; console.log(v))
+// &quot;hello world&quot;
+</code></pre>
+
+<h5 id="2-同时当-async-函数内部抛出错误的时候会使得-promise-状态变成-reject">2.同时当 async 函数内部抛出错误的时候会使得 Promise 状态变成 reject。</h5>
+
+<pre><code>async function f() {
+  throw new Error('出错了');
+}
+
+f().then(
+  v =&gt; console.log('right',v),
+  e =&gt; console.log('wrong',e)
+)
+// wrong Error: 出错了
+</code></pre>
+
+<h5 id="3-必须等到-await-命令后面的-promise-对象执行完-才会使得-async-返回的-promise-对象的状态发生改变-才能调用-then-方法-除非遇到-return-语句或者抛出错误">3.必须等到 await 命令后面的 Promise 对象执行完，才会使得 async 返回的 Promise 对象的状态发生改变，才能调用 then 方法，除非遇到 return 语句或者抛出错误。</h5>
+
+<h4 id="async-函数实现原理">async 函数实现原理</h4>
+
+<p>async 函数就是将 Generator 函数和自动执行器包装在一个函数里。</p>
+
+<pre><code>async function fn(args) {
+  // ...
+}
+
+// 等同于
+
+function fn(args) {
+  return spawn(function* () { //自动执行器
+    // ...
+  });
+}
+</code></pre>
+
+<h3 id="await">await</h3>
+
+<h5 id="1-await-命令后面一般是一个-promise-对象-如果不是-会被转成一个立即被-resolve-的-promise-对象-如-await-12-那么这个-12-会被传入-then-回调的参数-如果-promise-对象的变成-reject-状态-参数会传给-catch">1.await 命令后面一般是一个 Promise 对象。如果不是，会被转成一个立即被 resolve 的 Promise 对象。如 await 12, 那么这个 12 会被传入 then 回调的参数。如果 Promise 对象的变成 reject 状态，参数会传给 catch。</h5>
+
+<h5 id="2-只要一个-await-后面的-promise-状态是-reject-整个-async-函数中止执行">2.只要一个 await 后面的 Promise 状态是 reject，整个 async 函数中止执行。</h5>
+
+<h5 id="3-一般可以使用-try-catch-去接收-reject-也可以使用自带的-catch">3.一般可以使用 try catch 去接收 reject ，也可以使用自带的 catch。</h5>
+
+<pre><code>async function f() {
+  await Promise.reject('出错了')
+    .catch(e =&gt; console.log(e));
+  return await Promise.resolve('hello world');
+}
+
+f()
+.then(v =&gt; console.log(v))
+// 出错了
+// hello world
+</code></pre>
+
+<h5 id="4-如果-await-后面的异步操作出错-那么等同于async函数返回的-promise-对象被reject-可以使用-try-catch-对错误进行处理">4.如果 await 后面的异步操作出错，那么等同于async函数返回的 Promise 对象被reject，可以使用 try catch 对错误进行处理。</h5>
+
+<pre><code>async function f() {
+  try {
+    await new Promise(function (resolve, reject) {
+      throw new Error('出错了');
+    });
+  } catch(e) {
+  }
+  return await('hello world');
+}
+</code></pre>
+
+<h5 id="5-如果多个-await-命令不存在继发关系-应该让它们同时触发">5.如果多个 await 命令不存在继发关系，应该让它们同时触发。</h5>
+
+<pre><code>let foo = await getFoo();
+let bar = await getBar();
+</code></pre>
+
+<p>上面代码里面是两个互不依赖的独立异步操作，这样写会比较耗时，应该让他们同时发生。</p>
+
+<pre><code>let [foo, bar] = await Promise.all([getFoo(), getBar()]);
+</code></pre>
+                </section>
+            </article>
+
+            
+
+            
+                <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'luckyabby'; 
+
+     
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+            
+
+            
+
+            <footer id="footer">
+    
+        <div id="social">
+
+	
+	
+    <a class="symbol" href="">
+        <i class="fa fa-facebook-square"></i>
+    </a>
+    
+    <a class="symbol" href="https://www.github.com/LuckyAbby">
+        <i class="fa fa-github-square"></i>
+    </a>
+    
+    <a class="symbol" href="">
+        <i class="fa fa-twitter-square"></i>
+    </a>
+    
+
+
+</div>
+
+    
+    <p class="small">
+    
+        © Copyright 2019 ❤️
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="http://luckyabby.com/js/jquery-3.3.1.min.js"></script>
+<script src="http://luckyabby.com/js/main.js"></script>
+<script src="http://luckyabby.com/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+  
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-84989670-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+
+
+
+    </body>
+</html>

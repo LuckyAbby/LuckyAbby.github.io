@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>React on luckyabby</title>
+    <link>http://luckyabby.com/tags/react/</link>
+    <description>Recent content in React on luckyabby</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 22 Jul 2017 15:23:25 +0800</lastBuildDate>
+    
+	<atom:link href="http://luckyabby.com/tags/react/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>React学习笔记</title>
+      <link>http://luckyabby.com/posts/react%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Sat, 22 Jul 2017 15:23:25 +0800</pubDate>
+      
+      <guid>http://luckyabby.com/posts/react%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid>
+      <description>想把学习 React 的一些零碎的知识点记下来，也是一些我自己的理解，可能比较琐碎，也可能比较肤浅。 在我看来，React 的一些特性主要体现在以下的几个方</description>
+    </item>
+    
+  </channel>
+</rss>

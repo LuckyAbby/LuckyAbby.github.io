@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>踩坑 on luckyabby</title>
-    <link>luckyabby.com/tags/%E8%B8%A9%E5%9D%91/</link>
+    <link>//luckyabby.com/tags/%E8%B8%A9%E5%9D%91/</link>
     <description>Recent content in 踩坑 on luckyabby</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Tue, 06 Mar 2018 21:01:09 +0800</lastBuildDate>
     
-	<atom:link href="luckyabby.com/tags/%E8%B8%A9%E5%9D%91/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="//luckyabby.com/tags/%E8%B8%A9%E5%9D%91/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>踩坑篇--使用 fetch 上传文件</title>
-      <link>luckyabby.com/posts/%E8%B8%A9%E5%9D%91%E7%AF%87/</link>
+      <link>//luckyabby.com/posts/%E8%B8%A9%E5%9D%91%E7%AF%87/</link>
       <pubDate>Tue, 06 Mar 2018 21:01:09 +0800</pubDate>
       
-      <guid>luckyabby.com/posts/%E8%B8%A9%E5%9D%91%E7%AF%87/</guid>
+      <guid>//luckyabby.com/posts/%E8%B8%A9%E5%9D%91%E7%AF%87/</guid>
       <description>这个坑是自己最近使用 fetch 给后端上传文件的时候踩到的，需求很简单，就是需要给后端上传一个文件以及需要的几个字段。看，简单吧。。 于是，撸起袖子准备</description>
     </item>
     

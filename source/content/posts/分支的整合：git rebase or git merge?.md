@@ -3,14 +3,13 @@ title: "分支的整合：git rebase Or git merge"
 date: 2018-03-14T20:56:29+08:00
 tags: ["Git"]
 ---
-
 Git 整合分支一般有 git merge 和 git rebase 两种。rebase 通常就是我们所说的“变基”、“衍合”。
 
 假设我们现在有两个分支，master和 develop 分支，master上的分支永远都是稳定版本的，develop上的分支存放的是暂定的开发版本的代码。我们需要将自己开发分支上的代码先合并到 develop 上。
 
 假设你从 master 新拉了一个分支，但是此时你的小伙伴已经上传了她的代码到了 develop 分支，此时分支的提交历史如下：
 
-![](http://ojzeprg7w.bkt.clouddn.com/gitn1.png)
+![](https://abby-1253430270.cos.ap-shanghai.myqcloud.com/gitn1.png)
 
 此时你将你的分支整合到 develop 上就会有两种整合方案，一是 git merge 另一种就是 git rebase。
 
@@ -18,7 +17,7 @@ Git 整合分支一般有 git merge 和 git rebase 两种。rebase 通常就是�
 
 使用 git merge 命令它会把两个分支最新的快照（C4 和 C5）以及二者最新的共同祖先（C3）进行三方合并，合并的结果是产生一个新的提交对象（C6）。
 
-![](http://ojzeprg7w.bkt.clouddn.com/gitn9.png)
+![](https://abby-1253430270.cos.ap-shanghai.myqcloud.com/gitn9.png)
 
 <!-- ```
 ➜  gitOwn git:(lyt/bugfix) git co develop
@@ -34,11 +33,11 @@ Merge made by the 'recursive' strategy.
 
 最后的提交历史如图：
 
-![](http://ojzeprg7w.bkt.clouddn.com/gitn10.png)
+![](https://abby-1253430270.cos.ap-shanghai.myqcloud.com/gitn10.png)
 
 用 git merge 是最方便的合并操作，也会保留真实完整的 commit 信息。但是也会导致一个问题，就是会使得提交历史发生很多分叉，如下图:
 
-![](http://ojzeprg7w.bkt.clouddn.com/gitn6.png)
+![](https://abby-1253430270.cos.ap-shanghai.myqcloud.com/gitn6.png)
 
 由图可见，提交从 master 开始分叉，分成 develop 和 lyt/bugfix 两个分支，最后又合并到 develop 分支上。
 
@@ -52,7 +51,7 @@ Merge made by the 'recursive' strategy.
 
 简单来说，使用 rebase 命令将提交到某一分支上的所有修改都移至另一分支上，就好像“重新播放”一样。
 
-![](http://ojzeprg7w.bkt.clouddn.com/gitn3.png)
+![](https://abby-1253430270.cos.ap-shanghai.myqcloud.com/gitn3.png)
 
 <!-- ```
 ➜  gitOwn git:(master) git co lyt/bugfix
@@ -67,11 +66,11 @@ rebase 的原理就是会找到当前分支（lyt/bugfix）和变基的基底分
 
 之后我们看到的提交历史就如下：
 
-![](http://ojzeprg7w.bkt.clouddn.com/gitn2.png)
+![](https://abby-1253430270.cos.ap-shanghai.myqcloud.com/gitn2.png)
 
 变基之后再回到 develop 分支，就可以进一次快进合并。
 
-![](http://ojzeprg7w.bkt.clouddn.com/gitn4.png)
+![](https://abby-1253430270.cos.ap-shanghai.myqcloud.com/gitn4.png)
 
 <!-- ```
 ➜  gitOwn git:(lyt/bugfix) git co develop
@@ -90,19 +89,19 @@ Fast-forward
 
 最后合并之后的提交历史如图：
 
-![](http://ojzeprg7w.bkt.clouddn.com/gitn8.png)
+![](https://abby-1253430270.cos.ap-shanghai.myqcloud.com/gitn8.png)
 
 现在的 C5' 对应的快照，其实和普通的三方合并，即 git merge 中的 C6 对应的快照内容一模一样了,但是会使得历史更清晰。
 
 如下图，我们使用图形化的界面可以看到现在的提交历史是一根线，没有分叉的地方，看上去十分干净，但是我们也可以注意到此时更改了提交历史。lyt/bugfix 这个分支能向前追溯到原来不属于它的提交(其余人在 someOtherCommits 上提交的 commit 信息)，这样就会篡改提交历史。
 
-![](http://ojzeprg7w.bkt.clouddn.com/gitn5.png)
+![](https://abby-1253430270.cos.ap-shanghai.myqcloud.com/gitn5.png)
 
 #### 解决冲突
 
 如果在 rebase 的操作过程中遇到了冲突，比如我重新从 master 新建了一个分支，同时修改了 develop 分支中修改的一个文件。再 rebase 的时候就会遇到这样的问题。
 
-![](http://ojzeprg7w.bkt.clouddn.com/gitn11.png)
+![](https://abby-1253430270.cos.ap-shanghai.myqcloud.com/gitn11.png)
 
 <!-- ```
 ➜  gitOwn git:(lyt/bugfix11) git rebase develop
@@ -123,7 +122,7 @@ To check out the original branch and stop rebasing, run "git rebase --abort".
 
 上面说的意思就是遇到了冲突，此时我们使用`git status`查看是哪个文件冲突之后，再手动解决冲突。之后添加到暂存区再继续进行 rebase。 rebase 完成之后通过 `git log`就能看到之前在 develop 分支上的提交出现在 lyt/bugfix11 这个分支上了，说明已经变基成功。
 
-![](http://ojzeprg7w.bkt.clouddn.com/gitn12.png)
+![](https://abby-1253430270.cos.ap-shanghai.myqcloud.com/gitn12.png)
 
 ### git merge or git rebase?
 

@@ -1,7 +1,8 @@
 ---
 title: "PureComponent对比Component"
-date: 2019-03-08T00:35:19+08:00
+date: 2019-02-08T00:35:19+08:00
 draft: true
+tags: ['React','JS']
 ---
 
 PureComponent 是 react15.3 中发布的一个新类，对比 Component 主要是改变了生命周期方法 shouldComponentUpdate，不需要自己再去写代码检测是否重新 render，它会自动检查组件当检测到state或者props发生变化时，PureComponent才会调用render方法，提升了性能，具体的实现就是 React 做了一个 shallowEqual：

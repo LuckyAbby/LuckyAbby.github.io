@@ -6,10 +6,21 @@
     <description>Recent content on luckyabby</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 23 Mar 2018 10:49:18 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 09 Mar 2019 17:42:51 +0800</lastBuildDate>
     
 	<atom:link href="https://luckyabby.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>深入setState</title>
+      <link>https://luckyabby.com/posts/%E6%B7%B1%E5%85%A5setstate/</link>
+      <pubDate>Sat, 09 Mar 2019 17:42:51 +0800</pubDate>
+      
+      <guid>https://luckyabby.com/posts/%E6%B7%B1%E5%85%A5setstate/</guid>
+      <description>&lt;h2 id=&#34;例子&#34;&gt;例子&lt;/h2&gt;
+
+&lt;p&gt;对于这样一个例子：&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>初级webpack配置工程师的弃坑之路</title>

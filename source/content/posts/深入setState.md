@@ -307,6 +307,7 @@ if (!batchingStrategy.isBatchingUpdates) {
 在这个方法里面，我们可以看到 isBatchingUpdates 为 false,就会执行 transaction.perform 这个方法，因此可以看到此时 setState 只是唤起了一次批量更新而已，然后在这个 perform 里面将内部实例传进去去执行 enqueueUpdate 方法。等到这个 setState 之行结束之后这个事务就结束了，再次执行 setState 又得重新唤起一次批量更新模式，因此表现的像同步。
 
 因此总结一下 setState，可以得到如下结论：
+
 - React的批量更新模式已经被启动时（事件触发时），表现的类似于异步：
   React响应事件处理 => 启动更新策略事务（绑定了wrapper） => 事务perform => **setState => 获取内部实例 => 存储新的状态 => 发现更新策略事务已启动 => 将当前内部实例放入脏组件数组 => setState执行结束** => 更新策略事务perform完毕 => wrapper处理组件状态的更新
 - React的批量更新模式没有被启动时（异步触发时），表现的类似于同步：

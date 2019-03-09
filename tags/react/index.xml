@@ -23,6 +23,15 @@
     </item>
     
     <item>
+      <title>PureComponent对比Component</title>
+      <link>https://luckyabby.com/posts/purecomponent%E5%AF%B9%E6%AF%94component/</link>
+      <pubDate>Fri, 08 Feb 2019 00:35:19 +0800</pubDate>
+      
+      <guid>https://luckyabby.com/posts/purecomponent%E5%AF%B9%E6%AF%94component/</guid>
+      <description>PureComponent 是 react15.3 中发布的一个新类，对比 Component 主要是改变了生命周期方法 shouldComponentUpdate，不需要自己再去写代码检测是否重新 rende</description>
+    </item>
+    
+    <item>
       <title>React学习笔记</title>
       <link>https://luckyabby.com/posts/react%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
       <pubDate>Sat, 22 Jul 2017 15:23:25 +0800</pubDate>

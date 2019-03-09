@@ -1,7 +1,6 @@
 ---
 title: "PureComponent对比Component"
 date: 2019-02-08T00:35:19+08:00
-draft: true
 tags: ['React','JS']
 ---
 

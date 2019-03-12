@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://luckyabby.com/posts/attribute%E4%B8%8Eproperties/</loc>
+    <lastmod>2019-03-12T23:23:35+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://luckyabby.com/posts/%E6%B7%B1%E5%85%A5setstate/</loc>
     <lastmod>2019-03-09T17:42:51+08:00</lastmod>
   </url>
@@ -242,7 +247,7 @@
   
   <url>
     <loc>https://luckyabby.com/tags/js/</loc>
-    <lastmod>2019-03-09T17:42:51+08:00</lastmod>
+    <lastmod>2019-03-12T23:23:35+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -254,7 +259,7 @@
   
   <url>
     <loc>https://luckyabby.com/posts/</loc>
-    <lastmod>2019-03-09T17:42:51+08:00</lastmod>
+    <lastmod>2019-03-12T23:23:35+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -278,7 +283,7 @@
   
   <url>
     <loc>https://luckyabby.com/</loc>
-    <lastmod>2019-03-09T17:42:51+08:00</lastmod>
+    <lastmod>2019-03-12T23:23:35+08:00</lastmod>
     <priority>0</priority>
   </url>
   

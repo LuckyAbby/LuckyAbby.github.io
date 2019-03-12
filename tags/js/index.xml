@@ -6,10 +6,20 @@
     <description>Recent content in Js on luckyabby</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 09 Mar 2019 17:42:51 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 12 Mar 2019 23:23:35 +0800</lastBuildDate>
     
 	<atom:link href="https://luckyabby.com/tags/js/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Attribute与properties</title>
+      <link>https://luckyabby.com/posts/attribute%E4%B8%8Eproperties/</link>
+      <pubDate>Tue, 12 Mar 2019 23:23:35 +0800</pubDate>
+      
+      <guid>https://luckyabby.com/posts/attribute%E4%B8%8Eproperties/</guid>
+      <description>&lt;p&gt;attribute 属于 html,一般翻译为 特性
+properties 属于 DOM，翻译为属性，因为一个 html 元素就是一个 DOM 节点，而每个节点都是一个 JS 对象，因此具有属性，DOM元素属性和普通对象的属性一样，就是DOM对象这个javascript对象上的属性而已。&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>深入setState</title>

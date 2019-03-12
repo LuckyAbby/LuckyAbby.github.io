@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		
+		<meta name="description" content="My Blog">
+		<meta name="generator" content="Hugo 0.54.0" />
+		<title>Attribute与properties &middot; luckyabby</title>
+		<link rel="shortcut icon" href="https://luckyabby.com/images/favicon.ico">
+		<link rel="stylesheet" href="https://luckyabby.com/css/style.css">
+		<link rel="stylesheet" href="https://luckyabby.com/css/highlight.css">
+
+		
+		<link rel="stylesheet" href="https://luckyabby.com/css/font-awesome.min.css">
+		
+
+		
+		<link href="https://luckyabby.com/index.xml" rel="alternate" type="application/rss+xml" title="luckyabby" />
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='https://luckyabby.com/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='https://luckyabby.com/posts'>Archive</a>
+	<a href='https://luckyabby.com/tags'>Tags</a>
+	<a href='https://luckyabby.com/about'>About</a>
+
+	
+
+	
+	<a class="cta" href="https://luckyabby.com/index.xml">Subscribe</a>
+	
+</nav>
+
+
+        <section id="wrapper" class="post">
+            <article>
+                <header>
+                    <h1>
+                        Attribute与properties
+                    </h1>
+                    <h2 class="headline">
+                    Mar 12, 2019 23:23
+                    · 937 words
+                    · 2 minute read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="https://luckyabby.com/tags/js">JS</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                  
+                    <div id="toc">
+                      <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#attribute">Attribute</a></li>
+<li><a href="#properties">properties</a></li>
+<li><a href="#dataset-属性">dataset 属性</a></li>
+<li><a href="#同步机制">同步机制</a></li>
+<li><a href="#特殊值">特殊值</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+                    </div>
+                  
+                
+                <section id="post-body">
+                    <p>attribute 属于 html,一般翻译为 特性
+properties 属于 DOM，翻译为属性，因为一个 html 元素就是一个 DOM 节点，而每个节点都是一个 JS 对象，因此具有属性，DOM元素属性和普通对象的属性一样，就是DOM对象这个javascript对象上的属性而已。</p>
+
+<h3 id="attribute">Attribute</h3>
+
+<p>attribute 出现在 html 元素中，比如 id、class、type等。</p>
+
+<p>例如</p>
+
+<pre><code class="language-html">&lt;input type=&quot;text&quot; id=&quot;myInput&quot; a=111 A=2222 /&gt;
+</code></pre>
+
+<p>HTML 元素映射到 DOM 是 HTMLElement 类型的节点对象，HTMLElement 类型的节点对象有一个 attributes 属性，这个属性本身也是一个对象，HTML 元素的所有 attribute 都包含在这个对象里面。</p>
+
+<p>HTMLElement 节点对象有几个方法可以操作 attribute。</p>
+
+<pre><code>elem.hasAttribute(name)  // 检查 attribute 是否存在
+elem.getAttribute(name)  // 获得 attribute
+elem.setAttribute(name, value)  // 设置 attribute 的值
+elem.removeAttribute(name)  // 删除 attribute
+</code></pre>
+
+<p>我们打印出上面的 attributes 属性，得到的结果是：</p>
+
+<pre><code>NamedNodeMap {0: type, 1: id, 2: a, type: type, id: id, a: a, length: 3}
+    0: type
+    1: id
+    2: a
+    baseURI: &quot;file:///Users/jh/index/html%20css%20test/attribute.html&quot;
+    childNodes: NodeList []
+    firstChild: null
+    isConnected: false
+    lastChild: null
+    localName: &quot;a&quot;
+    name: &quot;a&quot;
+    namespaceURI: null
+    nextSibling: null
+    nodeName: &quot;a&quot;
+    nodeType: 2
+    nodeValue: &quot;111&quot;
+    ownerDocument: document
+    ownerElement: input#myInput
+    parentElement: null
+    parentNode: null
+    prefix: null
+    previousSibling: null
+    specified: true
+    textContent: &quot;111&quot;
+    value: &quot;111&quot;
+    __proto__: Attr
+    length: 3
+</code></pre>
+
+<p>可以看到只有三个值，定义的 A 并没有显示出来，因此可以归纳出有如下特点：</p>
+
+<ul>
+<li>只能是字符串</li>
+<li>大小写不敏感</li>
+<li>以动态集合的方式存在（NamedNodeMap）</li>
+</ul>
+
+<h3 id="properties">properties</h3>
+
+<p>properties 是 DOM 节点对象的属性，因此可以直接通过 . 或者 []来获取值。具有如下特点：</p>
+
+<ul>
+<li>可以是任何类型的值</li>
+<li>大小写敏感</li>
+<li>js 中自定义的 properties 不会出现在 html 中</li>
+</ul>
+
+<p>但是注意有些 attribute 是 JS 保留字比如 class attribute 转化为 properties 时是 className。</p>
+
+<h3 id="dataset-属性">dataset 属性</h3>
+
+<p>HTML 元素的每一个 公认的（非自定义的） attribute 映射为节点对象上一个个的 property，但是自定义的除了 attribute 通过  data- 自定义的可以通过 dataset 获取之外，别的都不可以获取。</p>
+
+<p>因此对于通过  data-  自定义的 HTML attribute 可以有两种方法获取</p>
+
+<pre><code class="language-html">&lt;input type=&quot;text&quot; id=&quot;myInput&quot; data-name=&quot;input&quot; data-my-name=&quot;myInput&quot;/&gt;
+</code></pre>
+
+<ul>
+<li>el.getAttribute(&lsquo;data-name&rsquo;)/el.getAttribute(&lsquo;data-my-name&rsquo;)</li>
+<li>el.dataset.name/el.dataset.myName</li>
+</ul>
+
+<h3 id="同步机制">同步机制</h3>
+
+<ul>
+<li>对于自定义的 properties/Attribute不会同步，但是修改 dataset 会同步</li>
+<li>对于非自定义的attribute，如id、class、title等，都会有对应的 property 映射，property 或 attribute 的变化多数是同步。</li>
+</ul>
+
+<pre><code class="language-js">&lt;input type=&quot;text&quot; id=&quot;myInput&quot; class=&quot;myInputClass&quot; /&gt;
+
+var el = document.getElementById('myInput');
+
+el.id = 'renamedId';
+console.log('el.id', el.getAttribute('id')); //renamedId
+
+el.setAttribute('class', 'renamedClass');
+console.log('el.className', el.className); //renamedClass
+</code></pre>
+
+<p>带有默认值的 attribute 不会随 property 而变化，property 会随着变化。比如</p>
+
+<pre><code class="language-js">&lt;input type=&quot;text&quot; id=&quot;myInput&quot; class=&quot;myInputClass&quot; /&gt;
+var el = document.getElementById('myInput');
+
+el.setAttribute('value', 'AttrValue');
+console.log('el.value', el.value); // AttrValue
+
+el.value= 'proValue';
+console.log('el.proValue', el.getAttribute('value'))// AttrValue
+</code></pre>
+
+<h3 id="特殊值">特殊值</h3>
+
+<p>有几种特殊的特性，通过getAttribute()返回的值和 properties 并不相同。如href，src，onclick等事件处理程序。比如下面href的例子,getAttribute会获取和 html 编写的值一样的值，而 href 返回来的是却不一样。</p>
+
+<pre><code class="language-js"> &lt;a href=&quot;//m.taobao.com&quot; id=&quot;link&quot;&gt;&lt;/a&gt;
+
+var el = document.getElementById('link');
+
+console.log('el.link', el.href); // file://m.taobao.com/
+console.log('el.getAttribute', el.getAttribute('href'));// //m.taobao.com
+</code></pre>
+                </section>
+            </article>
+
+            
+
+            
+                <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'luckyabby'; 
+
+     
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+            
+
+            
+
+            <footer id="footer">
+    
+        <div id="social">
+
+	
+	
+    <a class="symbol" href="">
+        <i class="fa fa-facebook-square"></i>
+    </a>
+    
+    <a class="symbol" href="https://www.github.com/LuckyAbby">
+        <i class="fa fa-github-square"></i>
+    </a>
+    
+    <a class="symbol" href="">
+        <i class="fa fa-twitter-square"></i>
+    </a>
+    
+
+
+</div>
+
+    
+    <p class="small">
+    
+        © Copyright 2019 ❤️
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="https://luckyabby.com/js/jquery-3.3.1.min.js"></script>
+<script src="https://luckyabby.com/js/main.js"></script>
+<script src="https://luckyabby.com/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+  
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-84989670-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+
+
+
+    </body>
+</html>

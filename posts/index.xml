@@ -78,15 +78,6 @@ properties 属于 DOM，翻译为属性，因为一个 html 元素就是一个 D
     </item>
     
     <item>
-      <title>2017年,一切都过得很温暖</title>
-      <link>https://luckyabby.com/posts/2017%E5%B9%B4%E4%B8%80%E5%88%87%E9%83%BD%E8%BF%87%E5%BE%97%E5%BE%88%E6%B8%A9%E6%9A%96/</link>
-      <pubDate>Tue, 02 Jan 2018 16:22:57 +0800</pubDate>
-      
-      <guid>https://luckyabby.com/posts/2017%E5%B9%B4%E4%B8%80%E5%88%87%E9%83%BD%E8%BF%87%E5%BE%97%E5%BE%88%E6%B8%A9%E6%9A%96/</guid>
-      <description>总结是从自己的公众号上复制过来的，2017年总的来说，没有达到之前的预期，但是一切却也过的还不错。 一月 愿得一人心 白首不分离 我和node的相遇</description>
-    </item>
-    
-    <item>
       <title>我还是想谈谈JS里面的闭包</title>
       <link>https://luckyabby.com/posts/%E6%88%91%E8%BF%98%E6%98%AF%E6%83%B3%E8%B0%88%E8%B0%88js%E9%87%8C%E9%9D%A2%E7%9A%84%E9%97%AD%E5%8C%85/</link>
       <pubDate>Fri, 08 Dec 2017 16:11:59 +0800</pubDate>

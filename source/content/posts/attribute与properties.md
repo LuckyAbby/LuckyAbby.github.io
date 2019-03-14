@@ -1,5 +1,5 @@
 ---
-title: "Attribute与properties"
+title: "attribute与properties"
 date: 2019-03-12T23:23:35+08:00
 tags: ['JS']
 ---
@@ -9,7 +9,7 @@ properties 属于 DOM，翻译为属性，因为一个 html 元素就是一个 D
 
 <!--more-->
 
-### Attribute
+### attribute
 
 attribute 出现在 html 元素中，比如 id、class、type等。
 

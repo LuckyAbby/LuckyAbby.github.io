@@ -1,11 +1,11 @@
 ---
-title: "attribute与properties"
+title: "attribute与property"
 date: 2019-03-12T23:23:35+08:00
 tags: ['JS']
 ---
 
 attribute 属于 html,一般翻译为 特性
-properties 属于 DOM，翻译为属性，因为一个 html 元素就是一个 DOM 节点，而每个节点都是一个 JS 对象，因此具有属性，DOM元素属性和普通对象的属性一样，就是DOM对象这个javascript对象上的属性而已。
+property 属于 DOM，翻译为属性，因为一个 html 元素就是一个 DOM 节点，而每个节点都是一个 JS 对象，因此具有属性，DOM元素属性和普通对象的属性一样，就是DOM对象这个javascript对象上的属性而已。
 
 <!--more-->
 
@@ -66,14 +66,14 @@ NamedNodeMap {0: type, 1: id, 2: a, type: type, id: id, a: a, length: 3}
 - 以动态集合的方式存在（NamedNodeMap）
 
 
-### properties
-properties 是 DOM 节点对象的属性，因此可以直接通过 . 或者 []来获取值。具有如下特点：
+### property
+property 是 DOM 节点对象的属性，因此可以直接通过 . 或者 []来获取值。具有如下特点：
 
 - 可以是任何类型的值
 - 大小写敏感
-- js 中自定义的 properties 不会出现在 html 中
+- js 中自定义的 property 不会出现在 html 中
 
-但是注意有些 attribute 是 JS 保留字比如 class attribute 转化为 properties 时是 className。
+但是注意有些 attribute 是 JS 保留字比如 class attribute 转化为 property 时是 className。
 
 ### dataset 属性
 
@@ -89,7 +89,7 @@ HTML 元素的每一个 公认的（非自定义的） attribute 映射为节点
 
 ### 同步机制
 
-- 对于自定义的 properties/Attribute不会同步，但是修改 dataset 会同步
+- 对于自定义的 property/Attribute不会同步，但是修改 dataset 会同步
 - 对于非自定义的attribute，如id、class、title等，都会有对应的 property 映射，property 或 attribute 的变化多数是同步。
 
 ```js
@@ -119,7 +119,7 @@ console.log('el.proValue', el.getAttribute('value'))// AttrValue
 
 ### 特殊值
 
-有几种特殊的特性，通过getAttribute()返回的值和 properties 并不相同。如href，src，onclick等事件处理程序。比如下面href的例子,getAttribute会获取和 html 编写的值一样的值，而 href 返回来的是却不一样。
+有几种特殊的特性，通过getAttribute()返回的值和 property 并不相同。如href，src，onclick等事件处理程序。比如下面href的例子,getAttribute会获取和 html 编写的值一样的值，而 href 返回来的是却不一样。
 
 ```js
  <a href="//m.taobao.com" id="link"></a>

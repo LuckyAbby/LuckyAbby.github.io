@@ -8,7 +8,7 @@
 		
 		<meta name="description" content="My Blog">
 		<meta name="generator" content="Hugo 0.54.0" />
-		<title>attribute与properties &middot; luckyabby</title>
+		<title>attribute与property &middot; luckyabby</title>
 		<link rel="shortcut icon" href="https://luckyabby.com/images/favicon.ico">
 		<link rel="stylesheet" href="https://luckyabby.com/css/style.css">
 		<link rel="stylesheet" href="https://luckyabby.com/css/highlight.css">
@@ -46,11 +46,11 @@
             <article>
                 <header>
                     <h1>
-                        attribute与properties
+                        attribute与property
                     </h1>
                     <h2 class="headline">
                     Mar 12, 2019 23:23
-                    · 937 words
+                    · 935 words
                     · 2 minute read
                       <span class="tags">
                       
@@ -73,7 +73,7 @@
 <li>
 <ul>
 <li><a href="#attribute">attribute</a></li>
-<li><a href="#properties">properties</a></li>
+<li><a href="#property">property</a></li>
 <li><a href="#dataset-属性">dataset 属性</a></li>
 <li><a href="#同步机制">同步机制</a></li>
 <li><a href="#特殊值">特殊值</a></li>
@@ -86,7 +86,7 @@
                 
                 <section id="post-body">
                     <p>attribute 属于 html,一般翻译为 特性
-properties 属于 DOM，翻译为属性，因为一个 html 元素就是一个 DOM 节点，而每个节点都是一个 JS 对象，因此具有属性，DOM元素属性和普通对象的属性一样，就是DOM对象这个javascript对象上的属性而已。</p>
+property 属于 DOM，翻译为属性，因为一个 html 元素就是一个 DOM 节点，而每个节点都是一个 JS 对象，因此具有属性，DOM元素属性和普通对象的属性一样，就是DOM对象这个javascript对象上的属性而已。</p>
 
 <h3 id="attribute">attribute</h3>
 
@@ -146,17 +146,17 @@ elem.removeAttribute(name)  // 删除 attribute
 <li>以动态集合的方式存在（NamedNodeMap）</li>
 </ul>
 
-<h3 id="properties">properties</h3>
+<h3 id="property">property</h3>
 
-<p>properties 是 DOM 节点对象的属性，因此可以直接通过 . 或者 []来获取值。具有如下特点：</p>
+<p>property 是 DOM 节点对象的属性，因此可以直接通过 . 或者 []来获取值。具有如下特点：</p>
 
 <ul>
 <li>可以是任何类型的值</li>
 <li>大小写敏感</li>
-<li>js 中自定义的 properties 不会出现在 html 中</li>
+<li>js 中自定义的 property 不会出现在 html 中</li>
 </ul>
 
-<p>但是注意有些 attribute 是 JS 保留字比如 class attribute 转化为 properties 时是 className。</p>
+<p>但是注意有些 attribute 是 JS 保留字比如 class attribute 转化为 property 时是 className。</p>
 
 <h3 id="dataset-属性">dataset 属性</h3>
 
@@ -175,7 +175,7 @@ elem.removeAttribute(name)  // 删除 attribute
 <h3 id="同步机制">同步机制</h3>
 
 <ul>
-<li>对于自定义的 properties/Attribute不会同步，但是修改 dataset 会同步</li>
+<li>对于自定义的 property/Attribute不会同步，但是修改 dataset 会同步</li>
 <li>对于非自定义的attribute，如id、class、title等，都会有对应的 property 映射，property 或 attribute 的变化多数是同步。</li>
 </ul>
 
@@ -204,7 +204,7 @@ console.log('el.proValue', el.getAttribute('value'))// AttrValue
 
 <h3 id="特殊值">特殊值</h3>
 
-<p>有几种特殊的特性，通过getAttribute()返回的值和 properties 并不相同。如href，src，onclick等事件处理程序。比如下面href的例子,getAttribute会获取和 html 编写的值一样的值，而 href 返回来的是却不一样。</p>
+<p>有几种特殊的特性，通过getAttribute()返回的值和 property 并不相同。如href，src，onclick等事件处理程序。比如下面href的例子,getAttribute会获取和 html 编写的值一样的值，而 href 返回来的是却不一样。</p>
 
 <pre><code class="language-js"> &lt;a href=&quot;//m.taobao.com&quot; id=&quot;link&quot;&gt;&lt;/a&gt;
 

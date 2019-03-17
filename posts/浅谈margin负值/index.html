@@ -93,10 +93,7 @@
                   
                 
                 <section id="post-body">
-                    
-
-<p>margin负值在平常代码中似乎很少用到过，最近接触了之后才觉得效果比较让我惊讶，想着自己健忘还是写下来，还克服懒癌从印象笔记挪到blog，说不定以后还能给别人看见呢(捂脸逃)。
-<!-- more --></p>
+                    <p>margin负值在平常代码中似乎很少用到过，最近接触了之后才觉得效果比较让我惊讶，想着自己健忘还是写下来，还克服懒癌从印象笔记挪到blog，说不定以后还能给别人看见呢(捂脸逃)。</p>
 
 <h3 id="margin负值的原理">margin负值的原理</h3>
 
@@ -110,7 +107,7 @@ margin的参考线有两类，一类是top、left，它们以外元素作为参�
 另外关于包含块的定义具体请参考<a href="http://w3help.org/zh-cn/kb/008/">KB008包含块(Containing block)</a>。</p>
 
 <p>下面这张图很直观地解释了margin的移动，其中红色箭头表示正值时候的移动方向，当margin为负值的时候就反方向移动。
-<img src="http://ojzeprg7w.bkt.clouddn.com/%E6%B5%8B%E8%AF%95.png" alt="margin原理图" /></p>
+<img src="https://abby-1253430270.cos.ap-shanghai.myqcloud.com/margin%E8%B4%9F%E5%80%BC1.png?q-sign-algorithm=sha1&amp;q-ak=AKIDP3Yxq5sbF9d7XAXuk2OaPsKzXUW2L262&amp;q-sign-time=1552804369;1552806169&amp;q-key-time=1552804369;1552806169&amp;q-header-list=&amp;q-url-param-list=&amp;q-signature=9bbbd479724040dd31343eca23a4010fb0811f0e&amp;x-cos-security-token=40056ae5fed8b9d9203aa749a5e03c74019d341d10001" alt="margin原理图" /></p>
 
 <p>总地来说，就是当margin-top、left为负值的时候与参考线的距离减少，当margin-right、bottom为负值的时候参考线就向左、上面移动。</p>
 
@@ -144,7 +141,7 @@ margin的参考线有两类，一类是top、left，它们以外元素作为参�
 </code></pre>
 
 <p>结果如下图
-<img src="http://ojzeprg7w.bkt.clouddn.com/top.png" alt="top为负值测试图" /></p>
+<img src="https://abby-1253430270.cos.ap-shanghai.myqcloud.com/top.png?q-sign-algorithm=sha1&amp;q-ak=AKIDzaEQMfq9R7cyb4QQmHI5n8f91S2TWnfI&amp;q-sign-time=1552804553;1552806353&amp;q-key-time=1552804553;1552806353&amp;q-header-list=&amp;q-url-param-list=&amp;q-signature=8001c8151c98261ced19cfcad106a689b461fbf1&amp;x-cos-security-token=3d76c15ad0df16e2d3e6ea5146dc7d1171884ed210001" alt="top为负值测试图" /></p>
 
 <p>当设置class为two的div的margin-top为-50的时候，它的参考线是div.one的下边，整个div.two向上移动使得与参考线的距离减少50px。</p>
 
@@ -170,14 +167,14 @@ margin的参考线有两类，一类是top、left，它们以外元素作为参�
 }
 .two {
 	background:orange;
-    margin-left: -50px;
-    float: left;
+        margin-left: -50px;
+        float: left;
 }
 &lt;/style&gt;
 </code></pre>
 
 <p>结果如下图
-<img src="http://ojzeprg7w.bkt.clouddn.com/left.png" alt="left为负值侧视图" /></p>
+<img src="https://abby-1253430270.cos.ap-shanghai.myqcloud.com/left.png?q-sign-algorithm=sha1&amp;q-ak=AKIDtr26BoRrqUFGEYQedK5E546Im8ukzD50&amp;q-sign-time=1552804588;1552806388&amp;q-key-time=1552804588;1552806388&amp;q-header-list=&amp;q-url-param-list=&amp;q-signature=fda7a8d751c4c2e4128c3c8ce4f5910e58c67c69&amp;x-cos-security-token=900cbd05951f7f05270d66a9b1f58b04bf30fc4110001" alt="left为负值侧视图" /></p>
 
 <p>设置float:left使得两个div浮动起来，然后设置div.two的margin-left为-50px,div.two的参考线就是div.one的右边，于是div.two左移与参考线距离减少50px。</p>
 
@@ -210,7 +207,7 @@ margin的参考线有两类，一类是top、left，它们以外元素作为参�
 </code></pre>
 
 <p>结果如下图
-<img src="http://ojzeprg7w.bkt.clouddn.com/left.png" alt="right为负值侧视图" /></p>
+<img src="https://abby-1253430270.cos.ap-shanghai.myqcloud.com/left.png?q-sign-algorithm=sha1&amp;q-ak=AKIDtr26BoRrqUFGEYQedK5E546Im8ukzD50&amp;q-sign-time=1552804588;1552806388&amp;q-key-time=1552804588;1552806388&amp;q-header-list=&amp;q-url-param-list=&amp;q-signature=fda7a8d751c4c2e4128c3c8ce4f5910e58c67c69&amp;x-cos-security-token=900cbd05951f7f05270d66a9b1f58b04bf30fc4110001" alt="right为负值侧视图" /></p>
 
 <p>仍然让两个div左浮动，设置div.one的margin-right为-50px,这时候的参考线是本身的右边界，margin-right为负值于是参考线向反方向即左方向移动。</p>
 
@@ -241,7 +238,7 @@ margin的参考线有两类，一类是top、left，它们以外元素作为参�
 </code></pre>
 
 <p>结果如下图
-<img src="http://ojzeprg7w.bkt.clouddn.com/top.png" alt="bottom为负值测试图" /></p>
+<img src="https://abby-1253430270.cos.ap-shanghai.myqcloud.com/top.png?q-sign-algorithm=sha1&amp;q-ak=AKIDzaEQMfq9R7cyb4QQmHI5n8f91S2TWnfI&amp;q-sign-time=1552804553;1552806353&amp;q-key-time=1552804553;1552806353&amp;q-header-list=&amp;q-url-param-list=&amp;q-signature=8001c8151c98261ced19cfcad106a689b461fbf1&amp;x-cos-security-token=3d76c15ad0df16e2d3e6ea5146dc7d1171884ed210001" alt="bottom为负值测试图" /></p>
 
 <p>当设置div.one的margin-bottom为负值的时候，此时的参考线是自身的下边界，bottom为负值于是参考线向反方向即向上方移动。</p>
 
@@ -279,7 +276,7 @@ margin的参考线有两类，一类是top、left，它们以外元素作为参�
 </code></pre>
 
 <p>结果如图
-<img src="http://ojzeprg7w.bkt.clouddn.com/buju.png" alt="利用margin左右排版测试图" /></p>
+<img src="https://abby-1253430270.cos.ap-shanghai.myqcloud.com/buju.png?q-sign-algorithm=sha1&amp;q-ak=AKIDAKBLBm58PRmG6zDCsM9l79U1CDMrNfkm&amp;q-sign-time=1552804463;1552806263&amp;q-key-time=1552804463;1552806263&amp;q-header-list=&amp;q-url-param-list=&amp;q-signature=c58e2fe4bcb2540efb48d6af308782a96f71a269&amp;x-cos-security-token=63e17d9b27806bb4a3fd5d0cb040baed4db1d4df10001" alt="利用margin左右排版测试图" /></p>
 
 <h3 id="最后">最后</h3>
 
@@ -287,7 +284,6 @@ margin的参考线有两类，一类是top、left，它们以外元素作为参�
 参考资料
 1. <a href="http://www.hicss.net/i-know-you-do-not-know-the-negative-margin/">我知道你不知道的负Margin</a>
 2. <a href="http://blog.acwong.org/2014/12/06/negative-margins/">实用的margin负值</a></p>
-
                 </section>
             </article>
 

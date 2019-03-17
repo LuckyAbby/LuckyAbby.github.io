@@ -4,7 +4,7 @@ date: 2016-10-04T15:47:18+08:00
 tags: ['CSS']
 ---
 margin负值在平常代码中似乎很少用到过，最近接触了之后才觉得效果比较让我惊讶，想着自己健忘还是写下来，还克服懒癌从印象笔记挪到blog，说不定以后还能给别人看见呢(捂脸逃)。
-<!-- more -->
+<!--more-->
 ### margin负值的原理
 为了方便理解负值margin，我们引入参考线的定义，参考线就是就是margin移动的基准点，而margin的值就是移动的数值。
 margin的参考线有两类，一类是top、left，它们以外元素作为参考线，另一类是right、bottom，它们以自身作为参考线。
@@ -16,7 +16,7 @@ margin的参考线有两类，一类是top、left，它们以外元素作为参�
 另外关于包含块的定义具体请参考[KB008包含块(Containing block)](http://w3help.org/zh-cn/kb/008/)。
 
 下面这张图很直观地解释了margin的移动，其中红色箭头表示正值时候的移动方向，当margin为负值的时候就反方向移动。
-![margin原理图](http://ojzeprg7w.bkt.clouddn.com/%E6%B5%8B%E8%AF%95.png)
+![margin原理图](https://abby-1253430270.cos.ap-shanghai.myqcloud.com/margin%E8%B4%9F%E5%80%BC1.png?q-sign-algorithm=sha1&q-ak=AKIDP3Yxq5sbF9d7XAXuk2OaPsKzXUW2L262&q-sign-time=1552804369;1552806169&q-key-time=1552804369;1552806169&q-header-list=&q-url-param-list=&q-signature=9bbbd479724040dd31343eca23a4010fb0811f0e&x-cos-security-token=40056ae5fed8b9d9203aa749a5e03c74019d341d10001)
 
 总地来说，就是当margin-top、left为负值的时候与参考线的距离减少，当margin-right、bottom为负值的时候参考线就向左、上面移动。
 ### 实际小DEMO
@@ -47,7 +47,7 @@ margin的参考线有两类，一类是top、left，它们以外元素作为参�
 </style>
 ```
 结果如下图
-![top为负值测试图](http://ojzeprg7w.bkt.clouddn.com/top.png)
+![top为负值测试图](https://abby-1253430270.cos.ap-shanghai.myqcloud.com/top.png?q-sign-algorithm=sha1&q-ak=AKIDzaEQMfq9R7cyb4QQmHI5n8f91S2TWnfI&q-sign-time=1552804553;1552806353&q-key-time=1552804553;1552806353&q-header-list=&q-url-param-list=&q-signature=8001c8151c98261ced19cfcad106a689b461fbf1&x-cos-security-token=3d76c15ad0df16e2d3e6ea5146dc7d1171884ed210001)
 
 当设置class为two的div的margin-top为-50的时候，它的参考线是div.one的下边，整个div.two向上移动使得与参考线的距离减少50px。
 ##### 当设置margin-left为负值的时候
@@ -72,13 +72,13 @@ margin的参考线有两类，一类是top、left，它们以外元素作为参�
 }
 .two {
 	background:orange;
-    margin-left: -50px;
-    float: left;
+        margin-left: -50px;
+        float: left;
 }
 </style>
 ```
 结果如下图
-![left为负值侧视图](http://ojzeprg7w.bkt.clouddn.com/left.png)
+![left为负值侧视图](https://abby-1253430270.cos.ap-shanghai.myqcloud.com/left.png?q-sign-algorithm=sha1&q-ak=AKIDtr26BoRrqUFGEYQedK5E546Im8ukzD50&q-sign-time=1552804588;1552806388&q-key-time=1552804588;1552806388&q-header-list=&q-url-param-list=&q-signature=fda7a8d751c4c2e4128c3c8ce4f5910e58c67c69&x-cos-security-token=900cbd05951f7f05270d66a9b1f58b04bf30fc4110001)
 
 设置float:left使得两个div浮动起来，然后设置div.two的margin-left为-50px,div.two的参考线就是div.one的右边，于是div.two左移与参考线距离减少50px。
 ##### 当设置margin-right为负值的时候
@@ -109,7 +109,7 @@ margin的参考线有两类，一类是top、left，它们以外元素作为参�
 </style>
 ```
 结果如下图
-![right为负值侧视图](http://ojzeprg7w.bkt.clouddn.com/left.png)
+![right为负值侧视图](https://abby-1253430270.cos.ap-shanghai.myqcloud.com/left.png?q-sign-algorithm=sha1&q-ak=AKIDtr26BoRrqUFGEYQedK5E546Im8ukzD50&q-sign-time=1552804588;1552806388&q-key-time=1552804588;1552806388&q-header-list=&q-url-param-list=&q-signature=fda7a8d751c4c2e4128c3c8ce4f5910e58c67c69&x-cos-security-token=900cbd05951f7f05270d66a9b1f58b04bf30fc4110001)
 
 仍然让两个div左浮动，设置div.one的margin-right为-50px,这时候的参考线是本身的右边界，margin-right为负值于是参考线向反方向即左方向移动。
 ##### 当设置margin-bottom为负值的时候
@@ -138,7 +138,7 @@ margin的参考线有两类，一类是top、left，它们以外元素作为参�
 </style>
 ```
 结果如下图
-![bottom为负值测试图](http://ojzeprg7w.bkt.clouddn.com/top.png)
+![bottom为负值测试图](https://abby-1253430270.cos.ap-shanghai.myqcloud.com/top.png?q-sign-algorithm=sha1&q-ak=AKIDzaEQMfq9R7cyb4QQmHI5n8f91S2TWnfI&q-sign-time=1552804553;1552806353&q-key-time=1552804553;1552806353&q-header-list=&q-url-param-list=&q-signature=8001c8151c98261ced19cfcad106a689b461fbf1&x-cos-security-token=3d76c15ad0df16e2d3e6ea5146dc7d1171884ed210001)
 
 当设置div.one的margin-bottom为负值的时候，此时的参考线是自身的下边界，bottom为负值于是参考线向反方向即向上方移动。
 ### margin负值的实际应用
@@ -172,7 +172,7 @@ margin的参考线有两类，一类是top、left，它们以外元素作为参�
 </style>
 ```
 结果如图
-![利用margin左右排版测试图](http://ojzeprg7w.bkt.clouddn.com/buju.png)
+![利用margin左右排版测试图](https://abby-1253430270.cos.ap-shanghai.myqcloud.com/buju.png?q-sign-algorithm=sha1&q-ak=AKIDAKBLBm58PRmG6zDCsM9l79U1CDMrNfkm&q-sign-time=1552804463;1552806263&q-key-time=1552804463;1552806263&q-header-list=&q-url-param-list=&q-signature=c58e2fe4bcb2540efb48d6af308782a96f71a269&x-cos-security-token=63e17d9b27806bb4a3fd5d0cb040baed4db1d4df10001)
 ### 最后
 因为自己做的项目还不多，很多问题其实自己还并没有遇到过，先总结出来仅供参考，也是第一次写技术博客，有不对的地方烦请指出改正。
 参考资料

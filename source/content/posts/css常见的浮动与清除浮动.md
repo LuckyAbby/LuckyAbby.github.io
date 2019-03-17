@@ -6,7 +6,6 @@ tags: ['浮动','CSS','清除浮动']
 
 这篇博客自己之前好像是写过的。。后来换电脑之后博客静态文件备份好像丢了几篇博客(突然心痛)。最近又遇到这个问题，想着再写一遍就当温习一遍了。
 
-
 浮动(float)属性指的是某个元素脱离正常流，沿着容器的左侧或者右侧进行排列，允许文本或者内联元素环绕它，类似于排版印刷里面的文本环绕。
 
 ### 浮动元素如何进行定位
@@ -16,15 +15,17 @@ tags: ['浮动','CSS','清除浮动']
 例如下图中有三个 div, 按正常流的排列顺序，块级元素会单独占据一行。此时我们将 div2 设置成 `float: left`，之后可以看到 div3 占据了 div2 原本的位置，div2 因为脱离文档流浮动到最左侧，遮盖住了 div3 的一部分。
 
 将 div2 设置成右浮动便会右移排列到最右侧。如下图：
-![](http://ojzeprg7w.bkt.clouddn.com/float11.jpg)
+![](https://abby-1253430270.cos.ap-shanghai.myqcloud.com/float11.jpg)
 
-<!-- 如下图，将三个div均设置成左浮动，并将其中 div1 的高度设置成 150px, 这时候 div3 左浮动的时候碰到 div1 的边界，会被 div1 卡住。
-![](http://ojzeprg7w.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-14%20%E4%B8%8B%E5%8D%883.41.23.png) -->
+具体的表现如下图所示。
+![](https://abby-1253430270.cos.ap-shanghai.myqcloud.com/float1.png)
+![](https://abby-1253430270.cos.ap-shanghai.myqcloud.com/float2.png)
+![](https://abby-1253430270.cos.ap-shanghai.myqcloud.com/float3.png) 
 
 ### 浮动带来的一些影响
 
 以及拿上面的例子举例。我们给这三个 div 加上一个容器 div， 再将其设置一个 border, 会发现容器 div 并没有被撑起来，如下图：
-![](http://ojzeprg7w.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-14%20%E4%B8%8B%E5%8D%883.16.10.png)
+![](https://abby-1253430270.cos.ap-shanghai.myqcloud.com/float-new-2.png)
 
 代码如下：
 
@@ -83,7 +84,7 @@ tags: ['浮动','CSS','清除浮动']
 ```
 
 清楚浮动之后的图片如下：
-![](http://ojzeprg7w.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-03-14%20%E4%B8%8B%E5%8D%883.16.24.png)
+![](https://abby-1253430270.cos.ap-shanghai.myqcloud.com/float-new-3.png)
 
 #### 2.使用 ::after 伪元素
 

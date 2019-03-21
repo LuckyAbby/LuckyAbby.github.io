@@ -50,7 +50,7 @@
                     </h1>
                     <h2 class="headline">
                     Feb 8, 2019 00:35
-                    · 1308 words
+                    · 1347 words
                     · 3 minute read
                       <span class="tags">
                       
@@ -233,6 +233,8 @@ render() {
 <li><p>PureComponent是有状态和生命周期的，只是在 shouldComponentUpdate 的时候帮忙做了一些判断使得组件性能更好一些，但是需要注意的是只是 shallowEqual，发挥作用更好的是用作展示型组件。</p></li>
 
 <li><p>Stateless Functional Component 是完全没有生命周期，只能用作展示型组件。</p></li>
+
+<li><p>Stateless Functional Component 不会生成组件的实例，但是类组件每次都会生成一个实例，因此 Stateless Functional Component 性能更优。</p></li>
 </ul>
 
                 </section>

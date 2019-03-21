@@ -152,3 +152,4 @@ Stateless Functional Component 组件的思想就是 Stateless，因此只有 po
 - PureComponent是有状态和生命周期的，只是在 shouldComponentUpdate 的时候帮忙做了一些判断使得组件性能更好一些，但是需要注意的是只是 shallowEqual，发挥作用更好的是用作展示型组件。
 
 - Stateless Functional Component 是完全没有生命周期，只能用作展示型组件。
+- Stateless Functional Component 不会生成组件的实例，但是类组件每次都会生成一个实例，因此 Stateless Functional Component 性能更优。

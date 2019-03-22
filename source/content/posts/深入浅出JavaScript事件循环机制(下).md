@@ -57,7 +57,7 @@ setTimeout的回调函数被放进setTimeout的任务队列之中。而对于Pro
 ```
 **注意下面所有图中的setTimeout任务队和最后的函数调用栈中存放的都是setTimeout的回调函数，并不是整个setTimeout定时器。**
 
-![](http://ojzeprg7w.bkt.clouddn.com/%E5%8D%9A%E5%AE%A251.JPG)
+![](https://abby-1253430270.cos.ap-shanghai.myqcloud.com/%E5%8D%9A%E5%AE%A251.JPG)
 1.首先，script任务源先执行，全局上下文入栈。
 
 ![](http://ojzeprg7w.bkt.clouddn.com/%E5%8D%9A%E5%AE%A252.JPG)

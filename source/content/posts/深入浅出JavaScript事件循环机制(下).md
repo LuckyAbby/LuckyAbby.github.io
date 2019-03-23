@@ -60,29 +60,29 @@ setTimeout的回调函数被放进setTimeout的任务队列之中。而对于Pro
 ![](https://abby-1253430270.cos.ap-shanghai.myqcloud.com/%E5%8D%9A%E5%AE%A251.JPG)
 1.首先，script任务源先执行，全局上下文入栈。
 
-![](http://ojzeprg7w.bkt.clouddn.com/%E5%8D%9A%E5%AE%A252.JPG)
+![](https://abby-1253430270.cos.ap-shanghai.myqcloud.com/%E5%8D%9A%E5%AE%A252.JPG)
 2.script任务源的代码在执行时遇到setTimeout,作为一个macro-task，将其回调函数放入自己的队列之中。
 
-![](http://ojzeprg7w.bkt.clouddn.com/%E5%8D%9A%E5%AE%A253.JPG)
+![](https://abby-1253430270.cos.ap-shanghai.myqcloud.com/%E5%8D%9A%E5%AE%A253.JPG)
 3.script任务源的代码在执行时遇到Promise实例。Promise构造函数中的第一个参数是在当前任务直接执行不会被放入队列之中，因此此时输出 1 。
 
-![](http://ojzeprg7w.bkt.clouddn.com/%E5%8D%9A%E5%AE%A254.JPG)
+![](https://abby-1253430270.cos.ap-shanghai.myqcloud.com/%E5%8D%9A%E5%AE%A254.JPG)
 
-![](http://ojzeprg7w.bkt.clouddn.com/%E5%8D%9A%E5%AE%A255.JPG)
+![](https://abby-1253430270.cos.ap-shanghai.myqcloud.com/%E5%8D%9A%E5%AE%A255.JPG)
 4.在for循环里面遇到resolve函数，函数入栈执行之后出栈，此时Promise的状态变成Fulfilled。代码接着执行遇到cosole.log(2),输出2。
 
-![](http://ojzeprg7w.bkt.clouddn.com/%E5%8D%9A%E5%AE%A256.JPG)
+![](https://abby-1253430270.cos.ap-shanghai.myqcloud.com/%E5%8D%9A%E5%AE%A256.JPG)
 5.接着执行，代码遇到then方法，其回调函数作为micro-task入栈，进入Promise的任务队列之中。
 
-![](http://ojzeprg7w.bkt.clouddn.com/%E5%8D%9A%E5%AE%A257%E6%94%B9.JPG)
+![](https://abby-1253430270.cos.ap-shanghai.myqcloud.com/%E5%8D%9A%E5%AE%A257%E6%94%B9.JPG)
 6.代码接着执行，此时遇到console.log(3),输出3。
 
-![](http://ojzeprg7w.bkt.clouddn.com/%E5%8D%9A%E5%AE%A258%E6%94%B9.JPG)
+![](https://abby-1253430270.cos.ap-shanghai.myqcloud.com/%E5%8D%9A%E5%AE%A258%E6%94%B9.JPG)
 
-![](http://ojzeprg7w.bkt.clouddn.com/%E5%8D%9A%E5%AE%A259.JPG)
+![](https://abby-1253430270.cos.ap-shanghai.myqcloud.com/%E5%8D%9A%E5%AE%A259.JPG)
 7.输出3之后第一个宏任务script的代码执行完毕，这时候开始开始执行所有在队列之中的微任务。then的回调函数入栈执行完毕之后出栈，这时候输出5
 
-![](http://ojzeprg7w.bkt.clouddn.com/%E5%8D%9A%E5%AE%A260.JPG)
+![](https://abby-1253430270.cos.ap-shanghai.myqcloud.com/%E5%8D%9A%E5%AE%A260.JPG)
 8.这时候所有的micro-task执行完毕，第一轮循环结束。第二轮循环从setTimeout的任务队列开始，setTimeout的回调函数入栈执行完毕之后出栈，此时输出4。
 
 ## 总结

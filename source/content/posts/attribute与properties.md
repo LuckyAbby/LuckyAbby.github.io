@@ -30,7 +30,7 @@ elem.removeAttribute(name)  // 删除 attribute
 ```
 
 我们打印出上面的 attributes 属性，得到的结果是：
-```
+```js
 NamedNodeMap {0: type, 1: id, 2: a, type: type, id: id, a: a, length: 3}
     0: type
     1: id

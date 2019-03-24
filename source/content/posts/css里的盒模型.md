@@ -24,7 +24,7 @@ css 的盒模型主要有两种，分为 w3c 的标准模型以及 IE 的传统�
 ```
 样式：
 
-```
+```html
 div {
   width:200px;
   height:200px;
@@ -48,7 +48,7 @@ div {
   -ms-box-sizing: border-box;
 ```
 最后在浏览器中显示的结果如图：
-![](http://ojzeprg7w.bkt.clouddn.com/css2.jpg)
+![](https://abby-1253430270.cos.ap-shanghai.myqcloud.com/css2.jpg)
 
 上图很明显的说明了两种盒模型在处理块状元素实际的 width 时的差别。详细的计算过程就是：
 ```
@@ -62,14 +62,14 @@ div {
 对于 border-box 这种特性在两栏布局的时候就不用再像之前再精打细算算好每个元素的宽度之后如果再需要修改类似于 padding 之类的值的时候一不小心就会被挤下来的情况。
 
 比如：
-```
+```html
 <div id="content">
   <div id="left">left</div>;
   <div id="main">main</div>
 </div>
 ```
 css:
-```
+```css
 #content {
   width: 420px;
 }

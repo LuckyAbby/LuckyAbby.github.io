@@ -7,14 +7,16 @@ css 的盒模型主要有两种，分为 w3c 的标准模型以及 IE 的传统�
 
 ##### 1. w3c 标准盒模型
 ```
-元素真实的内部 width = content width + padding + border
-元素真实的内部 height = content height + padding + border
+元素给定的 width = content width
+元素给定的 height = content height
+元素真实的 width（空间位置） = content width + padding + border
+元素真实的 height（空间位置） = content height + padding + border
 ```
 
 ##### 2. IE 传统盒模型
 ```
-元素真实的 width = content width
-元素真实的 height = content height
+元素给定的 width = content width + padding + border
+元素给定的 height = content height + padding + border
 ```
 用一个例子来表示：
 
@@ -53,10 +55,10 @@ div {
 上图很明显的说明了两种盒模型在处理块状元素实际的 width 时的差别。详细的计算过程就是：
 ```
 # 对于 content-box
-元素的真实内部 width = content width(200) + padding(10*2) + border(5*2)
+元素的真实的 width = content width(200) + padding(10*2) + border(5*2)
 
 # 对于 border-box
-元素的真实内部 width = content width(200)
+元素的真实的 width = content width(200)
 ```
 
 对于 border-box 这种特性在两栏布局的时候就不用再像之前再精打细算算好每个元素的宽度之后如果再需要修改类似于 padding 之类的值的时候一不小心就会被挤下来的情况。

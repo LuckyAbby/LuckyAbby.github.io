@@ -50,7 +50,7 @@
                     </h1>
                     <h2 class="headline">
                     Oct 18, 2017 17:23
-                    · 2137 words
+                    · 2436 words
                     · 5 minute read
                       <span class="tags">
                       
@@ -78,6 +78,7 @@
 <li><a href="#cmd">CMD</a>
 <ul>
 <li><a href="#amd-cmd-区别">AMD CMD 区别</a></li>
+<li><a href="#umd">UMD</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -242,6 +243,35 @@ needModules.func();
 <p>1.AMD推崇依赖前置，在定义模块的时候就声明依赖的模块。CMD 推崇依赖就近，只有在需要用的时候才去require 执行。</p>
 
 <p>2.对于依赖的模块，AMD 提前执行，但是 CMD 的思想是 lazy loading, 延迟执行.</p>
+
+<h3 id="umd">UMD</h3>
+
+<p>AMD模块以浏览器第一的原则发展，异步加载模块。
+CommonJS模块以服务器第一原则发展，选择同步加载，它的模块无需包装(unwrapped modules)。
+于是又出现了通用模块定义UMD （Universal Module Definition）。希望解决跨平台的解决方案。</p>
+
+<p>UMD先是否支持AMD（define是否存在），存在则使用AMD方式加载模块。
+再判断是否支持Node.js的模块（exports）是否存在，存在则使用Node.js模块模式。</p>
+
+<pre><code class="language-js">(function (root, factory) {
+    if (typeof define === 'function' &amp;&amp; define.amd) {
+        // AMD
+        define(['jquery'], factory);
+    } else if (typeof exports === 'object') {
+        // Node, CommonJS之类的
+        module.exports = factory(require('jquery'));
+    } else {
+        // 浏览器全局变量(root 即 window)
+        root.returnExports = factory(root.jQuery);
+    }
+}(this, function ($) {
+    //    方法
+    function myFunc(){};
+ 
+    //    暴露公共方法
+    return myFunc;
+}));
+</code></pre>
 
 <p>本文只是很浅显的介绍，具体的用法可以参考文档。具体项目中使用哪种分情况而定。</p>
 

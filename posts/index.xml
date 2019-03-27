@@ -17,7 +17,7 @@
       <pubDate>Mon, 25 Mar 2019 22:18:36 +0800</pubDate>
       
       <guid>https://luckyabby.com/posts/%E8%99%9A%E6%8B%9F%E5%88%97%E8%A1%A8%E7%BB%84%E4%BB%B6%E5%BC%80%E5%8F%91%E6%80%9D%E8%B7%AF%E4%BB%A5%E5%8F%8A%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/</guid>
-      <description>虚拟列表主要是解决当列表数量较多（超过一千条）时，页面内引入大量的 DOM 元素导致页面卡顿的情况，对于列表数量没达到足够的量级（主要根据自己的业务</description>
+      <description>虚拟列表主要是解决当列表数量较多时，页面内引入大量的 DOM 元素导致页面卡顿的情况，对于列表数量没达到足够的量级（主要根据自己的业务来衡量）但是想</description>
     </item>
     
     <item>

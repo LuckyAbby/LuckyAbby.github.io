@@ -129,9 +129,13 @@ module.exports = webpack;
 /******/ ]);
 ```
 简单的可以归纳出几点：
+
 - 这是一个立即执行的函数，函数的参数是一个函数数组，通过数组的下标来作为 moduleId。
+
 - 立即执行的函数函数体里面定义了一个 `installedModules` 变量用户记录缓存后的模块
+
 - 函数体里面还定义了最重要的函数 `__webpack_require__`，**这个函数用来加载导出的模块**，它会在模块记载之前去判断`installedModules`这个缓存里面是否有模块，有的话就直接从缓存中取出来，没有的话就将这个模块缓存下来，同时通过`	modules[moduleId].call(module.exports, module, module.exports, __webpack_require__)`这行代码执行模块里面的代码，这行代码就是在 module.exports 这个对象上执行传入的方法，并将`module, exports, __webpack_require__ `这三个参数传给执行的方法，这也是为什么我们看到立即执行函数的参数都是`(function(module, exports, __webpack_require__) {`这样开头的函数数组。
+
 - `__webpack_require__`这个函数最后会将`module.exports`这个对象返回出去，这也是为什么我们需要将导出的模块定义在这个变量上的原因。
 
 整体来说还是比较简单的，但是实际应用中还有很多比这个复杂的场景，比如多页面打包 公共模块的拆分等等，明天继续更～。

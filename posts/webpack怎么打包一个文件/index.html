@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		
+		<meta name="description" content="My Blog">
+		<meta name="generator" content="Hugo 0.54.0" />
+		<title>Webpack怎么打包一个文件 &middot; luckyabby</title>
+		<link rel="shortcut icon" href="https://luckyabby.com/images/favicon.ico">
+		<link rel="stylesheet" href="https://luckyabby.com/css/style.css">
+		<link rel="stylesheet" href="https://luckyabby.com/css/highlight.css">
+
+		
+		<link rel="stylesheet" href="https://luckyabby.com/css/font-awesome.min.css">
+		
+
+		
+		<link href="https://luckyabby.com/index.xml" rel="alternate" type="application/rss+xml" title="luckyabby" />
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='https://luckyabby.com/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='https://luckyabby.com/posts'>Archive</a>
+	<a href='https://luckyabby.com/tags'>Tags</a>
+	<a href='https://luckyabby.com/about'>About</a>
+
+	
+
+	
+	<a class="cta" href="https://luckyabby.com/index.xml">Subscribe</a>
+	
+</nav>
+
+
+        <section id="wrapper" class="post">
+            <article>
+                <header>
+                    <h1>
+                        Webpack怎么打包一个文件
+                    </h1>
+                    <h2 class="headline">
+                    Apr 2, 2019 20:36
+                    · 1101 words
+                    · 3 minute read
+                      <span class="tags">
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                  
+                
+                <section id="post-body">
+                    <p>之前零零碎碎写过一些 webpack 的配置，也没有整体的学习 webpack 打包文件的过程，今天整体梳理一下 webpack 究竟是怎么打包文件的，打包之后的文件究竟是什么样子。</p>
+
+<p>首先很简单的配置一下配置信息：</p>
+
+<pre><code class="language-js">const path = require('path');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin'); //自动生成指定的文件
+const CleanWebpackPlugin = require('clean-webpack-plugin'); //自动删除目录
+
+module.exports = {
+  entry: {
+    index: path.join(__dirname, 'index.js'),
+  },
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'js/[name].[chunkhash].js'
+  },
+  module: {
+  },
+  plugins: [
+    new CleanWebpackPlugin(['dist']),
+    new HtmlWebpackPlugin({
+      filename: 'index.html'
+    }),
+  ]
+};
+</code></pre>
+
+<p>现在有一个如下目录结构的文件</p>
+
+<pre><code class="language-js">|—— src
+     |-- testA.js
+     |-- testB.js
+|—— index.js
+</code></pre>
+
+<p>其中三个文件的关系如下：</p>
+
+<pre><code class="language-js">## index.js
+const { hello, webpack } = require('./src/testA');
+console.log('hello', hello, webpack);
+const child = `&lt;div&gt;${hello},${webpack}&lt;/div&gt;`;
+document.body.innerHTML = child;
+
+## testA.js
+const webpack = require('./testB');
+const hello = 'hello';
+module.exports = { hello, webpack };
+
+## testB.js
+const webpack = 'webpack';
+module.exports = webpack;
+</code></pre>
+
+<p>就是很简单的 index.js 依赖 testA.js，testA.js 依赖 testB.js，
+我们在 scripts 脚本里面配置</p>
+
+<pre><code class="language-js">&quot;scripts&quot;: {
+    &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;,
+    &quot;dist&quot;: &quot;webpack --config webpack.config.js&quot;,
+  },
+</code></pre>
+
+<p>之后运行 npm run dist 可以看到打到之后的 index.[chunkhash].js的文件，我们看看这个文件里面究竟做了什么。</p>
+
+<p>将这个文件精简之后看到的文件如下面的代码：</p>
+
+<pre><code class="language-js">/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const { hello, webpack } = __webpack_require__(1);
+console.log('hello', hello, webpack);
+const child = `&lt;div&gt;${hello},${webpack}&lt;/div&gt;`;
+document.body.innerHTML = child;
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const webpack = __webpack_require__(2);
+const hello = 'hello';
+module.exports = { hello, webpack };
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports) {
+
+const webpack = 'webpack';
+module.exports = webpack;
+
+/***/ })
+/******/ ]);
+</code></pre>
+
+<p>简单的可以归纳出几点：
+- 这是一个立即执行的函数，函数的参数是一个函数数组，通过数组的下标来作为 moduleId。
+- 立即执行的函数函数体里面定义了一个 <code>installedModules</code> 变量用户记录缓存后的模块
+- 函数体里面还定义了最重要的函数 <code>__webpack_require__</code>，<strong>这个函数用来加载导出的模块</strong>，它会在模块记载之前去判断<code>installedModules</code>这个缓存里面是否有模块，有的话就直接从缓存中取出来，没有的话就将这个模块缓存下来，同时通过<code>modules[moduleId].call(module.exports, module, module.exports, __webpack_require__)</code>这行代码执行模块里面的代码，这行代码就是在 module.exports 这个对象上执行传入的方法，并将<code>module, exports, __webpack_require__</code>这三个参数传给执行的方法，这也是为什么我们看到立即执行函数的参数都是<code>(function(module, exports, __webpack_require__) {</code>这样开头的函数数组。
+- <code>__webpack_require__</code>这个函数最后会将<code>module.exports</code>这个对象返回出去，这也是为什么我们需要将导出的模块定义在这个变量上的原因。</p>
+
+<p>整体来说还是比较简单的，但是实际应用中还有很多比这个复杂的场景，比如多页面打包 公共模块的拆分等等，明天继续更～。</p>
+
+                </section>
+            </article>
+
+            
+
+            
+                <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'luckyabby'; 
+
+     
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+            
+
+            
+
+            <footer id="footer">
+    
+        <div id="social">
+
+	
+	
+    <a class="symbol" href="">
+        <i class="fa fa-facebook-square"></i>
+    </a>
+    
+    <a class="symbol" href="https://www.github.com/LuckyAbby">
+        <i class="fa fa-github-square"></i>
+    </a>
+    
+    <a class="symbol" href="">
+        <i class="fa fa-twitter-square"></i>
+    </a>
+    
+
+
+</div>
+
+    
+    <p class="small">
+    
+        © Copyright 2019 ❤️
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="https://luckyabby.com/js/jquery-3.3.1.min.js"></script>
+<script src="https://luckyabby.com/js/main.js"></script>
+<script src="https://luckyabby.com/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+  
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-84989670-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+
+
+
+    </body>
+</html>

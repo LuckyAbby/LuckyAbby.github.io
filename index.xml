@@ -6,10 +6,19 @@
     <description>Recent content on luckyabby</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 25 Mar 2019 22:18:36 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 02 Apr 2019 20:36:01 +0800</lastBuildDate>
     
 	<atom:link href="https://luckyabby.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Webpack怎么打包一个文件</title>
+      <link>https://luckyabby.com/posts/webpack%E6%80%8E%E4%B9%88%E6%89%93%E5%8C%85%E4%B8%80%E4%B8%AA%E6%96%87%E4%BB%B6/</link>
+      <pubDate>Tue, 02 Apr 2019 20:36:01 +0800</pubDate>
+      
+      <guid>https://luckyabby.com/posts/webpack%E6%80%8E%E4%B9%88%E6%89%93%E5%8C%85%E4%B8%80%E4%B8%AA%E6%96%87%E4%BB%B6/</guid>
+      <description>之前零零碎碎写过一些 webpack 的配置，也没有整体的学习 webpack 打包文件的过程，今天整体梳理一下 webpack 究竟是怎么打包文件的，打包之后的文件究竟是什么样子。 首先很</description>
+    </item>
     
     <item>
       <title>虚拟列表组件开发思路以及遇到的问题</title>

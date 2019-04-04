@@ -44,8 +44,9 @@ module.exports = {
 ## index.js
 const { hello, webpack } = require('./src/testA');
 console.log('hello', hello, webpack);
-const child = `<div>${hello},${webpack}</div>`;
-document.body.innerHTML = child;
+const child = document.createElement('div');
+child.innerHTML = `${hello},${webpack}`;
+document.body.appendChild(child);
 
 ## testA.js
 const webpack = require('./testB');
@@ -107,8 +108,9 @@ module.exports = webpack;
 
 const { hello, webpack } = __webpack_require__(1);
 console.log('hello', hello, webpack);
-const child = `<div>${hello},${webpack}</div>`;
-document.body.innerHTML = child;
+const child = document.createElement('div');
+child.innerHTML = `${hello},${webpack}`;
+document.body.appendChild(child);
 
 /***/ }),
 /* 1 */
@@ -138,4 +140,31 @@ module.exports = webpack;
 
 - `__webpack_require__`这个函数最后会将`module.exports`这个对象返回出去，这也是为什么我们需要将导出的模块定义在这个变量上的原因。
 
-整体来说还是比较简单的，但是实际应用中还有很多比这个复杂的场景，比如多页面打包 公共模块的拆分等等，明天继续更～。
+整体来说还是比较简单的，但是实际应用中还有很多比这个复杂的场景，比如异步加载模块等等，现在我们再加一个异步加载模块的文件 testC.js,并对 index.js进行一下改造,点击按钮之后再去加载 testC.js 这个文件。
+
+```js
+## index.js
+const btn = document.getElementById('btn');
+btn.addEventListener('click', function() {
+    //只有触发事件才回家再对应的js 也就是异步加载 
+    require.ensure([], function() {
+      const data = require('./src/testC');
+      const p = document.createElement('p');
+      p.innerHTML = data;
+      document.body.appendChild(p);
+    })
+})
+
+## testC.js
+const ensureRequire = 'ensure_require';
+module.exports = ensureRequire;
+```
+
+我们这时候打开浏览器能看到加载的资源只有一个 js 文件,
+![](https://abby-1253430270.cos.ap-shanghai.myqcloud.com/webpackdemo1.jpg)
+
+但是当我们点击按钮之后此时加载的资源多了一个 js 文件，这个文件就是我们异步加载的那个 testC.js,
+![](https://abby-1253430270.cos.ap-shanghai.myqcloud.com/webpackdemo2.jpg)
+
+
+
